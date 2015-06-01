@@ -2,5 +2,5 @@ package interfacesParaUnidadesYEstructuras;
 
 public interface Atacable {
 	public boolean estaDestruido();
-	public void esAtacadaPor(Atacante atacante);
+	public void recibePuntosDeDanio(int danio);
 }
