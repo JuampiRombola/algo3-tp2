@@ -28,4 +28,13 @@ public class UnidadTest{
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
 	}
+	
+	@Test 
+	public void alRecibirEnDosAtaquesUnDanioIgualASuVidaMAximaEstaDestruido(){
+		int vidaMaxima = 200;
+		Unidad unidad = new Unidad(vidaMaxima);
+		unidad.recibePuntosDeDanio(vidaMaxima/2);
+		unidad.recibePuntosDeDanio(vidaMaxima/2);
+		assertTrue(unidad.estaDestruido());
+	}
 }
