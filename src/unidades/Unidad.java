@@ -3,7 +3,7 @@ package unidades;
 import interfacesParaUnidadesYEstructuras.Atacable;
 
 public class Unidad implements Atacable{
-int vidaActual;
+private int vidaActual;
 	
 	public Unidad(int vidaMaxima) {
 		this.vidaActual = vidaMaxima;
