@@ -15,7 +15,6 @@ int vidaActual;
 		return (vidaActual < 0);
 	}
 
-	@Override
 	public boolean aplicarDanio(int danio) {
 		// TODO Auto-generated method stub
 		return false;
