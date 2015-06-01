@@ -11,7 +11,6 @@ public class UnidadTest {
 	public void testLaUnidadAlCrearseNoEstaDestruida() {
 		int vidaMaxima = 10;
 		Unidad unidad = new Unidad(vidaMaxima);
-		assert(!unidad.estaDestruida());
+		assertTrue(!unidad.estaDestruida());
 	}
-
 }
