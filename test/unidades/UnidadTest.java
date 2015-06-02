@@ -9,19 +9,17 @@ public class UnidadTest{
 	private int rangoArmaDePrueba = 10;
 	private int danioArmaDePrueba = 100;
 	private Arma armaDePrueba = new Arma(danioArmaDePrueba, rangoArmaDePrueba);
-	private int vidaMaximaUnidadDePrueba = 10;
-	private Unidad unidadAtacante = new Unidad(vidaMaximaUnidadDePrueba,
+	private int vidaMaxima = 10;
+	private Unidad unidadAtacante = new Unidad(vidaMaxima,
 												     		armaDePrueba);
 	@Test
 	public void alCrearseLaUnidadNoEstaDestruida(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		assertTrue(!unidad.estaDestruido());
 	}
 	
 	@Test 
 	public void alRecibirUnDanioIgualALaVidaMaximaEstaDestruido(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(vidaMaxima);
 		assertTrue(unidad.estaDestruido());
@@ -29,7 +27,6 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioMayorALaVidaMaximaEstaDestruido(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
@@ -37,7 +34,6 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirEnDosAtaquesUnDanioIgualASuVidaMAximaEstaDestruido(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(vidaMaxima/2);
 		unidad.recibePuntosDeDanio(vidaMaxima/2);
@@ -46,7 +42,6 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioIgualALaVidaMaximaLaVidaActualEs0(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(vidaMaxima);
 		assertTrue(unidad.getVidaActual() == 0);
@@ -54,7 +49,6 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioMayorALaVidaMaximaLaVidaActualEs0(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(vidaMaxima + 20);
 		assertTrue(unidad.getVidaActual() == 0);
@@ -62,14 +56,12 @@ public class UnidadTest{
 	
 	@Test 
 	public void laVidaMaximaCoincideConLaDelConstructor(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		assertTrue(unidad.getVidaMaxima() == vidaMaxima);
 	}
 	
 	@Test 
 	public void laVidaMaximaCoincideConLaDelConstructorLuegoDeRecibirDanio(){
-		int vidaMaxima = 200;
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba);
 		unidad.recibePuntosDeDanio(100);
 		assertTrue(unidad.getVidaMaxima() == vidaMaxima);
@@ -98,10 +90,4 @@ public class UnidadTest{
 		assertTrue(!atacable.estaDestruido());
 	}
 	
-	@Test
-	public void elTamanioDeUnaUnidadPorDefaultEs1(){
-		int vidaAtacable = 100;
-		Unidad unidad = new Unidad(vidaAtacable, armaDePrueba);
-		assertTrue(unidad.getTamanio() == 1);
-	}
 }

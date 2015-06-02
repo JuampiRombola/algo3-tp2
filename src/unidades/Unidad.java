@@ -37,8 +37,4 @@ private Arma arma;
 	public int getVidaMaxima(){
 		return vidaMaxima;
 	}
-
-	public int getTamanio() {
-		return 1;
-	}
 }
