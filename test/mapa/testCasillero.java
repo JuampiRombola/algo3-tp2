@@ -2,7 +2,7 @@ package mapa;
 
 import interfaces.unidadesYEstructuras.Seleccionable;
 import mapa.Casillero;
-import unidades.UnidadTerran;
+import unidades.Marine;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,24 +10,60 @@ import org.junit.Test;
 public class testCasillero {
 
 	@Test
-	public void casilleroTerrestreVacioCuandoSeCrea() {
+	public void casilleroVacioCuandoSeCrea() {
 		Casillero casillero = new Casillero();
-		Assert.assertTrue(casillero.estaVacioTierra());
+		
+		Assert.assertTrue(casillero.estaVacio());
 	}
 
 	@Test
-	public void casilleroTerrestreNoEstaVacioCuandoSeOcupa() {
+	public void casilleroNoEstaVacioCuandoSeOcupa() {
 		Casillero casillero = new Casillero();
-		Seleccionable unidad = new UnidadTerran(1, null);
-		casillero.ocuparTierra(unidad);
-		Assert.assertFalse(casillero.estaVacioTierra());
+		Seleccionable unidad = new Marine();
+		
+		casillero.ocupar(unidad);
+		
+		Assert.assertFalse(casillero.estaVacio());
 	}
 	
 	@Test
-	public void casilleroTerrestreDevuelveLoQueSeLeDioParaQueLoOcupe() {
+	public void casilleroDevuelveLoQueSeLeDioParaQueLoOcupe() {
 		Casillero casillero = new Casillero();
-		Seleccionable unidad = new UnidadTerran(1, null);
-		casillero.ocuparTierra(unidad);
-		Assert.assertEquals(unidad, casillero.obtenerTierra());
+		Seleccionable unidad = new Marine();
+		
+		casillero.ocupar(unidad);
+		
+		Assert.assertEquals(unidad, casillero.obtener());
+	}
+	
+	@Test
+	public void casilleroEstaVacioCuandoSeLibera() {
+		Casillero casillero = new Casillero();
+		Seleccionable unidad = new Marine();
+		
+		casillero.ocupar(unidad);
+		casillero.liberar();
+		
+		Assert.assertTrue(casillero.estaVacio());
+	}
+	
+	@Test
+	public void casilleroDevuelveSeleccionableCuandoSeLibera() {
+		Casillero casillero = new Casillero();
+		Seleccionable unidad = new Marine();
+		
+		casillero.ocupar(unidad);
+		
+		Assert.assertEquals(unidad, casillero.liberar());
+	}
+	
+	@Test
+	public void casilleroObtieneLasCoordenadasAsignadas() {
+		Casillero casillero = new Casillero(1, 2);
+		
+		Posicion posicion = casillero.getPosicion();
+		
+		Assert.assertEquals(1, posicion.getX());
+		Assert.assertEquals(2, posicion.getY());
 	}
 }

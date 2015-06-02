@@ -3,23 +3,35 @@ package mapa;
 import interfaces.unidadesYEstructuras.Seleccionable;
 
 public class Casillero {
-	private boolean estaVacioTierra;
-	private Seleccionable terrestre;
+	private Seleccionable elemento;
+	private Posicion posicion;
 	
-	public Casillero() {
-		this.estaVacioTierra = true;
+	public Casillero(){
 	}
 	
-	public boolean estaVacioTierra() {
-		return this.estaVacioTierra;
+	public Casillero(int x, int y) {
+		this.posicion = new Posicion(x, y);
 	}
 
-	public void ocuparTierra(Seleccionable seleccionable) {
-		this.terrestre = seleccionable;
-		this.estaVacioTierra = false;
+	public boolean estaVacio() {
+		return (this.elemento == null);
 	}
 
-	public Seleccionable obtenerTierra(){
-		return this.terrestre;
+	public void ocupar(Seleccionable seleccionable) {
+		this.elemento = seleccionable;
+	}
+	
+	public Seleccionable obtener() {
+		return this.elemento;
+	}
+
+	public Seleccionable liberar() {
+		Seleccionable aux = elemento;
+		this.elemento = null;
+		return aux;
+	}
+
+	public Posicion getPosicion() {
+		return this.posicion;
 	}
 }
