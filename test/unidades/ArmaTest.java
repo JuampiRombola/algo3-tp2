@@ -5,7 +5,7 @@ import interfaces.unidadesYEstructuras.Atacable;
 
 import org.junit.Test;
 
-public class ArmaTests {
+public class ArmaTest {
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDeLaUnidadEstaEsDestruida(){
 		int vidaMaxima = 10;

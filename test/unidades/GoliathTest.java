@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GoliathTests {
+public class GoliathTest {
 	@Test
 	public void unGoliathTiene125PuntosDeVidaMaximaInicialmente(){
 		Goliath goliath = new Goliath();
