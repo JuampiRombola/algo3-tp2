@@ -16,4 +16,16 @@ public class MarineTest {
 		Marine marine = new Marine();
 		assertTrue(marine.getVidaActual() == 40);
 	}
+	
+	@Test
+	public void unMarineTiene6DeDanioInicialmente(){
+		Marine marine = new Marine();
+		assertTrue(marine.getDanio() == 6);
+	}
+	
+	@Test
+	public void unMarineTiene4DeRangoInicialmente(){
+		Marine marine = new Marine();
+		assertTrue(marine.getRango() == 4);
+	}
 }

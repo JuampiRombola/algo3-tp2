@@ -34,10 +34,13 @@ protected Arma arma;
 		return vidaMaxima;
 	}
 	
+	//Cuando tengamos danio aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
+	//Tener en cuenta al usar.
 	public int getDanio(){
 		return this.arma.getDanio();
 	}
-	
+	//Cuando tengamos rango aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
+	//Tener en cuenta al usar.
 	public int getRango(){
 		return this.arma.getRango();
 	}
