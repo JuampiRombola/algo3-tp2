@@ -15,4 +15,10 @@ public class Arma {
 			atacable.recibePuntosDeDanio(danio);
 		}
 	}
+	public int getRango(){
+		return this.rango;
+	}
+	public int getDanio(){
+		return this.danio;
+	}
 }
