@@ -33,4 +33,12 @@ protected Arma arma;
 	public int getVidaMaxima(){
 		return vidaMaxima;
 	}
+	
+	public int getDanio(){
+		return this.arma.getDanio();
+	}
+	
+	public int getRango(){
+		return this.arma.getRango();
+	}
 }

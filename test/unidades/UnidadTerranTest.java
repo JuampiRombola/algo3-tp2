@@ -90,4 +90,45 @@ public class UnidadTerranTest{
 		assertTrue(!atacable.estaDestruido());
 	}
 	
+	
+	@Test
+	public void unArmaConDanio1DevuelveConGetDanio1(){
+		int danio = 1;
+		int rango = 10;
+		int vida = 10;
+		Arma arma = new Arma(danio, rango);
+		UnidadTerran unidadTerran = new UnidadTerran(vida, arma);
+		assertTrue(unidadTerran.getDanio() == 1);
+	}
+	
+	@Test
+	public void siTengoUnArmaConDanio2DevuelveConGetDanio2(){
+		int danio = 2;
+		int rango = 10;
+		int vida = 10;
+		Arma arma = new Arma(danio, rango);
+		UnidadTerran unidadTerran = new UnidadTerran(vida, arma);
+		assertTrue(unidadTerran.getDanio() == 2);
+	}
+	
+	@Test
+	public void  siTengoUnArmaConRango2DevuelveConGetRango2(){
+		int danio = 10;
+		int rango = 2;
+		int vida = 10;
+		Arma arma = new Arma(danio, rango);
+		UnidadTerran unidadTerran = new UnidadTerran(vida, arma);
+		assertTrue(unidadTerran.getRango() == 2);
+	}
+	
+	@Test
+	public void  siTengoUnArmaConRango1DevuelveConGetRango1(){
+		int danio = 10;
+		int rango = 1;
+		int vida = 10;
+		Arma arma = new Arma(danio, rango);
+		UnidadTerran unidadTerran = new UnidadTerran(vida, arma);
+		assertTrue(unidadTerran.getRango() == 1);
+	}
+	
 }
