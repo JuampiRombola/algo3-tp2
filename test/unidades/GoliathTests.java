@@ -6,13 +6,13 @@ import org.junit.Test;
 
 public class GoliathTests {
 	@Test
-	public void unMarineTiene125PuntosDeVidaMaximaInicialmente(){
+	public void unGoliathTiene125PuntosDeVidaMaximaInicialmente(){
 		Goliath goliath = new Goliath();
 		assertTrue(goliath.getVidaMaxima() == 125);
 	}
 	
 	@Test
-	public void unMarineTiene125PuntosDeVidaActualInicialmente(){
+	public void unGoliathTiene125PuntosDeVidaActualInicialmente(){
 		Goliath goliath = new Goliath();
 		assertTrue(goliath.getVidaActual() == 125);
 	}
@@ -24,7 +24,7 @@ public class GoliathTests {
 	}
 	
 	@Test
-	public void unMarineTiene5DeRangoInicialmente(){
+	public void unGoliathTiene5DeRangoInicialmente(){
 		Goliath goliath = new Goliath();
 		assertTrue(goliath.getRango() == 5);
 	}
