@@ -1,7 +1,7 @@
 package unidades;
 
 import static org.junit.Assert.*;
-import interfacesParaUnidadesYEstructuras.Atacable;
+import interfaces.Atacable;
 
 import org.junit.Test;
 

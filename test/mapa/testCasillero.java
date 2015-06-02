@@ -1,7 +1,7 @@
 package test.mapa;
 
-import interfacesParaUnidadesYEstructuras.Seleccionable;
-import modelo.mapa.Casillero;
+import interfaces.Seleccionable;
+import mapa.Casillero;
 import unidades.Unidad;
 
 import org.junit.Assert;
