@@ -13,7 +13,7 @@ public class ArmaTests {
 		int danio =  vidaMaxima + 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = new UnidadTerran(vidaMaxima, arma);
 		arma.atacar(atacable, rango);
 		assertTrue(atacable.estaDestruido());
 	}
@@ -23,7 +23,7 @@ public class ArmaTests {
 		int danio =  vidaMaxima - 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = new UnidadTerran(vidaMaxima, arma);
 		arma.atacar(atacable, rango);
 		assertTrue(!atacable.estaDestruido());
 	}
@@ -34,7 +34,7 @@ public class ArmaTests {
 		int danio =  vidaMaxima + 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = new UnidadTerran(vidaMaxima, arma);
 		arma.atacar(atacable, rango + 1);
 		assertTrue(!atacable.estaDestruido());
 	}

@@ -1,8 +1,8 @@
-package test.mapa;
+package mapa;
 
 import interfaces.unidadesYEstructuras.Seleccionable;
 import mapa.Casillero;
-import unidades.Unidad;
+import unidades.UnidadTerran;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class testCasillero {
 	@Test
 	public void casilleroTerrestreNoEstaVacioCuandoSeOcupa() {
 		Casillero casillero = new Casillero();
-		Seleccionable unidad = new Unidad(1, null);
+		Seleccionable unidad = new UnidadTerran(1, null);
 		casillero.ocuparTierra(unidad);
 		Assert.assertFalse(casillero.estaVacioTierra());
 	}
@@ -26,7 +26,7 @@ public class testCasillero {
 	@Test
 	public void casilleroTerrestreDevuelveLoQueSeLeDioParaQueLoOcupe() {
 		Casillero casillero = new Casillero();
-		Seleccionable unidad = new Unidad(1, null);
+		Seleccionable unidad = new UnidadTerran(1, null);
 		casillero.ocuparTierra(unidad);
 		Assert.assertEquals(unidad, casillero.obtenerTierra());
 	}
