@@ -1,15 +1,23 @@
 package unidades;
 
 import interfacesParaUnidadesYEstructuras.Atacable;
+import interfacesParaUnidadesYEstructuras.Seleccionable;
 
-public class Unidad implements Atacable{
+public class Unidad implements Seleccionable{
 private int vidaActual;
 private int vidaMaxima;
-	
-	public Unidad(int vidaMaxima) {
+private Arma arma;
+
+	public Unidad(int vidaMaxima, Arma arma){
+		this.arma = arma;
 		this.vidaMaxima = vidaMaxima;
 		this.vidaActual = vidaMaxima;
 	}
+
+	public void atacar(Atacable atacable, int distanciaEntreAtacanteYAtacable) {
+		arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
+	}
+
 
 	public boolean estaDestruido(){
 		return vidaActual <= 0;
@@ -28,5 +36,9 @@ private int vidaMaxima;
 	
 	public int getVidaMaxima(){
 		return vidaMaxima;
+	}
+
+	public int getTamanio() {
+		return 1;
 	}
 }
