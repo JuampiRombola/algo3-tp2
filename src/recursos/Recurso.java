@@ -1,9 +1,12 @@
 package recursos;
 
+import construcciones.EdificioRecolector;
+
 
 public abstract class Recurso {
 	static int recoleccion = 10;
-	private int unidadesRestantes;
+	protected int unidadesRestantes;
+	protected EdificioRecolector recolector;
 	
 	public Recurso(int unidadesMaximas) {
 		this.unidadesRestantes = unidadesMaximas;
@@ -17,9 +20,14 @@ public abstract class Recurso {
 		return unidadesRestantes <= 0;
 	}
 	
+	public void setRecolector(EdificioRecolector recolector) {
+		this.recolector = recolector;
+	}
+	
 	public void recolectar() {
-		if  (!this.estaDestruido()) {
+		if  ((!this.estaDestruido()) && (this.recolector != null)) {
 			this.unidadesRestantes -= recoleccion;
+			this.recolector.recolectar(recoleccion);
 		}
 
 	}
