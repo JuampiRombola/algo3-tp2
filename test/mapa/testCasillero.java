@@ -1,6 +1,6 @@
 package test.mapa;
 
-import interfaces.Seleccionable;
+import interfaces.unidadesYEstructuras.Seleccionable;
 import mapa.Casillero;
 import unidades.Unidad;
 

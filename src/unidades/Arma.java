@@ -1,6 +1,6 @@
 package unidades;
 
-import interfaces.Atacable;
+import interfaces.unidadesYEstructuras.Atacable;
 
 public class Arma {
 	

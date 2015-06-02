@@ -1,7 +1,7 @@
 package unidades;
 
-import interfaces.Atacable;
-import interfaces.Seleccionable;
+import interfaces.unidadesYEstructuras.Atacable;
+import interfaces.unidadesYEstructuras.Seleccionable;
 
 public class Unidad implements Seleccionable{
 private int vidaActual;

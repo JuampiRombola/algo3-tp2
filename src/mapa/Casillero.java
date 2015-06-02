@@ -1,6 +1,6 @@
 package mapa;
 
-import interfaces.Seleccionable;
+import interfaces.unidadesYEstructuras.Seleccionable;
 
 public class Casillero {
 	private boolean estaVacioTierra;
