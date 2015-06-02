@@ -71,4 +71,11 @@ public class MineralTest {
 		mineral.recolectar();
 		assertEquals(mineralesIniciales, centro.getRecursosRecolectados() - 10);
 	}
+	
+	@Test
+	public void cuandoSeCreaUnMineralYNoTieneNingunCentroAsociadoNoSePuedeRecolectar() {
+		Mineral mineral = new Mineral();
+		mineral.recolectar();
+		assertEquals(1500, mineral.getUnidadesRestantes());
+	}
 }
