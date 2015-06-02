@@ -35,4 +35,14 @@ public class MineralTest {
 		}
 		assertEquals(0, mineral.getUnidadesRestantes());
 	}
+	
+	@Test
+	public void cuandoElMineralEstaDestruidoNoSePuedeSeguirSacandoUnidades() {
+		Mineral mineral = new Mineral();
+		while (!mineral.estaDestruido()) {
+			mineral.recolectar();
+		}
+		mineral.recolectar();
+		assertEquals(0, mineral.getUnidadesRestantes());
+	}
 }
