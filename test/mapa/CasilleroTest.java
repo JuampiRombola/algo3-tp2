@@ -7,7 +7,7 @@ import unidades.Marine;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class testCasillero {
+public class CasilleroTest {
 
 	@Test
 	public void casilleroVacioCuandoSeCrea() {

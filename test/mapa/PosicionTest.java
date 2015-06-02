@@ -3,7 +3,7 @@ package mapa;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class testPosicion {
+public class PosicionTest {
 
 	@Test
 	public void posicionDevuelveCoordenadaXCorrectamente() {
