@@ -15,7 +15,7 @@ protected Arma arma;
 		this.vida = new Vida(vidaMaxima);
 	}
 
-	public void atacar(Atacable atacable, int distanciaEntreAtacanteYAtacable) {
+	public void atacar(Atacable atacable, double distanciaEntreAtacanteYAtacable) {
 		arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
 	}
 
