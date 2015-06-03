@@ -41,7 +41,7 @@ protected Arma arma;
 	}
 	//Cuando tengamos rango aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
 	//Tener en cuenta al usar.
-	public int getRango(){
+	public double getRango(){
 		return this.arma.getRango();
 	}
 }
