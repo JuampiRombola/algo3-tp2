@@ -10,8 +10,8 @@ public class Arma {
 		this.danio = danio;
 		this.rango = rango;
 	}
-	public void atacar(Atacable atacable, int distanciaEntreArmaYAtacable){
-		if(distanciaEntreArmaYAtacable <= rango){
+	public void atacar(Atacable atacable, double distanciaEntreArmaYAtacable){
+		if(distanciaEntreArmaYAtacable <= (double)rango){
 			atacable.recibePuntosDeDanio(danio);
 		}
 	}
