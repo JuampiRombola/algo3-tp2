@@ -7,14 +7,12 @@ import interfaces.unidadesYEstructuras.Seleccionable;
 
 public class Unidad implements Seleccionable{
 
-protected int vidaMaxima;
-protected int vidaActual;
+protected Vida vida;
 protected Arma arma;
 
 	public Unidad(int vidaMaxima, Arma arma){
 		this.arma = arma;
-		this.vidaMaxima = vidaMaxima;
-		this.vidaActual = vidaMaxima;
+		this.vida = new Vida(vidaMaxima);
 	}
 
 	public void atacar(Atacable atacable, int distanciaEntreAtacanteYAtacable) {
@@ -23,15 +21,15 @@ protected Arma arma;
 
 
 	public boolean estaDestruido(){
-		return vidaActual <= 0;
+		return vida.getVida() == 0;
 	}
 	
 	public int getVidaActual(){
-		return vidaActual;
+		return vida.getVida();
 	}
 	
 	public int getVidaMaxima(){
-		return vidaMaxima;
+		return  vida.getVidaMaxima();
 	}
 	
 	//Cuando tengamos danio aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
@@ -46,10 +44,6 @@ protected Arma arma;
 	}
 	
 	public void recibePuntosDeDanio(int danio) {
-		vidaActual = vidaActual - danio;
-		//Los valores negativos no tienen sentido en el modelo
-		if(vidaActual < 0){ 
-			vidaActual = 0;
-		}
+		vida.recibirDanio(danio);
 	}
 }
