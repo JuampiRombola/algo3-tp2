@@ -21,22 +21,21 @@ public class Mapa {
 		//this.generarMapa();
 	}
 	
-	public Casillero getCasilleroTerrestre(Posicion posicion) {
-		for (Casillero casillero : this.areaTerrestre) {
-			if (posicion.equals(casillero.getPosicion())) {
-				return casillero;
+	public Casillero getCasilleroTerrestre(Posicion posicion) throws CasilleroInexistenteException {
+		Casillero casilleroBuscado = null;
+		for (Casillero casilleroSeleccionado : this.areaTerrestre) {
+			if (posicion.equals(casilleroSeleccionado.getPosicion())) {
+				casilleroBuscado = casilleroSeleccionado;
 			}
 		}
-		return null;
+		if (casilleroBuscado == null)
+			throw new CasilleroInexistenteException();
+		return casilleroBuscado;
 	}
 	
-	public boolean agregarUnidadTerrestre(Seleccionable unidad, int x, int y) {
+	public void agregarUnidadTerrestre(Seleccionable unidad, int x, int y) throws CasilleroInexistenteException {
 		Posicion posicion = new Posicion(x, y);
 		Casillero casillero = this.getCasilleroTerrestre(posicion);
-		if (casillero != null) {
-			casillero.ocupar(unidad);
-			return true;
-		}
-		return false;
+		casillero.ocupar(unidad);
 	}
 }
