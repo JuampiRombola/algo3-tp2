@@ -30,7 +30,7 @@ public class PosicionTest {
 	public void dosPosicionesSonDistintasSiTienenDistintasCoordenadas() {
 		Posicion posicion1 = new Posicion(1, 1);
 		Posicion posicion2 = new Posicion(1, 2);
-		Assert.assertNotEquals(posicion1, posicion2);
+		Assert.assertFalse(posicion1.equals(posicion2));
 	}
 	
 	@Test
