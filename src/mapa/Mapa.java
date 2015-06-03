@@ -5,7 +5,8 @@ import interfaces.unidadesYEstructuras.Seleccionable;
 import java.util.ArrayList;
 
 public class Mapa {
-
+	//Para el test de integracion, hay que probar el combate acercando al Marine
+	//Se necesita un metodo que permita mover la unidad de un lado al otro
 	private ArrayList<Casillero> areaEspacial;
 	private ArrayList<Casillero> areaTerrestre;
 	
@@ -34,4 +35,6 @@ public class Mapa {
 		Casillero casillero = this.getCasilleroTerrestre(posicion);
 		casillero.ocupar(unidad);
 	}
+	
+
 }

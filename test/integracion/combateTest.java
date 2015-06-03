@@ -73,7 +73,6 @@ public class combateTest {
 			}
 			Assert.assertTrue(marine.estaDestruido());
 			Assert.assertFalse(goliath.estaDestruido());
-			
 		} catch (CasilleroInexistenteException e) {}
 	}
 	
