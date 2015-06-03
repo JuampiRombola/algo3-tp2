@@ -101,6 +101,22 @@ public class UnidadTest{
 		assertTrue(unidad.getDanio() == 1);
 	}
 	
+	public Unidad crearUnidadDestruida(){
+		int vidaUnidadNueva = danioArmaDePrueba;
+		Unidad unidad = new Unidad(vidaUnidadNueva, armaDePrueba);
+		armaDePrueba.atacar(unidad, rangoArmaDePrueba);
+		return unidad;
+	}
+	
+	@Test
+	public void siDisparoUnArmaYEstoyDestruidoNoPuedoDestruirAUnAtacable(){
+		int vidaAtacable = danioArmaDePrueba;
+		Unidad unidadDestruida = crearUnidadDestruida();
+		Atacable atacable = new Unidad(vidaAtacable, armaDePrueba);
+		unidadDestruida.atacar(atacable, rangoArmaDePrueba);
+		assertTrue(!atacable.estaDestruido());
+	}
+	
 	@Test
 	public void siTengoUnArmaConDanio2DevuelveConGetDanio2(){
 		int danio = 2;

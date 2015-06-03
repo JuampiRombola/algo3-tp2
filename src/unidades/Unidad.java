@@ -16,7 +16,8 @@ protected Arma arma;
 	}
 
 	public void atacar(Atacable atacable, double distanciaEntreAtacanteYAtacable) {
-		arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
+		if (!estaDestruido())
+			arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
 	}
 
 
