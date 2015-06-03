@@ -2,39 +2,35 @@ package mapa;
 
 import interfaces.unidadesYEstructuras.Seleccionable;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class Mapa {
 
-	private Collection<Casillero> areaEspacial;
-	private Collection<Casillero> areaTerrestre;
+	private ArrayList<Casillero> areaEspacial;
+	private ArrayList<Casillero> areaTerrestre;
 	
 	public Mapa(int alto, int ancho){
+		this.areaEspacial = new ArrayList<Casillero>();
+		this.areaTerrestre = new ArrayList<Casillero>();
 		for (int i=0; i < alto; i++) {
 			for (int j=0; j < ancho; j++) {
-				Casillero casilleroEspacial = new Casillero(i, j);
-				Casillero casilleroTerrestre = new Casillero(i, j);
-				areaEspacial.add(casilleroEspacial);
-				areaTerrestre.add(casilleroTerrestre);
+				areaEspacial.add(new Casillero(i, j));
+				areaTerrestre.add(new Casillero(i, j));
 			}
 		}
 		//this.generarMapa();
 	}
 	
 	public Casillero getCasilleroTerrestre(Posicion posicion) throws CasilleroInexistenteException {
-		Casillero casilleroBuscado = null;
-		for (Casillero casilleroSeleccionado : this.areaTerrestre) {
-			if (posicion.equals(casilleroSeleccionado.getPosicion())) {
-				casilleroBuscado = casilleroSeleccionado;
+		for (Casillero casillero : this.areaTerrestre) {
+			if (posicion.equals(casillero.getPosicion())) {
+				return casillero;
 			}
 		}
-		if (casilleroBuscado == null)
-			throw new CasilleroInexistenteException();
-		return casilleroBuscado;
+		throw new CasilleroInexistenteException();
 	}
 	
-	public void agregarUnidadTerrestre(Seleccionable unidad, int x, int y) throws CasilleroInexistenteException {
-		Posicion posicion = new Posicion(x, y);
+	public void agregarUnidadTerrestre(Seleccionable unidad, Posicion posicion) throws CasilleroInexistenteException {
 		Casillero casillero = this.getCasilleroTerrestre(posicion);
 		casillero.ocupar(unidad);
 	}
