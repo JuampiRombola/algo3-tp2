@@ -1,6 +1,6 @@
 package unidades;
 
-public class Marine extends UnidadTerran{
+public class Marine extends Unidad{
 
 	static int vidaMaxima = 40;
 	static int danioBasico = 6;

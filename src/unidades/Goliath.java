@@ -1,6 +1,6 @@
 package unidades;
 
-public class Goliath extends UnidadTerran {
+public class Goliath extends Unidad {
 	static int vidaMaxima = 125;
 	static int danioBasico = 12;
 	static int rangoBasico = 5;
