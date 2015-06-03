@@ -1,6 +1,7 @@
 package unidades;
 
 import static org.junit.Assert.*;
+import unidades.Vida;
 
 import org.junit.Test;
 

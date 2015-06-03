@@ -2,6 +2,7 @@ package recursos;
 
 import static org.junit.Assert.*;
 import juego.Jugador;
+import recursos.Mineral;
 
 import org.junit.Test;
 

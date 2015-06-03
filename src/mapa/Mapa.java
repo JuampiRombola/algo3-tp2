@@ -10,7 +10,7 @@ public class Mapa {
 	private ArrayList<Casillero> areaEspacial;
 	private ArrayList<Casillero> areaTerrestre;
 	
-	public Mapa(int alto, int ancho){
+	public Mapa(int alto, int ancho) {
 		this.areaEspacial = new ArrayList<Casillero>();
 		this.areaTerrestre = new ArrayList<Casillero>();
 		for (int i=0; i < alto; i++) {
@@ -35,6 +35,11 @@ public class Mapa {
 		Casillero casillero = this.getCasilleroTerrestre(posicion);
 		casillero.ocupar(unidad);
 	}
+	/*
+	public void moverElementoTerrestre(Posicion posicionOrigen, int corrimientoX, int corrimientoY) throws CasilleroInexistenteException, CasilleroOcupadoException {
+		Casillero casilleroDelElemento = this.getCasilleroTerrestre(posicionOrigen);
+		Posicion nuevaPosicion = new Posicion()
+	}
+	*/
 	
-
 }

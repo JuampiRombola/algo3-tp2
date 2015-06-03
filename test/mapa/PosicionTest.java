@@ -2,6 +2,8 @@ package mapa;
 
 import org.junit.Assert;
 import org.junit.Test;
+import mapa.Posicion;
+import mapa.Casillero;
 
 public class PosicionTest {
 

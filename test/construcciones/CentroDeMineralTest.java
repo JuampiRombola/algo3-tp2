@@ -2,6 +2,7 @@ package construcciones;
 
 import static org.junit.Assert.*;
 import juego.Jugador;
+import construcciones.CentroDeMineral;
 
 import org.junit.Test;
 
