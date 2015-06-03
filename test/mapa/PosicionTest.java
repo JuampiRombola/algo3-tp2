@@ -28,9 +28,30 @@ public class PosicionTest {
 	
 	@Test
 	public void dosPosicionesSonDistintasSiTienenDistintasCoordenadas() {
+		Posicion posicion1 = new Posicion(5, 1);
+		Posicion posicion2 = new Posicion(1, 2);
+		Assert.assertFalse(posicion1.equals(posicion2));
+	}
+	
+	@Test
+	public void dosPosicionesSonDistintasSiTienenDistintasCoordenadaX() {
+		Posicion posicion1 = new Posicion(1, 1);
+		Posicion posicion2 = new Posicion(2, 1);
+		Assert.assertFalse(posicion1.equals(posicion2));
+	}
+	
+	@Test
+	public void dosPosicionesSonDistintasSiTienenDistintasCoordenadaY() {
 		Posicion posicion1 = new Posicion(1, 1);
 		Posicion posicion2 = new Posicion(1, 2);
 		Assert.assertFalse(posicion1.equals(posicion2));
+	}
+	
+	@Test
+	public void alCompararUnaPosicionConOtroObjetoSeDevuelveFalse() {
+		Posicion posicion1 = new Posicion(1, 1);
+		Casillero otroObjeto = new Casillero();
+		Assert.assertFalse(posicion1.equals(otroObjeto));
 	}
 	
 	@Test
