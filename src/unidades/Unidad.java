@@ -1,14 +1,17 @@
 package unidades;
 
+import mapa.Posicion;
+import mapa.Posicionable;
 import interfaces.unidadesYEstructuras.Atacable;
 import interfaces.unidadesYEstructuras.Seleccionable;
 
 
 
-public class Unidad implements Seleccionable{
+public class Unidad implements Seleccionable, Posicionable{
 
-protected Vida vida;
-protected Arma arma;
+	protected Vida vida;
+	protected Arma arma;
+	private Posicion posicion;
 
 	public Unidad(int vidaMaxima, Arma arma){
 		this.arma = arma;
@@ -46,5 +49,20 @@ protected Arma arma;
 	
 	public void recibePuntosDeDanio(int danio) {
 		vida.recibirDanio(danio);
+	}
+
+	@Override
+	public boolean esTerrestre() {
+		return true;
+	}
+
+	@Override
+	public void setPosicion(int x, int y) {
+		this.posicion = new Posicion(x, y, this.esTerrestre());
+	}
+
+	@Override
+	public Posicion getPosicion() {
+		return this.posicion;
 	}
 }
