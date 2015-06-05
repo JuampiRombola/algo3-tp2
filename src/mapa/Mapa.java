@@ -1,45 +1,57 @@
 package mapa;
 
-import interfaces.unidadesYEstructuras.Seleccionable;
-
 import java.util.ArrayList;
+import java.util.Collection;
+
+import mapa.excepciones.PosicionInvalidaException;
+import mapa.excepciones.PosicionVaciaException;
 
 public class Mapa {
-	//Para el test de integracion, hay que probar el combate acercando al Marine
-	//Se necesita un metodo que permita mover la unidad de un lado al otro
-	private ArrayList<Casillero> areaEspacial;
-	private ArrayList<Casillero> areaTerrestre;
+	private int alto, ancho;
+	private Collection<Posicionable> unidades;
 	
 	public Mapa(int alto, int ancho) {
-		this.areaEspacial = new ArrayList<Casillero>();
-		this.areaTerrestre = new ArrayList<Casillero>();
-		for (int i=0; i < alto; i++) {
-			for (int j=0; j < ancho; j++) {
-				areaEspacial.add(new Casillero(i, j));
-				areaTerrestre.add(new Casillero(i, j));
-			}
-		}
-		//this.generarMapa();
+		this.alto = alto;
+		this.ancho = ancho;
+		this.unidades = new ArrayList<Posicionable>(alto * ancho);
 	}
 	
-	public Casillero getCasilleroTerrestre(Posicion posicion) throws CasilleroInexistenteException {
-		for (Casillero casillero : this.areaTerrestre) {
-			if (posicion.equals(casillero.getPosicion())) {
-				return casillero;
-			}
-		}
-		throw new CasilleroInexistenteException();
+	private void validadPosicion(int x, int y) throws PosicionInvalidaException {
+		if (x < 0 || x > this.alto || y < 0 || y > this.ancho)
+			throw new PosicionInvalidaException();
 	}
 	
-	public void agregarUnidadTerrestre(Seleccionable unidad, Posicion posicion) throws CasilleroInexistenteException {
-		Casillero casillero = this.getCasilleroTerrestre(posicion);
-		casillero.ocupar(unidad);
+	private boolean posicionEstaOcupada(Posicion posicion) {
+		for (Posicionable unidad : unidades) {
+			if (posicion.equals(unidad.getPosicion()))
+				return true;
+		}
+		return false;
 	}
-	/*
-	public void moverElementoTerrestre(Posicion posicionOrigen, int corrimientoX, int corrimientoY) throws CasilleroInexistenteException, CasilleroOcupadoException {
-		Casillero casilleroDelElemento = this.getCasilleroTerrestre(posicionOrigen);
-		Posicion nuevaPosicion = new Posicion()
+	
+	public void agregarUnidad(Posicionable unidad, int x, int y) throws PosicionInvalidaException {
+		this.validadPosicion(x, y);
+		unidad.setPosicion(x, y);
+		if (!this.posicionEstaOcupada(unidad.getPosicion()))
+			this.unidades.add(unidad);
 	}
-	*/
+	
+	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
+		for (Posicionable unidad : unidades) {
+			if (posicion.equals(unidad.getPosicion()))
+				return unidad;
+		}
+		throw new PosicionVaciaException();
+	}
+	
+	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
+		this.validadPosicion(xDestino, yDestino);
+		if (!this.posicionEstaOcupada(unidad.getPosicion()))
+			unidad.setPosicion(xDestino, yDestino);
+	}
+	
+	public void removerUnidad(Posicionable unidad) {
+		this.unidades.remove(unidad);
+	}
 	
 }

@@ -4,17 +4,19 @@ public class Posicion {
 	
 	private int x;
 	private int y;
+	private boolean esTerrestre;
 
-	public Posicion(int x, int y) {
+	public Posicion(int x, int y, boolean esTerrestre) {
 		this.x = x;
 		this.y = y;
+		this.esTerrestre = esTerrestre;
 	}
 
-	public int getX(){
+	public int getX() {
 		return this.x;
 	}
 	
-	public int getY(){
+	public int getY() {
 		return this.y;
 	}
 	
@@ -24,13 +26,13 @@ public class Posicion {
 			return false;
 		}
 		Posicion otraPosicion = (Posicion)otroObjeto;
-		return ((this.x == otraPosicion.x) && (this.y == otraPosicion.y));
+		return ((this.x == otraPosicion.x) && (this.y == otraPosicion.y) 
+				&& (this.esTerrestre == otraPosicion.esTerrestre));
 	}
 	
 	public double calcularDistancia(Posicion posicion) {
 		double distanciaEnX = posicion.getX() - this.x;
 		double distanciaEnY = posicion.getY() - this.y;
-		double distancia = Math.sqrt(Math.pow(distanciaEnX, 2) + Math.pow(distanciaEnY, 2));
-		return distancia;
+		return Math.sqrt(Math.pow(distanciaEnX, 2) + Math.pow(distanciaEnY, 2));
 	}
 }
