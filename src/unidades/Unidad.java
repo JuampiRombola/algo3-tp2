@@ -14,11 +14,12 @@ public class Unidad implements Atacable {
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
+		this.posicion = posicion;
 	}
 	
-	public void atacar(Atacable atacable, double distanciaEntreAtacanteYAtacable) {
+	public void atacar(Atacable atacable) {
 		if (!estaDestruido())
-			arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
+			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
 	}
 
 

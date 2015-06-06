@@ -85,7 +85,7 @@ public class UnidadTest{
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDelAtacableEsteEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable, rangoArmaDePrueba);
+		unidadAtacante.atacar(atacable);
 		assertTrue(atacable.estaDestruido());
 	}
 	
@@ -93,15 +93,15 @@ public class UnidadTest{
 	public void siDisparoUnArmaEnRangoConMenorDanioQueLaVidaDelAtacableEsteNoEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba + 1;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable, rangoArmaDePrueba);
+		unidadAtacante.atacar(atacable);
 		assertTrue(!atacable.estaDestruido());
 	}
 	
 	@Test
 	public void siDisparoUnArmaConMayorDanioQueLaVidaDelAtacablePeroFueraDeRangoElAtacableNoEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba - 1;
-		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable, rangoArmaDePrueba + 1);
+		Unidad atacable = nuevaUnidadFueraDeRangoDeAtaque(vidaAtacable);
+		unidadAtacante.atacar(atacable);
 		assertTrue(!atacable.estaDestruido());
 	}
 	
@@ -127,7 +127,7 @@ public class UnidadTest{
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad unidadDestruida = crearUnidadDestruida();
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadDestruida.atacar(atacable, rangoArmaDePrueba);
+		unidadDestruida.atacar(atacable);
 		assertTrue(!atacable.estaDestruido());
 	}
 	
