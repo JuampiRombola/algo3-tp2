@@ -24,24 +24,48 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void cuandoSeIntentaOcuparUnaPosixionInexistenteSeLanzaUnError() {
+	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
 		Mapa mapa = new Mapa(10, 10);
 		Posicionable unidad = new Marine();
 		
 		try{
-			mapa.agregarUnidad(unidad, 11, 11);
+			mapa.agregarUnidad(unidad, 11, 1);
 			
 			fail();
 		} catch (PosicionInvalidaException e) {}
 	}
 	
 	@Test
-	public void cuandoSeIntentaOcuparUnaPosixionNegativaSeLanzaUnError() {
+	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
 		Mapa mapa = new Mapa(10, 10);
 		Posicionable unidad = new Marine();
 		
 		try{
-			mapa.agregarUnidad(unidad, -1, -1);
+			mapa.agregarUnidad(unidad, 1, 11);
+			
+			fail();
+		} catch (PosicionInvalidaException e) {}
+	}
+	
+	@Test
+	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
+		Mapa mapa = new Mapa(10, 10);
+		Posicionable unidad = new Marine();
+		
+		try{
+			mapa.agregarUnidad(unidad, -1, 1);
+			
+			fail();
+		} catch (PosicionInvalidaException e) {}
+	}
+	
+	@Test
+	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
+		Mapa mapa = new Mapa(10, 10);
+		Posicionable unidad = new Marine();
+		
+		try{
+			mapa.agregarUnidad(unidad, 1, -1);
 			
 			fail();
 		} catch (PosicionInvalidaException e) {}
@@ -95,6 +119,22 @@ public class MapaTest {
 			mapa.moverUnidad(unidad, 2, 2);
 			
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionVaciaException e) {}
+	}
+	
+	@Test
+	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
+		Mapa mapa = new Mapa(10, 10);
+		Posicionable unidadConMovimiento = new Marine();
+		Posicionable unidad = new Marine();
+		try{
+			mapa.agregarUnidad(unidadConMovimiento, 1, 1);
+			mapa.agregarUnidad(unidad, 1, 2);
+			mapa.moverUnidad(unidad, 1, 1);
+			
+			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(1, 2, true)));
+			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
