@@ -1,7 +1,6 @@
 package unidades;
 
 import static org.junit.Assert.*;
-import interfaces.unidadesYEstructuras.Atacable;
 
 import org.junit.Test;
 
@@ -69,7 +68,7 @@ public class UnidadTest{
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDelAtacableEsteEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba;
-		Atacable atacable = new Unidad(vidaAtacable, armaDePrueba);
+		Unidad atacable = new Unidad(vidaAtacable, armaDePrueba);
 		unidadAtacante.atacar(atacable, rangoArmaDePrueba);
 		assertTrue(atacable.estaDestruido());
 	}
@@ -77,7 +76,7 @@ public class UnidadTest{
 	@Test
 	public void siDisparoUnArmaEnRangoConMenorDanioQueLaVidaDelAtacableEsteNoEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba + 1;
-		Atacable atacable = new Unidad(vidaAtacable, armaDePrueba);
+		Unidad atacable = new Unidad(vidaAtacable, armaDePrueba);
 		unidadAtacante.atacar(atacable, rangoArmaDePrueba);
 		assertTrue(!atacable.estaDestruido());
 	}
@@ -85,7 +84,7 @@ public class UnidadTest{
 	@Test
 	public void siDisparoUnArmaConMayorDanioQueLaVidaDelAtacablePeroFueraDeRangoElAtacableNoEsDestruido(){
 		int vidaAtacable = danioArmaDePrueba - 1;
-		Atacable atacable = new Unidad(vidaAtacable, armaDePrueba);
+		Unidad atacable = new Unidad(vidaAtacable, armaDePrueba);
 		unidadAtacante.atacar(atacable, rangoArmaDePrueba + 1);
 		assertTrue(!atacable.estaDestruido());
 	}
@@ -112,7 +111,7 @@ public class UnidadTest{
 	public void siDisparoUnArmaYEstoyDestruidoNoPuedoDestruirAUnAtacable(){
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad unidadDestruida = crearUnidadDestruida();
-		Atacable atacable = new Unidad(vidaAtacable, armaDePrueba);
+		Unidad atacable = new Unidad(vidaAtacable, armaDePrueba);
 		unidadDestruida.atacar(atacable, rangoArmaDePrueba);
 		assertTrue(!atacable.estaDestruido());
 	}

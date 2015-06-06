@@ -1,13 +1,12 @@
 package unidades;
 
 import mapa.Posicion;
-import mapa.Posicionable;
 import interfaces.unidadesYEstructuras.Atacable;
-import interfaces.unidadesYEstructuras.Seleccionable;
+import interfaces.unidadesYEstructuras.Atacante;
 
 
 
-public class Unidad implements Seleccionable, Posicionable {
+public class Unidad implements Atacable, Atacante {
 
 	protected Vida vida;
 	protected Arma arma;
@@ -51,17 +50,14 @@ public class Unidad implements Seleccionable, Posicionable {
 		vida.recibirDanio(danio);
 	}
 
-	@Override
 	public boolean esTerrestre() {
 		return true;
 	}
 
-	@Override
 	public void setPosicion(int x, int y) {
 		this.posicion = new Posicion(x, y, this.esTerrestre());
 	}
 
-	@Override
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
