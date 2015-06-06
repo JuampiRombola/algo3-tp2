@@ -7,13 +7,13 @@ import interfaces.unidadesYEstructuras.Seleccionable;
 
 
 
-public class Unidad implements Seleccionable, Posicionable{
+public class Unidad implements Seleccionable, Posicionable {
 
 	protected Vida vida;
 	protected Arma arma;
 	private Posicion posicion;
 
-	public Unidad(int vidaMaxima, Arma arma){
+	public Unidad(int vidaMaxima, Arma arma) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 	}
@@ -24,26 +24,26 @@ public class Unidad implements Seleccionable, Posicionable{
 	}
 
 
-	public boolean estaDestruido(){
+	public boolean estaDestruido() {
 		return vida.getVida() == 0;
 	}
 	
-	public int getVidaActual(){
+	public int getVidaActual() {
 		return vida.getVida();
 	}
 	
-	public int getVidaMaxima(){
+	public int getVidaMaxima() {
 		return  vida.getVidaMaxima();
 	}
 	
 	//Cuando tengamos danio aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
 	//Tener en cuenta al usar.
-	public int getDanio(){
+	public int getDanio() {
 		return this.arma.getDanio();
 	}
 	//Cuando tengamos rango aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
 	//Tener en cuenta al usar.
-	public double getRango(){
+	public double getRango() {
 		return this.arma.getRango();
 	}
 	

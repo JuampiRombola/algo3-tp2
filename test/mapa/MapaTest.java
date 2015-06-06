@@ -124,6 +124,20 @@ public class MapaTest {
 	}
 	
 	@Test
+	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
+		Mapa mapa = new Mapa(10, 10);
+		Posicionable unidad = new Marine();
+		try{
+			mapa.agregarUnidad(unidad, 1, 1);
+			mapa.moverUnidad(unidad, 2, 2);
+			mapa.getUnidad(new Posicion(1, 1, true));
+			
+			fail();
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionVaciaException e) {}
+	}
+	
+	@Test
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
 		Mapa mapa = new Mapa(10, 10);
 		Posicionable unidadConMovimiento = new Marine();

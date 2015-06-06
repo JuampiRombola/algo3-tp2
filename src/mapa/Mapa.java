@@ -46,7 +46,7 @@ public class Mapa {
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
 		this.validadPosicion(xDestino, yDestino);
-		if (!this.posicionEstaOcupada(unidad.getPosicion()))
+		if (!this.posicionEstaOcupada(new Posicion(xDestino, yDestino, unidad.esTerrestre())))
 			unidad.setPosicion(xDestino, yDestino);
 	}
 	
