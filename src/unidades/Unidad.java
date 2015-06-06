@@ -2,11 +2,10 @@ package unidades;
 
 import mapa.Posicion;
 import interfaces.unidadesYEstructuras.Atacable;
-import interfaces.unidadesYEstructuras.Atacante;
 
 
 
-public class Unidad implements Atacable, Atacante {
+public class Unidad implements Atacable {
 
 	protected Vida vida;
 	protected Arma arma;
