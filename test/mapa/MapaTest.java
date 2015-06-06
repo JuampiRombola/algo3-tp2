@@ -131,7 +131,7 @@ public class MapaTest {
 		try{
 			mapa.agregarUnidad(unidadConMovimiento, 1, 1);
 			mapa.agregarUnidad(unidad, 1, 2);
-			mapa.moverUnidad(unidad, 1, 1);
+			mapa.moverUnidad(unidadConMovimiento, 1, 2);
 			
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(1, 2, true)));
 			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
