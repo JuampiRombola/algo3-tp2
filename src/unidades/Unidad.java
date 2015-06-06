@@ -16,7 +16,7 @@ public class Unidad implements Atacable, Atacante {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 	}
-
+	
 	public void atacar(Atacable atacable, double distanciaEntreAtacanteYAtacable) {
 		if (!estaDestruido())
 			arma.atacar(atacable, distanciaEntreAtacanteYAtacable);
@@ -24,15 +24,15 @@ public class Unidad implements Atacable, Atacante {
 
 
 	public boolean estaDestruido() {
-		return vida.getVida() == 0;
+		return vida.getPuntosDeVida() == 0;
 	}
 	
 	public int getVidaActual() {
-		return vida.getVida();
+		return vida.getPuntosDeVida();
 	}
 	
 	public int getVidaMaxima() {
-		return  vida.getVidaMaxima();
+		return  vida.getPuntosDeVidaMaximos();
 	}
 	
 	//Cuando tengamos danio aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.

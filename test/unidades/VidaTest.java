@@ -12,28 +12,28 @@ public class VidaTest {
 	public void siLaVidaAlCrearseEsDe10GetVidaMaximaDevuelve10(){
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
-		assertTrue(vida.getVidaMaxima() == 10);
+		assertTrue(vida.getPuntosDeVidaMaximos() == 10);
 	}
 	
 	@Test
 	public void siLaVidaAlCrearseEsDe20GetVidaMaximaDevuelve10(){
 		int puntosDeVidaMaximos = 20;
 		Vida vida = new Vida(puntosDeVidaMaximos);
-		assertTrue(vida.getVidaMaxima() == 20);
+		assertTrue(vida.getPuntosDeVidaMaximos() == 20);
 	}
 	
 	@Test
 	public void siLaVidaAlCrearseEsDe10GetVidaDevuelve10(){
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
-		assertTrue(vida.getVida() == 10);
+		assertTrue(vida.getPuntosDeVida() == 10);
 	}
 	
 	@Test
 	public void siLaVidaAlCrearseEsDe10GetVidaDevuelve20(){
 		int puntosDeVidaMaximos = 20;
 		Vida vida = new Vida(puntosDeVidaMaximos);
-		assertTrue(vida.getVida() == 20);
+		assertTrue(vida.getPuntosDeVida() == 20);
 	}
 	
 	@Test
@@ -41,14 +41,14 @@ public class VidaTest {
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
 		vida.recibirDanio(5);
-		assertTrue(vida.getVida() == 5);
+		assertTrue(vida.getPuntosDeVida() == 5);
 	}
 	@Test
 	public void siLaVidaAlCrearseEsDe7YRecibe10DeDanioEnUnGolpeGetVidaDevuelve3(){
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
 		vida.recibirDanio(7);
-		assertTrue(vida.getVida() == 3);
+		assertTrue(vida.getPuntosDeVida() == 3);
 	}
 	
 	@Test
@@ -56,6 +56,6 @@ public class VidaTest {
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
 		vida.recibirDanio(12);
-		assertTrue(vida.getVida() == 0);
+		assertTrue(vida.getPuntosDeVida() == 0);
 	}
 }

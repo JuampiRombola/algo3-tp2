@@ -9,11 +9,11 @@ public class Vida {
 		this.vidaActual = vidaMaxima;
 	}
 
-	public int getVida() {
+	public int getPuntosDeVida() {
 		return vidaActual;
 	}
 	
-	public int getVidaMaxima() {
+	public int getPuntosDeVidaMaximos() {
 		return vidaMaxima;
 	}
 	

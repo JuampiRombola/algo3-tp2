@@ -6,14 +6,21 @@ import interfaces.unidadesYEstructuras.Atacable;
 import org.junit.Test;
 
 public class ArmaTest {
+	private int vidaMaxima = 10;
+	
+	public Atacable crearAtacable(){
+		//El arma en una atacable no tiene relevancia, es solo para crear la unidad.
+		Arma arma = new Arma(10,10);
+		Atacable atacable = new Unidad(vidaMaxima, arma);
+		return atacable;
+	}
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDeLaUnidadEstaEsDestruida(){
 		int vidaMaxima = 10;
-
 		int danio =  vidaMaxima + 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = crearAtacable();
 		arma.atacar(atacable, rango);
 		assertTrue(atacable.estaDestruido());
 	}
@@ -23,7 +30,7 @@ public class ArmaTest {
 		int danio =  vidaMaxima - 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = crearAtacable();
 		arma.atacar(atacable, rango);
 		assertTrue(!atacable.estaDestruido());
 	}
@@ -34,7 +41,7 @@ public class ArmaTest {
 		int danio =  vidaMaxima + 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Atacable atacable = crearAtacable();
 		arma.atacar(atacable, rango + 1);
 		assertTrue(!atacable.estaDestruido());
 	}
