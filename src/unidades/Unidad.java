@@ -12,7 +12,7 @@ public class Unidad implements Atacable, Atacante {
 	protected Arma arma;
 	private Posicion posicion;
 
-	public Unidad(int vidaMaxima, Arma arma) {
+	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 	}

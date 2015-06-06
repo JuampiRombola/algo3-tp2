@@ -1,6 +1,7 @@
 package unidades;
 
 import static org.junit.Assert.*;
+import mapa.Posicion;
 
 import org.junit.Test;
 
@@ -9,18 +10,22 @@ public class UnidadTest{
 	private int danioArmaDePrueba = 100;
 	private Arma armaDePrueba = new Arma(danioArmaDePrueba, rangoArmaDePrueba);
 	private int vidaMaxima = 10;
-	private Unidad unidadAtacante = new Unidad(vidaMaxima,	armaDePrueba);
+	private Posicion posicion = new Posicion(1,1, true);
+	private Posicion posicionEnRango = new Posicion (2,1, true);
+	//La posicion de la unidad que vaya a atacar es 1 1. 100, 100 esta fuera de rango.
+	private Posicion posicionFueraDeRango = new Posicion(100,100, true);
+	private Unidad unidadAtacante = new Unidad(vidaMaxima, armaDePrueba, posicion);
 	
 	public Unidad nuevaUnidad(){
-		return new Unidad(vidaMaxima, armaDePrueba);
+		return new Unidad(vidaMaxima, armaDePrueba, posicion);
 	}
 	
 	public Unidad nuevaUnidadEnRangoDeAtaque(int vida){
-		return  new Unidad(vida, armaDePrueba);
+		return  new Unidad(vida, armaDePrueba, posicionEnRango);
 	}
 	
 	public Unidad nuevaUnidadFueraDeRangoDeAtaque(int vida){
-		return new Unidad(vidaMaxima, armaDePrueba);
+		return new Unidad(vidaMaxima, armaDePrueba, posicionFueraDeRango);
 	}
 	@Test
 	public void alCrearseLaUnidadNoEstaDestruida(){
@@ -107,13 +112,12 @@ public class UnidadTest{
 		int rango = 10;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma);
+		Unidad unidad = new Unidad(vida, arma, posicion);
 		assertTrue(unidad.getDanio() == 1);
 	}
 	
 	public Unidad crearUnidadDestruida(){
-		int vidaUnidadNueva = danioArmaDePrueba;
-		Unidad unidad = new Unidad(vidaUnidadNueva, armaDePrueba);
+		Unidad unidad = nuevaUnidad();
 		armaDePrueba.atacar(unidad, rangoArmaDePrueba);
 		return unidad;
 	}
@@ -133,7 +137,7 @@ public class UnidadTest{
 		int rango = 10;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma);
+		Unidad unidad = new Unidad(vida, arma, posicion);
 		assertTrue(unidad.getDanio() == 2);
 	}
 	
@@ -143,7 +147,7 @@ public class UnidadTest{
 		int rango = 2;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma);
+		Unidad unidad = new Unidad(vida, arma, posicion);
 		assertTrue(unidad.getRango() == 2);
 	}
 	
@@ -153,7 +157,7 @@ public class UnidadTest{
 		int rango = 1;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma);
+		Unidad unidad = new Unidad(vida, arma, posicion);
 		assertTrue(unidad.getRango() == 1);
 	}
 	

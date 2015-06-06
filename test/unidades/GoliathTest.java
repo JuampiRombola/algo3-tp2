@@ -7,7 +7,10 @@ import org.junit.Test;
 public class GoliathTest {
 	
 	public Goliath nuevoGoliath(){
-		return new Goliath();
+		//la posicion del goliath no es relevante en las pruebas que llaman a este metodo
+		int posicionEnX  = 1;
+		int posicionEnY = 1;
+		return new Goliath(posicionEnX, posicionEnY);
 	}
 	
 	@Test

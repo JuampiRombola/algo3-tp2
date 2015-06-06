@@ -2,6 +2,7 @@ package unidades;
 
 import static org.junit.Assert.*;
 import interfaces.unidadesYEstructuras.Atacable;
+import mapa.Posicion;
 
 import org.junit.Test;
 
@@ -9,9 +10,10 @@ public class ArmaTest {
 	private int vidaMaxima = 10;
 	
 	public Atacable crearAtacable(){
-		//El arma en una atacable no tiene relevancia, es solo para crear la unidad.
+		//El arma y la posicion en una atacable no tiene relevancia, es solo para crear la unidad.
 		Arma arma = new Arma(10,10);
-		Atacable atacable = new Unidad(vidaMaxima, arma);
+		Posicion posicion = new Posicion(1,1, true);
+		Atacable atacable = new Unidad(vidaMaxima, arma, posicion);
 		return atacable;
 	}
 	@Test

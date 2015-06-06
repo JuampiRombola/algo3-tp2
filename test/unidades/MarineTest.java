@@ -7,7 +7,9 @@ import org.junit.Test;
 public class MarineTest {
 	
 	public Marine nuevoMarine(){
-		return new Marine();
+		int posicionEnX  = 1;
+		int posicionEnY = 1;
+		return new Marine(posicionEnX,posicionEnY);
 	}
 	
 	@Test

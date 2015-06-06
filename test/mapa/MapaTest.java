@@ -14,7 +14,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidad, 1, 1);
 			
@@ -26,7 +26,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		
 		try{
 			mapa.agregarUnidad(unidad, 11, 1);
@@ -38,7 +38,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		
 		try{
 			mapa.agregarUnidad(unidad, 1, 11);
@@ -50,7 +50,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		
 		try{
 			mapa.agregarUnidad(unidad, -1, 1);
@@ -62,7 +62,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		
 		try{
 			mapa.agregarUnidad(unidad, 1, -1);
@@ -74,8 +74,8 @@ public class MapaTest {
 	@Test
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
-		Posicionable unidadIntrusa = new Marine();
+		Posicionable unidad = new Marine(1,1);
+		Posicionable unidadIntrusa = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidad, 1, 1);
 			mapa.agregarUnidad(unidadIntrusa, 1, 1);
@@ -99,7 +99,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidad, 1, 1);
 			mapa.removerUnidad(unidad);
@@ -113,7 +113,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeMueveUnaUnidadParaObtenerlaHayQueBuscarlaConSuNuevaPosicion() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidad, 1, 1);
 			mapa.moverUnidad(unidad, 2, 2);
@@ -126,7 +126,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidad = new Marine();
+		Posicionable unidad = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidad, 1, 1);
 			mapa.moverUnidad(unidad, 2, 2);
@@ -140,8 +140,8 @@ public class MapaTest {
 	@Test
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
 		Mapa mapa = new Mapa(10, 10);
-		Posicionable unidadConMovimiento = new Marine();
-		Posicionable unidad = new Marine();
+		Posicionable unidadConMovimiento = new Marine(1,1);
+		Posicionable unidad = new Marine(1,1);
 		try{
 			mapa.agregarUnidad(unidadConMovimiento, 1, 1);
 			mapa.agregarUnidad(unidad, 1, 2);
