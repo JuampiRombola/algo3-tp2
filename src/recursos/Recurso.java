@@ -1,15 +1,16 @@
 package recursos;
 
-import construcciones.EdificioRecolector;
+import mapa.Posicion;
+import mapa.Posicionable;
 
 
-public abstract class Recurso {
-	static int recoleccion = 10;
+public abstract class Recurso implements Posicionable{
 	protected int unidadesRestantes;
-	protected EdificioRecolector recolector;
+	protected Posicion posicion;
 	
-	public Recurso(int unidadesMaximas) {
+	public Recurso(int unidadesMaximas, Posicion posicion) {
 		this.unidadesRestantes = unidadesMaximas;
+		this.posicion = posicion;
 	}
 	
 	public int getUnidadesRestantes() {
@@ -20,15 +21,21 @@ public abstract class Recurso {
 		return unidadesRestantes <= 0;
 	}
 	
-	public void setRecolector(EdificioRecolector recolector) {
-		this.recolector = recolector;
+	public void extraer(int cantidadExtraida) {
+		if  (!this.estaDestruido()) {
+			this.unidadesRestantes -= cantidadExtraida;
+		}
 	}
 	
-	public void recolectar() {
-		if  ((!this.estaDestruido()) && (this.recolector != null)) {
-			this.unidadesRestantes -= recoleccion;
-			this.recolector.recolectar(recoleccion);
-		}
-
+	public boolean esTerrestre(){
+		return true;
+	}
+	
+	public void setPosicion(int x, int y) {
+		this.posicion = new Posicion(x, y, this.esTerrestre());
+	}
+	
+	public Posicion getPosicion() {
+		return this.posicion;
 	}
 }

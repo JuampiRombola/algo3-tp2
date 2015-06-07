@@ -1,15 +1,15 @@
 package construcciones;
 
-import juego.Jugador;
+import recursos.Mineral;
 
 public class CentroDeMineral extends EdificioRecolector{
-
-	public CentroDeMineral(Jugador jugador) {
-		super(jugador);
+	static boolean esTerrestre = true;
+	
+	public CentroDeMineral(Mineral mineral) {
+		super(mineral);
 	}
 	
 	public void recolectar(int cantidadRecolectada) {
 		super.recolectar(cantidadRecolectada);
-		this.jugador.sumarMinerales(cantidadRecolectada);
 	}
 }

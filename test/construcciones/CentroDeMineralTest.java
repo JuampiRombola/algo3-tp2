@@ -1,34 +1,26 @@
 package construcciones;
 
 import static org.junit.Assert.*;
-import juego.Jugador;
 import construcciones.CentroDeMineral;
 
 import org.junit.Test;
+
+import recursos.Mineral;
 
 public class CentroDeMineralTest {
 
 	@Test
 	public void cuandoSeCreaUnCentroNoTieneMineralesRecolectados() {
-		CentroDeMineral centro = new CentroDeMineral(null);
+		Mineral mineral = new Mineral(1, 1);
+		CentroDeMineral centro = new CentroDeMineral(mineral);
 		assertEquals(0, centro.getRecursosRecolectados());
 		}
 	
 	@Test
 	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadoTiene10Unidades() {
-		Jugador jugador = new Jugador();
-		CentroDeMineral centro = new CentroDeMineral(jugador);
+		Mineral mineral = new Mineral(1, 1);
+		CentroDeMineral centro = new CentroDeMineral(mineral);
 		centro.recolectar(10);
 		assertEquals(10, centro.getRecursosRecolectados());
 	}
-	
-	@Test
-	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadoElJugadorTiene10UnidadesMas() {
-		Jugador jugador = new Jugador();
-		int mineralesIniciales = jugador.getMinerales();
-		CentroDeMineral centro = new CentroDeMineral(jugador);
-		centro.recolectar(10);
-		assertEquals(mineralesIniciales, centro.jugador.getMinerales() - 10);
-	}
-
 }
