@@ -2,6 +2,7 @@ package recursos;
 
 import static org.junit.Assert.*;
 import recursos.Mineral;
+import mapa.Posicion;
 
 import org.junit.Test;
 
@@ -14,6 +15,20 @@ public class MineralTest {
 		assertEquals(1500, mineral.getUnidadesRestantes());
 	}
 
+	@Test
+	public void cuandoSeCreaUnMineralEsteEstaEnTierra() {
+		Mineral mineral = new Mineral(1, 1);
+		assertEquals(true, mineral.esTerrestre());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnMineralSePuedeCambiarSuPosicion() {
+		Mineral mineral = new Mineral(1, 1);
+		Posicion posicionInicial = mineral.getPosicion();
+		mineral.setPosicion(1, 2);
+		assertFalse(posicionInicial.equals(mineral.getPosicion()));
+	}
+	
 	@Test
 	public void cuandoSeExtra10UnidadesDeUnMineralTiene10UnidadesMenos() {
 		Mineral mineral = new Mineral(1, 1);

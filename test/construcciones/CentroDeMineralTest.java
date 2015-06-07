@@ -18,6 +18,13 @@ public class CentroDeMineralTest {
 		}
 	
 	@Test
+	public void cuandoSeCreaUnCentroDeMineralEsteEstaEnTierra() {
+		Mineral mineral = new Mineral(1, 1);
+		CentroDeMineral centro = new CentroDeMineral(mineral);
+		assertEquals(true, centro.esTerrestre());
+	}
+	
+	@Test
 	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadoTiene10Unidades() {
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
@@ -55,4 +62,6 @@ public class CentroDeMineralTest {
 		goliath.atacar(centro);
 		assertEquals(0, centro.getVidaActual());
 	}
+	
+
 }
