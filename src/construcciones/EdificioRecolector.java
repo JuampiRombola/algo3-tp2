@@ -1,19 +1,23 @@
 package construcciones;
 
+import interfaces.unidadesYEstructuras.Atacable;
 import mapa.Posicion;
 import mapa.Posicionable;
 import recursos.Recurso;
+import unidades.Vida;
 
 
-public abstract class EdificioRecolector implements Posicionable{
+public abstract class EdificioRecolector implements Posicionable, Atacable{
 	protected int recursosRecolectados;
 	protected Recurso recurso;
 	protected Posicion posicion;
+	protected Vida vida;
 	
-	public EdificioRecolector(Recurso recurso) {
+	public EdificioRecolector(Recurso recurso, int vida) {
 		this.recursosRecolectados = 0;
 		this.recurso = recurso;
 		this.posicion = recurso.getPosicion();
+		this.vida = new Vida(vida);
 	}
 	
 	public int getRecursosRecolectados() {
@@ -35,6 +39,18 @@ public abstract class EdificioRecolector implements Posicionable{
 	
 	public Posicion getPosicion() {
 		return this.posicion;
+	}
+	
+	public boolean estaDestruido() {
+		return this.getVidaActual() <= 0;
+	}
+	
+	public void recibePuntosDeDanio(int danio){
+		this.vida.recibirDanio(danio);
+	}
+	
+	public int getVidaActual(){
+		return this.vida.getPuntosDeVida();
 	}
 	
 }

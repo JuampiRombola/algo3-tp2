@@ -4,7 +4,7 @@ public class Vida {
 	private int vidaMaxima;
 	private int vidaActual;
 	
-	Vida(int vidaMaxima){
+	public Vida(int vidaMaxima){
 		this.vidaMaxima = vidaMaxima;
 		this.vidaActual = vidaMaxima;
 	}
