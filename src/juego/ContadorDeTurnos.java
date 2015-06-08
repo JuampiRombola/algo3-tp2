@@ -12,7 +12,7 @@ public class ContadorDeTurnos {
 		return turnoActual;
 	}
 	
-	public void avanzarTurno(){ //Package private
+	public void avanzarTurno(){
 		turnoActual++;
 	}
 }
