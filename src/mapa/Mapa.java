@@ -42,6 +42,7 @@ public class Mapa {
 				return unidad;
 		}
 		throw new PosicionVaciaException();
+
 	}
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {

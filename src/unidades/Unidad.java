@@ -7,8 +7,8 @@ import interfaces.unidadesYEstructuras.Atacable;
 
 public class Unidad implements Atacable {
 
-	protected Vida vida;
-	protected Arma arma;
+	private Vida vida;
+	private Arma arma;
 	private Posicion posicion;
 
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
