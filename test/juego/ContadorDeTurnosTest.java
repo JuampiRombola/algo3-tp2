@@ -11,4 +11,11 @@ public class ContadorDeTurnosTest {
 		ContadorDeTurnos contadorDeTurnos = new ContadorDeTurnos();
 		assertTrue(contadorDeTurnos.obtenerTurnoActual() == 1);
 	}
+	
+	@Test
+	public void elTurnoActualDeUnContadorAlPasarUnTurnoEsEl2(){
+		ContadorDeTurnos contadorDeTurnos = new ContadorDeTurnos();
+		contadorDeTurnos.avanzarTurno();
+		assertTrue(contadorDeTurnos.obtenerTurnoActual() == 2);
+	}
 }
