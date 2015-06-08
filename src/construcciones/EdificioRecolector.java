@@ -2,12 +2,11 @@ package construcciones;
 
 import interfaces.unidadesYEstructuras.Atacable;
 import mapa.Posicion;
-import mapa.Posicionable;
 import recursos.Recurso;
 import unidades.Vida;
 
 
-public abstract class EdificioRecolector implements Posicionable, Atacable{
+public abstract class EdificioRecolector implements Atacable{
 	protected int recursosRecolectados;
 	protected Recurso recurso;
 	protected Posicion posicion;

@@ -63,6 +63,4 @@ public class CentroDeMineralTest {
 		goliath.atacar(centro);
 		assertEquals(0, centro.getVidaActual());
 	}
-	
-
 }
