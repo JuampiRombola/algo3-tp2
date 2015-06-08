@@ -160,5 +160,24 @@ public class UnidadTest{
 		Unidad unidad = new Unidad(vida, arma, posicion);
 		assertTrue(unidad.getRango() == 1);
 	}
+	@Test
+	public void unaUnidadNoHaceDanioEnElSegundoDisparoSiDispara2VecesSeguidas(){
+		Unidad unidadAtacante = nuevaUnidad();
+		int vidaAtacable = danioArmaDePrueba*2;
+		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
+		unidadAtacante.atacar(unidadAtacable);
+		unidadAtacante.atacar(unidadAtacable);
+		assertTrue(unidadAtacable.getVidaActual() == (vidaAtacable/2));
+	}
 	
+	@Test
+	public void unaUnidadHaceDanioEnElSegundoDisparoSiAvanzaUnTurno(){
+		Unidad unidadAtacante = nuevaUnidad();
+		int vidaAtacable = danioArmaDePrueba*2;
+		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
+		unidadAtacante.atacar(unidadAtacable);
+		unidadAtacante.avanzarTurno();
+		unidadAtacante.atacar(unidadAtacable);
+		assertTrue(unidadAtacable.estaDestruido());
+	}
 }
