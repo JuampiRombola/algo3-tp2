@@ -4,7 +4,7 @@ import mapa.Posicion;
 import unidades.Marine;
 import unidades.Unidad;
 
-public class Barraca extends Edificio{
+public class Barraca extends ConstructorDeUnidades{
 	static int vidaMaxima = 1000;
 	static boolean inicialmenteTerrestre = true;
 	

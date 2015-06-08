@@ -4,7 +4,7 @@ import mapa.Posicion;
 import unidades.Goliath;
 import unidades.Unidad;
 
-public class Fabrica extends Edificio{
+public class Fabrica extends ConstructorDeUnidades{
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	
