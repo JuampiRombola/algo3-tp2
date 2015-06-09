@@ -46,4 +46,10 @@ public class BarracaTest {
 		Unidad marine = barraca.crearUnidad();
 		assertEquals(marine.getVidaActual(), 40);
 	}
+	
+	@Test
+	public void elMetodoGetNivelDevuelveQueLaBarracaEsUnEdificioDeNivel1(){
+		Barraca barraca = new Barraca(1, 1);
+		assertTrue(barraca.getNivel() == 1);
+	}
 }

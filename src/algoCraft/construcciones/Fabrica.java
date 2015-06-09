@@ -7,6 +7,7 @@ import algoCraft.unidades.Unidad;
 public class Fabrica extends ConstructorDeUnidades{
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
+	static int nivel = 2;
 	
 	public Fabrica(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
@@ -14,6 +15,10 @@ public class Fabrica extends ConstructorDeUnidades{
 
 	public Unidad crearUnidad() {
 		return new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
+	}
+	
+	public int getNivel(){
+		return nivel;
 	}
 }
 

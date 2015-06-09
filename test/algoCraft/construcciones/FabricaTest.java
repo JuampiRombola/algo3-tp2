@@ -46,4 +46,10 @@ public class FabricaTest {
 		Unidad goliath = fabrica.crearUnidad();
 		assertEquals(goliath.getVidaActual(), 125);
 	}
+	
+	@Test
+	public void elMetodoGetNivelDevuelveQueLaFabricaEsUnEdificioDeNivel2(){
+		Fabrica fabrica = new Fabrica(1, 1);
+		assertTrue(fabrica.getNivel() == 2);
+	}
 }
