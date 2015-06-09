@@ -4,7 +4,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
 
 
-public abstract class Recurso implements Posicionable{
+public abstract class Recurso implements Posicionable {
 	protected int unidadesRestantes;
 	protected Posicion posicion;
 	
@@ -27,7 +27,7 @@ public abstract class Recurso implements Posicionable{
 		}
 	}
 	
-	public boolean esTerrestre(){
+	public boolean esTerrestre() {
 		return true;
 	}
 	

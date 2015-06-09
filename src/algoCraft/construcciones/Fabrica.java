@@ -4,7 +4,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
-public class Fabrica extends ConstructorDeUnidades{
+public class Fabrica extends ConstructorDeUnidades {
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	static int nivel = 2;
@@ -22,7 +22,7 @@ public class Fabrica extends ConstructorDeUnidades{
 		}
 	}
 	
-	public int getNivel(){
+	public int getNivel() {
 		return nivel;
 	}
 	
@@ -34,7 +34,7 @@ public class Fabrica extends ConstructorDeUnidades{
 		this.habilitado = false;
 	}
 	
-	public boolean estaHabilitado(){
+	public boolean estaHabilitado() {
 		return habilitado;
 	}
 }

@@ -40,7 +40,7 @@ public class Unidad implements Atacable {
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!estaDestruido() && estoyActiva()){
+		if (!estaDestruido() && estoyActiva()) {
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
 			realiceUnaAccion = true;
 			actualizoElTurnoDeLaUltimaAccion();
