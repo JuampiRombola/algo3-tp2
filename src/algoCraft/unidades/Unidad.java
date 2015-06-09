@@ -47,8 +47,6 @@ public class Unidad implements Atacable {
 		}
 	}
 
-
-
 	public boolean estaDestruido() {
 		return vida.getPuntosDeVida() == 0;
 	}

@@ -4,7 +4,7 @@ import algoCraft.Atacable;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Vida;
 
-public abstract class Edificio implements Atacable{
+public abstract class Edificio implements Atacable {
 	protected Vida vida;
 	protected Posicion posicion;
 	

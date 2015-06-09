@@ -15,26 +15,26 @@ public class Barraca extends ConstructorDeUnidades{
 	}
 
 	public Unidad crearUnidad() throws EdificioNoHabilitadoException {
-		if(habilitado){
+		if (this.habilitado) {
 			return new Marine(this.posicion.getX(), this.posicion.getY() + 1);
-		}else{
+		} else {
 			throw new EdificioNoHabilitadoException();
 		}
 	}
 	
-	public int getNivel(){
+	public int getNivel() {
 		return nivel;
 	}
 
 	void habilitarProduccion() {
-		habilitado = true;
+		this.habilitado = true;
 	}
 
 	void deshabilitarProduccion() {
-		habilitado = false;
+		this.habilitado = false;
 	}
 	
-	public boolean estaHabilitado(){
-		return habilitado;
+	public boolean estaHabilitado() {
+		return this.habilitado;
 	}
 }

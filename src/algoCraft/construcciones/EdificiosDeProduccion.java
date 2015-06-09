@@ -14,10 +14,10 @@ public class EdificiosDeProduccion {
 	ArrayList<ConstructorDeUnidades> edificios = new ArrayList<ConstructorDeUnidades>();
 	
 	public void agregarEdificio(ConstructorDeUnidades edificio) throws NoExisteUnEdificioDeNivelAnterior{
-		if(edificios.isEmpty() || !edificios.contains(edificio))
-			if(edificio.getNivel() == 1 || existeUnEdificioDeUnNivelMenorA(edificio.getNivel())){
+		if (edificios.isEmpty() || !edificios.contains(edificio))
+			if (edificio.getNivel() == 1 || existeUnEdificioDeUnNivelMenorA(edificio.getNivel())) {
 				edificios.add(edificio);
-			}else{
+			} else {
 				throw new NoExisteUnEdificioDeNivelAnterior();
 			}
 	}
@@ -25,9 +25,8 @@ public class EdificiosDeProduccion {
 	private int nivelDelEdificioConNivelMasAlto() {
 		int nivelMasAlto = 0;
 		for (ConstructorDeUnidades edificio : edificios) {
-			if (edificio.getNivel() > nivelMasAlto){
+			if (edificio.getNivel() > nivelMasAlto)
 				nivelMasAlto = edificio.getNivel();
-			}
 		}	
 		return nivelMasAlto;
 	}
@@ -49,33 +48,27 @@ public class EdificiosDeProduccion {
 	private boolean existeUnEdificioDeUnNivelMenorA(int nivel) {
 		int nivelBuscado = nivel -1;
 		for (ConstructorDeUnidades edificio : edificios) {
-			if (edificio.getNivel() == nivelBuscado && !edificio.estaDestruido()){
+			if (edificio.getNivel() == nivelBuscado && !edificio.estaDestruido())
 				return true;
-			}
 		}
 		return false;
 	}
 	
 	private void borrarEdificiosDestruidos() {
 		for (ConstructorDeUnidades edificio : edificios) {
-			if (edificio.estaDestruido()){
+			if (edificio.estaDestruido())
 				edificios.remove(edificio);
-			}
 		}
 	}
 	
-	public void validarDependencias(){
+	public void validarDependencias() {
 		borrarEdificiosDestruidos();
-		for(int i = nivelDelEdificioConNivelMasAlto(); i > 1; i--){
-			if(existeUnEdificioDeUnNivelMenorA(i)){
+		for (int i = nivelDelEdificioConNivelMasAlto(); i > 1; i--) {
+			if(existeUnEdificioDeUnNivelMenorA(i)) {
 				habilitarTodosLosEdificiosDeNivel(i);
-			}else{
+			} else {
 				deshabilitarTodosLosEdificiosDeNivel(i);
 			}
 		}
 	}
-
-
-
-	
 }

@@ -15,9 +15,9 @@ public class Fabrica extends ConstructorDeUnidades{
 	}
 
 	public Unidad crearUnidad() throws EdificioNoHabilitadoException {
-		if(habilitado){
+		if (this.habilitado) {
 			return new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
-		}else{
+		} else {
 			throw new EdificioNoHabilitadoException();
 		}
 	}
@@ -27,11 +27,11 @@ public class Fabrica extends ConstructorDeUnidades{
 	}
 	
 	public void habilitarProduccion() {
-		habilitado = true;
+		this.habilitado = true;
 	}
 
 	public void deshabilitarProduccion() {
-		habilitado = false;
+		this.habilitado = false;
 	}
 	
 	public boolean estaHabilitado(){
