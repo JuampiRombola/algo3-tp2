@@ -1,4 +1,4 @@
-package mapa;
+package algoCraft.mapa;
 
 import static org.junit.Assert.*;
 

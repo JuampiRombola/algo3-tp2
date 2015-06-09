@@ -1,4 +1,4 @@
-package juego;
+package algoCraft.juego;
 
 import static org.junit.Assert.*;
 

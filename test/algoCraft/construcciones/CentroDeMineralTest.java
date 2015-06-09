@@ -1,4 +1,4 @@
-package construcciones;
+package algoCraft.construcciones;
 
 import static org.junit.Assert.*;
 

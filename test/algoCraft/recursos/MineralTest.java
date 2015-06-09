@@ -1,4 +1,4 @@
-package recursos;
+package algoCraft.recursos;
 
 import static org.junit.Assert.*;
 
