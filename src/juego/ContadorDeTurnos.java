@@ -1,18 +1,40 @@
 package juego;
 
-public class ContadorDeTurnos {
+public class ContadorDeTurnos{
 	
+	private static boolean instanciaCreada = false;
+	private static ContadorDeTurnos contador;
 	private int turnoActual;
 	
-	public ContadorDeTurnos(){
+	private ContadorDeTurnos(){
 		turnoActual = 1;
 	}
 	
+	//Nada debe llamarlo por fuera de las pruebas excepto la clase que vaya a manejarlo.
+	static public void iniciarContador(){
+		contador = new ContadorDeTurnos();
+		instanciaCreada = true;
+	}
+	
+	
+	static public ContadorDeTurnos getInstancia(){
+		return contador;
+	}
+	
 	public int obtenerTurnoActual() {
-		return turnoActual;
+		if (instanciaCreada){
+			return turnoActual;
+		}else{
+			throw new NoFueCreadoUnContadorDeTurnos();
+		}
 	}
 	
 	public void avanzarTurno(){
-		turnoActual++;
+		if (instanciaCreada){
+			turnoActual++;
+		}else{
+			throw new NoFueCreadoUnContadorDeTurnos();
+		}
+			
 	}
 }
