@@ -1,10 +1,10 @@
 package construcciones;
 
 import static org.junit.Assert.*;
+import juego.ContadorDeTurnos;
 
 import org.junit.Test;
 
-import construcciones.Fabrica;
 import unidades.Goliath;
 import unidades.Unidad;
 
@@ -18,6 +18,7 @@ public class FabricaTest {
 
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
+		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
 		int vidaInicial = fabrica.getVidaActual();
 		Goliath goliath = new Goliath(2,2);
@@ -27,10 +28,12 @@ public class FabricaTest {
 	
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
+		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
 		Goliath goliath = new Goliath(2,2);
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
+			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(fabrica);
 		assertEquals(0, fabrica.getVidaActual());
