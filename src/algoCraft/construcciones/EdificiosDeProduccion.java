@@ -13,9 +13,13 @@ public class EdificiosDeProduccion {
 	
 	ArrayList<ConstructorDeUnidades> edificios = new ArrayList<ConstructorDeUnidades>();
 	
-	public void agregarEdificio(ConstructorDeUnidades edificio){
+	public void agregarEdificio(ConstructorDeUnidades edificio) throws NoExisteUnEdificioDeNivelAnterior{
 		if(edificios.isEmpty() || !edificios.contains(edificio))
-			edificios.add(edificio);
+			if(edificio.getNivel() == 1 || existeUnEdificioDeUnNivelMenorA(edificio.getNivel())){
+				edificios.add(edificio);
+			}else{
+				throw new NoExisteUnEdificioDeNivelAnterior();
+			}
 	}
 	
 	private int nivelDelEdificioConNivelMasAlto() {
@@ -42,7 +46,7 @@ public class EdificiosDeProduccion {
 		
 	}
 	
-	private boolean existeUnEdificioNoDestruidoDeNivelMenorA(int nivel) {
+	private boolean existeUnEdificioDeUnNivelMenorA(int nivel) {
 		int nivelBuscado = nivel -1;
 		for (ConstructorDeUnidades edificio : edificios) {
 			if (edificio.getNivel() == nivelBuscado && !edificio.estaDestruido()){
@@ -52,15 +56,25 @@ public class EdificiosDeProduccion {
 		return false;
 	}
 	
+	private void borrarEdificiosDestruidos() {
+		for (ConstructorDeUnidades edificio : edificios) {
+			if (edificio.estaDestruido()){
+				edificios.remove(edificio);
+			}
+		}
+	}
+	
 	public void validarDependencias(){
+		borrarEdificiosDestruidos();
 		for(int i = nivelDelEdificioConNivelMasAlto(); i > 1; i--){
-			if(existeUnEdificioNoDestruidoDeNivelMenorA(i)){
+			if(existeUnEdificioDeUnNivelMenorA(i)){
 				habilitarTodosLosEdificiosDeNivel(i);
 			}else{
 				deshabilitarTodosLosEdificiosDeNivel(i);
 			}
 		}
 	}
+
 
 
 	

@@ -15,7 +15,7 @@ public class EdificiosDeProduccionTest {
 	}
 	
 	@Test
-	public void siTengoUnEdificioDeNivel1YActualizoLasDependenciasSigueEstandoHabilitado(){
+	public void siTengoUnEdificioDeNivel1YActualizoLasDependenciasSigueEstandoHabilitado() throws NoExisteUnEdificioDeNivelAnterior{
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1();
 		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
 		edificios.agregarEdificio(deNivel1);
@@ -28,8 +28,12 @@ public class EdificiosDeProduccionTest {
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1();
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2();
 		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
-		edificios.agregarEdificio(deNivel1);
-		edificios.agregarEdificio(deNivel2);
+		try {
+			edificios.agregarEdificio(deNivel1);
+		} catch (NoExisteUnEdificioDeNivelAnterior e) {}
+		try {
+			edificios.agregarEdificio(deNivel2);
+		} catch (NoExisteUnEdificioDeNivelAnterior e) {}
 		edificios.validarDependencias();
 		assertTrue(deNivel2.estaHabilitado());
 	}
@@ -39,10 +43,26 @@ public class EdificiosDeProduccionTest {
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1();
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2();
 		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
-		edificios.agregarEdificio(deNivel1);
-		edificios.agregarEdificio(deNivel2);
+		try {
+			edificios.agregarEdificio(deNivel1);
+		} catch (NoExisteUnEdificioDeNivelAnterior e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			edificios.agregarEdificio(deNivel2);
+		} catch (NoExisteUnEdificioDeNivelAnterior e) {}
+		
 		deNivel1.recibePuntosDeDanio(deNivel1.getVidaActual());
 		edificios.validarDependencias();
+		assertTrue(!deNivel2.estaHabilitado());
+	}
+	
+	@Test(expected = NoExisteUnEdificioDeNivelAnterior.class)
+	public void siTratoDePonerUnEdificioDeNivel2SinHaberPuestoUnoDeNivel1AnteriormenteObtengoUnaExcepcion() throws NoExisteUnEdificioDeNivelAnterior{
+		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2();
+		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
+		edificios.agregarEdificio(deNivel2);
 		assertTrue(!deNivel2.estaHabilitado());
 	}
 }
