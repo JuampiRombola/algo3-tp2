@@ -1,4 +1,4 @@
-package juego;
+package algoCraft.juego;
 
 public class ContadorDeTurnos{
 	

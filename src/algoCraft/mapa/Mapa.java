@@ -1,10 +1,10 @@
-package mapa;
+package algoCraft.mapa;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import mapa.excepciones.PosicionInvalidaException;
-import mapa.excepciones.PosicionVaciaException;
+import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionVaciaException;
 
 public class Mapa {
 	private int alto, ancho;

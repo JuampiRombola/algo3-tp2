@@ -3,6 +3,9 @@ package mapa;
 import org.junit.Assert;
 import org.junit.Test;
 
+import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
+
 public class PosicionTest {
 
 	@Test

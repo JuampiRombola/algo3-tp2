@@ -1,6 +1,6 @@
-package unidades;
+package algoCraft.unidades;
 
-import mapa.Posicion;
+import algoCraft.mapa.Posicion;
 
 public class Marine extends Unidad{
 

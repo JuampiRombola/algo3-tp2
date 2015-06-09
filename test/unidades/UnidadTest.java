@@ -1,10 +1,13 @@
 package unidades;
 
 import static org.junit.Assert.*;
-import juego.ContadorDeTurnos;
-import mapa.Posicion;
 
 import org.junit.Test;
+
+import algoCraft.juego.ContadorDeTurnos;
+import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Arma;
+import algoCraft.unidades.Unidad;
 
 public class UnidadTest{
 	private int rangoArmaDePrueba = 10;

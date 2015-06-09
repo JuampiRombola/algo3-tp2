@@ -1,4 +1,4 @@
-package mapa;
+package algoCraft.mapa;
 
 public interface Posicionable {
 	boolean esTerrestre();

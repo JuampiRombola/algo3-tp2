@@ -1,4 +1,4 @@
-package unidades;
+package algoCraft.unidades;
 
 public class Vida {
 	private int vidaMaxima;

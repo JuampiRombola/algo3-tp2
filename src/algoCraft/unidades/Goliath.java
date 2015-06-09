@@ -1,6 +1,6 @@
-package unidades;
+package algoCraft.unidades;
 
-import mapa.Posicion;
+import algoCraft.mapa.Posicion;
 
 public class Goliath extends Unidad {
 	static int vidaMaxima = 125;

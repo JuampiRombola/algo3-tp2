@@ -1,12 +1,13 @@
 package construcciones;
 
 import static org.junit.Assert.*;
-import juego.ContadorDeTurnos;
 
 import org.junit.Test;
 
-import unidades.Goliath;
-import unidades.Unidad;
+import algoCraft.construcciones.Fabrica;
+import algoCraft.juego.ContadorDeTurnos;
+import algoCraft.unidades.Goliath;
+import algoCraft.unidades.Unidad;
 
 public class FabricaTest {
 

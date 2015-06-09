@@ -1,6 +1,6 @@
-package interfaces.unidadesYEstructuras;
 
-import mapa.Posicionable;
+
+import algoCraft.mapa.Posicionable;
 
 public interface Atacable extends Posicionable{
 	boolean estaDestruido();

@@ -1,8 +1,8 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import mapa.Posicion;
-import unidades.Goliath;
-import unidades.Unidad;
+import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Goliath;
+import algoCraft.unidades.Unidad;
 
 public class Fabrica extends ConstructorDeUnidades{
 	static int vidaMaxima = 1250;

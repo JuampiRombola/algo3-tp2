@@ -1,9 +1,9 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import interfaces.unidadesYEstructuras.Atacable;
-import mapa.Posicion;
-import recursos.Recurso;
-import unidades.Vida;
+import algoCraft.Atacable;
+import algoCraft.mapa.Posicion;
+import algoCraft.recursos.Recurso;
+import algoCraft.unidades.Vida;
 
 
 public abstract class EdificioRecolector implements Atacable{

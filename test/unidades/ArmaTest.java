@@ -1,10 +1,13 @@
 package unidades;
 
 import static org.junit.Assert.*;
-import interfaces.unidadesYEstructuras.Atacable;
-import mapa.Posicion;
 
 import org.junit.Test;
+
+import algoCraft.Atacable;
+import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Arma;
+import algoCraft.unidades.Unidad;
 
 public class ArmaTest {
 	private int vidaMaxima = 10;

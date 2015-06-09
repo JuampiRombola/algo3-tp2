@@ -1,12 +1,13 @@
 package construcciones;
 
 import static org.junit.Assert.*;
-import juego.ContadorDeTurnos;
 
 import org.junit.Test;
 
-import recursos.Mineral;
-import unidades.Goliath;
+import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.juego.ContadorDeTurnos;
+import algoCraft.recursos.Mineral;
+import algoCraft.unidades.Goliath;
 
 public class CentroDeMineralTest {
 

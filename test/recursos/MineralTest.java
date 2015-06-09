@@ -1,10 +1,11 @@
 package recursos;
 
 import static org.junit.Assert.*;
-import recursos.Mineral;
-import mapa.Posicion;
 
 import org.junit.Test;
+
+import algoCraft.mapa.Posicion;
+import algoCraft.recursos.Mineral;
 
 
 public class MineralTest {

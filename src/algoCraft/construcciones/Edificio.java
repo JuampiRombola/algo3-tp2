@@ -1,8 +1,8 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import mapa.Posicion;
-import unidades.Vida;
-import interfaces.unidadesYEstructuras.Atacable;
+import algoCraft.Atacable;
+import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Vida;
 
 public abstract class Edificio implements Atacable{
 	protected Vida vida;

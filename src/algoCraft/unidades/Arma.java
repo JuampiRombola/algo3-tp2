@@ -1,6 +1,7 @@
-package unidades;
+package algoCraft.unidades;
 
-import interfaces.unidadesYEstructuras.Atacable;
+import algoCraft.Atacable;
+
 
 public class Arma {
 	

@@ -1,4 +1,4 @@
-package mapa;
+package algoCraft.mapa;
 
 public class Posicion {
 	

@@ -1,13 +1,16 @@
 package mapa;
 
 import static org.junit.Assert.*;
-import mapa.excepciones.PosicionInvalidaException;
-import mapa.excepciones.PosicionVaciaException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import unidades.Marine;
+import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
+import algoCraft.mapa.Posicionable;
+import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionVaciaException;
+import algoCraft.unidades.Marine;
 
 public class MapaTest {
 

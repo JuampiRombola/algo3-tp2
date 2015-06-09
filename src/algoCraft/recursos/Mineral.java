@@ -1,6 +1,6 @@
-package recursos;
+package algoCraft.recursos;
 
-import mapa.Posicion;
+import algoCraft.mapa.Posicion;
 
 public class Mineral extends Recurso {
 	static boolean esTerrestre = true;

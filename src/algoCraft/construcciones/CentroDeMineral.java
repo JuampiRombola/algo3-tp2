@@ -1,6 +1,6 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import recursos.Mineral;
+import algoCraft.recursos.Mineral;
 
 public class CentroDeMineral extends EdificioRecolector{
 	static boolean esTerrestre = true;

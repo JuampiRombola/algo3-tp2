@@ -1,8 +1,8 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import mapa.Posicion;
-import unidades.Marine;
-import unidades.Unidad;
+import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Marine;
+import algoCraft.unidades.Unidad;
 
 public class Barraca extends ConstructorDeUnidades{
 	static int vidaMaxima = 1000;

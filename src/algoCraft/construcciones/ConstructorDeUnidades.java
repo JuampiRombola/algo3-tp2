@@ -1,6 +1,6 @@
-package construcciones;
+package algoCraft.construcciones;
 
-import mapa.Posicion;
+import algoCraft.mapa.Posicion;
 
 public abstract class ConstructorDeUnidades extends Edificio {
 

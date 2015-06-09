@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algoCraft.unidades.Goliath;
+
 public class GoliathTest {
 	
 	public Goliath nuevoGoliath(){

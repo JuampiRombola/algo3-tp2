@@ -1,7 +1,7 @@
-package recursos;
+package algoCraft.recursos;
 
-import mapa.Posicion;
-import mapa.Posicionable;
+import algoCraft.mapa.Posicion;
+import algoCraft.mapa.Posicionable;
 
 
 public abstract class Recurso implements Posicionable{

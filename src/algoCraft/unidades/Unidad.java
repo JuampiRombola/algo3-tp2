@@ -1,8 +1,8 @@
-package unidades;
+package algoCraft.unidades;
 
-import juego.ContadorDeTurnos;
-import mapa.Posicion;
-import interfaces.unidadesYEstructuras.Atacable;
+import algoCraft.Atacable;
+import algoCraft.juego.ContadorDeTurnos;
+import algoCraft.mapa.Posicion;
 
 
 
