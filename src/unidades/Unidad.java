@@ -1,5 +1,6 @@
 package unidades;
 
+import juego.ContadorDeTurnos;
 import mapa.Posicion;
 import interfaces.unidadesYEstructuras.Atacable;
 
@@ -11,17 +12,41 @@ public class Unidad implements Atacable {
 	private Arma arma;
 	private Posicion posicion;
 
+	private int turnoUltimaAccion;
+	private boolean realiceUnaAccion;
+
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
+		this.realiceUnaAccion = false;
+	
+	}
+
+	private boolean pasoUnTurnoDesdeLaUltimaAccion() {
+		ContadorDeTurnos contador = ContadorDeTurnos.getInstancia();
+		int turnosPasadosDesdeUltimaAccion  = turnoUltimaAccion - contador.obtenerTurnoActual();
+		return (turnosPasadosDesdeUltimaAccion != 0) ;
+	}
+	
+	private boolean estoyActiva(){
+		return (!realiceUnaAccion || pasoUnTurnoDesdeLaUltimaAccion());
+	}
+
+
+	private void actualizoElTurnoDeLaUltimaAccion() {
+		ContadorDeTurnos contador = ContadorDeTurnos.getInstancia();
+		turnoUltimaAccion = contador.obtenerTurnoActual();
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!estaDestruido()){
+		if (!estaDestruido() && estoyActiva()){
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
+			realiceUnaAccion = true;
+			actualizoElTurnoDeLaUltimaAccion();
 		}
 	}
+
 
 
 	public boolean estaDestruido() {
