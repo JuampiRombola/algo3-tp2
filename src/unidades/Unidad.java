@@ -10,19 +10,16 @@ public class Unidad implements Atacable {
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
-	private boolean activa;
 
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
-		activa = true;
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!estaDestruido() && activa){
+		if (!estaDestruido()){
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
-			activa = false;
 		}
 	}
 
@@ -64,10 +61,5 @@ public class Unidad implements Atacable {
 
 	public Posicion getPosicion() {
 		return this.posicion;
-	}
-
-	public void avanzarTurno() {
-		this.activa = true;
-		
 	}
 }

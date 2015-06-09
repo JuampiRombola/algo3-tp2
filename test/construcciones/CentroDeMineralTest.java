@@ -58,7 +58,6 @@ public class CentroDeMineralTest {
 		Goliath goliath = new Goliath(2,2);
 		while (!centro.estaDestruido()) {
 			goliath.atacar(centro);
-			goliath.avanzarTurno();
 		}
 		goliath.atacar(centro);
 		assertEquals(0, centro.getVidaActual());

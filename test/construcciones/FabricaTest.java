@@ -31,7 +31,6 @@ public class FabricaTest {
 		Goliath goliath = new Goliath(2,2);
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
-			goliath.avanzarTurno();
 		}
 		goliath.atacar(fabrica);
 		assertEquals(0, fabrica.getVidaActual());

@@ -31,7 +31,6 @@ public class BarracaTest {
 		Goliath goliath = new Goliath(2,2);
 		while (!barraca.estaDestruido()) {
 			goliath.atacar(barraca);
-			goliath.avanzarTurno();
 		}
 		goliath.atacar(barraca);
 		assertEquals(0, barraca.getVidaActual());
