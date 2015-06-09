@@ -43,7 +43,12 @@ public class FabricaTest {
 	@Test
 	public void cuandoLaFabricaCreaUnGoliathEsteTieneTodaSuVida() {
 		Fabrica fabrica = new Fabrica(1, 1);
-		Unidad goliath = fabrica.crearUnidad();
+		Unidad goliath = null;
+		try {
+			goliath = fabrica.crearUnidad();
+		} catch (EdificioNoHabilitadoException e) {
+			
+		}
 		assertEquals(goliath.getVidaActual(), 125);
 	}
 	
@@ -51,5 +56,26 @@ public class FabricaTest {
 	public void elMetodoGetNivelDevuelveQueLaFabricaEsUnEdificioDeNivel2(){
 		Fabrica fabrica = new Fabrica(1, 1);
 		assertTrue(fabrica.getNivel() == 2);
+	}
+	
+	@Test
+	public void alCrearseLaFabricaEstaHabilitada(){
+		Fabrica barraca = new Fabrica(1, 1);
+		assertTrue(barraca.estaHabilitado());
+	}
+	
+	@Test
+	public void alDeshabiltarseLaFabricaEstaDeshabilitada(){
+		Fabrica fabrica = new Fabrica(1, 1);
+		fabrica.deshabilitarProduccion();
+		assertFalse(fabrica.estaHabilitado());
+	}
+	
+	@Test
+	public void alDeshabiltarseYHabilitarseLaFabricaEstaHabilitada(){
+		Fabrica fabrica = new Fabrica(1, 1);
+		fabrica.deshabilitarProduccion();
+		fabrica.habilitarProduccion();
+		assertTrue(fabrica.estaHabilitado());
 	}
 }

@@ -9,8 +9,13 @@ public abstract class ConstructorDeUnidades extends Edificio {
 		super(vida, posicion);
 	}
 	
-	abstract Unidad crearUnidad();
+	abstract Unidad crearUnidad() throws EdificioNoHabilitadoException;
 	
 	abstract int getNivel();
-
+	
+	abstract void habilitarProduccion();
+	
+	abstract void deshabilitarProduccion();
+	
+	abstract boolean estaHabilitado();
 }

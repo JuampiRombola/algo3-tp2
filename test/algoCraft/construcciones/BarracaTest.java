@@ -43,7 +43,12 @@ public class BarracaTest {
 	@Test
 	public void cuandoLaBarracaCreaUnMarineEsteTieneTodaSuVida() {
 		Barraca barraca = new Barraca(1, 1);
-		Unidad marine = barraca.crearUnidad();
+		Unidad marine = null;
+		try {
+			marine = barraca.crearUnidad();
+		} catch (EdificioNoHabilitadoException e) {
+			
+		}
 		assertEquals(marine.getVidaActual(), 40);
 	}
 	
@@ -51,5 +56,26 @@ public class BarracaTest {
 	public void elMetodoGetNivelDevuelveQueLaBarracaEsUnEdificioDeNivel1(){
 		Barraca barraca = new Barraca(1, 1);
 		assertTrue(barraca.getNivel() == 1);
+	}
+	
+	@Test
+	public void alCrearseLaBarracaEstaHabilitada(){
+		Barraca barraca = new Barraca(1, 1);
+		assertTrue(barraca.estaHabilitado());
+	}
+	
+	@Test
+	public void alDeshabiltarseLaBarracaEstaDeshabilitada(){
+		Barraca barraca = new Barraca(1, 1);
+		barraca.deshabilitarProduccion();
+		assertFalse(barraca.estaHabilitado());
+	}
+	
+	@Test
+	public void alDeshabiltarseYHabilitarseLaBarracaEstaHabilitada(){
+		Barraca barraca = new Barraca(1, 1);
+		barraca.deshabilitarProduccion();
+		barraca.habilitarProduccion();
+		assertTrue(barraca.estaHabilitado());
 	}
 }
