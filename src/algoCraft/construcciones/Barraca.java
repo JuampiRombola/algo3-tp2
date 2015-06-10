@@ -12,13 +12,16 @@ public class Barraca extends ConstructorDeUnidades{
 	static boolean inicialmenteTerrestre = true;
 	static int nivel = 1;
 	static int turnosEnConstruirse = 12;
-	private boolean habilitado;
+	private boolean dependenciasValidas;
+	private boolean enConstruccion;
 	private int turnoActual;
 	private Queue<Unidad> unidadesEnConstruccion;
+	private Unidad ultimaUnidadConstruida;
 	
 	public Barraca(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
-		this.habilitado = false;
+		this.dependenciasValidas = true;
+		this.enConstruccion = true;
 		this.turnoActual = 0;
 		this.unidadesEnConstruccion = new LinkedList<Unidad>();
 		this.vida.setVidaActualEnCero();
@@ -38,16 +41,16 @@ public class Barraca extends ConstructorDeUnidades{
 		return nivel;
 	}
 
-	void habilitarProduccion() {
-		this.habilitado = true;
+	public void setDependenciasValidas() {
+		this.dependenciasValidas = true;
 	}
 
-	void deshabilitarProduccion() {
-		this.habilitado = false;
+	public void setDependenciasNoValidas() {
+		this.dependenciasValidas = false;
 	}
 	
 	public boolean estaHabilitado() {
-		return this.habilitado;
+		return this.dependenciasValidas && !this.enConstruccion;
 	}
 	
 	public void avanzarTurno() {
@@ -56,10 +59,11 @@ public class Barraca extends ConstructorDeUnidades{
 	}
 	
 	private void construccionPorTurno() {
-		if (!this.estaHabilitado()) {
+		if (this.enConstruccion) {
 			if (this.turnoActual == turnosEnConstruirse)
 				this.vida.maximizarVida();
-				this.habilitarProduccion();
+				this.setDependenciasValidas();
+				this.enConstruccion = false;
 				this.turnoActual = 0;
 			} else {
 				this.vida.sumarVida(this.vida.getPuntosDeVidaMaximos() / turnosEnConstruirse);
@@ -69,12 +73,16 @@ public class Barraca extends ConstructorDeUnidades{
 	
 	private void construirUnidades() {
 		if (!this.unidadesEnConstruccion.isEmpty()) {
-			if (this.turnoActual == (this.unidadesEnConstruccion.peek()).getTurnosEnConstruirse()) {
-				@SuppressWarnings("unused")
-				Unidad unidad = this.unidadesEnConstruccion.poll();
+			Unidad unidad = this.unidadesEnConstruccion.peek();
+			if (this.turnoActual == unidad.getTurnosEnConstruirse()) {
+				unidad = this.unidadesEnConstruccion.poll();
 				this.turnoActual = 0;
 			}
 			this.turnoActual += 1;
 		}
+	}
+	
+	public Unidad obtenerUltimaUnidadConstruida() {
+		return ultimaUnidadConstruida;
 	}
 }

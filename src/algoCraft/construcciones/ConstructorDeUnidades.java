@@ -13,9 +13,9 @@ public abstract class ConstructorDeUnidades extends Edificio {
 	
 	abstract int getNivel();
 	
-	abstract void habilitarProduccion();
+	abstract void setDependenciasValidas();
 	
-	abstract void deshabilitarProduccion();
+	abstract void setDependenciasNoValidas();
 	
 	abstract boolean estaHabilitado();
 	

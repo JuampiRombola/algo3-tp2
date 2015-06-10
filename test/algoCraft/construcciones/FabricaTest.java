@@ -102,8 +102,11 @@ public class FabricaTest {
 	@Test
 	public void alDeshabiltarseLaFabricaEstaDeshabilitada(){
 		Fabrica fabrica = new Fabrica(1, 1);
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
 		
-		fabrica.deshabilitarProduccion();
+		fabrica.setDependenciasNoValidas();
 		
 		assertFalse(fabrica.estaHabilitado());
 	}
@@ -111,9 +114,12 @@ public class FabricaTest {
 	@Test
 	public void alDeshabiltarseYHabilitarseLaFabricaEstaHabilitada(){
 		Fabrica fabrica = new Fabrica(1, 1);
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
 		
-		fabrica.deshabilitarProduccion();
-		fabrica.habilitarProduccion();
+		fabrica.setDependenciasNoValidas();
+		fabrica.setDependenciasValidas();
 		
 		assertTrue(fabrica.estaHabilitado());
 	}

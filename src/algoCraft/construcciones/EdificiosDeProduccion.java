@@ -34,13 +34,13 @@ public class EdificiosDeProduccion {
 	private void habilitarTodosLosEdificiosDeNivel(int i) {
 		for (ConstructorDeUnidades edificio : edificios) {
 			if (edificio.getNivel() == i)
-				edificio.habilitarProduccion();
+				edificio.setDependenciasValidas();
 		}
 	}
 	private void deshabilitarTodosLosEdificiosDeNivel(int i) {
 		for (ConstructorDeUnidades edificio : edificios) {
 			if (edificio.getNivel() == i)
-				edificio.deshabilitarProduccion();
+				edificio.setDependenciasNoValidas();
 		}
 	}
 	

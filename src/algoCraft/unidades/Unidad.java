@@ -22,22 +22,22 @@ public class Unidad implements Atacable {
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!estaDestruido() && activa) {
+		if (!this.estaDestruido() && this.activa) {
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
-			activa = false;
+			this.activa = false;
 		}
 	}
 
 	public boolean estaDestruido() {
-		return vida.getPuntosDeVida() == 0;
+		return this.vida.getPuntosDeVida() == 0;
 	}
 	
 	public int getVidaActual() {
-		return vida.getPuntosDeVida();
+		return this.vida.getPuntosDeVida();
 	}
 	
 	public int getVidaMaxima() {
-		return  vida.getPuntosDeVidaMaximos();
+		return  this.vida.getPuntosDeVidaMaximos();
 	}
 	
 	//Cuando tengamos danio aereo y terrestre esto va a cambiar. Por eso no esta en las interfaces.
@@ -52,7 +52,7 @@ public class Unidad implements Atacable {
 	}
 	
 	public void recibePuntosDeDanio(int danio) {
-		vida.recibirDanio(danio);
+		this.vida.recibirDanio(danio);
 	}
 
 	public boolean esTerrestre() {
