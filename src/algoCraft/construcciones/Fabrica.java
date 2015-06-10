@@ -76,6 +76,8 @@ public class Fabrica extends ConstructorDeUnidades {
 			Unidad unidad = this.unidadesEnConstruccion.peek();
 			if (this.turnoActual == unidad.getTurnosEnConstruirse()) {
 				unidad = this.unidadesEnConstruccion.poll();
+				this.ultimaUnidadConstruida = unidad;
+				this.seCreoUnaUnidadNueva = true;
 				this.turnoActual = 0;
 			}
 			this.turnoActual += 1;
