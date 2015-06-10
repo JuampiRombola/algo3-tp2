@@ -14,7 +14,7 @@ public class SuperficieTest {
 	
 	private boolean esTerrestre = true;
 	
-	private Collection<Posicion> inicializarPosiciones() {
+	private Collection<Posicion> inicializarPosiciones(boolean esTerrestre) {
 		Collection<Posicion> posiciones = new ArrayList<Posicion>();
 		posiciones.add(new Posicion(0, 0, esTerrestre));
 		posiciones.add(new Posicion(0, 1, esTerrestre));
@@ -25,7 +25,7 @@ public class SuperficieTest {
 	
 	@Test
 	public void superficieTieneLasPosicionesDeBase() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		Assert.assertTrue(superficie.contienePosicion(new Posicion(0, 0, esTerrestre)));
 		Assert.assertTrue(superficie.contienePosicion(new Posicion(0, 1, esTerrestre)));
@@ -35,14 +35,14 @@ public class SuperficieTest {
 
 	@Test
 	public void superficieNoTieneUnaPosicionNoAsignada() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		Assert.assertFalse(superficie.contienePosicion(new Posicion(0, 0, !esTerrestre)));
 	}
 	
 	@Test
 	public void setearLasPosicionesEn0x4TransformaLasPosicionesYLasViejasYaNoSonValidas() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		superficie.setPosicionCentral(new Posicion(0, 4, esTerrestre));
 		
@@ -54,7 +54,7 @@ public class SuperficieTest {
 	
 	@Test
 	public void setearLasPosicionesEn0x4TransformaLasPosicionesA0x4y0x5y1x4y1x5() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		superficie.setPosicionCentral(new Posicion(0, 4, esTerrestre));
 		
@@ -65,16 +65,16 @@ public class SuperficieTest {
 	}
 	
 	@Test
-	public void siDosSuperficiesTienenLasMismasPosicionesSeColisionan() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+	public void siDosSuperficiesTienenLasMismasPosicionesColisionan() {
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		Assert.assertTrue(superficie.colicionaConSuperficie(superficie));
 	}
 	
 	@Test
-	public void siDosSuperficiesTienenAlMenosUnaPosicionIgual() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
-		Superficie superficie2 = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+	public void siDosSuperficiesTienenAlMenosUnaPosicionIgualColicionan() {
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
+		Superficie superficie2 = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		superficie2.setPosicionCentral(new Posicion(1, 1, esTerrestre));
 		
@@ -82,13 +82,23 @@ public class SuperficieTest {
 	}
 	
 	@Test
+	public void siDosSuperficiesTienenDistintasPosicionesColicionan() {
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
+		Superficie superficie2 = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
+		
+		superficie2.setPosicionCentral(new Posicion(0, 4, esTerrestre));
+		
+		Assert.assertFalse(superficie.colicionaConSuperficie(superficie2));
+	}
+	
+	@Test
 	public void siDosSuperficiesTienenLasMismasCoordenadasPeroUnaEsTerrestreYLaOtraNoEntoncesNoColisionan() {
-		Superficie superficieTerrestre = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
-		Superficie superficieAerea = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficieTerrestre = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
+		Superficie superficieAerea = new Superficie(inicializarPosiciones(!esTerrestre), new Posicion(0, 0, !esTerrestre));
 		
 		superficieAerea.setPosicionCentral(new Posicion(0, 0, !esTerrestre));
 		
-		Assert.assertTrue(superficieTerrestre.colicionaConSuperficie(superficieAerea));
+		Assert.assertFalse(superficieTerrestre.colicionaConSuperficie(superficieAerea));
 	}
 	
 	@Test
@@ -105,8 +115,8 @@ public class SuperficieTest {
 	
 	@Test
 	public void laDistanciaDeDosSuperficiesCuadradasSeTomaComoLaMenorDistanciaEntreEllas() {
-		Superficie superficie = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
-		Superficie superficie2 = new Superficie(inicializarPosiciones(), new Posicion(0, 0, esTerrestre));
+		Superficie superficie = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
+		Superficie superficie2 = new Superficie(inicializarPosiciones(esTerrestre), new Posicion(0, 0, esTerrestre));
 		
 		superficie.setPosicionCentral(new Posicion(0, 4, esTerrestre));
 		
