@@ -40,6 +40,7 @@ public class BarracaTest {
 		
 		while (!barraca.estaDestruido()) {
 			goliath.atacar(barraca);
+			goliath.avanzarTurno();
 		}
 		goliath.atacar(barraca);
 		

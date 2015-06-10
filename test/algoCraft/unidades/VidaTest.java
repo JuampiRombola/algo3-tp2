@@ -95,10 +95,8 @@ public class VidaTest {
 	public void siLaVidaAlCrearseEsDe10YRecibe5DeDanioYLuegoSeLeSuma4LaVidaTotalEsDe9(){
 		int puntosDeVidaMaximos = 10;
 		Vida vida = new Vida(puntosDeVidaMaximos);
-		
 		vida.recibirDanio(5);
 		vida.sumarVida(4);
-		
 		assertTrue(vida.getPuntosDeVida() == 9);
 	}
 }

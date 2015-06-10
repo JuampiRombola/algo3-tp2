@@ -12,27 +12,20 @@ public class Unidad implements Atacable {
 	private Posicion posicion;
 	// Habria que reveer todos los metodos en base a este nuevo atributo
 	private int turnosEnConstruirse;
-	private boolean realiceUnaAccion;
+	private boolean activa;
 
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int turnosEnConstruirse) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
-		this.realiceUnaAccion = false;
+		this.activa = true;
 		this.turnosEnConstruirse = turnosEnConstruirse;
-	}
-
-	private boolean pasoUnTurnoDesdeLaUltimaAccion() {
-		return true;
-	}
-	
-	private boolean estoyActiva(){
-		return (!realiceUnaAccion || pasoUnTurnoDesdeLaUltimaAccion());
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!estaDestruido() && estoyActiva()) {
+		if (!estaDestruido() && activa) {
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
+			activa = false;
 		}
 	}
 
@@ -77,5 +70,9 @@ public class Unidad implements Atacable {
 	
 	public int getTurnosEnConstruirse() {
 		return this.turnosEnConstruirse;
+	}
+	
+	public void avanzarTurno(){
+		this.activa = true;
 	}
 }

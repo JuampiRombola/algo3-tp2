@@ -41,6 +41,7 @@ public class FabricaTest {
 		
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
+			goliath.avanzarTurno();
 		}
 		goliath.atacar(fabrica);
 		
