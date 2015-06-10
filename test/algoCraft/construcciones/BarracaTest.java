@@ -11,7 +11,7 @@ import algoCraft.unidades.Unidad;
 public class BarracaTest {
 
 	@Test
-	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() {
+	public void cuandoSeCreaUnaBarracaEstaEstaEnTierra() {
 		Barraca barraca = new Barraca(1, 1);
 		assertEquals(true, barraca.esTerrestre());
 	}
@@ -55,13 +55,37 @@ public class BarracaTest {
 			barraca.avanzarTurno();
 		}
 		try {
-			Unidad marine = barraca.crearUnidad();
+			barraca.crearUnidad();
 			for (int j = 0; j < 3; j++) {
 				barraca.avanzarTurno();
 			}
-			
-			assertEquals(marine.getVidaActual(), 40);
+			try {
+				Unidad marine = barraca.obtenerUltimaUnidadConstruida();
+				
+				assertEquals(marine.getVidaActual(), 40);
+			} catch (NoSeCreoUnaNuevaUnidad e) {}
 		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
+	public void siLaBarracaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
+		Barraca barraca = new Barraca(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
+		try {
+			barraca.crearUnidad();
+			@SuppressWarnings("unused")
+			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
+		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaBarracaEstaNoCreoNingunaUnidad() {
+		Barraca barraca = new Barraca(1, 1);
+		
+		assertEquals(false, barraca.getSeCreoUnaUnidadNueva());
 	}
 	
 	@Test
@@ -83,7 +107,7 @@ public class BarracaTest {
 	}
 	
 	@Test
-	public void alCrearseLaBarracaYPasar10TurnosEstaHabilitada() {
+	public void alCrearseLaBarracaYPasar12TurnosEstaHabilitada() {
 		Barraca barraca = new Barraca(1, 1);
 		
 		for (int i = 0; i < 12; i++) {

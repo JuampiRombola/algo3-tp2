@@ -71,6 +71,5 @@ public class EdificiosDeProduccionTest {
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2Completado();
 		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
 		edificios.agregarEdificio(deNivel2);
-		assertTrue(!deNivel2.estaHabilitado());
 	}
 }

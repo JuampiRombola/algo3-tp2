@@ -49,19 +49,44 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void cuandoLaFabricaCreaUnGoliathEsteTieneTodaSuVida() {
+	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() {
 		Fabrica fabrica = new Fabrica(1, 1);
 		
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
 		}
 		try {
-			Unidad goliath = fabrica.crearUnidad();
+			fabrica.crearUnidad();
 			for (int j = 0; j < 6; j++) {
 				fabrica.avanzarTurno();
 			}
-			assertEquals(goliath.getVidaActual(), 125);
+			try {
+				Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
+				
+				assertEquals(goliath.getVidaActual(), 125);
+			} catch (NoSeCreoUnaNuevaUnidad e) {}
 		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
+	public void siLaFabricaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
+		try {
+			fabrica.crearUnidad();
+			@SuppressWarnings("unused")
+			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
+		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		assertEquals(false, fabrica.getSeCreoUnaUnidadNueva());
 	}
 	
 	@Test
