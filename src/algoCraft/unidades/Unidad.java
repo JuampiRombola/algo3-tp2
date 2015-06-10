@@ -10,7 +10,6 @@ public class Unidad implements Atacable {
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
-	// Habria que reveer todos los metodos en base a este nuevo atributo
 	private int turnosEnConstruirse;
 	private boolean activa;
 
