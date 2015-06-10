@@ -11,16 +11,20 @@ public class Unidad implements Atacable {
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
+	// Habria que reveer todos los metodos en base a este nuevo atributo
+	private boolean habilitado;
+	private int turnosEnConstruirse;
 
 	private int turnoUltimaAccion;
 	private boolean realiceUnaAccion;
 
-	public Unidad(int vidaMaxima, Arma arma, Posicion posicion) {
+	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int turnosEnConstruirse) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
 		this.realiceUnaAccion = false;
-	
+		this.habilitado = false;
+		this.turnosEnConstruirse = turnosEnConstruirse;
 	}
 
 	private boolean pasoUnTurnoDesdeLaUltimaAccion() {
@@ -84,5 +88,22 @@ public class Unidad implements Atacable {
 
 	public Posicion getPosicion() {
 		return this.posicion;
+	}
+	
+	
+	public void habilitar() {
+		this.habilitado = true;
+	}
+
+	public void deshabilitar() {
+		this.habilitado = false;
+	}
+	
+	public boolean estaHabilitado() {
+		return habilitado;
+	}
+	
+	public int getTurnosEnConstruirse() {
+		return this.turnosEnConstruirse;
 	}
 }

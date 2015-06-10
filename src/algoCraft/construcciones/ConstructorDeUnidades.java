@@ -18,4 +18,6 @@ public abstract class ConstructorDeUnidades extends Edificio {
 	abstract void deshabilitarProduccion();
 	
 	abstract boolean estaHabilitado();
+	
+	abstract void avanzarTurno();
 }

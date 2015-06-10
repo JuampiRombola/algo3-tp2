@@ -7,11 +7,19 @@ import org.junit.Test;
 public class EdificiosDeProduccionTest {
 	
 	private ConstructorDeUnidades crearEdificioDeNivel1(){
-		return new Barraca(1, 1);
+		Barraca barraca = new Barraca(1, 1);
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
+		return barraca;
 	}
 	
 	private ConstructorDeUnidades crearEdificioDeNivel2(){
-		return new Fabrica(1, 1);
+		Fabrica fabrica = new Fabrica(1, 1);
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
+		return fabrica;
 	}
 	
 	@Test

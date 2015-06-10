@@ -21,9 +21,14 @@ public class BarracaTest {
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		ContadorDeTurnos.iniciarContador();
 		Barraca barraca = new Barraca(1, 1);
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
 		int vidaInicial = barraca.getVidaActual();
 		Goliath goliath = new Goliath(2,2);
+		
 		goliath.atacar(barraca);
+		
 		assertTrue(barraca.getVidaActual() < vidaInicial);
 	}
 	
@@ -32,50 +37,88 @@ public class BarracaTest {
 		ContadorDeTurnos.iniciarContador();
 		Barraca barraca = new Barraca(1, 1);
 		Goliath goliath = new Goliath(2,2);
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
+		
 		while (!barraca.estaDestruido()) {
 			goliath.atacar(barraca);
 			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(barraca);
+		
 		assertEquals(0, barraca.getVidaActual());
 	}
 	
 	@Test
 	public void cuandoLaBarracaCreaUnMarineEsteTieneTodaSuVida() {
 		Barraca barraca = new Barraca(1, 1);
-		Unidad marine = null;
-		try {
-			marine = barraca.crearUnidad();
-		} catch (EdificioNoHabilitadoException e) {
-			
+		
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
 		}
-		assertEquals(marine.getVidaActual(), 40);
+		try {
+			Unidad marine = barraca.crearUnidad();
+			for (int j = 0; j < 3; j++) {
+				barraca.avanzarTurno();
+			}
+			
+			assertEquals(marine.getVidaActual(), 40);
+		} catch (EdificioNoHabilitadoException e) {}
 	}
 	
 	@Test
-	public void elMetodoGetNivelDevuelveQueLaBarracaEsUnEdificioDeNivel1(){
+	public void cuandoLaBarracaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
 		Barraca barraca = new Barraca(1, 1);
+		
+		try {
+			barraca.crearUnidad();
+			
+			fail();
+		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test
+	public void elMetodoGetNivelDevuelveQueLaBarracaEsUnEdificioDeNivel1() {
+		Barraca barraca = new Barraca(1, 1);
+		
 		assertTrue(barraca.getNivel() == 1);
 	}
 	
 	@Test
-	public void alCrearseLaBarracaEstaHabilitada(){
+	public void alCrearseLaBarracaYPasar10TurnosEstaHabilitada() {
 		Barraca barraca = new Barraca(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
+		
 		assertTrue(barraca.estaHabilitado());
 	}
 	
 	@Test
-	public void alDeshabiltarseLaBarracaEstaDeshabilitada(){
+	public void alCrearseLaBarracaEstaDeshabilitada() {
 		Barraca barraca = new Barraca(1, 1);
-		barraca.deshabilitarProduccion();
+
 		assertFalse(barraca.estaHabilitado());
 	}
 	
 	@Test
-	public void alDeshabiltarseYHabilitarseLaBarracaEstaHabilitada(){
+	public void alDeshabiltarseLaBarracaEstaDeshabilitada() {
 		Barraca barraca = new Barraca(1, 1);
+		
+		barraca.deshabilitarProduccion();
+		
+		assertFalse(barraca.estaHabilitado());
+	}
+	
+	@Test
+	public void alDeshabiltarseYHabilitarseLaBarracaEstaHabilitada() {
+		Barraca barraca = new Barraca(1, 1);
+		
 		barraca.deshabilitarProduccion();
 		barraca.habilitarProduccion();
+		
 		assertTrue(barraca.estaHabilitado());
 	}
 }

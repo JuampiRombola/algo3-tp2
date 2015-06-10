@@ -42,7 +42,6 @@ public class EdificiosDeProduccion {
 			if (edificio.getNivel() == i)
 				edificio.deshabilitarProduccion();
 		}
-		
 	}
 	
 	private boolean existeUnEdificioDeUnNivelMenorA(int nivel) {
@@ -64,7 +63,7 @@ public class EdificiosDeProduccion {
 	public void validarDependencias() {
 		borrarEdificiosDestruidos();
 		for (int i = nivelDelEdificioConNivelMasAlto(); i > 1; i--) {
-			if(existeUnEdificioDeUnNivelMenorA(i)) {
+			if (existeUnEdificioDeUnNivelMenorA(i)) {
 				habilitarTodosLosEdificiosDeNivel(i);
 			} else {
 				deshabilitarTodosLosEdificiosDeNivel(i);

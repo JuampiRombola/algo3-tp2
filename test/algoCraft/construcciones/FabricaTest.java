@@ -14,6 +14,7 @@ public class FabricaTest {
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() {
 		Fabrica fabrica = new Fabrica(1, 1);
+		
 		assertEquals(true, fabrica.esTerrestre());
 	}
 
@@ -21,9 +22,14 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
 		int vidaInicial = fabrica.getVidaActual();
 		Goliath goliath = new Goliath(2,2);
+		
 		goliath.atacar(fabrica);
+		
 		assertTrue(fabrica.getVidaActual() < vidaInicial);
 	}
 	
@@ -31,25 +37,45 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
 		Goliath goliath = new Goliath(2,2);
+		
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
 			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(fabrica);
+		
 		assertEquals(0, fabrica.getVidaActual());
 	}
 	
 	@Test
 	public void cuandoLaFabricaCreaUnGoliathEsteTieneTodaSuVida() {
 		Fabrica fabrica = new Fabrica(1, 1);
-		Unidad goliath = null;
-		try {
-			goliath = fabrica.crearUnidad();
-		} catch (EdificioNoHabilitadoException e) {
-			
+		
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
 		}
-		assertEquals(goliath.getVidaActual(), 125);
+		try {
+			Unidad goliath = fabrica.crearUnidad();
+			for (int j = 0; j < 6; j++) {
+				fabrica.avanzarTurno();
+			}
+			assertEquals(goliath.getVidaActual(), 125);
+		} catch (EdificioNoHabilitadoException e) {}
+	}
+	
+	@Test
+	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		try {
+			fabrica.crearUnidad();
+			
+			fail();
+		} catch (EdificioNoHabilitadoException e) {}
 	}
 	
 	@Test
@@ -59,23 +85,39 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void alCrearseLaFabricaEstaHabilitada(){
-		Fabrica barraca = new Fabrica(1, 1);
-		assertTrue(barraca.estaHabilitado());
+	public void alCrearseLaBarracaYPasar10TurnosEstaHabilitada() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
+		
+		assertTrue(fabrica.estaHabilitado());
+	}
+	
+	@Test
+	public void alCrearseLaBarracaEstaDeshabilitada() {
+		Fabrica fabrica = new Fabrica(1, 1);
+
+		assertFalse(fabrica.estaHabilitado());
 	}
 	
 	@Test
 	public void alDeshabiltarseLaFabricaEstaDeshabilitada(){
 		Fabrica fabrica = new Fabrica(1, 1);
+		
 		fabrica.deshabilitarProduccion();
+		
 		assertFalse(fabrica.estaHabilitado());
 	}
 	
 	@Test
 	public void alDeshabiltarseYHabilitarseLaFabricaEstaHabilitada(){
 		Fabrica fabrica = new Fabrica(1, 1);
+		
 		fabrica.deshabilitarProduccion();
 		fabrica.habilitarProduccion();
+		
 		assertTrue(fabrica.estaHabilitado());
 	}
 }

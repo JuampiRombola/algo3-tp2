@@ -8,8 +8,9 @@ public class Marine extends Unidad{
 	static int rangoBasico = 4;
 	static Arma arma = new Arma(danioBasico,rangoBasico);
 	static boolean inicialmenteTerrestre = true;
+	static int turnosEnConstruirse = 3;
 	
 	public Marine(int posicionEnX, int posicionEnY) {
-		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre));
+		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), turnosEnConstruirse);
 	}
 }

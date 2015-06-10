@@ -1,8 +1,8 @@
 package algoCraft.unidades;
 
 public class Vida {
-	private int vidaMaxima;
-	private int vidaActual;
+	protected int vidaMaxima;
+	protected int vidaActual;
 	
 	public Vida(int vidaMaxima) {
 		this.vidaMaxima = vidaMaxima;
@@ -23,5 +23,17 @@ public class Vida {
 		} else {
 			vidaActual = 0;
 		}
+	}
+	
+	public void setVidaActualEnCero() {
+		this.vidaActual = 0;
+	}
+	
+	public void maximizarVida() {
+		this.vidaActual = this.vidaMaxima;
+	}
+	
+	public void sumarVida(int vida) {
+		this.vidaActual += vida;
 	}
 }
