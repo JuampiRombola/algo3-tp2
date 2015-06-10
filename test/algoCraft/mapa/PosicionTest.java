@@ -70,4 +70,22 @@ public class PosicionTest {
 		Posicion posicion2 = new Posicion(3, 2, true);
 		Assert.assertTrue(1.0 == posicion1.calcularDistancia(posicion2));
 	}
+	
+	@Test
+	public void siLasCoordenadasdeSon2y2YLaDeOtroSon3y2YSeSumanDan5y4() {
+		Posicion posicion1 = new Posicion(2, 2, true);
+		Posicion posicion2 = new Posicion(3, 2, true);
+		
+		posicion1.sumar(posicion2);
+		
+		Assert.assertTrue(posicion1.equals(new Posicion(5, 4, true)));
+	}
+	
+	@Test
+	public void siLasCoordenadasdeSon3y2YLaDeOtroSon2y2YLaDiferenciaEs1y0() {
+		Posicion posicion1 = new Posicion(3, 2, true);
+		Posicion posicion2 = new Posicion(2, 2, true);
+		
+		Assert.assertTrue(posicion1.diferencia(posicion2).equals(new Posicion(1, 0, true)));
+	}
 }

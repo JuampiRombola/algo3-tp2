@@ -1,5 +1,7 @@
 package algoCraft.mapa;
 
+import algoCraft.mapa.Posicion;
+
 public class Posicion {
 	
 	private int x;
@@ -34,5 +36,16 @@ public class Posicion {
 		double distanciaEnX = posicion.getX() - this.x;
 		double distanciaEnY = posicion.getY() - this.y;
 		return Math.sqrt(Math.pow(distanciaEnX, 2) + Math.pow(distanciaEnY, 2));
+	}
+	
+	public void sumar(Posicion diferencia) {
+		this.x += diferencia.x;
+		this.y += diferencia.y;
+	}
+
+	public Posicion diferencia(Posicion otraPosicion) {
+		int diferenciaEnX = this.x - otraPosicion.x;
+		int diferenciaEnY = this.y - otraPosicion.y;
+		return (new Posicion(diferenciaEnX, diferenciaEnY, this.esTerrestre));
 	}
 }
