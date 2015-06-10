@@ -24,7 +24,7 @@ public class Barraca extends ConstructorDeUnidades{
 		this.dependenciasValidas = true;
 		this.enConstruccion = true;
 		this.seCreoUnaUnidadNueva = false;
-		this.turnoActual = 0;
+		this.turnoActual = 1;
 		this.unidadesEnConstruccion = new LinkedList<Unidad>();
 		this.vida.setVidaActualEnCero();
 	}
@@ -61,14 +61,14 @@ public class Barraca extends ConstructorDeUnidades{
 	
 	private void construccionPorTurno() {
 		if (this.enConstruccion) {
-			if (this.turnoActual == turnosEnConstruirse)
+			if (this.turnoActual == turnosEnConstruirse) {
 				this.vida.maximizarVida();
-				this.setDependenciasValidas();
 				this.enConstruccion = false;
-				this.turnoActual = 0;
+				this.turnoActual = 1;
 			} else {
 				this.vida.sumarVida(this.vida.getPuntosDeVidaMaximos() / turnosEnConstruirse);
 				this.turnoActual += 1;
+			}
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class Barraca extends ConstructorDeUnidades{
 				unidad = this.unidadesEnConstruccion.poll();
 				this.ultimaUnidadConstruida = unidad;
 				this.seCreoUnaUnidadNueva = true;
-				this.turnoActual = 0;
+				this.turnoActual = 1;
 			}
 			this.turnoActual += 1;
 		}

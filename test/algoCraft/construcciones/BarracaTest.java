@@ -125,6 +125,33 @@ public class BarracaTest {
 	}
 	
 	@Test
+	public void alCrearseLaBarracaYPasar12TurnosEstaTieneTodaLaVida() {
+		Barraca barraca = new Barraca(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			barraca.avanzarTurno();
+		}
+		
+		assertEquals(1000, barraca.getVidaActual());
+	}
+	
+	@Test
+	public void alCrearseLaBarracaTiene0PuntosDeVida() {
+		Barraca barraca = new Barraca(1, 1);
+		
+		assertEquals(0, barraca.getVidaActual());
+	}
+	
+	@Test
+	public void alCrearseLaBarracaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
+		Barraca barraca = new Barraca(1, 1);
+		
+		barraca.avanzarTurno();
+		
+		assertTrue(0 < barraca.getVidaActual());
+	}
+	
+	@Test
 	public void alDeshabiltarseLaBarracaEstaDeshabilitada() {
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++) {

@@ -125,6 +125,33 @@ public class FabricaTest {
 	}
 	
 	@Test
+	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			fabrica.avanzarTurno();
+		}
+		
+		assertEquals(1250, fabrica.getVidaActual());
+	}
+	
+	@Test
+	public void alCrearseLaFabricaTiene0PuntosDeVida() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		assertEquals(0, fabrica.getVidaActual());
+	}
+	
+	@Test
+	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		fabrica.avanzarTurno();
+		
+		assertTrue(0 < fabrica.getVidaActual());
+	}
+	
+	@Test
 	public void alDeshabiltarseLaFabricaEstaDeshabilitada(){
 		Fabrica fabrica = new Fabrica(1, 1);
 		for (int i = 0; i < 12; i++) {
