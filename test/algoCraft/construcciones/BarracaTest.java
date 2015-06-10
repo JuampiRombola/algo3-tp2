@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
-import algoCraft.juego.ContadorDeTurnos;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
@@ -19,7 +18,6 @@ public class BarracaTest {
 
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {
-		ContadorDeTurnos.iniciarContador();
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno();
@@ -34,7 +32,6 @@ public class BarracaTest {
 	
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
-		ContadorDeTurnos.iniciarContador();
 		Barraca barraca = new Barraca(1, 1);
 		Goliath goliath = new Goliath(2,2);
 		for (int i = 0; i < 12; i++) {
@@ -43,7 +40,6 @@ public class BarracaTest {
 		
 		while (!barraca.estaDestruido()) {
 			goliath.atacar(barraca);
-			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(barraca);
 		

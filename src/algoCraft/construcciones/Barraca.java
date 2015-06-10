@@ -70,8 +70,8 @@ public class Barraca extends ConstructorDeUnidades{
 	private void construirUnidades() {
 		if (!this.unidadesEnConstruccion.isEmpty()) {
 			if (this.turnoActual == (this.unidadesEnConstruccion.peek()).getTurnosEnConstruirse()) {
+				@SuppressWarnings("unused")
 				Unidad unidad = this.unidadesEnConstruccion.poll();
-				unidad.habilitar();
 				this.turnoActual = 0;
 			}
 			this.turnoActual += 1;

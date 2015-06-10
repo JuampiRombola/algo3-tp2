@@ -1,7 +1,6 @@
 package algoCraft.unidades;
 
 import algoCraft.Atacable;
-import algoCraft.juego.ContadorDeTurnos;
 import algoCraft.mapa.Posicion;
 
 
@@ -12,10 +11,7 @@ public class Unidad implements Atacable {
 	private Arma arma;
 	private Posicion posicion;
 	// Habria que reveer todos los metodos en base a este nuevo atributo
-	private boolean habilitado;
 	private int turnosEnConstruirse;
-
-	private int turnoUltimaAccion;
 	private boolean realiceUnaAccion;
 
 	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int turnosEnConstruirse) {
@@ -23,31 +19,20 @@ public class Unidad implements Atacable {
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
 		this.realiceUnaAccion = false;
-		this.habilitado = false;
 		this.turnosEnConstruirse = turnosEnConstruirse;
 	}
 
 	private boolean pasoUnTurnoDesdeLaUltimaAccion() {
-		ContadorDeTurnos contador = ContadorDeTurnos.getInstancia();
-		int turnosPasadosDesdeUltimaAccion  = turnoUltimaAccion - contador.obtenerTurnoActual();
-		return (turnosPasadosDesdeUltimaAccion != 0) ;
+		return true;
 	}
 	
 	private boolean estoyActiva(){
 		return (!realiceUnaAccion || pasoUnTurnoDesdeLaUltimaAccion());
 	}
-
-
-	private void actualizoElTurnoDeLaUltimaAccion() {
-		ContadorDeTurnos contador = ContadorDeTurnos.getInstancia();
-		turnoUltimaAccion = contador.obtenerTurnoActual();
-	}
 	
 	public void atacar(Atacable atacable) {
 		if (!estaDestruido() && estoyActiva()) {
 			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
-			realiceUnaAccion = true;
-			actualizoElTurnoDeLaUltimaAccion();
 		}
 	}
 
@@ -88,19 +73,6 @@ public class Unidad implements Atacable {
 
 	public Posicion getPosicion() {
 		return this.posicion;
-	}
-	
-	
-	public void habilitar() {
-		this.habilitado = true;
-	}
-
-	public void deshabilitar() {
-		this.habilitado = false;
-	}
-	
-	public boolean estaHabilitado() {
-		return habilitado;
 	}
 	
 	public int getTurnosEnConstruirse() {

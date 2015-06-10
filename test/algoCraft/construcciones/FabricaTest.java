@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Fabrica;
-import algoCraft.juego.ContadorDeTurnos;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
@@ -20,7 +19,6 @@ public class FabricaTest {
 
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
-		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
@@ -35,7 +33,6 @@ public class FabricaTest {
 	
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
-		ContadorDeTurnos.iniciarContador();
 		Fabrica fabrica = new Fabrica(1, 1);
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
@@ -44,7 +41,6 @@ public class FabricaTest {
 		
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
-			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(fabrica);
 		

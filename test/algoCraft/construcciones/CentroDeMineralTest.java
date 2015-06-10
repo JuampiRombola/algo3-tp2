@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.CentroDeMineral;
-import algoCraft.juego.ContadorDeTurnos;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
 
@@ -44,7 +43,6 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathSuVidaDisminuye() {
-		ContadorDeTurnos.iniciarContador();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		int vidaInicial = centro.getVidaActual();
@@ -55,13 +53,11 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
-		ContadorDeTurnos.iniciarContador();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		Goliath goliath = new Goliath(2,2);
 		while (!centro.estaDestruido()) {
 			goliath.atacar(centro);
-			ContadorDeTurnos.getInstancia().avanzarTurno();
 		}
 		goliath.atacar(centro);
 		assertEquals(0, centro.getVidaActual());

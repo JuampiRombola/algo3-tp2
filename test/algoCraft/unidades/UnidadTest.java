@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algoCraft.juego.ContadorDeTurnos;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
@@ -87,7 +86,6 @@ public class UnidadTest{
 	}
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDelAtacableEsteEsDestruido() {
-		ContadorDeTurnos.iniciarContador();
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(atacable);
@@ -96,7 +94,6 @@ public class UnidadTest{
 	
 	@Test
 	public void siDisparoUnArmaEnRangoConMenorDanioQueLaVidaDelAtacableEsteNoEsDestruido() {
-		ContadorDeTurnos.iniciarContador();
 		int vidaAtacable = danioArmaDePrueba + 1;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(atacable);
@@ -105,7 +102,6 @@ public class UnidadTest{
 	
 	@Test
 	public void siDisparoUnArmaConMayorDanioQueLaVidaDelAtacablePeroFueraDeRangoElAtacableNoEsDestruido() {
-		ContadorDeTurnos.iniciarContador();
 		int vidaAtacable = danioArmaDePrueba - 1;
 		Unidad atacable = nuevaUnidadFueraDeRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(atacable);
@@ -124,7 +120,6 @@ public class UnidadTest{
 	}
 	
 	public Unidad crearUnidadDestruida() {
-		ContadorDeTurnos.iniciarContador();
 		Unidad unidad = nuevaUnidad();
 		armaDePrueba.atacar(unidad, rangoArmaDePrueba);
 		return unidad;
@@ -132,7 +127,6 @@ public class UnidadTest{
 	
 	@Test
 	public void siDisparoUnArmaYEstoyDestruidoNoPuedoDestruirAUnAtacable() {
-		ContadorDeTurnos.iniciarContador();
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad unidadDestruida = crearUnidadDestruida();
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
@@ -142,7 +136,6 @@ public class UnidadTest{
 	
 	@Test
 	public void siTengoUnArmaConDanio2DevuelveConGetDanio2() {
-		ContadorDeTurnos.iniciarContador();
 		int danio = 2;
 		int rango = 10;
 		int vida = 10;
@@ -153,7 +146,6 @@ public class UnidadTest{
 	
 	@Test
 	public void  siTengoUnArmaConRango2DevuelveConGetRango2() {
-		ContadorDeTurnos.iniciarContador();
 		int danio = 10;
 		int rango = 2;
 		int vida = 10;
@@ -164,7 +156,6 @@ public class UnidadTest{
 	
 	@Test
 	public void  siTengoUnArmaConRango1DevuelveConGetRango1() {
-		ContadorDeTurnos.iniciarContador();
 		int danio = 10;
 		int rango = 1;
 		int vida = 10;
@@ -172,10 +163,9 @@ public class UnidadTest{
 		Unidad unidad = new Unidad(vida, arma, posicion, 0);
 		assertTrue(unidad.getRango() == 1);
 	}
-
+/*
 	@Test
 	public void unaUnidadNoHaceDanioEnElSegundoDisparoSiDispara2VecesSeguidas() {
-		ContadorDeTurnos.iniciarContador();
 		Unidad unidadAtacante = nuevaUnidad();
 		int vidaAtacable = danioArmaDePrueba*2;
 		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
@@ -183,15 +173,12 @@ public class UnidadTest{
 		unidadAtacante.atacar(unidadAtacable);
 		assertTrue(unidadAtacable.getVidaActual() == (vidaAtacable/2));
 	}
-	
 	@Test
 	public void unaUnidadHaceDanioEnElSegundoDisparoSiAvanzoUnTurno() {
-		ContadorDeTurnos.iniciarContador();
 		Unidad unidadAtacante = nuevaUnidad();
 		int vidaAtacable = danioArmaDePrueba*2;
 		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(unidadAtacable);
-		ContadorDeTurnos.getInstancia().avanzarTurno();
 		unidadAtacante.atacar(unidadAtacable);
 		assertTrue(unidadAtacable.estaDestruido());
 	}
@@ -202,5 +189,5 @@ public class UnidadTest{
 		int turnosEnConstruirse = unidad.getTurnosEnConstruirse();
 		
 		assertEquals(turnosEnConstruirse, 1);
-	}
+	}*/
 }
