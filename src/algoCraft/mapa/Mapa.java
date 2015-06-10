@@ -16,7 +16,9 @@ public class Mapa {
 		this.unidades = new ArrayList<Posicionable>(alto * ancho);
 	}
 	
-	private void validadPosicion(int x, int y) throws PosicionInvalidaException {
+	private void validadPosicion(Posicion posicion) throws PosicionInvalidaException {
+		int x = posicion.getX();
+		int y = posicion.getY();
 		if (x < 0 || x > this.alto || y < 0 || y > this.ancho)
 			throw new PosicionInvalidaException();
 	}
@@ -29,9 +31,8 @@ public class Mapa {
 		return false;
 	}
 	
-	public void agregarUnidad(Posicionable unidad, int x, int y) throws PosicionInvalidaException {
-		this.validadPosicion(x, y);
-		unidad.setPosicion(x, y);
+	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException {
+		this.validadPosicion(unidad.getPosicion());
 		if (!this.posicionEstaOcupada(unidad.getPosicion()))
 			this.unidades.add(unidad);
 	}
@@ -46,7 +47,7 @@ public class Mapa {
 	}
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
-		this.validadPosicion(xDestino, yDestino);
+		this.validadPosicion(new Posicion(xDestino, yDestino, unidad.esTerrestre()));
 		if (!this.posicionEstaOcupada(new Posicion(xDestino, yDestino, unidad.esTerrestre())))
 			unidad.setPosicion(xDestino, yDestino);
 	}
