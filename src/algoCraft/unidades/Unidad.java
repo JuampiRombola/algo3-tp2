@@ -6,7 +6,6 @@ import algoCraft.mapa.Posicion;
 
 
 public class Unidad implements Atacable {
-
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
