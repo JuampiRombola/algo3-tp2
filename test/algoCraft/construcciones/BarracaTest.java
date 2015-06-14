@@ -143,29 +143,4 @@ public class BarracaTest {
 		
 		assertTrue(0 < barraca.getVidaActual());
 	}
-	
-	@Test
-	public void alDeshabiltarseLaBarracaEstaDeshabilitada() {
-		Barraca barraca = new Barraca(1, 1);
-		for (int i = 0; i < 12; i++) {
-			barraca.avanzarTurno();
-		}
-		
-		barraca.setDependenciasNoValidas();
-		
-		assertFalse(barraca.estaHabilitado());
-	}
-	
-	@Test
-	public void alDeshabiltarseYHabilitarseLaBarracaEstaHabilitada() {
-		Barraca barraca = new Barraca(1, 1);
-		for (int i = 0; i < 12; i++) {
-			barraca.avanzarTurno();
-		}
-		
-		barraca.setDependenciasNoValidas();
-		barraca.setDependenciasValidas();
-		
-		assertTrue(barraca.estaHabilitado());
-	}
 }

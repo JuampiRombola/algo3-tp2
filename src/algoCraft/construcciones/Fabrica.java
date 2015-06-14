@@ -11,7 +11,6 @@ public class Fabrica extends ConstructorDeUnidades {
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
-	private boolean dependenciasValidas;
 	private boolean enConstruccion;
 	private boolean seCreoUnaUnidadNueva;
 	private int turnoActual;
@@ -20,7 +19,6 @@ public class Fabrica extends ConstructorDeUnidades {
 	
 	public Fabrica(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
-		this.dependenciasValidas = true;
 		this.enConstruccion = true;
 		this.seCreoUnaUnidadNueva = false;
 		this.turnoActual = 1;
@@ -37,16 +35,8 @@ public class Fabrica extends ConstructorDeUnidades {
 		}
 	}
 	
-	public void setDependenciasValidas() {
-		this.dependenciasValidas = true;
-	}
-
-	public void setDependenciasNoValidas() {
-		this.dependenciasValidas = false;
-	}
-	
 	public boolean estaHabilitado() {
-		return dependenciasValidas && !this.enConstruccion;
+		return !this.enConstruccion;
 	}
 	
 	public void avanzarTurno() {

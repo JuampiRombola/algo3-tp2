@@ -11,7 +11,6 @@ public class Barraca extends ConstructorDeUnidades{
 	static int vidaMaxima = 1000;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
-	private boolean dependenciasValidas;
 	private boolean enConstruccion;
 	private boolean seCreoUnaUnidadNueva;
 	private int turnoActual;
@@ -20,7 +19,6 @@ public class Barraca extends ConstructorDeUnidades{
 	
 	public Barraca(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
-		this.dependenciasValidas = true;
 		this.enConstruccion = true;
 		this.seCreoUnaUnidadNueva = false;
 		this.turnoActual = 1;
@@ -36,17 +34,9 @@ public class Barraca extends ConstructorDeUnidades{
 			throw new EdificioNoHabilitadoException();
 		}
 	}
-
-	public void setDependenciasValidas() {
-		this.dependenciasValidas = true;
-	}
-
-	public void setDependenciasNoValidas() {
-		this.dependenciasValidas = false;
-	}
 	
 	public boolean estaHabilitado() {
-		return this.dependenciasValidas && !this.enConstruccion;
+		return !this.enConstruccion;
 	}
 	
 	public void avanzarTurno() {

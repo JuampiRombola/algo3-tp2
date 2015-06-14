@@ -107,17 +107,8 @@ public class FabricaTest {
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
 		}
-		
 		assertTrue(fabrica.estaHabilitado());
 	}
-	
-	@Test
-	public void alCrearseLaBarracaEstaDeshabilitada() {
-		Fabrica fabrica = new Fabrica(1, 1);
-
-		assertFalse(fabrica.estaHabilitado());
-	}
-	
 	@Test
 	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
 		Fabrica fabrica = new Fabrica(1, 1);
@@ -143,30 +134,5 @@ public class FabricaTest {
 		fabrica.avanzarTurno();
 		
 		assertTrue(0 < fabrica.getVidaActual());
-	}
-	
-	@Test
-	public void alDeshabiltarseLaFabricaEstaDeshabilitada(){
-		Fabrica fabrica = new Fabrica(1, 1);
-		for (int i = 0; i < 12; i++) {
-			fabrica.avanzarTurno();
-		}
-		
-		fabrica.setDependenciasNoValidas();
-		
-		assertFalse(fabrica.estaHabilitado());
-	}
-	
-	@Test
-	public void alDeshabiltarseYHabilitarseLaFabricaEstaHabilitada(){
-		Fabrica fabrica = new Fabrica(1, 1);
-		for (int i = 0; i < 12; i++) {
-			fabrica.avanzarTurno();
-		}
-		
-		fabrica.setDependenciasNoValidas();
-		fabrica.setDependenciasValidas();
-		
-		assertTrue(fabrica.estaHabilitado());
 	}
 }

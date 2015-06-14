@@ -11,12 +11,6 @@ public abstract class ConstructorDeUnidades extends Edificio {
 	
 	abstract void crearUnidad() throws EdificioNoHabilitadoException;
 	
-	abstract void setDependenciasValidas();
-	
-	abstract void setDependenciasNoValidas();
-	
-	abstract boolean estaHabilitado();
-	
 	abstract void avanzarTurno();
 	
 	abstract Unidad obtenerUltimaUnidadConstruida() throws NoSeCreoUnaNuevaUnidad;
