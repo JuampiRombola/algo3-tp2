@@ -21,7 +21,7 @@ public class MapaTest {
 		try{
 			mapa.agregarUnidad(unidad);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
+		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionVaciaException e) {}
 	}

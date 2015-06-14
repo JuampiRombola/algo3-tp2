@@ -100,13 +100,6 @@ public class BarracaTest {
 	}
 	
 	@Test
-	public void elMetodoGetNivelDevuelveQueLaBarracaEsUnEdificioDeNivel1() {
-		Barraca barraca = new Barraca(1, 1);
-		
-		assertTrue(barraca.getNivel() == 1);
-	}
-	
-	@Test
 	public void alCrearseLaBarracaYPasar12TurnosEstaHabilitada() {
 		Barraca barraca = new Barraca(1, 1);
 		

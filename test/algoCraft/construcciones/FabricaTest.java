@@ -101,12 +101,6 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void elMetodoGetNivelDevuelveQueLaFabricaEsUnEdificioDeNivel2(){
-		Fabrica fabrica = new Fabrica(1, 1);
-		assertTrue(fabrica.getNivel() == 2);
-	}
-	
-	@Test
 	public void alCrearseLaBarracaYPasar10TurnosEstaHabilitada() {
 		Fabrica fabrica = new Fabrica(1, 1);
 		

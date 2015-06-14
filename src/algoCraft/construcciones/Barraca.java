@@ -10,7 +10,6 @@ import algoCraft.unidades.Unidad;
 public class Barraca extends ConstructorDeUnidades{
 	static int vidaMaxima = 1000;
 	static boolean inicialmenteTerrestre = true;
-	static int nivel = 1;
 	static int turnosEnConstruirse = 12;
 	private boolean dependenciasValidas;
 	private boolean enConstruccion;
@@ -36,10 +35,6 @@ public class Barraca extends ConstructorDeUnidades{
 		} else {
 			throw new EdificioNoHabilitadoException();
 		}
-	}
-	
-	public int getNivel() {
-		return nivel;
 	}
 
 	public void setDependenciasValidas() {
