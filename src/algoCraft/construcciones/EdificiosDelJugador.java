@@ -2,7 +2,7 @@ package algoCraft.construcciones;
 
 import java.util.ArrayList;
 
-public class EdificiosDeProduccion {
+public class EdificiosDelJugador {
 	
 	/*Primer modelo:
 		Solo hay una serie de edificios que dependen uno de los otros.

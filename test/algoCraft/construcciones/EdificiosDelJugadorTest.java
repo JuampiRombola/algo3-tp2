@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class EdificiosDeProduccionTest {
+public class EdificiosDelJugadorTest {
 	
 	private ConstructorDeUnidades crearEdificioDeNivel1Completado(){
 		Barraca barraca = new Barraca(1, 1);
@@ -25,7 +25,7 @@ public class EdificiosDeProduccionTest {
 	@Test
 	public void siTengoUnEdificioDeNivel1YActualizoLasDependenciasSigueEstandoHabilitado() throws NoExisteUnEdificioDeNivelAnterior{
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1Completado();
-		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
+		EdificiosDelJugador edificios = new EdificiosDelJugador();
 		edificios.agregarEdificio(deNivel1);
 		edificios.validarDependencias();
 		assertTrue(deNivel1.estaHabilitado());
@@ -35,7 +35,7 @@ public class EdificiosDeProduccionTest {
 	public void siTengoUnEdificioDeNivel1YOtroDeNivel2YActualizoLasDependenciasElDeNivel2SigueEstandoHabilitado(){
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1Completado();
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2Completado();
-		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
+		EdificiosDelJugador edificios = new EdificiosDelJugador();
 		try {
 			edificios.agregarEdificio(deNivel1);
 		} catch (NoExisteUnEdificioDeNivelAnterior e) {}
@@ -50,7 +50,7 @@ public class EdificiosDeProduccionTest {
 	public void siTengoUnEdificioDeNivel1YOtroDeNivel2YDestruyenElDeNivel1ElDeNivel2NoEstaHabilitado(){
 		ConstructorDeUnidades deNivel1 = crearEdificioDeNivel1Completado();
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2Completado();
-		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
+		EdificiosDelJugador edificios = new EdificiosDelJugador();
 		try {
 			edificios.agregarEdificio(deNivel1);
 		} catch (NoExisteUnEdificioDeNivelAnterior e) {
@@ -69,7 +69,7 @@ public class EdificiosDeProduccionTest {
 	@Test(expected = NoExisteUnEdificioDeNivelAnterior.class)
 	public void siTratoDePonerUnEdificioDeNivel2SinHaberPuestoUnoDeNivel1AnteriormenteObtengoUnaExcepcion() throws NoExisteUnEdificioDeNivelAnterior{
 		ConstructorDeUnidades deNivel2 = crearEdificioDeNivel2Completado();
-		EdificiosDeProduccion edificios = new EdificiosDeProduccion();
+		EdificiosDelJugador edificios = new EdificiosDelJugador();
 		edificios.agregarEdificio(deNivel2);
 	}
 }
