@@ -26,12 +26,12 @@ public class Barraca extends Edificio{
 		this.vida.setVidaActualEnCero();
 	}
 
-	public void crearUnidad() throws EdificioNoHabilitadoException {
+	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
 		if (this.estaHabilitado()) {
 			Marine marine = new Marine(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(marine);
 		} else {
-			throw new EdificioNoHabilitadoException();
+			throw new ElEdificioEstaEnConstruccion();
 		}
 	}
 	

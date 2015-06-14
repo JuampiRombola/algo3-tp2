@@ -26,12 +26,12 @@ public class Fabrica extends Edificio {
 		this.vida.setVidaActualEnCero();
 	}
 
-	public void crearUnidad() throws EdificioNoHabilitadoException {
+	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
 		if (this.estaHabilitado()) {
 			Goliath goliath = new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(goliath);
 		} else {
-			throw new EdificioNoHabilitadoException();
+			throw new ElEdificioEstaEnConstruccion();
 		}
 	}
 	

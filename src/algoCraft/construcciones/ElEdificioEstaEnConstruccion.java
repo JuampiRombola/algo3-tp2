@@ -1,6 +1,6 @@
 package algoCraft.construcciones;
 
-public class EdificioNoHabilitadoException extends Exception {
+public class ElEdificioEstaEnConstruccion extends Exception {
 
 	/**
 	 * 

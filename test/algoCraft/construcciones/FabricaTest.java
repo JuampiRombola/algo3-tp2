@@ -65,7 +65,7 @@ public class FabricaTest {
 				
 				assertEquals(goliath.getVidaActual(), 125);
 			} catch (NoSeCreoUnaNuevaUnidad e) {}
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
@@ -79,7 +79,7 @@ public class FabricaTest {
 			fabrica.crearUnidad();
 			@SuppressWarnings("unused")
 			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test
@@ -97,7 +97,7 @@ public class FabricaTest {
 			fabrica.crearUnidad();
 			
 			fail();
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test

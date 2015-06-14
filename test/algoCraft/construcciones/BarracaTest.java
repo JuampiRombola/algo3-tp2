@@ -64,7 +64,7 @@ public class BarracaTest {
 				
 				assertEquals(marine.getVidaActual(), 40);
 			} catch (NoSeCreoUnaNuevaUnidad e) {}
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
@@ -78,7 +78,7 @@ public class BarracaTest {
 			barraca.crearUnidad();
 			@SuppressWarnings("unused")
 			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test
@@ -96,7 +96,7 @@ public class BarracaTest {
 			barraca.crearUnidad();
 			
 			fail();
-		} catch (EdificioNoHabilitadoException e) {}
+		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
 	@Test
