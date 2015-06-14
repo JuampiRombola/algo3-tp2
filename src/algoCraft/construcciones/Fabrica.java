@@ -17,26 +17,26 @@ public class Fabrica extends Edificio {
 	private Queue<Unidad> unidadesEnConstruccion;
 	private Unidad ultimaUnidadConstruida;
 	
-	public Fabrica(int x, int y) {
+	public Fabrica(int x, int y, Barraca barraca) throws LaBarracaEstaDestruida {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
-		this.enConstruccion = true;
-		this.seCreoUnaUnidadNueva = false;
-		this.turnoActual = 1;
-		this.unidadesEnConstruccion = new LinkedList<Unidad>();
-		this.vida.setVidaActualEnCero();
+		if(!barraca.estaDestruido()){
+			this.enConstruccion = true;
+			this.seCreoUnaUnidadNueva = false;
+			this.turnoActual = 1;
+			this.unidadesEnConstruccion = new LinkedList<Unidad>();
+			this.vida.setVidaActualEnCero();
+		}else{
+			throw new LaBarracaEstaDestruida();
+		}
 	}
 
 	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
-		if (this.estaHabilitado()) {
+		if (!this.enConstruccion) {
 			Goliath goliath = new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(goliath);
 		} else {
 			throw new ElEdificioEstaEnConstruccion();
 		}
-	}
-	
-	public boolean estaHabilitado() {
-		return !this.enConstruccion;
 	}
 	
 	public void avanzarTurno() {

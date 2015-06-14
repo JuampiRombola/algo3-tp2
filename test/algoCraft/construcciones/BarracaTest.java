@@ -78,7 +78,9 @@ public class BarracaTest {
 			barraca.crearUnidad();
 			@SuppressWarnings("unused")
 			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-		} catch (ElEdificioEstaEnConstruccion e) {}
+		} catch (ElEdificioEstaEnConstruccion e) { 
+			fail();
+		}
 	}
 	
 	@Test
@@ -138,9 +140,7 @@ public class BarracaTest {
 	@Test
 	public void alCrearseLaBarracaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
 		Barraca barraca = new Barraca(1, 1);
-		
 		barraca.avanzarTurno();
-		
 		assertTrue(0 < barraca.getVidaActual());
 	}
 }

@@ -9,17 +9,23 @@ import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
 public class FabricaTest {
-
+	
+	private Barraca nuevaBarracaConstruida(){
+		Barraca barraca = new Barraca(1,1);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno();
+		return barraca;
+	}
+	
 	@Test
-	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() {
-		Fabrica fabrica = new Fabrica(1, 1);
-		
+	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		assertEquals(true, fabrica.esTerrestre());
 	}
 
 	@Test
-	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
 		}
@@ -32,8 +38,8 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
 		}
@@ -49,8 +55,8 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
@@ -69,8 +75,8 @@ public class FabricaTest {
 	}
 	
 	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
-	public void siLaFabricaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void siLaFabricaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad, LaBarracaEstaDestruida{
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
@@ -83,15 +89,15 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		assertEquals(false, fabrica.getSeCreoUnaUnidadNueva());
 	}
 	
 	@Test
-	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		try {
 			fabrica.crearUnidad();
@@ -101,17 +107,8 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void alCrearseLaBarracaYPasar10TurnosEstaHabilitada() {
-		Fabrica fabrica = new Fabrica(1, 1);
-		
-		for (int i = 0; i < 12; i++) {
-			fabrica.avanzarTurno();
-		}
-		assertTrue(fabrica.estaHabilitado());
-	}
-	@Test
-	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno();
@@ -121,18 +118,25 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void alCrearseLaFabricaTiene0PuntosDeVida() {
-		Fabrica fabrica = new Fabrica(1, 1);
+	public void alCrearseLaFabricaTiene0PuntosDeVida() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		assertEquals(0, fabrica.getVidaActual());
 	}
 	
 	@Test
-	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
-		Fabrica fabrica = new Fabrica(1, 1);
-		
+	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() throws LaBarracaEstaDestruida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		fabrica.avanzarTurno();
-		
 		assertTrue(0 < fabrica.getVidaActual());
+	}
+		
+	@Test(expected=LaBarracaEstaDestruida.class)
+	public void siTratoDeCrearLaFabricaConUnaBarracaDestruidaObtengoUnaExcepcion() throws LaBarracaEstaDestruida{
+		Barraca barraca = new Barraca(1,1);
+		barraca.avanzarTurno();
+		barraca.recibePuntosDeDanio(barraca.getVidaActual());
+		@SuppressWarnings("unused")
+		Fabrica fabrica = new Fabrica(1, 1, barraca);
 	}
 }
