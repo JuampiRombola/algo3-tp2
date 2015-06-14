@@ -17,15 +17,15 @@ public class Fabrica extends Edificio {
 	private Queue<Unidad> unidadesEnConstruccion;
 	private Unidad ultimaUnidadConstruida;
 	
-	public Fabrica(int x, int y, Barraca barraca) throws LaBarracaEstaDestruida {
+	public Fabrica(int x, int y, Barraca barraca) throws LaBarracaNoEsValida{
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
-		if(!barraca.estaDestruido()){
+		if(!barraca.estaDestruido() && !barraca.estaEnConstruccion()){
 			estoyEnConstruccion = true;
 			this.seCreoUnaUnidadNueva = false;
 			this.contadorDeTurnos = 0;
 			this.unidadesEnConstruccion = new LinkedList<Unidad>();
 		}else{
-			throw new LaBarracaEstaDestruida();
+			throw new LaBarracaNoEsValida();
 		}
 	}
 

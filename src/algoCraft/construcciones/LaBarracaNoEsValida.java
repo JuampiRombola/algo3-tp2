@@ -1,10 +1,5 @@
 package algoCraft.construcciones;
 
-public class LaBarracaEstaDestruida extends Exception {
-
-	/**
-	 * 
-	 */
+public class LaBarracaNoEsValida extends Exception {
 	private static final long serialVersionUID = 1L;
-
 }

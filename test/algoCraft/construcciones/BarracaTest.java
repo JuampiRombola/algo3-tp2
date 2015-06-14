@@ -102,21 +102,20 @@ public class BarracaTest {
 	}
 	
 	@Test
-	public void alCrearseLaBarracaYPasar12TurnosEstaHabilitada() {
+	public void alCrearseLaBarracaYPasar12TurnosYaNoEstaEnConstruccion() {
 		Barraca barraca = new Barraca(1, 1);
 		
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno();
 		}
-		
-		assertTrue(barraca.estaHabilitado());
+		assertFalse(barraca.estaEnConstruccion());
 	}
 	
 	@Test
-	public void alCrearseLaBarracaEstaDeshabilitada() {
+	public void alCrearseLaBarracaEstaEnConstruccion() {
 		Barraca barraca = new Barraca(1, 1);
 
-		assertFalse(barraca.estaHabilitado());
+		assertTrue(barraca.estaEnConstruccion());
 	}
 	
 	@Test

@@ -36,8 +36,8 @@ public class Barraca extends Edificio{
 		}
 	}
 	
-	public boolean estaHabilitado() {
-		return !this.estoyEnConstruccion;
+	public boolean estaEnConstruccion() {
+		return estoyEnConstruccion;
 	}
 	private boolean estoyCreandoUnaUnidad() {
 		return !unidadesEnConstruccion.isEmpty();
