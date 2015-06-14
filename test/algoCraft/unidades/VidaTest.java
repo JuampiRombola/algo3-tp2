@@ -71,13 +71,21 @@ public class VidaTest {
 	}
 	
 	@Test
-	public void siLaVidaAlCrearseEsSeteadaEn0Tiene0PuntosDeVidaActual(){
-		int puntosDeVidaMaximos = 10;
-		Vida vida = new Vida(puntosDeVidaMaximos);
-		
-		vida.setVidaActualEnCero();
-		
-		assertTrue(vida.getPuntosDeVida() == 0);
+	public void siLaVidaAlCrearseEsDe10Recibe5PuntosDeDanioYSeRestauran3LaVidaActualEsDe8(){
+		 int puntosDeVidaMaximos = 10;
+		 Vida vida = new Vida(puntosDeVidaMaximos);
+		 vida.recibirDanio(5);
+		 vida.restaurarVida(3);
+		 assertTrue(vida.getPuntosDeVida() == 8);
+	}
+	
+	@Test
+	public void siLaVidaAlCrearseEsDe10Recibe5PuntosDeDanioYSeRestauran10LaVidaActualEsLaVidaMaxima(){
+		 int puntosDeVidaMaximos = 10;
+		 Vida vida = new Vida(puntosDeVidaMaximos);
+		 vida.recibirDanio(5);
+		 vida.restaurarVida(10);
+		 assertTrue(vida.getPuntosDeVida() == vida.vidaMaxima);
 	}
 	
 	@Test

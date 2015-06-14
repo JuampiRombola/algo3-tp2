@@ -131,13 +131,6 @@ public class BarracaTest {
 	}
 	
 	@Test
-	public void alCrearseLaBarracaTiene0PuntosDeVida() {
-		Barraca barraca = new Barraca(1, 1);
-		
-		assertEquals(0, barraca.getVidaActual());
-	}
-	
-	@Test
 	public void alCrearseLaBarracaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
 		Barraca barraca = new Barraca(1, 1);
 		barraca.avanzarTurno();

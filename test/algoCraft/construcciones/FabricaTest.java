@@ -118,13 +118,6 @@ public class FabricaTest {
 	}
 	
 	@Test
-	public void alCrearseLaFabricaTiene0PuntosDeVida() throws LaBarracaEstaDestruida {
-		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
-		
-		assertEquals(0, fabrica.getVidaActual());
-	}
-	
-	@Test
 	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() throws LaBarracaEstaDestruida {
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		fabrica.avanzarTurno();
@@ -134,7 +127,6 @@ public class FabricaTest {
 	@Test(expected=LaBarracaEstaDestruida.class)
 	public void siTratoDeCrearLaFabricaConUnaBarracaDestruidaObtengoUnaExcepcion() throws LaBarracaEstaDestruida{
 		Barraca barraca = new Barraca(1,1);
-		barraca.avanzarTurno();
 		barraca.recibePuntosDeDanio(barraca.getVidaActual());
 		@SuppressWarnings("unused")
 		Fabrica fabrica = new Fabrica(1, 1, barraca);

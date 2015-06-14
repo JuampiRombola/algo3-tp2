@@ -11,27 +11,26 @@ public class Fabrica extends Edificio {
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
-	private boolean enConstruccion;
+	private boolean estoyEnConstruccion;
 	private boolean seCreoUnaUnidadNueva;
-	private int turnoActual;
+	private int contadorDeTurnos;
 	private Queue<Unidad> unidadesEnConstruccion;
 	private Unidad ultimaUnidadConstruida;
 	
 	public Fabrica(int x, int y, Barraca barraca) throws LaBarracaEstaDestruida {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre));
 		if(!barraca.estaDestruido()){
-			this.enConstruccion = true;
+			estoyEnConstruccion = true;
 			this.seCreoUnaUnidadNueva = false;
-			this.turnoActual = 1;
+			this.contadorDeTurnos = 0;
 			this.unidadesEnConstruccion = new LinkedList<Unidad>();
-			this.vida.setVidaActualEnCero();
 		}else{
 			throw new LaBarracaEstaDestruida();
 		}
 	}
 
 	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
-		if (!this.enConstruccion) {
+		if (!this.estoyEnConstruccion) {
 			Goliath goliath = new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(goliath);
 		} else {
@@ -39,35 +38,40 @@ public class Fabrica extends Edificio {
 		}
 	}
 	
+	public boolean estaHabilitado() {
+		return !this.estoyEnConstruccion;
+	}
+	private boolean estoyCreandoUnaUnidad() {
+		return !unidadesEnConstruccion.isEmpty();
+	}
+	
+
 	public void avanzarTurno() {
-		this.construccionPorTurno();
-		this.construirUnidades();
-	}
-	
-	private void construccionPorTurno() {
-		if (this.enConstruccion) {
-			if (this.turnoActual == turnosEnConstruirse) {
-				this.vida.maximizarVida();
-				this.enConstruccion = false;
-				this.turnoActual = 1;
-			} else {
-				this.vida.sumarVida(this.vida.getPuntosDeVidaMaximos() / turnosEnConstruirse);
-				this.turnoActual += 1;
+		this.contadorDeTurnos++;
+		if(estoyEnConstruccion){
+			continuarMiConstruccion();
+		}else
+			if(estoyCreandoUnaUnidad()){
+				continuarCreandoLaUnidad();
 			}
+	}
+
+	private void continuarMiConstruccion() {
+		if(contadorDeTurnos == turnosEnConstruirse){
+			estoyEnConstruccion = false;
 		}
 	}
 	
-	private void construirUnidades() {
-		if (!this.unidadesEnConstruccion.isEmpty()) {
-			Unidad unidad = this.unidadesEnConstruccion.peek();
-			if (this.turnoActual == unidad.getTurnosEnConstruirse()) {
-				unidad = this.unidadesEnConstruccion.poll();
-				this.ultimaUnidadConstruida = unidad;
-				this.seCreoUnaUnidadNueva = true;
-				this.turnoActual = 1;
-			}
-			this.turnoActual += 1;
+
+	private void continuarCreandoLaUnidad() {
+		Unidad unidad = this.unidadesEnConstruccion.peek();
+		if (this.contadorDeTurnos == unidad.getTurnosEnConstruirse()) {
+			unidad = this.unidadesEnConstruccion.poll();
+			this.ultimaUnidadConstruida = unidad;
+			this.seCreoUnaUnidadNueva = true;
+			this.contadorDeTurnos = 1;
 		}
+		this.contadorDeTurnos += 1;
 	}
 	
 	public boolean getSeCreoUnaUnidadNueva() {

@@ -25,8 +25,11 @@ public class Vida {
 		}
 	}
 	
-	public void setVidaActualEnCero() {
-		this.vidaActual = 0;
+	public void restaurarVida(int puntosDeVidaRestaurados){
+		vidaActual = vidaActual + puntosDeVidaRestaurados;
+		if(vidaActual > vidaMaxima){
+			vidaActual = vidaMaxima;
+		}
 	}
 	
 	public void maximizarVida() {
