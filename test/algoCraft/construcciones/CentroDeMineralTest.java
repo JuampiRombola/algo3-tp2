@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
 
@@ -62,5 +63,21 @@ public class CentroDeMineralTest {
 		}
 		goliath.atacar(centro);
 		assertEquals(0, centro.getVidaActual());
+	}
+	
+	@Test
+	public void unCentroEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mineral mineral = new Mineral(1, 1);
+		CentroDeMineral centro = new CentroDeMineral(mineral);
+		Posicion posicion = new Posicion(1,1, true);
+		assertEquals(centro.getPosicion(), posicion);
+	}
+	
+	@Test
+	public void unCentroEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mineral mineral = new Mineral(2, 2);
+		CentroDeMineral centro = new CentroDeMineral(mineral);
+		Posicion posicion = new Posicion(2,2, true);
+		assertEquals(centro.getPosicion(), posicion);
 	}
 }

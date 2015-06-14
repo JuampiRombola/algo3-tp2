@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Fabrica;
+import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
@@ -16,7 +17,21 @@ public class FabricaTest {
 			barraca.avanzarTurno();
 		return barraca;
 	}
-
+	
+	@Test
+	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() throws LaBarracaNoEsValida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
+		Posicion posicion = new Posicion(1,1, fabrica.esTerrestre());
+		assertEquals(fabrica.getPosicion(), posicion);
+	}
+	
+	@Test
+	public void unaFabricaEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() throws LaBarracaNoEsValida {
+		Fabrica fabrica = new Fabrica(2, 2, nuevaBarracaConstruida());
+		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
+		assertEquals(fabrica.getPosicion(), posicion);
+	}
+	
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() throws LaBarracaNoEsValida{
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());

@@ -3,7 +3,6 @@ package algoCraft.recursos;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
 
@@ -62,5 +61,19 @@ public class MineralTest {
 		}
 		mineral.extraer(10);
 		assertEquals(0, mineral.getUnidadesRestantes());
+	}
+	
+	@Test
+	public void unMineralEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mineral mineral = new Mineral(1, 1);
+		Posicion posicion = new Posicion(1,1, true);
+		assertEquals(mineral.getPosicion(), posicion);
+	}
+	
+	@Test
+	public void unCentroEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mineral mineral = new Mineral(1, 1);
+		Posicion posicion = new Posicion(1,1, true);
+		assertEquals(mineral.getPosicion(), posicion);
 	}
 }

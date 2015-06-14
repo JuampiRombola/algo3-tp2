@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
@@ -14,6 +15,20 @@ public class BarracaTest {
 	public void cuandoSeCreaUnaBarracaEstaEstaEnTierra() {
 		Barraca barraca = new Barraca(1, 1);
 		assertEquals(true, barraca.esTerrestre());
+	}
+	
+	@Test
+	public void unaBarracaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Barraca barraca = new Barraca(1, 1);
+		Posicion posicion = new Posicion(1,1, barraca.esTerrestre());
+		assertEquals(barraca.getPosicion(), posicion);
+	}
+	
+	@Test
+	public void unaBarracaEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Barraca barraca = new Barraca(2, 2);
+		Posicion posicion = new Posicion(2,2, barraca.esTerrestre());
+		assertEquals(barraca.getPosicion(), posicion);
 	}
 
 	@Test
@@ -61,7 +76,6 @@ public class BarracaTest {
 			}
 			try {
 				Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-				
 				assertEquals(marine.getVidaActual(), 40);
 			} catch (NoSeCreoUnaNuevaUnidad e) {}
 		} catch (ElEdificioEstaEnConstruccion e) {}
