@@ -70,6 +70,25 @@ public class FabricaTest {
 	}
 	
 	@Test
+	public void laFabricaEstaEnConstruccionCuandoRecienEsCreada() throws LaBarracaNoEsValida{
+		Barraca barraca = nuevaBarracaConstruida();;
+		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		assertTrue(fabrica.estaEnConstruccion());
+	}
+	
+	@Test
+	public void laFabricaDejaDeEstarEnConstruccionCuandoPasan12Turnos() throws LaBarracaNoEsValida{
+		Barraca barraca = nuevaBarracaConstruida();
+		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		int turno = 0;
+		while(fabrica.estaEnConstruccion()){
+			fabrica.avanzarTurno();
+			turno++;
+		}
+		assertTrue(turno == 12);
+	}
+	
+	@Test
 	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() throws LaBarracaNoEsValida {
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		

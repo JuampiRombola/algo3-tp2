@@ -59,9 +59,13 @@ public class Fabrica extends Edificio {
 	private void continuarMiConstruccion() {
 		if(contadorDeTurnos == turnosEnConstruirse){
 			estoyEnConstruccion = false;
+			contadorDeTurnos = 1;
 		}
 	}
 	
+	public boolean estaEnConstruccion() {
+		return estoyEnConstruccion;
+	}
 
 	private void continuarCreandoLaUnidad() {
 		Unidad unidad = this.unidadesEnConstruccion.peek();
@@ -71,7 +75,6 @@ public class Fabrica extends Edificio {
 			this.seCreoUnaUnidadNueva = true;
 			this.contadorDeTurnos = 1;
 		}
-		this.contadorDeTurnos += 1;
 	}
 	
 	public boolean getSeCreoUnaUnidadNueva() {

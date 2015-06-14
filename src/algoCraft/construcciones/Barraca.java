@@ -57,6 +57,7 @@ public class Barraca extends Edificio{
 	private void continuarMiConstruccion() {
 		if(contadorDeTurnos == turnosEnConstruirse){
 			estoyEnConstruccion = false;
+			this.contadorDeTurnos = 1;
 		}
 	}
 	
@@ -69,7 +70,6 @@ public class Barraca extends Edificio{
 			this.seCreoUnaUnidadNueva = true;
 			this.contadorDeTurnos = 1;
 		}
-		this.contadorDeTurnos += 1;
 	}
 	
 	public boolean getSeCreoUnaUnidadNueva() {
@@ -78,6 +78,7 @@ public class Barraca extends Edificio{
 	
 	public Unidad obtenerUltimaUnidadConstruida() throws NoSeCreoUnaNuevaUnidad {
 		if (this.getSeCreoUnaUnidadNueva()) {
+			seCreoUnaUnidadNueva = false;
 			return this.ultimaUnidadConstruida;
 		} else {
 			throw new NoSeCreoUnaNuevaUnidad();
