@@ -7,7 +7,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
-public class Fabrica extends ConstructorDeUnidades {
+public class Fabrica extends Edificio {
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;

@@ -7,7 +7,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
-public class Barraca extends ConstructorDeUnidades{
+public class Barraca extends Edificio{
 	static int vidaMaxima = 1000;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
