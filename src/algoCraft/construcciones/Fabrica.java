@@ -38,9 +38,6 @@ public class Fabrica extends Edificio {
 		}
 	}
 	
-	public boolean estaHabilitado() {
-		return !this.estoyEnConstruccion;
-	}
 	private boolean estoyCreandoUnaUnidad() {
 		return !unidadesEnConstruccion.isEmpty();
 	}
