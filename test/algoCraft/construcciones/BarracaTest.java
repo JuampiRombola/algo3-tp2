@@ -37,6 +37,58 @@ public class BarracaTest {
 	}
 	
 	@Test
+	public void cuandoSeCreaUnaBarracaEstaNoCreoNingunaUnidad() {
+		Barraca barraca = new Barraca(1, 1);
+		assertFalse(barraca.getSeCreoUnaUnidadNueva());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaBarracaYSeTerminaDeConstruirNoSeCreoNingunaUnidad(){
+		Barraca barraca = crearBarracaConstruida();
+		assertFalse(barraca.getSeCreoUnaUnidadNueva());
+	}
+	@Test
+	public void laBarracaTarda3TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
+		Barraca barraca = crearBarracaConstruida();
+		barraca.crearUnidad();
+		int turno = 0;
+		while(!barraca.getSeCreoUnaUnidadNueva()){
+			turno++;
+			barraca.avanzarTurno();
+		}
+		assertTrue(turno == 3);
+	}
+	
+	@Test
+	public void siSacoElMarineDespuesDeHaberSidoCreadoLaBarracaMuestraQueNoHayUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
+		Barraca barraca = crearBarracaConstruida();
+		barraca.crearUnidad();
+		while(!barraca.getSeCreoUnaUnidadNueva()){
+			barraca.avanzarTurno();
+		}
+		barraca.obtenerUltimaUnidadConstruida();
+		assertFalse(barraca.getSeCreoUnaUnidadNueva());
+	}
+	
+	@Test
+	public void crear2MarinesLleva6Turnos() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
+		Barraca barraca = crearBarracaConstruida();
+		barraca.crearUnidad();
+		int turno = 0;
+		int marinesCreados = 0;
+		while (marinesCreados < 2){
+			while(!barraca.getSeCreoUnaUnidadNueva()){
+				turno++;
+				barraca.avanzarTurno();
+			}
+			marinesCreados++;
+			barraca.obtenerUltimaUnidadConstruida();
+			barraca.crearUnidad();
+		}
+		assertTrue(turno == 6);
+	}
+	
+	@Test
 	public void cuandoSeCreaUnaBarracaEstaEstaEnTierra() {
 		Barraca barraca = new Barraca(1, 1);
 		assertEquals(true, barraca.esTerrestre());
@@ -109,18 +161,7 @@ public class BarracaTest {
 		Barraca barraca = crearBarracaConstruida();
 		barraca.getSeCreoUnaUnidadNueva();
 	}
-	
-	/*
-	@Test
-	public void luegoDeObtenerUnaUnidadNuevaSiNoPideCrearOtraNoSeCreoUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Barraca barraca = crearBarracaConstruida();
-		barraca.crearUnidad();
-		barraca.avanzarTurno();
-		barraca.avanzarTurno();
-		barraca.avanzarTurno();
-		barraca.obtenerUltimaUnidadConstruida();
-		assertFalse(barraca.getSeCreoUnaUnidadNueva());
-	}*/
+
 	
 	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
 	public void siLaBarracaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
@@ -138,13 +179,7 @@ public class BarracaTest {
 		}
 	}
 	
-	@Test
-	public void cuandoSeCreaUnaBarracaEstaNoCreoNingunaUnidad() {
-		Barraca barraca = new Barraca(1, 1);
-		
-		assertEquals(false, barraca.getSeCreoUnaUnidadNueva());
-	}
-	
+
 	@Test
 	public void cuandoLaBarracaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
 		Barraca barraca = new Barraca(1, 1);
@@ -190,21 +225,4 @@ public class BarracaTest {
 		barraca.avanzarTurno();
 		assertTrue(0 < barraca.getVidaActual());
 	}
-	
-	/*
-	@Test
-	public void seTarda6TurnosEnCrear2Marines() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Barraca barraca = crearBarracaConstruida();
-		int marinesCreados = 0;
-		int turno = 0;
-		while (marinesCreados < 2){
-			barraca.crearUnidad();
-			barraca.avanzarTurno();
-			turno ++;
-			if(barraca.getSeCreoUnaUnidadNueva()){
-				marinesCreados++;
-			}
-		}
-		assertEquals(turno, 6);
-	}*/
 }

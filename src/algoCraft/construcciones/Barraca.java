@@ -57,7 +57,7 @@ public class Barraca extends Edificio{
 	private void continuarMiConstruccion() {
 		if(contadorDeTurnos == turnosEnConstruirse){
 			estoyEnConstruccion = false;
-			this.contadorDeTurnos = 1;
+			this.contadorDeTurnos = 0;
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class Barraca extends Edificio{
 			unidad = this.unidadesEnConstruccion.poll();
 			this.ultimaUnidadConstruida = unidad;
 			this.seCreoUnaUnidadNueva = true;
-			this.contadorDeTurnos = 1;
+			this.contadorDeTurnos = 0;
 		}
 	}
 	
