@@ -106,6 +106,14 @@ public class BarracaTest {
 		Posicion posicion = new Posicion(2,2, barraca.esTerrestre());
 		assertEquals(barraca.getPosicion(), posicion);
 	}
+	
+	@Test
+	public void unaBarracaEnEl11movidaAl22DevuelveUnaPosicionEnEL22ConGetPosicion() {
+		Barraca barraca = new Barraca(1, 1);
+		barraca.setPosicion(2, 2);
+		Posicion posicion = new Posicion(2,2, barraca.esTerrestre());
+		assertEquals(barraca.getPosicion(), posicion);
+	}
 
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {

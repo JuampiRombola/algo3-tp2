@@ -44,6 +44,14 @@ public class FabricaTest {
 	}
 	
 	@Test
+	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL22ConSetPosicion22() throws LaBarracaNoEsValida {
+		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
+		fabrica.setPosicion(2, 2);
+		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
+		assertEquals(fabrica.getPosicion(), posicion);
+	}
+	
+	@Test
 	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() throws LaBarracaNoEsValida{
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		assertEquals(true, fabrica.esTerrestre());
