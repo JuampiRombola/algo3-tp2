@@ -18,6 +18,17 @@ public class FabricaTest {
 		return barraca;
 	}
 	
+	private Fabrica crearFabricaConstruida(){
+		Fabrica fabrica;
+		try {
+			fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
+			//La excepcion esta controlada por la nueva barraca construida. Si hay una falla proviene de la barraca
+		} catch (LaBarracaNoEsValida e) { fabrica = null;}
+		for(int i = 0; i < 12; i++)
+			fabrica.avanzarTurno();
+		return fabrica;
+	}
+	
 	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() throws LaBarracaNoEsValida {
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
@@ -84,6 +95,53 @@ public class FabricaTest {
 		while(fabrica.estaEnConstruccion()){
 			fabrica.avanzarTurno();
 			turno++;
+		}
+		assertTrue(turno == 12);
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaFabricaYSeTerminaDeConstruirNoSeCreoNingunaUnidad(){
+		Fabrica fabrica = crearFabricaConstruida();
+		assertFalse(fabrica.getSeCreoUnaUnidadNueva());
+	}
+	
+	@Test
+	public void laFabricaTarda6TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
+		Fabrica fabrica = crearFabricaConstruida();
+		fabrica.crearUnidad();
+		int turno = 0;
+		while(!fabrica.getSeCreoUnaUnidadNueva()){
+			turno++;
+			fabrica.avanzarTurno();
+		}
+		assertTrue(turno == 6);
+	}
+
+	@Test
+	public void siSacoElGoliathDespuesDeHaberSidoCreadoLaBarracaMuestraQueNoHayUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
+		Fabrica fabrica = crearFabricaConstruida();
+		fabrica.crearUnidad();
+		while(!fabrica.getSeCreoUnaUnidadNueva()){
+			fabrica.avanzarTurno();
+		}
+		fabrica.obtenerUltimaUnidadConstruida();
+		assertFalse(fabrica.getSeCreoUnaUnidadNueva());
+	}
+	
+	@Test
+	public void crear2GoliathsLleva12Turnos() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
+		Fabrica fabrica = crearFabricaConstruida();
+		fabrica.crearUnidad();
+		int turno = 0;
+		int marinesCreados = 0;
+		while (marinesCreados < 2){
+			while(!fabrica.getSeCreoUnaUnidadNueva()){
+				turno++;
+				fabrica.avanzarTurno();
+			}
+			marinesCreados++;
+			fabrica.obtenerUltimaUnidadConstruida();
+			fabrica.crearUnidad();
 		}
 		assertTrue(turno == 12);
 	}
