@@ -116,7 +116,7 @@ public class FabricaTest {
 	@Test
 	public void laFabricaTarda6TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
 		Fabrica fabrica = crearFabricaConstruida();
-		fabrica.crearUnidad();
+		fabrica.crearGoliath();
 		int turno = 0;
 		while(!fabrica.getSeCreoUnaUnidadNueva()){
 			turno++;
@@ -128,7 +128,7 @@ public class FabricaTest {
 	@Test
 	public void siSacoElGoliathDespuesDeHaberSidoCreadoLaBarracaMuestraQueNoHayUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
 		Fabrica fabrica = crearFabricaConstruida();
-		fabrica.crearUnidad();
+		fabrica.crearGoliath();
 		while(!fabrica.getSeCreoUnaUnidadNueva()){
 			fabrica.avanzarTurno();
 		}
@@ -139,7 +139,7 @@ public class FabricaTest {
 	@Test
 	public void crear2GoliathsLleva12Turnos() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
 		Fabrica fabrica = crearFabricaConstruida();
-		fabrica.crearUnidad();
+		fabrica.crearGoliath();
 		int turno = 0;
 		int marinesCreados = 0;
 		while (marinesCreados < 2){
@@ -149,7 +149,7 @@ public class FabricaTest {
 			}
 			marinesCreados++;
 			fabrica.obtenerUltimaUnidadConstruida();
-			fabrica.crearUnidad();
+			fabrica.crearGoliath();
 		}
 		assertTrue(turno == 12);
 	}
@@ -162,7 +162,7 @@ public class FabricaTest {
 			fabrica.avanzarTurno();
 		}
 		try {
-			fabrica.crearUnidad();
+			fabrica.crearGoliath();
 			for (int j = 0; j < 6; j++) {
 				fabrica.avanzarTurno();
 			}
@@ -182,7 +182,7 @@ public class FabricaTest {
 			fabrica.avanzarTurno();
 		}
 		try {
-			fabrica.crearUnidad();
+			fabrica.crearGoliath();
 			@SuppressWarnings("unused")
 			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
 		} catch (ElEdificioEstaEnConstruccion e) {}
@@ -200,7 +200,7 @@ public class FabricaTest {
 		Fabrica fabrica = new Fabrica(1, 1, nuevaBarracaConstruida());
 		
 		try {
-			fabrica.crearUnidad();
+			fabrica.crearGoliath();
 			
 			fail();
 		} catch (ElEdificioEstaEnConstruccion e) {}

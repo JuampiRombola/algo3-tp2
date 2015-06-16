@@ -71,5 +71,13 @@ public abstract class EdificioConstructor extends Edificio{
 			throw new NoSeCreoUnaNuevaUnidad();
 		}
 	}
+	
+	public void crearMarine() throws ElEdificioNoPuedeCrearLaUnidad, ElEdificioEstaEnConstruccion {
+		throw new ElEdificioNoPuedeCrearLaUnidad();
+	}
+	
+	public void crearGoliath() throws ElEdificioNoPuedeCrearLaUnidad, ElEdificioEstaEnConstruccion {
+		throw new ElEdificioNoPuedeCrearLaUnidad();
+	}
 }
 

@@ -12,7 +12,8 @@ public class Barraca extends EdificioConstructor{
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
 	}
 
-	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
+	@Override
+	public void crearMarine() throws ElEdificioEstaEnConstruccion {
 		if (!this.estaEnConstruccion) {
 			Marine marine = new Marine(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(marine);

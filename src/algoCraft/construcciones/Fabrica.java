@@ -17,7 +17,8 @@ public class Fabrica extends EdificioConstructor {
 		}
 	}
 
-	public void crearUnidad() throws ElEdificioEstaEnConstruccion {
+	@Override
+	public void crearGoliath() throws ElEdificioEstaEnConstruccion {
 		if (!this.estaEnConstruccion) {
 			Goliath goliath = new Goliath(this.posicion.getX(), this.posicion.getY() + 1);
 			this.unidadesEnConstruccion.offer(goliath);
