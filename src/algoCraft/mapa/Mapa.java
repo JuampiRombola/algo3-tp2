@@ -7,19 +7,23 @@ import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 
 public class Mapa {
-	private int alto, ancho;
+	private static Mapa mapa = new Mapa();
 	private HashMap<Posicion, Posicionable> unidades;
+	private int alto = 400;
+	private int ancho = 400;
 	
-	public Mapa(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
+	private Mapa() {
 		this.unidades = new HashMap<Posicion, Posicionable>(alto * ancho);
+	}
+	
+	public static Mapa getMapa() {
+		return mapa;
 	}
 	
 	private void validadPosicion(Posicion posicion) throws PosicionInvalidaException {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		if (x < 0 || x > this.alto || y < 0 || y > this.ancho)
+		if (x < 0 || x > alto || y < 0 || y > ancho)
 			throw new PosicionInvalidaException();
 	}
 	

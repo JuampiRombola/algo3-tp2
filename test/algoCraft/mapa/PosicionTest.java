@@ -60,7 +60,7 @@ public class PosicionTest {
 	@Test
 	public void alCompararUnaPosicionConOtroObjetoSeDevuelveFalse() {
 		Posicion posicion1 = new Posicion(1, 1, true);
-		Object otroObjeto = new Mapa(1, 1);
+		Object otroObjeto = Mapa.getMapa();
 		Assert.assertFalse(posicion1.equals(otroObjeto));
 	}
 	
