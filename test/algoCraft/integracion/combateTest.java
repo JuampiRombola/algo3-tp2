@@ -9,6 +9,7 @@ import org.junit.Test;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Marine;
@@ -28,7 +29,8 @@ public class combateTest {
 		try {
 			mapa.agregarUnidad(marine);
 			mapa.agregarUnidad(goliath);
-		} catch (PosicionInvalidaException e) {}
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
 		
 		try {
 			Assert.assertEquals(marine, mapa.getUnidad(new Posicion(1, 1, true)));

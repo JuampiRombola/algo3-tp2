@@ -9,6 +9,7 @@ import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Marine;
 
@@ -23,6 +24,7 @@ public class MapaTest {
 			
 		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
 		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -35,7 +37,8 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {}
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
 	}
 	
 	@Test
@@ -47,7 +50,8 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {}
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
 	}
 	
 	@Test
@@ -59,7 +63,8 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {}
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
 	}
 	
 	@Test
@@ -71,7 +76,8 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {}
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
 	}
 	
 	@Test
@@ -79,14 +85,32 @@ public class MapaTest {
 		Mapa mapa = new Mapa(10, 10);
 		Posicionable unidad = new Marine(1, 1);
 		Posicionable unidadIntrusa = new Marine(1, 1);
+		try {
+			mapa.agregarUnidad(unidad);
+			mapa.agregarUnidad(unidadIntrusa);
+			
+			fail();
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
+		
+		try {
+			Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
+			Assert.assertFalse(unidadIntrusa == mapa.getUnidad(unidad.getPosicion()));
+		} catch (PosicionVaciaException e) {}
+	}
+	
+	@Test
+	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
+		Mapa mapa = new Mapa(10, 10);
+		Posicionable unidad = new Marine(1, 1);
+		Posicionable unidadIntrusa = new Marine(1, 1);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
-			Assert.assertFalse(unidadIntrusa == mapa.getUnidad(unidad.getPosicion()));
+			fail();
 		} catch (PosicionInvalidaException e) {
-		} catch (PosicionVaciaException e) {}
+		} catch (PosicionOcupadaException e) {}
 	}
 	
 	@Test
@@ -110,6 +134,7 @@ public class MapaTest {
 			
 			fail();
 		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -123,6 +148,7 @@ public class MapaTest {
 			
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
 		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -137,6 +163,7 @@ public class MapaTest {
 			
 			fail();
 		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -153,6 +180,7 @@ public class MapaTest {
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(1, 2, true)));
 			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
 		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 }

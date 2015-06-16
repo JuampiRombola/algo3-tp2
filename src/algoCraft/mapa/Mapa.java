@@ -3,6 +3,7 @@ package algoCraft.mapa;
 import java.util.HashMap;
 
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 
 public class Mapa {
@@ -26,11 +27,12 @@ public class Mapa {
 		return unidades.containsKey(posicion);
 	}
 	
-	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException {
+	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
 		Posicion posicion = unidad.getPosicion();
 		this.validadPosicion(posicion);
-		if (!this.posicionEstaOcupada(posicion))
-			this.unidades.put(posicion, unidad);
+		if (this.posicionEstaOcupada(posicion))
+			throw new PosicionOcupadaException();
+		this.unidades.put(posicion, unidad);
 	}
 	
 	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
