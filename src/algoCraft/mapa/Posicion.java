@@ -24,12 +24,20 @@ public class Posicion {
 	
 	@Override
 	public boolean equals(Object otroObjeto) {
-		if (otroObjeto.getClass() != this.getClass()) {
+		if (otroObjeto.getClass() != this.getClass())
 			return false;
-		}
+		
 		Posicion otraPosicion = (Posicion)otroObjeto;
 		return ((this.x == otraPosicion.x) && (this.y == otraPosicion.y) 
 				&& (this.esTerrestre == otraPosicion.esTerrestre));
+	}
+	
+	@Override
+	public int hashCode() {
+		int corrimiento = 0;
+		if (this.esTerrestre)
+			corrimiento = 1;
+		return ((this.x * 31) ^ this.y) + corrimiento;
 	}
 	
 	public double calcularDistancia(Posicion posicion) {
