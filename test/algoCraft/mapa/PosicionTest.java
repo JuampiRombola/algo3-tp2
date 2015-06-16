@@ -88,4 +88,15 @@ public class PosicionTest {
 		
 		Assert.assertTrue(posicion1.diferencia(posicion2).equals(new Posicion(1, 0, true)));
 	}
+	@Test
+	public void dosPosicionesConLasMismasCoordenadasPeroUnaTerrestreYOtraNoTienenDistintoHashcode() {
+		Posicion posicion1 = new Posicion(2, 2, true);
+		Posicion posicion2 = new Posicion(2, 2, false);
+		
+		int hashcode1 = posicion1.hashCode();
+		int hashcode2 = posicion2.hashCode();
+		
+		Assert.assertFalse(hashcode1 == hashcode2);
+	}
+	
 }
