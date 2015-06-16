@@ -34,9 +34,7 @@ public class Posicion {
 	
 	@Override
 	public int hashCode() {
-		int corrimiento = 0;
-		if (this.esTerrestre)
-			corrimiento = 1;
+		int corrimiento = (this.esTerrestre) ? 1 : 0;
 		return ((this.x * 31) ^ this.y) + corrimiento;
 	}
 	
