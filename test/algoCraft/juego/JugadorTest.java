@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Unidad;
@@ -84,7 +86,7 @@ public class JugadorTest {
 		int cantidadInicial = jugador.getMineral();
 		try {
 			jugador.crearCentroDeMineral(mineral);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadFinal = jugador.getMineral();
 		assertTrue(cantidadInicial == cantidadFinal + 50);
 	}
@@ -95,7 +97,7 @@ public class JugadorTest {
 		Mineral mineral = new Mineral(1, 1);
 		try {
 			jugador.crearCentroDeMineral(mineral);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(4, jugador);
 		int cantidadInicial = jugador.getMineral();
 		jugador.avanzarTurno();
@@ -109,7 +111,7 @@ public class JugadorTest {
 		Mineral mineral = new Mineral(1, 1);
 		try {
 			jugador.crearCentroDeMineral(mineral);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(4, jugador);
 		int cantidadInicial = jugador.getMineral();
 		avanzarTurnos(2, jugador);
@@ -124,7 +126,7 @@ public class JugadorTest {
 		Mineral mineral = new Mineral(1, 1);
 		try {
 			jugador.crearCentroDeMineral(mineral);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
@@ -135,7 +137,7 @@ public class JugadorTest {
 		int cantidadInicial = jugador.getMineral();
 		try {
 			jugador.crearDepositoDeSuministros(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadFinal = jugador.getMineral();
 		assertTrue(cantidadInicial == cantidadFinal + 100);
 	}
@@ -145,7 +147,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador");
 		try {
 			jugador.crearDepositoDeSuministros(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadInicial = jugador.getPoblacionMaxima();
 		avanzarTurnos(6, jugador);
 		int cantidadFinal = jugador.getPoblacionMaxima();
@@ -157,7 +159,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador");
 		try {
 			jugador.crearDepositoDeSuministros(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadInicial = jugador.getPoblacionMaxima();
 		avanzarTurnos(3, jugador);
 		int cantidadFinal = jugador.getPoblacionMaxima();
@@ -170,7 +172,7 @@ public class JugadorTest {
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		try {
 			jugador.crearDepositoDeSuministros(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
@@ -182,7 +184,7 @@ public class JugadorTest {
 		int cantidadInicial = jugador.getMineral();
 		try {
 			jugador.crearRefineria(gas);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadFinal = jugador.getMineral();
 		assertTrue(cantidadInicial == cantidadFinal + 100);
 	}
@@ -193,7 +195,7 @@ public class JugadorTest {
 		GasVespeno gas = new GasVespeno(1, 1);
 		try {
 			jugador.crearRefineria(gas);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(6, jugador);
 		int cantidadInicial = jugador.getGasVespeno();
 		jugador.avanzarTurno();
@@ -207,7 +209,7 @@ public class JugadorTest {
 		GasVespeno gas = new GasVespeno(1, 1);
 		try {
 			jugador.crearRefineria(gas);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(6, jugador);
 		int cantidadInicial = jugador.getGasVespeno();
 		avanzarTurnos(2, jugador);
@@ -222,7 +224,7 @@ public class JugadorTest {
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		try {
 			jugador.crearRefineria(gas);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
@@ -235,14 +237,14 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		try {
 			jugador.crearBarraca(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadInicialMineral = jugador.getMineral();
 		int cantidadInicialGas = jugador.getGasVespeno();
 		avanzarTurnos(12, jugador);
 		try {
 			try {
 				jugador.crearFabrica(2, 2);
-			} catch (NoSeTienenLosRecursosSuficientes e) {}
+			} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		} catch (NoSePuedeConstruirElEdificio e) {}
 		int cantidadFinalMineral = jugador.getMineral();
 		int cantidadFinalGas = jugador.getGasVespeno();
@@ -258,12 +260,12 @@ public class JugadorTest {
 		try {
 			jugador.crearBarraca(1, 1);
 			jugador.crearDepositoDeSuministros(0, 0);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(10, jugador);
 		try {
 			try {
 				jugador.crearFabrica(2, 2);
-			} catch (NoSeTienenLosRecursosSuficientes e) {}
+			} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 			fail();
 		} catch (NoSePuedeConstruirElEdificio e) {}
 	}
@@ -275,12 +277,12 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		try {
 			jugador.crearDepositoDeSuministros(0, 0);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		avanzarTurnos(6, jugador);
 		try {
 			try {
 				jugador.crearFabrica(2, 2);
-			} catch (NoSeTienenLosRecursosSuficientes e) {}
+			} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 			fail();
 		} catch (NoSePuedeConstruirElEdificio e) {}
 	}
@@ -293,13 +295,13 @@ public class JugadorTest {
 		try {
 			jugador.crearBarraca(1, 1);
 			jugador.crearDepositoDeSuministros(0, 0);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		avanzarTurnos(12, jugador);
 		try {
 			try {
 				jugador.crearFabrica(2, 2);
-			} catch (NoSeTienenLosRecursosSuficientes e) {}
+			} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		} catch (NoSePuedeConstruirElEdificio e) {}
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
@@ -313,7 +315,7 @@ public class JugadorTest {
 		int cantidadInicialMineral = jugador.getMineral();
 		try {
 			jugador.crearBarraca(1, 1);
-		} catch (NoSeTienenLosRecursosSuficientes e) {}
+		} catch (NoSeTienenLosRecursosSuficientes | PosicionInvalidaException | PosicionOcupadaException e) {}
 		int cantidadFinalMineral = jugador.getMineral();
 		assertTrue(cantidadInicialMineral == cantidadFinalMineral + 150);
 	}

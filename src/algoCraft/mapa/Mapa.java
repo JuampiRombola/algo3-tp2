@@ -9,12 +9,12 @@ import algoCraft.construcciones.Base;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
+import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
-import algoCraft.recursos.Recurso;
 
 public class Mapa {
 	private HashMap<Posicion, Posicionable> elementos;
-	private HashMap<Posicion, Recurso> gasVespeno;
+	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
 	private HashMap<Posicion, Base> bases;
 	private static Mapa mapa = new Mapa();
@@ -44,7 +44,7 @@ public class Mapa {
 	}
 
 	private void generarRecursos() {
-		this.gasVespeno = new HashMap<Posicion, Recurso>();
+		this.gasVespeno = new HashMap<Posicion, GasVespeno>();
 		this.minerales = new HashMap<Posicion, Mineral>();
 		Iterator<Base> it = this.bases.values().iterator();
 		while (it.hasNext()) {
@@ -59,8 +59,9 @@ public class Mapa {
 		while (!(cantidadGasVespeno == 4)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
 			if (this.posicionEstaOcupada(posicion)) continue;
-			this.gasVespeno.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
-			this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			GasVespeno gasVespeno = new GasVespeno(posicion.getX(), posicion.getY());
+			this.gasVespeno.put(posicion, gasVespeno);
+			this.elementos.put(posicion, gasVespeno);
 			cantidadGasVespeno++;
 		}
 	}
@@ -70,8 +71,9 @@ public class Mapa {
 		while (!(cantidadMinerales == 6)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
 			if (this.posicionEstaOcupada(posicion)) continue;
-			this.minerales.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
-			this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());
+			this.minerales.put(posicion, mineral);
+			this.elementos.put(posicion, mineral);
 			cantidadMinerales++;
 		}
 	}
