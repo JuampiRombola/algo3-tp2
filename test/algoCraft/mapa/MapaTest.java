@@ -192,4 +192,40 @@ public class MapaTest {
 		
 		Assert.assertEquals(mapaPrimario, mapaSecundario);
 	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaTiene16GasVespenoEnTodoElMapa() {
+		Mapa mapaGenerado = Mapa.getMapa();
+		
+		Assert.assertTrue(16 == mapaGenerado.getCantidadGasVespeno());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaTiene24MineralesEnTodoElMapa() {
+		Mapa mapaGenerado = Mapa.getMapa();
+		
+		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaTiene4BasesEnTodoElMapa() {
+		Mapa mapaGenerado = Mapa.getMapa();
+		
+		Assert.assertTrue(4 == mapaGenerado.getBases().size());
+	}
+	
+	@Test
+	public void noDeberiaHaberGasVespenoEnEl250y250() {
+		Mapa mapaGenerado = Mapa.getMapa();
+		
+		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(250, 250, true)));
+	}
+	
+	@Test
+	public void noDeberiaHaberMineralesEnEl250y250() {
+		Mapa mapaGenerado = Mapa.getMapa();
+		
+		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(250, 250, true)));
+	}
+	
 }

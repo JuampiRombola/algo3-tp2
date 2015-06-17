@@ -26,6 +26,10 @@ public class Mapa {
 		this.generarRecursos();
 	}
 	
+	public static Mapa getMapa() {
+		return mapa;
+	}
+
 	private void generarBases() {
 		this.bases = new HashMap<Posicion, Base>();
 		int x = 15;
@@ -47,16 +51,15 @@ public class Mapa {
 			this.generarGasVespenoEntornoALaBase(base);
 			this.generarMineralesEntornoALaBase(base);
 		}
-		this.elementos.putAll(this.gasVespeno);
-		this.elementos.putAll(this.minerales);
 	}
 	
 	private void generarGasVespenoEntornoALaBase(Base base) {
 		int cantidadGasVespeno = 0;
 		while (!(cantidadGasVespeno == 4)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!this.gasVespeno.containsKey(posicion)) {
+			if (!(this.posicionEstaOcupada(posicion))) {
 				this.gasVespeno.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+				this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
 			cantidadGasVespeno++;
 			}
 		}
@@ -66,8 +69,9 @@ public class Mapa {
 		int cantidadMinerales = 0;
 		while (!(cantidadMinerales == 6)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!this.minerales.containsKey(posicion)) {
+			if (!(this.posicionEstaOcupada(posicion))) {
 				this.minerales.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+				this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
 			cantidadMinerales++;
 			}
 		}
@@ -82,10 +86,6 @@ public class Mapa {
 		int yRandom = (int)Math.floor(Math.random()*((yBase+corrimiento)-(yBase-corrimiento))+(yBase-corrimiento));
 		//System.out.println(xRandom + "y" + yRandom);
 		return (new Posicion(xRandom, yRandom, base.esTerrestre()));
-	}
-
-	public static Mapa getMapa() {
-		return mapa;
 	}
 	
 	private void validadPosicion(Posicion posicion) throws PosicionInvalidaException {
@@ -137,5 +137,13 @@ public class Mapa {
 	
 	public boolean hayMineralEn(Posicion posicion) {
 		return this.minerales.containsKey(posicion);
+	}
+	
+	public int getCantidadMinerales() {
+		return this.minerales.size();
+	}
+	
+	public int getCantidadGasVespeno() {
+		return this.gasVespeno.size();
 	}
 }
