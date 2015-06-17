@@ -246,4 +246,14 @@ public class BarracaTest {
 		barraca.avanzarTurno(jugador);
 		assertTrue(0 < barraca.getVidaActual());
 	}
+	
+	@Test
+	public void cuandoLaBarracaTrataDeCrearUnGoliathLanzaUnaExcepcion() throws ElEdificioEstaEnConstruccion {
+		Barraca barraca = new Barraca(1, 1);
+		
+		try {
+			barraca.crearGoliath();
+			fail();
+		} catch (ElEdificioNoPuedeCrearLaUnidad e) {}
+	}
 }

@@ -222,4 +222,14 @@ public class FabricaTest {
 		fabrica.avanzarTurno(jugador);
 		assertTrue(0 < fabrica.getVidaActual());
 	}
+	
+	@Test
+	public void cuandoLaBarracaTrataDeCrearUnGoliathLanzaUnaExcepcion() throws ElEdificioEstaEnConstruccion {
+		Fabrica fabrica = new Fabrica(1, 1);
+		
+		try {
+			fabrica.crearMarine();
+			fail();
+		} catch (ElEdificioNoPuedeCrearLaUnidad e) {}
+	}
 }
