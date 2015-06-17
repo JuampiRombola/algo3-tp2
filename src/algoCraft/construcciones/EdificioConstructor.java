@@ -4,7 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.mapa.excepciones.PosicionInvalidaException;
+import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.unidades.Unidad;
 
 public abstract class EdificioConstructor extends Edificio{
@@ -38,8 +41,17 @@ public abstract class EdificioConstructor extends Edificio{
 			this.ultimaUnidadConstruida = unidad;
 			this.seCreoUnaUnidadNueva = true;
 			this.contadorDeTurnos = 0;
+			
+			Posicion posicionSalida = new Posicion(this.posicion.getX(), this.posicion.getY(), unidad.esTerrestre());
+			Posicion posicionLibre = Mapa.getMapa().getPosicionVaciaCercana(posicionSalida);
+			unidad.setPosicion(posicionLibre.getX(), posicionLibre.getY());
+			try {
+				Mapa.getMapa().agregarUnidad(unidad);
+			} catch (PosicionInvalidaException e) {
+			} catch (PosicionOcupadaException e) {}
 			jugador.agregarUnidad(unidad);
 			jugador.sumarPoblacion(unidad.getPoblacionQueOcupa());
+			
 		}
 	}
 	
