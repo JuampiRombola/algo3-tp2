@@ -1,5 +1,6 @@
 package algoCraft.mapa;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,11 +58,10 @@ public class Mapa {
 		int cantidadGasVespeno = 0;
 		while (!(cantidadGasVespeno == 4)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!(this.posicionEstaOcupada(posicion))) {
-				this.gasVespeno.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
-				this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			if (this.posicionEstaOcupada(posicion)) continue;
+			this.gasVespeno.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
 			cantidadGasVespeno++;
-			}
 		}
 	}
 	
@@ -69,11 +69,10 @@ public class Mapa {
 		int cantidadMinerales = 0;
 		while (!(cantidadMinerales == 6)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!(this.posicionEstaOcupada(posicion))) {
-				this.minerales.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
-				this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			if (this.posicionEstaOcupada(posicion)) continue;
+			this.minerales.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			this.elementos.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
 			cantidadMinerales++;
-			}
 		}
 	}
 	
@@ -145,5 +144,15 @@ public class Mapa {
 	
 	public int getCantidadGasVespeno() {
 		return this.gasVespeno.size();
+	}
+	
+	public Posicion getPosicionVaciaCercana(Posicion posicion) {
+		ArrayList<Posicion> posiciones = posicion.obtenerPosicionesAdyacentes();
+		Posicion posicionBuscada = posiciones.remove(0);
+		while(this.posicionEstaOcupada(posicionBuscada)) {
+			posiciones.addAll(posicionBuscada.obtenerPosicionesAdyacentes());
+			posicionBuscada = posiciones.remove(0);
+		}
+		return posicionBuscada;
 	}
 }

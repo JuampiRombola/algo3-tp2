@@ -12,10 +12,11 @@ import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Marine;
+import algoCraft.unidades.Unidad;
 
 public class MapaTest {
-	// Usar posiciones desde el (50, 50) hasta (450, 450) inclusive para testear
-	// porque en otras posiciones puede haber recursos o bases
+	// Usar posiciones desde el (50, 50) hasta (450, 450) terrestres para testear
+	// o cualquiera de las aéreas porque en otras posiciones puede haber recursos o bases
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa mapa = Mapa.getMapa();
@@ -226,6 +227,30 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(250, 250, true)));
+	}
+	
+	@Test
+	public void laPosicionVaciaMasCercanaAl11x11EsLa10x10() {
+		Mapa mapa = Mapa.getMapa();
+		Posicion posicionOcupada = new Posicion(11, 11, false);
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
+		
+		Assert.assertEquals((new Posicion(10, 10, false)), posicionLibre);
+	}
+	
+	@Test
+	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasLasAdyacentesAl0x0EstanOcupadas() {
+		Mapa mapa = Mapa.getMapa();
+		try {
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1));
+		} catch (PosicionInvalidaException e) {
+		} catch (PosicionOcupadaException e) {}
+
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion (0, 0, false));
+		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
 	}
 	
 }
