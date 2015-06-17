@@ -242,10 +242,10 @@ public class MapaTest {
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasLasAdyacentesAl0x0EstanOcupadas() {
 		Mapa mapa = Mapa.getMapa();
 		try {
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1, 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1, 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1, 1));
+			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1, 1));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {}
 
