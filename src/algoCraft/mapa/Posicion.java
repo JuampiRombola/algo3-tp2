@@ -1,5 +1,7 @@
 package algoCraft.mapa;
 
+import java.util.ArrayList;
+
 import algoCraft.mapa.Posicion;
 
 public class Posicion {
@@ -53,5 +55,16 @@ public class Posicion {
 		int diferenciaEnX = this.x - otraPosicion.x;
 		int diferenciaEnY = this.y - otraPosicion.y;
 		return (new Posicion(diferenciaEnX, diferenciaEnY, this.esTerrestre));
+	}
+	
+	public ArrayList<Posicion> obtenerPosicionesAdyacentes() {
+		ArrayList<Posicion> posiciones = new ArrayList<Posicion>();
+		for (int i=(this.x-1); i <= (this.x+1); i++) {
+			for (int j=this.y-1; j <= (this.y+1); j++) {
+				if ((i == this.x && j == this.y) || (i < 0) || (j < 0)) continue;
+				posiciones.add(new Posicion(i, j, this.esTerrestre));
+			}
+		}
+		return posiciones;
 	}
 }

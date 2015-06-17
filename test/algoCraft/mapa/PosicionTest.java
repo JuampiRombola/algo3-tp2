@@ -1,5 +1,8 @@
 package algoCraft.mapa;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -88,6 +91,7 @@ public class PosicionTest {
 		
 		Assert.assertTrue(posicion1.diferencia(posicion2).equals(new Posicion(1, 0, true)));
 	}
+	
 	@Test
 	public void dosPosicionesConLasMismasCoordenadasPeroUnaTerrestreYOtraNoTienenDistintoHashcode() {
 		Posicion posicion1 = new Posicion(2, 2, true);
@@ -99,4 +103,22 @@ public class PosicionTest {
 		Assert.assertFalse(hashcode1 == hashcode2);
 	}
 	
+	@Test
+	public void lasPosicionesAdyacentesAl0x0son3() {
+		Posicion posicion = new Posicion(0, 0, true);
+		ArrayList<Posicion> posiciones = posicion.obtenerPosicionesAdyacentes();
+		
+		Assert.assertTrue(posiciones.size() == 3);
+	}
+	
+	@Test
+	public void lasPosicionesAdyacentesAl0x0son0x1y1x0y1x1() {
+		Posicion posicion = new Posicion(0, 0, true);
+		ArrayList<Posicion> posiciones = posicion.obtenerPosicionesAdyacentes();
+		Iterator<Posicion> it= posiciones.iterator();
+		
+		Assert.assertEquals((new Posicion(0, 1, true)), it.next());
+		Assert.assertEquals((new Posicion(1, 0, true)), it.next());
+		Assert.assertEquals((new Posicion(1, 1, true)), it.next());
+	}
 }
