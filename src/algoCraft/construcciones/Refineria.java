@@ -1,16 +1,16 @@
 package algoCraft.construcciones;
 
 import algoCraft.juego.Jugador;
-import algoCraft.recursos.Mineral;
+import algoCraft.recursos.GasVespeno;
 
-public class CentroDeMineral extends EdificioRecolector{
+public class Refineria extends EdificioRecolector {
 	static boolean esTerrestre = true;
 	static int cantidadARecolectar = 10;
-	static int vida = 500;
-	static int turnosEnConstruirse = 4;
+	static int vida = 750;
+	static int turnosEnConstruirse = 6;
 	
-	public CentroDeMineral(Mineral mineral) {
-		super(mineral, vida, turnosEnConstruirse);
+	public Refineria(GasVespeno gas) {
+		super(gas, vida, turnosEnConstruirse);
 	}
 	
 	public void recolectar() {
@@ -22,7 +22,7 @@ public class CentroDeMineral extends EdificioRecolector{
 		super.avanzarTurno(jugador);
 		if (!this.estaEnConstruccion) {
 			this.recolectar();
-			jugador.sumarUnidadesDeMineral(cantidadARecolectar);
+			jugador.sumarUnidadesDeGasVespeno(cantidadARecolectar);
 		}
 	}
 }

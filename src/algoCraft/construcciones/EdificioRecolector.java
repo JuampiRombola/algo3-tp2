@@ -11,8 +11,8 @@ public abstract class EdificioRecolector extends Edificio {
 	protected Posicion posicion;
 	protected Vida vida;
 	
-	public EdificioRecolector(Recurso recurso, int vida) {
-		super(vida, recurso.getPosicion());
+	public EdificioRecolector(Recurso recurso, int vida, int turnosEnConstruirse) {
+		super(vida, recurso.getPosicion(), turnosEnConstruirse);
 		this.recursosRecolectados = 0;
 		this.recurso = recurso;
 	}

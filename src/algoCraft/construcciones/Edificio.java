@@ -1,16 +1,23 @@
 package algoCraft.construcciones;
 
 import algoCraft.Atacable;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Vida;
 
 public abstract class Edificio implements Atacable {
 	protected Vida vida;
 	protected Posicion posicion;
+	protected int turnosEnConstruirse;
+	protected int contadorDeTurnos;
+	protected boolean estaEnConstruccion;
 	
-	public Edificio(int vida, Posicion posicion) {
+	public Edificio(int vida, Posicion posicion, int turnosEnConstruirse) {
 		this.vida = new Vida(vida);
 		this.posicion = posicion;
+		this.estaEnConstruccion = true;
+		this.contadorDeTurnos = 0;
+		this.turnosEnConstruirse = turnosEnConstruirse;
 	}
 	
 	public boolean estaDestruido() {
@@ -35,5 +42,30 @@ public abstract class Edificio implements Atacable {
 	
 	public Posicion getPosicion() {
 		return this.posicion;
+	}
+	
+	public void avanzarTurno(Jugador jugador) {
+		this.contadorDeTurnos++;
+		if(this.estaEnConstruccion) {
+			continuarConstruccion(jugador);
+		}
+	}
+
+	public void continuarConstruccion(Jugador jugador) {
+		if(this.contadorDeTurnos == this.turnosEnConstruirse){
+			this.estaEnConstruccion = false;
+			this.contadorDeTurnos = 0;
+		}
+	}
+	
+	public boolean estaEnConstruccion() {
+		return this.estaEnConstruccion;
+	}
+	
+	@Override
+	public boolean equals(Object otroObjeto) {
+		if (otroObjeto.getClass() != this.getClass())
+			return false;
+		return true;
 	}
 }

@@ -10,11 +10,8 @@ public class Fabrica extends EdificioConstructor {
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
 
-	public Fabrica(int x, int y, Barraca barraca) throws LaBarracaNoEsValida{
+	public Fabrica(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
-		if(barraca.estaDestruido() || barraca.estaEnConstruccion()){
-			throw new LaBarracaNoEsValida();
-		}
 	}
 
 	@Override
