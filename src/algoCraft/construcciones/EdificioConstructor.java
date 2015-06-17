@@ -51,7 +51,6 @@ public abstract class EdificioConstructor extends Edificio{
 			} catch (PosicionOcupadaException e) {}
 			jugador.agregarUnidad(unidad);
 			jugador.sumarPoblacion(unidad.getPoblacionQueOcupa());
-			
 		}
 	}
 	
