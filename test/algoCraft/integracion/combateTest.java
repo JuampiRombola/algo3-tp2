@@ -19,8 +19,8 @@ public class combateTest {
 	@Test
 	public void combateAMuerteEntreUnMarineYUnGoliath() {
 		Mapa mapa = Mapa.getMapa();
-		Marine marine = new Marine(1, 0);
-		Goliath goliath = new Goliath(22, 22);
+		Marine marine = new Marine(100, 100);
+		Goliath goliath = new Goliath(122, 122);
 		
 		//La vida del marine y del goliath estan completas
 		assertTrue(marine.getVidaMaxima() == 40);
@@ -33,8 +33,8 @@ public class combateTest {
 		} catch (PosicionOcupadaException e) {}
 		
 		try {
-			Assert.assertEquals(marine, mapa.getUnidad(new Posicion(1, 0, true)));
-			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(22, 22, true)));
+			Assert.assertEquals(marine, mapa.getUnidad(new Posicion(100, 100, true)));
+			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(122, 122, true)));
 		} catch (PosicionVaciaException e) {}
 		
 		//Los dos intentan atacarse pero como estan fuera de rango no se sacan vida
@@ -48,19 +48,19 @@ public class combateTest {
 		
 		//Se mueve al goliath dentro del rango del marine
 		try {
-			mapa.moverUnidad(goliath, 3, 2);
+			mapa.moverUnidad(goliath, 100, 102);
 		} catch (PosicionInvalidaException e) {}
 		
-		//La posicion (22, 22) terrestre queda vacia
+		//La posicion (122, 122) terrestre queda vacia
 		try {
-			mapa.getUnidad(new Posicion(22, 22, true));
+			mapa.getUnidad(new Posicion(122, 122, true));
 			fail();
 		} catch (PosicionVaciaException e) {}
 		
 		//Las posiciones (1, 1) y (3, 3) terrestres estan ocupadas
 		try {
-			Assert.assertEquals(marine, mapa.getUnidad(new Posicion(1, 0, true)));
-			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(3, 2, true)));
+			Assert.assertEquals(marine, mapa.getUnidad(new Posicion(100, 100, true)));
+			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(100, 102, true)));
 		} catch (PosicionVaciaException e) {}
 		
 		// El marine ataca al goliath
@@ -85,15 +85,15 @@ public class combateTest {
 		// Se remueve al marine del mapa
 		mapa.removerUnidad(marine);
 		
-		//La posicion (1, 0) terrestre queda vacia
+		//La posicion (100, 100) terrestre queda vacia
 		try {
-			mapa.getUnidad(new Posicion(1, 0, true));
+			mapa.getUnidad(new Posicion(100, 100, true));
 			fail();
 		} catch (PosicionVaciaException e) {}
 				
-		//La posicion (3, 2) terrestre se mantiene ocupada por el goliath
+		//La posicion (100, 102) terrestre se mantiene ocupada por el goliath
 		try {
-			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(3, 2, true)));
+			Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(100, 102, true)));
 		} catch (PosicionVaciaException e) {}
 	}
 }

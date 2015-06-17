@@ -14,11 +14,12 @@ import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Marine;
 
 public class MapaTest {
-
+	// Usar posiciones desde el (50, 50) hasta (450, 450) inclusive para testear
+	// porque en otras posiciones puede haber recursos o bases
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(0, 0);
+		Posicionable unidad = new Marine(50, 50);
 		try{
 			mapa.agregarUnidad(unidad);
 			
@@ -83,8 +84,8 @@ public class MapaTest {
 	@Test
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(2, 2);
-		Posicionable unidadIntrusa = new Marine(2, 2);
+		Posicionable unidad = new Marine(51, 51);
+		Posicionable unidadIntrusa = new Marine(51, 51);
 		try {
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
@@ -102,8 +103,8 @@ public class MapaTest {
 	@Test
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
-		Posicionable unidadIntrusa = new Marine(1, 1);
+		Posicionable unidad = new Marine(52, 52);
+		Posicionable unidadIntrusa = new Marine(52, 52);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
@@ -117,7 +118,7 @@ public class MapaTest {
 	public void cuandoSeIntentaObtenerLaUnidadDeUnaPosicionLibreSeLanzaUnError() {
 		Mapa mapa = Mapa.getMapa();
 		try{
-			mapa.getUnidad(new Posicion(500, 500, true));
+			mapa.getUnidad(new Posicion(53, 53, true));
 			
 			fail();
 		} catch (PosicionVaciaException e) {}
@@ -126,7 +127,7 @@ public class MapaTest {
 	@Test
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(3, 3);
+		Posicionable unidad = new Marine(54, 54);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.removerUnidad(unidad);
@@ -141,12 +142,12 @@ public class MapaTest {
 	@Test
 	public void cuandoSeMueveUnaUnidadParaObtenerlaHayQueBuscarlaConSuNuevaPosicion() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(4, 4);
+		Posicionable unidad = new Marine(55, 55);
 		try{
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidad, 5, 5);
+			mapa.moverUnidad(unidad, 56, 56);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(5, 5, true)));
+			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(56, 56, true)));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
@@ -155,11 +156,11 @@ public class MapaTest {
 	@Test
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(6, 6);
+		Posicionable unidad = new Marine(57, 57);
 		try{
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidad, 7, 7);
-			mapa.getUnidad(new Posicion(6, 6, true));
+			mapa.moverUnidad(unidad, 58, 58);
+			mapa.getUnidad(new Posicion(57, 57, true));
 			
 			fail();
 		} catch (PosicionInvalidaException e) {
@@ -170,15 +171,15 @@ public class MapaTest {
 	@Test
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidadConMovimiento = new Marine(8, 8);
-		Posicionable unidad = new Marine(9, 9);
+		Posicionable unidadConMovimiento = new Marine(59, 59);
+		Posicionable unidad = new Marine(60, 60);
 		try{
 			mapa.agregarUnidad(unidadConMovimiento);
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidadConMovimiento, 9, 9);
+			mapa.moverUnidad(unidadConMovimiento, 60, 60);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(9, 9, true)));
-			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(8, 8, true)));
+			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(60, 60, true)));
+			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(59, 59, true)));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}

@@ -1,21 +1,89 @@
 package algoCraft.mapa;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import algoCraft.construcciones.Base;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
+import algoCraft.recursos.Mineral;
+import algoCraft.recursos.Recurso;
 
 public class Mapa {
+	private HashMap<Posicion, Posicionable> elementos;
+	private HashMap<Posicion, Recurso> gasVespeno;
+	private HashMap<Posicion, Mineral> minerales;
+	private HashMap<Posicion, Base> bases;
 	private static Mapa mapa = new Mapa();
-	private HashMap<Posicion, Posicionable> unidades;
-	private int alto = 400;
-	private int ancho = 400;
-	
+	private int alto = 500;
+	private int ancho = 500;
+
 	private Mapa() {
-		this.unidades = new HashMap<Posicion, Posicionable>(alto * ancho);
+		this.elementos = new HashMap<Posicion, Posicionable>(alto * ancho);
+		this.generarBases();
+		this.generarRecursos();
 	}
 	
+	private void generarBases() {
+		this.bases = new HashMap<Posicion, Base>();
+		int x = 15;
+		int y = 15;
+		// Se crean 4 bases, una en cada vertice del mapa.
+		this.bases.put(new Posicion(x, y, true), new Base(x, y));
+		this.bases.put(new Posicion(alto-x, ancho-y, true), new Base(alto-x, ancho-y));
+		this.bases.put(new Posicion(alto-x, y, true), new Base(alto-x, y));
+		this.bases.put(new Posicion(x, ancho-y, true), new Base(x, ancho-y));
+		this.elementos.putAll(this.bases);
+	}
+
+	private void generarRecursos() {
+		this.gasVespeno = new HashMap<Posicion, Recurso>();
+		this.minerales = new HashMap<Posicion, Mineral>();
+		Iterator<Base> it = this.bases.values().iterator();
+		while (it.hasNext()) {
+			Base base = it.next();
+			this.generarGasVespenoEntornoALaBase(base);
+			this.generarMineralesEntornoALaBase(base);
+		}
+		this.elementos.putAll(this.gasVespeno);
+		this.elementos.putAll(this.minerales);
+	}
+	
+	private void generarGasVespenoEntornoALaBase(Base base) {
+		int cantidadGasVespeno = 0;
+		while (!(cantidadGasVespeno == 4)) {
+			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
+			if (!this.gasVespeno.containsKey(posicion)) {
+				this.gasVespeno.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			cantidadGasVespeno++;
+			}
+		}
+	}
+	
+	private void generarMineralesEntornoALaBase(Base base) {
+		int cantidadMinerales = 0;
+		while (!(cantidadMinerales == 6)) {
+			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
+			if (!this.minerales.containsKey(posicion)) {
+				this.minerales.put(posicion, new Mineral(posicion.getX(), posicion.getY()));
+			cantidadMinerales++;
+			}
+		}
+	}
+	
+	private Posicion obtenerPosicionAleatoriaEntornoALaBase(Base base) {
+		Posicion posicionBase = base.getPosicion();
+		int corrimiento = 10;
+		int xBase = posicionBase.getX();
+		int yBase = posicionBase.getY();
+		int xRandom = (int)Math.floor(Math.random()*((xBase+corrimiento)-(xBase-corrimiento))+(xBase-corrimiento));
+		int yRandom = (int)Math.floor(Math.random()*((yBase+corrimiento)-(yBase-corrimiento))+(yBase-corrimiento));
+		//System.out.println(xRandom + "y" + yRandom);
+		return (new Posicion(xRandom, yRandom, base.esTerrestre()));
+	}
+
 	public static Mapa getMapa() {
 		return mapa;
 	}
@@ -28,7 +96,7 @@ public class Mapa {
 	}
 	
 	private boolean posicionEstaOcupada(Posicion posicion) {
-		return unidades.containsKey(posicion);
+		return this.elementos.containsKey(posicion);
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
@@ -36,13 +104,13 @@ public class Mapa {
 		this.validadPosicion(posicion);
 		if (this.posicionEstaOcupada(posicion))
 			throw new PosicionOcupadaException();
-		this.unidades.put(posicion, unidad);
+		this.elementos.put(posicion, unidad);
 	}
 	
 	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
 		if (!this.posicionEstaOcupada(posicion))
 			throw new PosicionVaciaException();
-		return unidades.get(posicion);
+		return elementos.get(posicion);
 
 	}
 	
@@ -51,12 +119,23 @@ public class Mapa {
 		if (!this.posicionEstaOcupada(new Posicion(xDestino, yDestino, unidad.esTerrestre()))) {
 			this.removerUnidad(unidad);
 			unidad.setPosicion(xDestino, yDestino);
-			this.unidades.put(unidad.getPosicion(), unidad);
+			this.elementos.put(unidad.getPosicion(), unidad);
 		}
 	}
 	
 	public void removerUnidad(Posicionable unidad) {
-		this.unidades.remove(unidad.getPosicion());
+		this.elementos.remove(unidad.getPosicion());
 	}
 	
+	public Collection<Base> getBases() {
+		return this.bases.values();
+	}
+	
+	public boolean hayGasVespenoEn(Posicion posicion) {
+		return this.gasVespeno.containsKey(posicion);
+	}
+	
+	public boolean hayMineralEn(Posicion posicion) {
+		return this.minerales.containsKey(posicion);
+	}
 }

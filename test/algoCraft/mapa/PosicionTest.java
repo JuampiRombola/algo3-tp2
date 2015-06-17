@@ -3,8 +3,8 @@ package algoCraft.mapa;
 import org.junit.Assert;
 import org.junit.Test;
 
-import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Marine;
 
 public class PosicionTest {
 
@@ -60,7 +60,7 @@ public class PosicionTest {
 	@Test
 	public void alCompararUnaPosicionConOtroObjetoSeDevuelveFalse() {
 		Posicion posicion1 = new Posicion(1, 1, true);
-		Object otroObjeto = Mapa.getMapa();
+		Object otroObjeto = new Marine(1, 1);
 		Assert.assertFalse(posicion1.equals(otroObjeto));
 	}
 	
