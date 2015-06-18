@@ -14,7 +14,7 @@ import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Marine;
 
-public class combateTest {
+public class CombateTest {
 
 	@Test
 	public void combateAMuerteEntreUnMarineYUnGoliath() {

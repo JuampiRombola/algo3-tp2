@@ -2,7 +2,6 @@ package algoCraft.integracion;
 
 import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import algoCraft.construcciones.EdificioConstructor;
@@ -18,7 +17,7 @@ import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.recursos.Mineral;
 
-public class simuladorPartidaTest {
+public class SimuladorPartidaTest {
 
 	@Test
 	public void simuladorPartidaTest() {
