@@ -19,6 +19,7 @@ public class MapaTest {
 	// o cualquiera de las aéreas porque en otras posiciones puede haber recursos o bases
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(50, 50);
 		try{
@@ -32,6 +33,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(10000, 1);
 		
@@ -45,6 +47,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 10000);
 		
@@ -58,6 +61,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(-1, 1);
 		
@@ -71,6 +75,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, -1);
 		
@@ -84,6 +89,7 @@ public class MapaTest {
 	
 	@Test
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(51, 51);
 		Posicionable unidadIntrusa = new Marine(51, 51);
@@ -103,6 +109,7 @@ public class MapaTest {
 	
 	@Test
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(52, 52);
 		Posicionable unidadIntrusa = new Marine(52, 52);
@@ -117,9 +124,10 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeIntentaObtenerLaUnidadDeUnaPosicionLibreSeLanzaUnError() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		try{
-			mapa.getUnidad(new Posicion(53, 53, true));
+			mapa.getUnidad(new Posicion(50, 50, true));
 			
 			fail();
 		} catch (PosicionVaciaException e) {}
@@ -127,6 +135,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(54, 54);
 		try{
@@ -142,6 +151,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeMueveUnaUnidadParaObtenerlaHayQueBuscarlaConSuNuevaPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(55, 55);
 		try{
@@ -156,6 +166,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(57, 57);
 		try{
@@ -171,6 +182,7 @@ public class MapaTest {
 	
 	@Test
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidadConMovimiento = new Marine(59, 59);
 		Posicionable unidad = new Marine(60, 60);
@@ -188,6 +200,7 @@ public class MapaTest {
 	
 	@Test
 	public void seObtieneSoloUnaInstanciaDelMapa() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaPrimario = Mapa.getMapa();
 		Mapa mapaSecundario = Mapa.getMapa();
 		
@@ -196,6 +209,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeInicializaElMapaTiene16GasVespenoEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertTrue(16 == mapaGenerado.getCantidadGasVespeno());
@@ -203,6 +217,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeInicializaElMapaTiene24MineralesEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
@@ -210,6 +225,7 @@ public class MapaTest {
 	
 	@Test
 	public void cuandoSeInicializaElMapaTiene4BasesEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertTrue(4 == mapaGenerado.getBases().size());
@@ -217,6 +233,7 @@ public class MapaTest {
 	
 	@Test
 	public void noDeberiaHaberGasVespenoEnEl250y250() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(250, 250, true)));
@@ -224,6 +241,7 @@ public class MapaTest {
 	
 	@Test
 	public void noDeberiaHaberMineralesEnEl250y250() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		
 		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(250, 250, true)));
@@ -231,6 +249,7 @@ public class MapaTest {
 	
 	@Test
 	public void laPosicionVaciaMasCercanaAl11x11EsLa10x10() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicion posicionOcupada = new Posicion(11, 11, false);
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
@@ -240,6 +259,7 @@ public class MapaTest {
 	
 	@Test
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasLasAdyacentesAl0x0EstanOcupadas() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		try {
 			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1, 1));

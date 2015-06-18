@@ -21,6 +21,7 @@ public class SimuladorPartidaTest {
 
 	@Test
 	public void simuladorPartidaTest() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador1 = new Jugador("Ariel");
 		Jugador jugador2 = new Jugador("Juampi");
 		Mapa mapa = Mapa.getMapa();

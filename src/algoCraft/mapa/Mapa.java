@@ -17,7 +17,7 @@ public class Mapa {
 	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
 	private HashMap<Posicion, Base> bases;
-	private static Mapa mapa = new Mapa();
+	private static Mapa instancia = null;
 	private int alto = 500;
 	private int ancho = 500;
 
@@ -27,8 +27,14 @@ public class Mapa {
 		this.generarRecursos();
 	}
 	
+	public static void reiniciarInstanciaParaTest() {
+	    instancia = null;
+	}
+	
 	public static Mapa getMapa() {
-		return mapa;
+		if (instancia == null)
+			instancia = new Mapa();
+		return instancia;
 	}
 
 	private void generarBases() {

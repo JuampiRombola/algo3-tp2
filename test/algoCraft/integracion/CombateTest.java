@@ -18,6 +18,7 @@ public class CombateTest {
 
 	@Test
 	public void combateAMuerteEntreUnMarineYUnGoliath() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Marine marine = new Marine(100, 100);
 		Goliath goliath = new Goliath(122, 122);
