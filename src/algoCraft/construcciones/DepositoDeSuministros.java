@@ -8,6 +8,8 @@ public class DepositoDeSuministros extends Edificio {
 	static int vida = 500;
 	static int turnosQueTardaEnConstruirse = 6;
 	static int capacidadDePoblacionASumar = 5;
+	public static int cantidadMineral = 100;
+	public static int cantidadGasVespeno = 0;
 
 	public DepositoDeSuministros(int x, int y){
 		super(vida, new Posicion(x, y, inicialmenteTerrestre), turnosQueTardaEnConstruirse);

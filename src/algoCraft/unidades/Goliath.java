@@ -9,9 +9,11 @@ public class Goliath extends Unidad {
 	static Arma arma = new Arma(danioBasico,rangoBasico);
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 6;
-	static int cantidadDePoblacionGoliath = 2;
+	public static int cantidadMineral = 100;
+	public static int cantidadGasVespeno = 50;
+	public static int cantidadDePoblacion = 2;
 	
 	public Goliath(int posicionEnX, int posicionEnY) {
-		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), turnosEnConstruirse, cantidadDePoblacionGoliath);
+		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), turnosEnConstruirse, cantidadDePoblacion);
 	}
 }

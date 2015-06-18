@@ -9,6 +9,8 @@ public class Fabrica extends EdificioConstructor {
 	static int vidaMaxima = 1250;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 12;
+	public static int cantidadMineral = 200;
+	public static int cantidadGasVespeno = 100;
 
 	public Fabrica(int x, int y) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);

@@ -8,6 +8,8 @@ public class CentroDeMineral extends EdificioRecolector{
 	static int cantidadARecolectar = 10;
 	static int vida = 500;
 	static int turnosEnConstruirse = 4;
+	public static int cantidadMineral = 50;
+	public static int cantidadGasVespeno = 0;
 	
 	public CentroDeMineral(Mineral mineral) {
 		super(mineral, vida, turnosEnConstruirse);

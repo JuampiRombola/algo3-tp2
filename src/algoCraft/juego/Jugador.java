@@ -16,6 +16,8 @@ import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
+import algoCraft.unidades.Goliath;
+import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class Jugador {
@@ -116,58 +118,43 @@ public class Jugador {
 	}
 	
 	public void crearCentroDeMineral(Mineral mineral) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		int cantidadMineralCentroDeMineral = 50;
-		int cantidadGasVespenoCentroDeMineral = 0;
-		
-		this.verificarRecursos(cantidadMineralCentroDeMineral, cantidadGasVespenoCentroDeMineral);
+		this.verificarRecursos(CentroDeMineral.cantidadMineral, CentroDeMineral.cantidadGasVespeno);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		this.agregarEdificio(centro);
-		this.restarRecursosGastados(cantidadMineralCentroDeMineral, cantidadGasVespenoCentroDeMineral);
+		this.restarRecursosGastados(CentroDeMineral.cantidadMineral, CentroDeMineral.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(centro);
 	}
 	
 	public void crearDepositoDeSuministros(int x, int y) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		int cantidadMineralDepositoDeSuministros = 100;
-		int cantidadGasVespenoDepositoDeSuministros = 0;
-		
-		this.verificarRecursos(cantidadMineralDepositoDeSuministros, cantidadGasVespenoDepositoDeSuministros);
+		this.verificarRecursos(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
 		DepositoDeSuministros deposito = new DepositoDeSuministros(x, y);
 		this.agregarEdificio(deposito);
-		this.restarRecursosGastados(cantidadMineralDepositoDeSuministros, cantidadGasVespenoDepositoDeSuministros);
+		this.restarRecursosGastados(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(deposito);
 	}
 	
 	public void crearRefineria(GasVespeno gas) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		int cantidadMineralRefineria = 100;
-		int cantidadGasVespenoRefineria = 0;
-		
-		this.verificarRecursos(cantidadMineralRefineria, cantidadGasVespenoRefineria);
+		this.verificarRecursos(Refineria.cantidadMineral, Refineria.cantidadGasVespeno);
 		Refineria refineria = new Refineria(gas);
 		this.agregarEdificio(refineria);
-		this.restarRecursosGastados(cantidadMineralRefineria, cantidadGasVespenoRefineria);
+		this.restarRecursosGastados(Refineria.cantidadMineral, Refineria.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(refineria);
 	}
 	
-	public void crearBarraca(int x, int y) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		int cantidadMineralBarraca = 150;
-		int cantidadGasVespenoBarraca= 0;
-		
-		this.verificarRecursos(cantidadMineralBarraca, cantidadGasVespenoBarraca);
+	public void crearBarraca(int x, int y) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
+		this.verificarRecursos(Barraca.cantidadMineral, Barraca.cantidadGasVespeno);
 		Barraca barraca = new Barraca(x, y);
 		this.agregarEdificio(barraca);
-		this.restarRecursosGastados(cantidadMineralBarraca, cantidadGasVespenoBarraca);
+		this.restarRecursosGastados(Barraca.cantidadMineral, Barraca.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(barraca);
 	}
 	
 	public void crearFabrica(int x, int y) throws NoSePuedeConstruirElEdificio, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		int cantidadMineralFabrica = 200;
-		int cantidadGasVespenoFabrica = 100;
-		
 		this.validarDependenciasEdificios(new Barraca(0, 0));
-		this.verificarRecursos(cantidadMineralFabrica, cantidadGasVespenoFabrica);
+		this.verificarRecursos(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
 		Fabrica fabrica = new Fabrica(x, y);
 		this.agregarEdificio(fabrica);
-		this.restarRecursosGastados(cantidadMineralFabrica, cantidadGasVespenoFabrica);
+		this.restarRecursosGastados(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(fabrica);
 	}
 	
@@ -179,25 +166,17 @@ public class Jugador {
 	}
 	
 	public void crearMarine(EdificioConstructor barraca) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
-		int cantidadMineralMarine = 50;
-		int cantidadGasVespenoMarine = 0;
-		int cantidadDePoblacionMarine = 1;
-		
-		this.sePuedeConstruirUnidad(cantidadDePoblacionMarine);
-		this.verificarRecursos(cantidadMineralMarine, cantidadGasVespenoMarine);
+		this.sePuedeConstruirUnidad(Marine.cantidadDePoblacion);
+		this.verificarRecursos(Marine.cantidadMineral, Marine.cantidadGasVespeno);
 		barraca.crearMarine();
-		this.restarRecursosGastados(cantidadMineralMarine, cantidadGasVespenoMarine);
+		this.restarRecursosGastados(Marine.cantidadMineral, Marine.cantidadGasVespeno);
 	}
 	
 	public void crearGoliath(EdificioConstructor fabrica) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
-		int cantidadMineralGoliath = 100;
-		int cantidadGasVespenoGoliath = 50;
-		int cantidadDePoblacionGoliath = 2;
-		
-		this.sePuedeConstruirUnidad(cantidadDePoblacionGoliath);
-		this.verificarRecursos(cantidadMineralGoliath, cantidadGasVespenoGoliath);
+		this.sePuedeConstruirUnidad(Goliath.cantidadDePoblacion);
+		this.verificarRecursos(Goliath.cantidadMineral, Goliath.cantidadGasVespeno);
 		fabrica.crearGoliath();
-		this.restarRecursosGastados(cantidadMineralGoliath, cantidadGasVespenoGoliath);
+		this.restarRecursosGastados(Goliath.cantidadMineral, Goliath.cantidadGasVespeno);
 	}
 
 	public void avanzarTurno() {

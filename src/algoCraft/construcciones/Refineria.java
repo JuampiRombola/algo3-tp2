@@ -8,6 +8,8 @@ public class Refineria extends EdificioRecolector {
 	static int cantidadARecolectar = 10;
 	static int vida = 750;
 	static int turnosEnConstruirse = 6;
+	public static int cantidadMineral = 100;
+	public static int cantidadGasVespeno = 0;
 	
 	public Refineria(GasVespeno gas) {
 		super(gas, vida, turnosEnConstruirse);
