@@ -15,8 +15,8 @@ import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class MapaTest {
-	// Usar posiciones desde el (50, 50) hasta (450, 450) terrestres para testear
-	// o cualquiera de las aéreas porque en otras posiciones puede haber recursos o bases
+	// Usar posiciones desde el (50, 50) hasta (450, 450) terrestres o cualquiera de las
+	// aéreas para testear porque en otras posiciones puede haber recursos o bases
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa.reiniciarInstanciaParaTest();
@@ -91,8 +91,8 @@ public class MapaTest {
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(51, 51);
-		Posicionable unidadIntrusa = new Marine(51, 51);
+		Posicionable unidad = new Marine(50, 50);
+		Posicionable unidadIntrusa = new Marine(50, 50);
 		try {
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
@@ -111,8 +111,8 @@ public class MapaTest {
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(52, 52);
-		Posicionable unidadIntrusa = new Marine(52, 52);
+		Posicionable unidad = new Marine(50, 50);
+		Posicionable unidadIntrusa = new Marine(50, 50);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
@@ -137,7 +137,7 @@ public class MapaTest {
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(54, 54);
+		Posicionable unidad = new Marine(50, 50);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.removerUnidad(unidad);
@@ -153,12 +153,12 @@ public class MapaTest {
 	public void cuandoSeMueveUnaUnidadParaObtenerlaHayQueBuscarlaConSuNuevaPosicion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(55, 55);
+		Posicionable unidad = new Marine(50, 50);
 		try{
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidad, 56, 56);
+			mapa.moverUnidad(unidad, 51, 51);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(56, 56, true)));
+			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(51, 51, true)));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
@@ -168,11 +168,11 @@ public class MapaTest {
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(57, 57);
+		Posicionable unidad = new Marine(50, 50);
 		try{
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidad, 58, 58);
-			mapa.getUnidad(new Posicion(57, 57, true));
+			mapa.moverUnidad(unidad, 51, 51);
+			mapa.getUnidad(new Posicion(50, 50, true));
 			
 			fail();
 		} catch (PosicionInvalidaException e) {
@@ -184,15 +184,15 @@ public class MapaTest {
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidadConMovimiento = new Marine(59, 59);
-		Posicionable unidad = new Marine(60, 60);
+		Posicionable unidadConMovimiento = new Marine(50, 50);
+		Posicionable unidad = new Marine(51, 51);
 		try{
 			mapa.agregarUnidad(unidadConMovimiento);
 			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidadConMovimiento, 60, 60);
+			mapa.moverUnidad(unidadConMovimiento, 51, 51);
 			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(60, 60, true)));
-			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(59, 59, true)));
+			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(51, 51, true)));
+			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(50, 50, true)));
 		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
@@ -258,7 +258,17 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasLasAdyacentesAl0x0EstanOcupadas() {
+	public void laPosicionVaciaMasCercanaAl0x0EsLa0x1() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Posicion posicionOcupada = new Posicion(0, 0, false);
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
+		
+		Assert.assertEquals((new Posicion(0, 1, false)), posicionLibre);
+	}
+	
+	@Test
+	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		try {
