@@ -16,15 +16,14 @@ public class Mapa {
 	private HashMap<Posicion, Posicionable> elementos;
 	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
-	private HashMap<Posicion, Base> bases;
 	private static Mapa instancia = null;
 	private int alto = 500;
 	private int ancho = 500;
 
 	private Mapa() {
 		this.elementos = new HashMap<Posicion, Posicionable>(alto * ancho);
-		this.generarBases();
-		this.generarRecursos();
+		this.gasVespeno = new HashMap<Posicion, GasVespeno>();
+		this.minerales = new HashMap<Posicion, Mineral>();
 	}
 	
 	public static void reiniciarInstanciaParaTest() {
@@ -37,32 +36,42 @@ public class Mapa {
 		return instancia;
 	}
 
-	private void generarBases() {
-		this.bases = new HashMap<Posicion, Base>();
+	public Collection<Base> cargarBases(int cantidadJugadores) {
+		// Maximo 4 jugadores, 1 base por jugador
+		Collection<Base> bases = generarBases(cantidadJugadores);
+		for (Base base : bases)
+			this.elementos.put(base.getPosicion(), base);
+		cargarRecursos();
+		return bases;
+	}
+	
+	private Collection<Base> generarBases(int cantidadJugadores) {
 		int x = 15;
 		int y = 15;
+		ArrayList<Base> bases = new ArrayList<Base> ();
 		// Se crean 4 bases, una en cada vertice del mapa.
-		this.bases.put(new Posicion(x, y, true), new Base(x, y));
-		this.bases.put(new Posicion(alto-x, ancho-y, true), new Base(alto-x, ancho-y));
-		this.bases.put(new Posicion(alto-x, y, true), new Base(alto-x, y));
-		this.bases.put(new Posicion(x, ancho-y, true), new Base(x, ancho-y));
-		this.elementos.putAll(this.bases);
+		bases.add(new Base(x, y));
+		bases.add(new Base(alto-x, ancho-y));
+		bases.add(new Base(alto-x, y));
+		bases.add(new Base(x, ancho-y));
+		int indiceFinal = (cantidadJugadores > 4) ? 4 : cantidadJugadores;
+		return bases.subList(0, indiceFinal);
 	}
 
-	private void generarRecursos() {
-		this.gasVespeno = new HashMap<Posicion, GasVespeno>();
-		this.minerales = new HashMap<Posicion, Mineral>();
-		Iterator<Base> it = this.bases.values().iterator();
+	private void cargarRecursos() {
+		@SuppressWarnings("unchecked")
+		Collection<Posicionable> bases = ((HashMap<Posicion, Posicionable>)this.elementos.clone()).values();
+		Iterator<Posicionable> it = bases.iterator();
 		while (it.hasNext()) {
-			Base base = it.next();
+			Posicionable base = it.next();
 			this.generarGasVespenoEntornoALaBase(base);
 			this.generarMineralesEntornoALaBase(base);
 		}
 	}
 	
-	private void generarGasVespenoEntornoALaBase(Base base) {
+	private void generarGasVespenoEntornoALaBase(Posicionable base) {
 		int cantidadGasVespeno = 0;
-		while (!(cantidadGasVespeno == 4)) {
+		while (!(cantidadGasVespeno == 2)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
 			if (this.posicionEstaOcupada(posicion)) continue;
 			GasVespeno gasVespeno = new GasVespeno(posicion.getX(), posicion.getY());
@@ -72,9 +81,9 @@ public class Mapa {
 		}
 	}
 	
-	private void generarMineralesEntornoALaBase(Base base) {
+	private void generarMineralesEntornoALaBase(Posicionable base) {
 		int cantidadMinerales = 0;
-		while (!(cantidadMinerales == 6)) {
+		while (!(cantidadMinerales == 8)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
 			if (this.posicionEstaOcupada(posicion)) continue;
 			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());
@@ -84,14 +93,13 @@ public class Mapa {
 		}
 	}
 	
-	private Posicion obtenerPosicionAleatoriaEntornoALaBase(Base base) {
+	private Posicion obtenerPosicionAleatoriaEntornoALaBase(Posicionable base) {
 		Posicion posicionBase = base.getPosicion();
 		int corrimiento = 10;
 		int xBase = posicionBase.getX();
 		int yBase = posicionBase.getY();
 		int xRandom = (int)Math.floor(Math.random()*((xBase+corrimiento)-(xBase-corrimiento))+(xBase-corrimiento));
 		int yRandom = (int)Math.floor(Math.random()*((yBase+corrimiento)-(yBase-corrimiento))+(yBase-corrimiento));
-		//System.out.println(xRandom + "y" + yRandom);
 		return (new Posicion(xRandom, yRandom, base.esTerrestre()));
 	}
 	
@@ -102,7 +110,7 @@ public class Mapa {
 			throw new PosicionInvalidaException();
 	}
 	
-	private boolean posicionEstaOcupada(Posicion posicion) {
+	public boolean posicionEstaOcupada(Posicion posicion) {
 		return this.elementos.containsKey(posicion);
 	}
 	
@@ -132,10 +140,6 @@ public class Mapa {
 	
 	public void removerUnidad(Posicionable unidad) {
 		this.elementos.remove(unidad.getPosicion());
-	}
-	
-	public Collection<Base> getBases() {
-		return this.bases.values();
 	}
 	
 	public boolean hayGasVespenoEn(Posicion posicion) {

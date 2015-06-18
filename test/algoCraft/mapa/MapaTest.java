@@ -2,9 +2,12 @@ package algoCraft.mapa;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import algoCraft.construcciones.Base;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -208,33 +211,132 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void cuandoSeInicializaElMapaTiene16GasVespenoEnTodoElMapa() {
+	public void cuandoSeInicializaElMapaCon1BaseTiene2GasVespenoEnTodoElMapa() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
-		
-		Assert.assertTrue(16 == mapaGenerado.getCantidadGasVespeno());
+		mapaGenerado.cargarBases(1);
+		Assert.assertTrue(2 == mapaGenerado.getCantidadGasVespeno());
 	}
 	
 	@Test
-	public void cuandoSeInicializaElMapaTiene24MineralesEnTodoElMapa() {
+	public void cuandoSeInicializaElMapaCon2BasesTiene4GasVespenoEnTodoElMapa() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(2);
+		Assert.assertTrue(4 == mapaGenerado.getCantidadGasVespeno());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaCon3BasesTiene6GasVespenoEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(3);
+		Assert.assertTrue(6 == mapaGenerado.getCantidadGasVespeno());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaCon4BasesTiene8GasVespenoEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(4);
+		Assert.assertTrue(8 == mapaGenerado.getCantidadGasVespeno());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaCon1BaseTiene8MineralesEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		
+		Assert.assertTrue(8 == mapaGenerado.getCantidadMinerales());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaCon2BasesTiene16MineralesEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(2);
+		
+		Assert.assertTrue(16 == mapaGenerado.getCantidadMinerales());
+	}
+	
+	@Test
+	public void cuandoSeInicializaElMapaCon3BasesTiene24MineralesEnTodoElMapa() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(3);
 		
 		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
 	}
 	
 	@Test
-	public void cuandoSeInicializaElMapaTiene4BasesEnTodoElMapa() {
+	public void cuandoSeInicializaElMapaCon4BasesTiene32MineralesEnTodoElMapa() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(4);
 		
-		Assert.assertTrue(4 == mapaGenerado.getBases().size());
+		Assert.assertTrue(32 == mapaGenerado.getCantidadMinerales());
+	}
+	
+	@Test
+	public void siSeCargaUnaSolaBaseEstaSeEncuentraEnEl15x15() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		Assert.assertTrue(mapa.posicionEstaOcupada(new Posicion(15, 15, true)));
+	}
+	
+	@Test
+	public void siSeCarga1BaseSeDevuelveUnaColeccionCon1Base() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Collection<Base> bases = mapa.cargarBases(1);
+		
+		Assert.assertTrue(1 == bases.size());
+	}
+	
+	@Test
+	public void siSeCargan2BasesSeDevuelveUnaColeccionCon2Bases() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Collection<Base> bases = mapa.cargarBases(2);
+		
+		Assert.assertTrue(2 == bases.size());
+	}
+	
+	@Test
+	public void siSeCargan3BasesSeDevuelveUnaColeccionCon3Bases() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Collection<Base> bases = mapa.cargarBases(3);
+		
+		Assert.assertTrue(3 == bases.size());
+	}
+	
+	@Test
+	public void siSeCargan4BasesSeDevuelveUnaColeccionCon4Bases() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Collection<Base> bases = mapa.cargarBases(4);
+		
+		Assert.assertTrue(4 == bases.size());
+	}
+	
+	@Test
+	public void siSeCargan5OMasBasesSeDevuelveUnaColeccionConSolo4Bases() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Collection<Base> bases = mapa.cargarBases(5);
+		
+		Assert.assertTrue(4 == bases.size());
 	}
 	
 	@Test
 	public void noDeberiaHaberGasVespenoEnEl250y250() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(4);
 		
 		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(250, 250, true)));
 	}
@@ -243,6 +345,7 @@ public class MapaTest {
 	public void noDeberiaHaberMineralesEnEl250y250() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(4);
 		
 		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(250, 250, true)));
 	}
