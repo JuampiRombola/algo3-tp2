@@ -108,10 +108,10 @@ public class Jugador {
 	}
 
 	
-	private void validarDependenciasEdificios(Edificio edificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
+	private Edificio validarDependenciasEdificios(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
 		for (Edificio edificio : this.edificios) {
-			if (edificioQueDebePoseer.equals(edificio) && (!edificio.estaEnConstruccion())) {
-				return;
+			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion())) {
+				return edificio;
 			}
 		}
 		throw new NoSePuedeConstruirElEdificio();
@@ -150,9 +150,9 @@ public class Jugador {
 	}
 	
 	public void crearFabrica(int x, int y) throws NoSePuedeConstruirElEdificio, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		this.validarDependenciasEdificios(new Barraca(0, 0));
+		Edificio barraca = this.validarDependenciasEdificios(Barraca.class);
 		this.verificarRecursos(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
-		Fabrica fabrica = new Fabrica(x, y);
+		Fabrica fabrica = new Fabrica(x, y, (Barraca)barraca);
 		this.agregarEdificio(fabrica);
 		this.restarRecursosGastados(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(fabrica);

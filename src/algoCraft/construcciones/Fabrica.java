@@ -1,6 +1,7 @@
 package algoCraft.construcciones;
 
 
+import algoCraft.juego.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 
@@ -12,8 +13,10 @@ public class Fabrica extends EdificioConstructor {
 	public static int cantidadMineral = 200;
 	public static int cantidadGasVespeno = 100;
 
-	public Fabrica(int x, int y) {
+	public Fabrica(int x, int y, Barraca barraca) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
+		if(barraca.estaDestruido() || barraca.estaEnConstruccion())
+			throw new NoSePuedeConstruirElEdificio();
 	}
 
 	@Override
