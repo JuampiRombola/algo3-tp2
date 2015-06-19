@@ -15,7 +15,7 @@ public class Fabrica extends EdificioConstructor {
 
 	public Fabrica(int x, int y, Barraca barraca) {
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
-		if(barraca.estaDestruido() || barraca.estaEnConstruccion())
+		if(barraca.estaEnConstruccion())
 			throw new NoSePuedeConstruirElEdificio();
 	}
 

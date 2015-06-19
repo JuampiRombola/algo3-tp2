@@ -15,6 +15,8 @@ public class FabricaTest {
 	private Fabrica crearFabricaConstruida(){
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		for(int i = 0; i < 12; i++)
 			fabrica.avanzarTurno(jugador);
@@ -23,7 +25,10 @@ public class FabricaTest {
 	
 	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		Posicion posicion = new Posicion(1,1, fabrica.esTerrestre());
 		assertEquals(fabrica.getPosicion(), posicion);
@@ -31,7 +36,10 @@ public class FabricaTest {
 	
 	@Test
 	public void unaFabricaEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(2, 2, barraca);
 		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
 		assertEquals(fabrica.getPosicion(), posicion);
@@ -39,7 +47,10 @@ public class FabricaTest {
 	
 	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL22ConSetPosicion22() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		fabrica.setPosicion(2, 2);
 		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
@@ -48,15 +59,20 @@ public class FabricaTest {
 	
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		assertEquals(true, fabrica.esTerrestre());
 	}
 
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
-		Barraca barraca = new Barraca(0, 0);
 		Jugador jugador = new Jugador("Jugador");
+		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno(jugador);
@@ -73,6 +89,8 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno(jugador);
@@ -90,15 +108,20 @@ public class FabricaTest {
 	
 	@Test
 	public void laFabricaEstaEnConstruccionCuandoRecienEsCreada() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		assertTrue(fabrica.estaEnConstruccion());
 	}
 	
 	@Test
 	public void laFabricaDejaDeEstarEnConstruccionCuandoPasan12Turnos() {
-		Barraca barraca = new Barraca(0, 0);
 		Jugador jugador = new Jugador("Jugador");
+		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		int turno = 0;
 		while(fabrica.estaEnConstruccion()){
@@ -162,6 +185,8 @@ public class FabricaTest {
 	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() {
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		for (int i = 0; i < 12; i++) {
@@ -179,6 +204,8 @@ public class FabricaTest {
 	public void siLaFabricaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		for (int i = 0; i < 12; i++) {
@@ -191,7 +218,10 @@ public class FabricaTest {
 	
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		assertEquals(false, fabrica.getSeCreoUnaUnidadNueva());
@@ -199,7 +229,10 @@ public class FabricaTest {
 	
 	@Test
 	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		try {
@@ -213,6 +246,8 @@ public class FabricaTest {
 	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		for (int i = 0; i < 12; i++) {
@@ -226,6 +261,8 @@ public class FabricaTest {
 	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		fabrica.avanzarTurno(jugador);
 		assertTrue(0 < fabrica.getVidaActual());
@@ -233,7 +270,10 @@ public class FabricaTest {
 	
 	@Test
 	public void cuandoLaBarracaTrataDeCrearUnGoliathLanzaUnaExcepcion() throws ElEdificioEstaEnConstruccion {
+		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(0, 0);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno(jugador);
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
 		try {

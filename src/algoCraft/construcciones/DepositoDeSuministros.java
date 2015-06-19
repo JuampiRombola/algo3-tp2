@@ -16,7 +16,7 @@ public class DepositoDeSuministros extends Edificio {
 	}
 	
 	@Override
-	public void continuarConstruccion(Jugador jugador) {
+	protected void continuarConstruccion(Jugador jugador) {
 		if(this.contadorDeTurnos == this.turnosEnConstruirse){
 			this.estaEnConstruccion = false;
 			this.contadorDeTurnos = 0;
