@@ -157,14 +157,12 @@ public class FabricaTest {
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno(jugador);
 		}
-		try {
-			fabrica.crearGoliath();
-			for (int j = 0; j < 6; j++) {
-				fabrica.avanzarTurno(jugador);
-			}
-			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
-			assertEquals(goliath.getVidaActual(), 125);
-		} catch (ElEdificioEstaEnConstruccion e) {}
+		fabrica.crearGoliath();
+		for (int j = 0; j < 6; j++) {
+			fabrica.avanzarTurno(jugador);
+		}
+		Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
+		assertEquals(goliath.getVidaActual(), 125);
 	}
 	
 	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
@@ -175,11 +173,9 @@ public class FabricaTest {
 		for (int i = 0; i < 12; i++) {
 			fabrica.avanzarTurno(jugador);
 		}
-		try {
-			fabrica.crearGoliath();
-			@SuppressWarnings("unused")
-			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
-		} catch (ElEdificioEstaEnConstruccion e) {}
+		fabrica.crearGoliath();
+		@SuppressWarnings("unused")
+		Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
 	}
 	
 	@Test

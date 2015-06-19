@@ -161,14 +161,12 @@ public class BarracaTest {
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno(jugador);
 		}
-		try {
-			barraca.crearMarine();
-			for (int j = 0; j < 3; j++) {
-				barraca.avanzarTurno(jugador);
-			}
-			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-			assertEquals(marine.getVidaActual(), 40);
-		} catch (ElEdificioEstaEnConstruccion e) {}
+		barraca.crearMarine();
+		for (int j = 0; j < 3; j++) {
+			barraca.avanzarTurno(jugador);
+		}
+		Unidad marine = barraca.obtenerUltimaUnidadConstruida();
+		assertEquals(marine.getVidaActual(), 40);
 	}
 	
 	@Test
@@ -186,13 +184,9 @@ public class BarracaTest {
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno(jugador);
 		}
-		try {
-			barraca.crearMarine();
-			@SuppressWarnings("unused")
-			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-		} catch (ElEdificioEstaEnConstruccion e) { 
-			fail();
-		}
+		barraca.crearMarine();
+		@SuppressWarnings("unused")
+		Unidad marine = barraca.obtenerUltimaUnidadConstruida();
 	}
 	
 
@@ -202,7 +196,6 @@ public class BarracaTest {
 		
 		try {
 			barraca.crearMarine();
-			
 			fail();
 		} catch (ElEdificioEstaEnConstruccion e) {}
 	}

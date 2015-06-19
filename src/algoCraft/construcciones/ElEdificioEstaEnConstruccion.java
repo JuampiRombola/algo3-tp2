@@ -1,6 +1,8 @@
 package algoCraft.construcciones;
 
-public class ElEdificioEstaEnConstruccion extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class ElEdificioEstaEnConstruccion extends AlgoCraftException {
 
 	/**
 	 * 
