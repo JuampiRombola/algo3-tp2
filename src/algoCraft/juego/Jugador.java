@@ -110,9 +110,8 @@ public class Jugador {
 	
 	private Edificio validarDependenciasEdificios(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
 		for (Edificio edificio : this.edificios) {
-			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion())) {
+			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion()))
 				return edificio;
-			}
 		}
 		throw new NoSePuedeConstruirElEdificio();
 	}
@@ -159,10 +158,8 @@ public class Jugador {
 	}
 	
 	private void sePuedeConstruirUnidad(int cantidadDePoblacionQueOcupa) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion {
-		int poblacionActual = this.poblacion;
-		if (poblacionActual + cantidadDePoblacionQueOcupa <= this.poblacionMaxima)
-			return;
-		throw new NoSePuedeConstruirLaUnidadPorSobrepoblacion();
+		if (!(this.poblacion + cantidadDePoblacionQueOcupa <= this.poblacionMaxima))
+			throw new NoSePuedeConstruirLaUnidadPorSobrepoblacion();
 	}
 	
 	public void crearMarine(EdificioConstructor barraca) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
@@ -180,11 +177,9 @@ public class Jugador {
 	}
 
 	public void avanzarTurno() {
-		for (Edificio edificio : this.edificios) {
+		for (Edificio edificio : this.edificios)
 			edificio.avanzarTurno(this);
-		}
-		for (Unidad unidad : this.unidades) {
+		for (Unidad unidad : this.unidades)
 			unidad.avanzarTurno();
-		}
 	}
 }
