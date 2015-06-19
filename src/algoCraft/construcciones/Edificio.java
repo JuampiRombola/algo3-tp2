@@ -61,11 +61,4 @@ public abstract class Edificio implements Atacable {
 	public boolean estaEnConstruccion() {
 		return this.estaEnConstruccion;
 	}
-	
-	@Override
-	public boolean equals(Object otroObjeto) {
-		if (otroObjeto.getClass() != this.getClass())
-			return false;
-		return true;
-	}
 }
