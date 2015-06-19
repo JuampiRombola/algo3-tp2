@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
+import algoCraft.construcciones.excepciones.NoSeCreoUnaNuevaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;

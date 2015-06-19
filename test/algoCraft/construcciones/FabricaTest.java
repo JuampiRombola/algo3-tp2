@@ -5,8 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Fabrica;
+import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
+import algoCraft.construcciones.excepciones.NoSeCreoUnaNuevaUnidad;
 import algoCraft.juego.Jugador;
-import algoCraft.juego.NoSePuedeConstruirElEdificio;
+import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;

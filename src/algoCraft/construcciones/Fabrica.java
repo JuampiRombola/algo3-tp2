@@ -1,7 +1,8 @@
 package algoCraft.construcciones;
 
 
-import algoCraft.juego.NoSePuedeConstruirElEdificio;
+import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 

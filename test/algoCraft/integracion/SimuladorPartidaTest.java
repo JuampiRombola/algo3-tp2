@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.EdificioConstructor;
-import algoCraft.construcciones.ElEdificioEstaEnConstruccion;
-import algoCraft.construcciones.ElEdificioNoPuedeCrearLaUnidad;
+import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
 import algoCraft.juego.Jugador;
-import algoCraft.juego.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
-import algoCraft.juego.NoSeTienenLosRecursosSuficientes;
+import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
+import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;

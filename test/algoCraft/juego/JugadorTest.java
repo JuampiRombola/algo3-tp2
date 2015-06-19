@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Mapa;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
