@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
@@ -280,5 +281,14 @@ public class FabricaTest {
 			fabrica.crearMarine();
 			fail();
 		} catch (ElEdificioNoPuedeCrearLaUnidad e) {}
+	}
+	
+	@Test
+	public void siLaBarracaNoEstaConstruidaLaFabricaLanzaUnErrorAlCrearse() {
+		Barraca barraca = new Barraca(0, 0);
+		try {
+			new Fabrica(1, 1, barraca);
+			fail();
+		} catch (NoSePuedeConstruirElEdificio e) {}
 	}
 }
