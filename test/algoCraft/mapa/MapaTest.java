@@ -23,13 +23,10 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 1);
-		try{
-			mapa.agregarUnidad(unidad);
+		
+		mapa.agregarUnidad(unidad);
 			
 		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {
-		} catch (PosicionVaciaException e) {}
 	}
 	
 	@Test
@@ -42,8 +39,7 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {}
+		} catch (PosicionInvalidaException e) {}
 	}
 	
 	@Test
@@ -56,8 +52,7 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {}
+		} catch (PosicionInvalidaException e) {}
 	}
 	
 	@Test
@@ -70,8 +65,7 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {}
+		} catch (PosicionInvalidaException e) {}
 	}
 	
 	@Test
@@ -84,8 +78,7 @@ public class MapaTest {
 			mapa.agregarUnidad(unidad);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {}
+		} catch (PosicionInvalidaException e) {}
 	}
 	
 	@Test
@@ -99,13 +92,10 @@ public class MapaTest {
 			mapa.agregarUnidad(unidadIntrusa);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {}
 		
-		try {
-			Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
-			Assert.assertFalse(unidadIntrusa == mapa.getUnidad(unidad.getPosicion()));
-		} catch (PosicionVaciaException e) {}
+		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
+		Assert.assertFalse(unidadIntrusa == mapa.getUnidad(unidad.getPosicion()));
 	}
 	
 	@Test
@@ -119,7 +109,6 @@ public class MapaTest {
 			mapa.agregarUnidad(unidadIntrusa);
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
 		} catch (PosicionOcupadaException e) {}
 	}
 	
@@ -145,8 +134,6 @@ public class MapaTest {
 			mapa.getUnidad(unidad.getPosicion());
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -160,8 +147,6 @@ public class MapaTest {
 			mapa.moverUnidad(unidad, 2, 2);
 			
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -176,8 +161,6 @@ public class MapaTest {
 			mapa.getUnidad(new Posicion(1, 1, true));
 			
 			fail();
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {
 		} catch (PosicionVaciaException e) {}
 	}
 	
@@ -187,16 +170,14 @@ public class MapaTest {
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidadConMovimiento = new Marine(1, 1);
 		Posicionable unidad = new Marine(2, 2);
-		try{
-			mapa.agregarUnidad(unidadConMovimiento);
-			mapa.agregarUnidad(unidad);
-			mapa.moverUnidad(unidadConMovimiento, 2, 2);
-			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
-			Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {
-		} catch (PosicionVaciaException e) {}
+
+		mapa.agregarUnidad(unidadConMovimiento);
+		mapa.agregarUnidad(unidad);
+		mapa.moverUnidad(unidadConMovimiento, 2, 2);
+		
+		Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
+		Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
+
 	}
 	
 	@Test
@@ -372,13 +353,11 @@ public class MapaTest {
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		try {
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1, 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1, 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1, 1));
-			mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1, 1));
-		} catch (PosicionInvalidaException e) {
-		} catch (PosicionOcupadaException e) {}
+
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1, 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1, 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1, 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1, 1));
 
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion (0, 0, false));
 		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
