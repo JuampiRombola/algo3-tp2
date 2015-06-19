@@ -1,6 +1,8 @@
 package algoCraft.juego;
 
-public class NoSeTienenLosRecursosSuficientes extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class NoSeTienenLosRecursosSuficientes extends AlgoCraftException {
 
 	/**
 	 * 

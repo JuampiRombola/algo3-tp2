@@ -1,6 +1,8 @@
 package algoCraft.juego;
 
-public class NoSePuedeConstruirLaUnidadPorSobrepoblacion extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class NoSePuedeConstruirLaUnidadPorSobrepoblacion extends AlgoCraftException  {
 
 	/**
 	 * 

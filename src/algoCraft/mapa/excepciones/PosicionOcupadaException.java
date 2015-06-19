@@ -1,5 +1,7 @@
 package algoCraft.mapa.excepciones;
 
-public class PosicionOcupadaException extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class PosicionOcupadaException extends AlgoCraftException  {
 	private static final long serialVersionUID = 1L;
 }

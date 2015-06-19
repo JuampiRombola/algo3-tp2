@@ -1,6 +1,8 @@
 package algoCraft.juego;
 
-public class NoSePuedeConstruirElEdificio extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class NoSePuedeConstruirElEdificio extends AlgoCraftException {
 
 	/**
 	 * 
