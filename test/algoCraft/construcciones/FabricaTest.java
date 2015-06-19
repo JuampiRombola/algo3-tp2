@@ -162,11 +162,8 @@ public class FabricaTest {
 			for (int j = 0; j < 6; j++) {
 				fabrica.avanzarTurno(jugador);
 			}
-			try {
-				Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
-				
-				assertEquals(goliath.getVidaActual(), 125);
-			} catch (NoSeCreoUnaNuevaUnidad e) {}
+			Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
+			assertEquals(goliath.getVidaActual(), 125);
 		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	

@@ -1,6 +1,8 @@
 package algoCraft.construcciones;
 
-public class NoSeCreoUnaNuevaUnidad extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class NoSeCreoUnaNuevaUnidad extends AlgoCraftException {
 
 	/**
 	 * 

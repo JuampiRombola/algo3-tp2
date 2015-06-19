@@ -166,10 +166,8 @@ public class BarracaTest {
 			for (int j = 0; j < 3; j++) {
 				barraca.avanzarTurno(jugador);
 			}
-			try {
-				Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-				assertEquals(marine.getVidaActual(), 40);
-			} catch (NoSeCreoUnaNuevaUnidad e) {}
+			Unidad marine = barraca.obtenerUltimaUnidadConstruida();
+			assertEquals(marine.getVidaActual(), 40);
 		} catch (ElEdificioEstaEnConstruccion e) {}
 	}
 	
