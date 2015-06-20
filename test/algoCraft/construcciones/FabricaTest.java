@@ -7,12 +7,10 @@ import org.junit.Test;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
-import algoCraft.construcciones.excepciones.NoSeCreoUnaNuevaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
-import algoCraft.unidades.Unidad;
 
 public class FabricaTest {
 	
@@ -160,69 +158,6 @@ public class FabricaTest {
 		assertTrue(turno == 6);
 	}
 
-	@Test
-	public void siSacoElGoliathDespuesDeHaberSidoCreadoLaBarracaMuestraQueNoHayUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Fabrica fabrica = crearFabricaConstruida();
-		fabrica.crearGoliath();
-		
-		while(!fabrica.getSeCreoUnaUnidadNueva()){
-			fabrica.avanzarTurno(jugador);
-		}
-		fabrica.obtenerUltimaUnidadConstruida();
-		
-		assertFalse(fabrica.getSeCreoUnaUnidadNueva());
-	}
-	
-	@Test
-	public void crear2GoliathsLleva12Turnos() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Fabrica fabrica = crearFabricaConstruida();
-		fabrica.crearGoliath();
-		int turno = 0;
-		int marinesCreados = 0;
-		
-		while (marinesCreados < 2){
-			while(!fabrica.getSeCreoUnaUnidadNueva()){
-				turno++;
-				fabrica.avanzarTurno(jugador);
-			}
-			marinesCreados++;
-			fabrica.obtenerUltimaUnidadConstruida();
-			fabrica.crearGoliath();
-		}
-		
-		assertTrue(turno == 12);
-	}
-	
-	@Test
-	public void cuandoLaFabricaCreaUnMarineEsteTieneTodaSuVida() {
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = new Barraca(0, 0);
-		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
-		construirEdificio(fabrica, jugador);
-		fabrica.crearGoliath();
-		
-		for (int j = 0; j < 6; j++) 
-			fabrica.avanzarTurno(jugador);
-		Unidad goliath = fabrica.obtenerUltimaUnidadConstruida();
-		
-		assertEquals(goliath.getVidaActual(), 125);
-	}
-	
-	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
-	public void siLaFabricaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = new Barraca(0, 0);
-		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
-		construirEdificio(fabrica, jugador);
-		
-		fabrica.crearGoliath();
-		fabrica.obtenerUltimaUnidadConstruida();
-	}
-	
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
 		Jugador jugador = new Jugador("Jugador");

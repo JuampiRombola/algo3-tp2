@@ -5,18 +5,14 @@ import java.util.Queue;
 
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
-import algoCraft.construcciones.excepciones.NoSeCreoUnaNuevaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
-import algoCraft.mapa.excepciones.PosicionInvalidaException;
-import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.unidades.Unidad;
 
-public abstract class EdificioConstructor extends Edificio{
+public abstract class EdificioConstructor extends Edificio {
 	protected boolean seCreoUnaUnidadNueva;
 	protected Queue<Unidad> unidadesEnConstruccion;
-	protected Unidad ultimaUnidadConstruida;
 
 	
 	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse) {
@@ -32,26 +28,22 @@ public abstract class EdificioConstructor extends Edificio{
 	@Override
 	public void avanzarTurno(Jugador jugador) {
 		super.avanzarTurno(jugador);
-		if(estoyCreandoUnaUnidad()) {
+		if(estoyCreandoUnaUnidad())
 			continuarCreandoLaUnidad(jugador);
-		}
 	}
 
-	public void continuarCreandoLaUnidad(Jugador jugador) {
+	private void continuarCreandoLaUnidad(Jugador jugador) {
 		Unidad unidad = this.unidadesEnConstruccion.peek();
 		if (this.contadorDeTurnos == unidad.getTurnosEnConstruirse()) {
 			unidad = this.unidadesEnConstruccion.poll();
-			this.ultimaUnidadConstruida = unidad;
 			this.seCreoUnaUnidadNueva = true;
 			this.contadorDeTurnos = 0;
 			
 			Posicion posicionSalida = new Posicion(this.posicion.getX(), this.posicion.getY(), unidad.esTerrestre());
 			Posicion posicionLibre = Mapa.getMapa().getPosicionVaciaCercana(posicionSalida);
 			unidad.setPosicion(posicionLibre.getX(), posicionLibre.getY());
-			try {
-				Mapa.getMapa().agregarUnidad(unidad);
-			} catch (PosicionInvalidaException e) {
-			} catch (PosicionOcupadaException e) {}
+
+			Mapa.getMapa().agregarUnidad(unidad);
 			jugador.agregarUnidad(unidad);
 			jugador.sumarPoblacion(unidad.getPoblacionQueOcupa());
 		}
@@ -60,15 +52,7 @@ public abstract class EdificioConstructor extends Edificio{
 	public boolean getSeCreoUnaUnidadNueva() {
 		return this.seCreoUnaUnidadNueva;
 	}
-	
-	public Unidad obtenerUltimaUnidadConstruida() throws NoSeCreoUnaNuevaUnidad {
-		if (this.getSeCreoUnaUnidadNueva()) {
-			this.seCreoUnaUnidadNueva = false;
-			return this.ultimaUnidadConstruida;
-		} else {
-			throw new NoSeCreoUnaNuevaUnidad();
-		}
-	}
+
 	
 	public void crearMarine() throws ElEdificioNoPuedeCrearLaUnidad, ElEdificioEstaEnConstruccion {
 		throw new ElEdificioNoPuedeCrearLaUnidad();

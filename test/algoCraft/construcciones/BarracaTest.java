@@ -7,11 +7,9 @@ import org.junit.Test;
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
-import algoCraft.construcciones.excepciones.NoSeCreoUnaNuevaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
-import algoCraft.unidades.Unidad;
 
 public class BarracaTest {
 
@@ -64,37 +62,6 @@ public class BarracaTest {
 			barraca.avanzarTurno(jugador);
 		}
 		assertTrue(turno == 3);
-	}
-	
-	@Test
-	public void siSacoElMarineDespuesDeHaberSidoCreadoLaBarracaMuestraQueNoHayUnaUnidadNueva() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = crearBarracaConstruida();
-		barraca.crearMarine();
-		while(!barraca.getSeCreoUnaUnidadNueva()){
-			barraca.avanzarTurno(jugador);
-		}
-		barraca.obtenerUltimaUnidadConstruida();
-		assertFalse(barraca.getSeCreoUnaUnidadNueva());
-	}
-	
-	@Test
-	public void crear2MarinesLleva6Turnos() throws ElEdificioEstaEnConstruccion, NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = crearBarracaConstruida();
-		barraca.crearMarine();
-		int turno = 0;
-		int marinesCreados = 0;
-		while (marinesCreados < 2){
-			while(!barraca.getSeCreoUnaUnidadNueva()){
-				turno++;
-				barraca.avanzarTurno(jugador);
-			}
-			marinesCreados++;
-			barraca.obtenerUltimaUnidadConstruida();
-			barraca.crearMarine();
-		}
-		assertTrue(turno == 6);
 	}
 	
 	@Test
@@ -157,41 +124,10 @@ public class BarracaTest {
 	}
 	
 	@Test
-	public void cuandoLaBarracaCreaUnMarineEsteTieneTodaSuVida() {
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = new Barraca(1, 1);
-		
-		for (int i = 0; i < 12; i++) {
-			barraca.avanzarTurno(jugador);
-		}
-		barraca.crearMarine();
-		for (int j = 0; j < 3; j++) {
-			barraca.avanzarTurno(jugador);
-		}
-		Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-		assertEquals(marine.getVidaActual(), 40);
-	}
-	
-	@Test
 	public void alConstruirUnaBarracaNoSeCreoUnaUnidadNueva(){
 		Barraca barraca = crearBarracaConstruida();
 		barraca.getSeCreoUnaUnidadNueva();
 	}
-
-	
-	@Test(expected = NoSeCreoUnaNuevaUnidad.class)
-	public void siLaBarracaCreaUnaUnidadYNoPasaronLosTurnosNecesariosParaQueSeConstruyaNoSeLaPuedeObtener() throws NoSeCreoUnaNuevaUnidad{
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = new Barraca(1, 1);
-		
-		for (int i = 0; i < 12; i++) {
-			barraca.avanzarTurno(jugador);
-		}
-		barraca.crearMarine();
-		@SuppressWarnings("unused")
-		Unidad marine = barraca.obtenerUltimaUnidadConstruida();
-	}
-	
 
 	@Test
 	public void cuandoLaBarracaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {

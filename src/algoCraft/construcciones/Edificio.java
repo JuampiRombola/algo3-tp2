@@ -46,9 +46,8 @@ public abstract class Edificio implements Atacable {
 	
 	public void avanzarTurno(Jugador jugador) {
 		this.contadorDeTurnos++;
-		if(this.estaEnConstruccion) {
+		if(this.estaEnConstruccion)
 			continuarConstruccion(jugador);
-		}
 	}
 
 	protected void continuarConstruccion(Jugador jugador) {

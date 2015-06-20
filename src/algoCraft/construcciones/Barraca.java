@@ -17,11 +17,9 @@ public class Barraca extends EdificioConstructor{
 
 	@Override
 	public void crearMarine() throws ElEdificioEstaEnConstruccion {
-		if (!this.estaEnConstruccion) {
-			Marine marine = new Marine(this.posicion.getX(), this.posicion.getY() + 1);
-			this.unidadesEnConstruccion.offer(marine);
-		} else {
+		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
-		}
+		Marine marine = new Marine(this.posicion.getX(), this.posicion.getY() + 1);
+		this.unidadesEnConstruccion.offer(marine);
 	}
 }

@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Edificio;
+import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Unidad;
@@ -18,9 +21,8 @@ import algoCraft.unidades.Unidad;
 public class JugadorTest {
 
 	private void avanzarTurnos(int turnos, Jugador jugador) {
-		for(int i = 0; i < turnos; i++) {
+		for(int i = 0; i < turnos; i++)
 			jugador.avanzarTurno();
-		}
 	}
 	
 	@Test
@@ -334,4 +336,98 @@ public class JugadorTest {
 		avanzarTurnos(12, jugador);
 		jugador.crearFabrica(2, 2);
 	}
+	
+	@Test
+	public void cuandoSeCreaUnMarineAumentaEn1LaCantidadDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(1);
+
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		avanzarTurnos(3, jugador);
+		
+		assertTrue(1 == jugador.getUnidades().size());
+	}
+	
+	@Test
+	public void cuandoSeCrean2MarinesAumentaEn2LaCantidadDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(2);
+
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		avanzarTurnos(6, jugador);
+		
+		assertTrue(2 == jugador.getUnidades().size());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnGoliathAumentaEn1LaCantidadDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.crearFabrica(2, 2);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(2);
+
+		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		avanzarTurnos(6, jugador);
+		
+		assertTrue(1 == jugador.getUnidades().size());
+	}
+
+	@Test
+	public void cuandoSeCrean2GoliathsAumentaEn1LaCantidadDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.crearFabrica(2, 2);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(4);
+
+		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		avanzarTurnos(12, jugador);
+		
+		assertTrue(2 == jugador.getUnidades().size());
+	}
+	/*
+	@Test
+	public void cuandoSeCreaUnMarineYUnGoliathAumentaEn2LaCantidadDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.crearFabrica(2, 2);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(3);
+
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		avanzarTurnos(10, jugador);
+		
+		assertTrue(1 == jugador.getUnidades().size());
+	}*/
 }
