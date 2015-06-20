@@ -139,7 +139,7 @@ public class FabricaTest {
 	public void cuandoSeCreaUnaFabricaYSeTerminaDeConstruirNoSeCreoNingunaUnidad(){
 		Fabrica fabrica = crearFabricaConstruida();
 		
-		assertFalse(fabrica.getSeCreoUnaUnidadNueva());
+		assertFalse(fabrica.seTerminoDeCrearLaUnidad());
 	}
 	
 	@Test
@@ -149,7 +149,7 @@ public class FabricaTest {
 		fabrica.crearGoliath();
 		int turno = 0;
 		
-		while(!fabrica.getSeCreoUnaUnidadNueva()){
+		while(!fabrica.seTerminoDeCrearLaUnidad()){
 			turno++;
 			fabrica.avanzarTurno(jugador);
 		}
@@ -165,7 +165,7 @@ public class FabricaTest {
 		
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
 		
-		assertEquals(false, fabrica.getSeCreoUnaUnidadNueva());
+		assertEquals(false, fabrica.seTerminoDeCrearLaUnidad());
 	}
 	
 	@Test(expected = ElEdificioEstaEnConstruccion.class)
@@ -226,7 +226,7 @@ public class FabricaTest {
 			fabrica.avanzarTurno(jugador);
 		}
 		
-		assertTrue(barraca.getSeCreoUnaUnidadNueva());
-		assertTrue(fabrica.getSeCreoUnaUnidadNueva());
+		assertTrue(barraca.seTerminoDeCrearLaUnidad());
+		assertTrue(fabrica.seTerminoDeCrearLaUnidad());
 	}
 }

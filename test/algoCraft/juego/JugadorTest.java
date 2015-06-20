@@ -482,7 +482,7 @@ public class JugadorTest {
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		
 	}
-	/*
+
 	@Test
 	public void seCreanDosBarracasYSeConstruyeUnMarineEnLaSegundaElJugadorTiene1UnidadMas() {
 		Mapa.reiniciarInstanciaParaTest();
@@ -502,5 +502,5 @@ public class JugadorTest {
 		avanzarTurnos(4, jugador);
 		
 		assertTrue(1 == jugador.getUnidades().size());
-	}*/
+	}
 }
