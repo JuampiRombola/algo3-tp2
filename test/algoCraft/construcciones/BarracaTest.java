@@ -185,7 +185,7 @@ public class BarracaTest {
 		for (int i = 0; i < 12; i++)
 			barraca1.avanzarTurno(jugador);
 		
-		Barraca barraca2 = new Barraca(1, 1);
+		Barraca barraca2 = new Barraca(2, 2);
 		for (int i = 0; i < 12; i++)
 			barraca2.avanzarTurno(jugador);
 		
@@ -195,6 +195,7 @@ public class BarracaTest {
 			barraca1.avanzarTurno(jugador);
 		
 		assertTrue(barraca1.getSeCreoUnaUnidadNueva());
+		assertTrue(1 == jugador.getUnidades().size());
 	}
 	/*
 	@Test
