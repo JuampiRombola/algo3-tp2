@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Fabrica;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
-import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Posicion;
@@ -201,16 +200,6 @@ public class FabricaTest {
 		fabrica.avanzarTurno(jugador);
 		
 		assertTrue(0 < fabrica.getVidaActual());
-	}
-	
-	@Test(expected = ElEdificioNoPuedeCrearLaUnidad.class)
-	public void cuandoLaBarracaTrataDeCrearUnGoliathLanzaUnaExcepcion() throws ElEdificioEstaEnConstruccion {
-		Jugador jugador = new Jugador("Jugador");
-		Barraca barraca = new Barraca(0, 0);
-		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
-		
-		fabrica.crearMarine();
 	}
 	
 	@Test(expected = NoSePuedeConstruirElEdificio.class)

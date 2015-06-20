@@ -6,7 +6,6 @@ import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.CentroDeMineral;
 import algoCraft.construcciones.DepositoDeSuministros;
 import algoCraft.construcciones.Edificio;
-import algoCraft.construcciones.EdificioConstructor;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.construcciones.Refineria;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
@@ -165,14 +164,14 @@ public class Jugador {
 			throw new NoSePuedeConstruirLaUnidadPorSobrepoblacion();
 	}
 	
-	public void crearMarine(EdificioConstructor barraca) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
+	public void crearMarine(Barraca barraca) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
 		this.sePuedeConstruirUnidad(Marine.cantidadDePoblacion);
 		this.verificarRecursos(Marine.cantidadMineral, Marine.cantidadGasVespeno);
 		barraca.crearMarine();
 		this.restarRecursosGastados(Marine.cantidadMineral, Marine.cantidadGasVespeno);
 	}
 	
-	public void crearGoliath(EdificioConstructor fabrica) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
+	public void crearGoliath(Fabrica fabrica) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion, ElEdificioNoPuedeCrearLaUnidad {
 		this.sePuedeConstruirUnidad(Goliath.cantidadDePoblacion);
 		this.verificarRecursos(Goliath.cantidadMineral, Goliath.cantidadGasVespeno);
 		fabrica.crearGoliath();

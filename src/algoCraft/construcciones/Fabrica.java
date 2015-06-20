@@ -20,7 +20,6 @@ public class Fabrica extends EdificioConstructor {
 			throw new NoSePuedeConstruirElEdificio();
 	}
 
-	@Override
 	public void crearGoliath() throws ElEdificioEstaEnConstruccion {
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
-import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
@@ -175,15 +174,5 @@ public class BarracaTest {
 		Barraca barraca = new Barraca(1, 1);
 		barraca.avanzarTurno(jugador);
 		assertTrue(0 < barraca.getVidaActual());
-	}
-	
-	@Test
-	public void cuandoLaBarracaTrataDeCrearUnGoliathLanzaUnaExcepcion() throws ElEdificioEstaEnConstruccion {
-		Barraca barraca = new Barraca(1, 1);
-		
-		try {
-			barraca.crearGoliath();
-			fail();
-		} catch (ElEdificioNoPuedeCrearLaUnidad e) {}
 	}
 }

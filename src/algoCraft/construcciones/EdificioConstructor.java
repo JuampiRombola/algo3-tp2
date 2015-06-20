@@ -3,8 +3,6 @@ package algoCraft.construcciones;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
-import algoCraft.construcciones.excepciones.ElEdificioNoPuedeCrearLaUnidad;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -51,15 +49,6 @@ public abstract class EdificioConstructor extends Edificio {
 	
 	public boolean getSeCreoUnaUnidadNueva() {
 		return this.seCreoUnaUnidadNueva;
-	}
-
-	
-	public void crearMarine() throws ElEdificioNoPuedeCrearLaUnidad, ElEdificioEstaEnConstruccion {
-		throw new ElEdificioNoPuedeCrearLaUnidad();
-	}
-	
-	public void crearGoliath() throws ElEdificioNoPuedeCrearLaUnidad, ElEdificioEstaEnConstruccion {
-		throw new ElEdificioNoPuedeCrearLaUnidad();
 	}
 }
 

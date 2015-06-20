@@ -15,7 +15,6 @@ public class Barraca extends EdificioConstructor{
 		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
 	}
 
-	@Override
 	public void crearMarine() throws ElEdificioEstaEnConstruccion {
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
