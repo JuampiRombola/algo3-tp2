@@ -13,6 +13,8 @@ public class UnidadTest{
 	private int danioArmaDePrueba = 100;
 	private Arma armaDePrueba = new Arma(danioArmaDePrueba, rangoArmaDePrueba);
 	private int vidaMaxima = 10;
+	private int cantidadDePoblacionQueOcupa = 1;
+	private int tiempoDeConstruccion = 0;
 	private Posicion posicion = new Posicion(1,1, true);
 	private Posicion posicionEnRango = new Posicion (2,1, true);
 	//La posicion de la unidad que vaya a atacar es 1 1. 100, 100 esta fuera de rango.
@@ -20,15 +22,15 @@ public class UnidadTest{
 	private Unidad unidadAtacante = new Unidad(vidaMaxima, armaDePrueba, posicion, 0, 1);
 	
 	public Unidad nuevaUnidad() {
-		return new Unidad(vidaMaxima, armaDePrueba, posicion, 0, 1);
+		return new Unidad(vidaMaxima, armaDePrueba, posicion, tiempoDeConstruccion, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadEnRangoDeAtaque(int vida) {
-		return  new Unidad(vida, armaDePrueba, posicionEnRango, 0, 1);
+		return  new Unidad(vida, armaDePrueba, posicionEnRango, tiempoDeConstruccion, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadFueraDeRangoDeAtaque(int vida) {
-		return new Unidad(vidaMaxima, armaDePrueba, posicionFueraDeRango, 0, 1);
+		return new Unidad(vidaMaxima, armaDePrueba, posicionFueraDeRango, tiempoDeConstruccion, cantidadDePoblacionQueOcupa);
 	}
 	@Test
 	public void alCrearseLaUnidadNoEstaDestruida() {
@@ -184,20 +186,26 @@ public class UnidadTest{
 	}
 	
 	@Test
-	public void sePuedeObtenerElTiempoEnQueTardaEnConstruirseUnaUnidad() {
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 1, 1);
-		
-		int turnosEnConstruirse = unidad.getTurnosEnConstruirse();
-		
-		assertEquals(turnosEnConstruirse, 1);
+	public void getTurnosEnConstruirseDevuelve1SiEseFueElTiempoQueSeLeDioEnElConstructorAlaUnidad() {
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 1, cantidadDePoblacionQueOcupa);
+		assertEquals(unidad.getTurnosEnConstruirse(), 1);
 	}
 	
 	@Test
-	public void sePuedeObtenerLaPoblacionQueOcupaUnaUnidad() {
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 1, 1);
-		
-		int poblacionQueOcupa = unidad.getTurnosEnConstruirse();
-		
-		assertEquals(poblacionQueOcupa, 1);
+	public void getTurnosEnConstruirseDevuelve2SiEseFueElTiempoQueSeLeDioEnElConstructorAlaUnidad() {
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2, cantidadDePoblacionQueOcupa);
+		assertEquals(unidad.getTurnosEnConstruirse(), 2);
+	}
+	
+	@Test
+	public void getPoblacionDevuelve1SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, tiempoDeConstruccion, 1);
+		assertEquals(unidad.getPoblacionQueOcupa(), 1);
+	}
+	
+	@Test
+	public void getPoblacionDevuelve2SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, tiempoDeConstruccion, 2);
+		assertEquals(unidad.getPoblacionQueOcupa(), 2);
 	}
 }
