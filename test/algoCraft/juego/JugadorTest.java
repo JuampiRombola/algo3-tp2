@@ -11,6 +11,7 @@ import algoCraft.construcciones.Edificio;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
+import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -428,6 +429,37 @@ public class JugadorTest {
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
 		avanzarTurnos(10, jugador);
 		
-		assertTrue(1 == jugador.getUnidades().size());
+		assertTrue(2 == jugador.getUnidades().size());
 	}*/
+	
+	@Test(expected = NoSePuedeConstruirLaUnidadPorSobrepoblacion.class)
+	public void cuandoSeIntentaCrearUnaUnidadSinTenerLaCapacidadNecesariaLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+	}
+	
+	@Test(expected = NoSePuedeConstruirLaUnidadPorSobrepoblacion.class)
+	public void cuandoSeIntentaCrearUnaUnidadSinTenerLaCapacidadNecesariaYTeniendoUnidadesLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.sumarPoblacionMaxima(1);
+		
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		avanzarTurnos(3, jugador);
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		
+	}
+	
 }
