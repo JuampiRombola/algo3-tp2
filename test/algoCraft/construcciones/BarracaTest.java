@@ -179,16 +179,20 @@ public class BarracaTest {
 	@Test
 	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamente(){
 		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
 		Jugador jugador = new Jugador("Jugador");
 		
 		Barraca barraca1 = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++)
 			barraca1.avanzarTurno(jugador);
+		mapa.agregarUnidad(barraca1);
 		
 		Barraca barraca2 = new Barraca(2, 2);
 		for (int i = 0; i < 12; i++)
 			barraca2.avanzarTurno(jugador);
+		mapa.agregarUnidad(barraca2);
 		
+		barraca1 = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
 		barraca1.crearMarine();
 		
 		for (int i = 0; i < 4; i++)
