@@ -22,6 +22,7 @@ public class Fabrica extends EdificioConstructor {
 
 	public void crearGoliath() throws ElEdificioEstaEnConstruccion {
 		seTerminoDeCrearLaUnidad = false;
+		this.contadorDeTurnos = 0;
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
 		Goliath goliath = new Goliath(this.posicion.getX(), this.posicion.getY() + 1);

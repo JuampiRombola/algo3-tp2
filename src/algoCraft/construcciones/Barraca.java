@@ -16,6 +16,7 @@ public class Barraca extends EdificioConstructor{
 	}
 
 	public void crearMarine() throws ElEdificioEstaEnConstruccion {
+		this.contadorDeTurnos = 0;
 		seTerminoDeCrearLaUnidad = false;
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
