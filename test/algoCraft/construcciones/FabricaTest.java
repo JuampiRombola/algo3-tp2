@@ -208,7 +208,7 @@ public class FabricaTest {
 
 		new Fabrica(1, 1, barraca);
 	}
-	/*
+	
 	@Test
 	public void cuandoSeCreaUnaFabricaSePuedeSeguirCreandoUnMarineYAhoraTambienUnGoliath() {
 		Jugador jugador = new Jugador("Jugador");
@@ -216,6 +216,7 @@ public class FabricaTest {
 		construirEdificio(barraca, jugador);
 		
 		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		construirEdificio(fabrica, jugador);
 		
 		barraca.crearMarine();
 		fabrica.crearGoliath();
@@ -227,5 +228,5 @@ public class FabricaTest {
 		
 		assertTrue(barraca.getSeCreoUnaUnidadNueva());
 		assertTrue(fabrica.getSeCreoUnaUnidadNueva());
-	}*/
+	}
 }
