@@ -208,4 +208,24 @@ public class FabricaTest {
 
 		new Fabrica(1, 1, barraca);
 	}
+	/*
+	@Test
+	public void cuandoSeCreaUnaFabricaSePuedeSeguirCreandoUnMarineYAhoraTambienUnGoliath() {
+		Jugador jugador = new Jugador("Jugador");
+		Barraca barraca = new Barraca(0, 0);
+		construirEdificio(barraca, jugador);
+		
+		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		
+		barraca.crearMarine();
+		fabrica.crearGoliath();
+		
+		for (int i=0; i < 6; i++) {
+			barraca.avanzarTurno(jugador);
+			fabrica.avanzarTurno(jugador);
+		}
+		
+		assertTrue(barraca.getSeCreoUnaUnidadNueva());
+		assertTrue(fabrica.getSeCreoUnaUnidadNueva());
+	}*/
 }

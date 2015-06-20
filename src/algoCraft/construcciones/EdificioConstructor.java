@@ -15,6 +15,7 @@ public abstract class EdificioConstructor extends Edificio {
 	
 	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse) {
 		super(vida, posicion, turnosEnConstruirse);
+		this.seCreoUnaUnidadNueva = false;
 		this.unidadesEnConstruccion = new LinkedList<Unidad>();
 	}
 
