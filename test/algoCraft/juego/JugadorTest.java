@@ -411,26 +411,27 @@ public class JugadorTest {
 		
 		assertTrue(2 == jugador.getUnidades().size());
 	}
-	/*
+
 	@Test
 	public void cuandoSeCreaUnMarineYUnGoliathAumentaEn2LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarPoblacionMaxima(3);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12, jugador);
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		avanzarTurnos(3, jugador);
 		jugador.crearFabrica(2, 2);
 		avanzarTurnos(12, jugador);
-		jugador.sumarPoblacionMaxima(3);
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
-		avanzarTurnos(10, jugador);
+		avanzarTurnos(6, jugador);
 		
 		assertTrue(2 == jugador.getUnidades().size());
-	}*/
+	}
 	
 	@Test(expected = NoSePuedeConstruirLaUnidadPorSobrepoblacion.class)
 	public void cuandoSeIntentaCrearUnaUnidadSinTenerLaCapacidadNecesariaLanzaError() {

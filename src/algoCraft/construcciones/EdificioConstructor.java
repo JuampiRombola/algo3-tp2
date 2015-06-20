@@ -19,14 +19,14 @@ public abstract class EdificioConstructor extends Edificio {
 		this.unidadesEnConstruccion = new LinkedList<Unidad>();
 	}
 
-	public boolean estoyCreandoUnaUnidad() {
-		return !unidadesEnConstruccion.isEmpty();
+	private boolean estaCreandoUnaUnidad() {
+		return (!(unidadesEnConstruccion.isEmpty()));
 	}
 
 	@Override
 	public void avanzarTurno(Jugador jugador) {
 		super.avanzarTurno(jugador);
-		if(estoyCreandoUnaUnidad())
+		if(estaCreandoUnaUnidad())
 			continuarCreandoLaUnidad(jugador);
 	}
 
