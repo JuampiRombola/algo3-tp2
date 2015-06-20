@@ -9,6 +9,7 @@ import org.junit.Test;
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
+import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
@@ -85,8 +86,10 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador");
 		Mineral mineral = new Mineral(1, 1);
 		int cantidadInicial = jugador.getMineral();
+		
 		jugador.crearCentroDeMineral(mineral);
 		int cantidadFinal = jugador.getMineral();
+		
 		assertTrue(cantidadInicial == cantidadFinal + 50);
 	}
 	
@@ -95,11 +98,13 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		Mineral mineral = new Mineral(1, 1);
+		
 		jugador.crearCentroDeMineral(mineral);
 		avanzarTurnos(4, jugador);
 		int cantidadInicial = jugador.getMineral();
 		jugador.avanzarTurno();
 		int cantidadFinal = jugador.getMineral();
+		
 		assertTrue(cantidadInicial + 10 == cantidadFinal);
 	}
 	
@@ -108,11 +113,13 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		Mineral mineral = new Mineral(1, 1);
+		
 		jugador.crearCentroDeMineral(mineral);
 		avanzarTurnos(4, jugador);
 		int cantidadInicial = jugador.getMineral();
 		avanzarTurnos(2, jugador);
 		int cantidadFinal = jugador.getMineral();
+		
 		assertTrue(cantidadInicial + 20 == cantidadFinal);
 	}
 	
@@ -120,10 +127,12 @@ public class JugadorTest {
 	public void cuandoSeCreaUnCentroDeMineralElJugadorTiene1EdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		Mineral mineral = new Mineral(1, 1);
 		jugador.crearCentroDeMineral(mineral);
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
+		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
 	
@@ -131,9 +140,11 @@ public class JugadorTest {
 	public void cuandoSeCreaUnDepositoDeSuministrosElJugadorTiene100UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		int cantidadInicial = jugador.getMineral();
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadFinal = jugador.getMineral();
+		
 		assertTrue(cantidadInicial == cantidadFinal + 100);
 	}
 	
@@ -141,20 +152,24 @@ public class JugadorTest {
 	public void cuandoSeTieneUnDepositoDeSuministrosConstruidoElJugadorTiene5UnidadesMasDePoblacion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
 		avanzarTurnos(6, jugador);
 		int cantidadFinal = jugador.getPoblacionMaxima();
+		
 		assertTrue(cantidadInicial + 5 == cantidadFinal);
 	}
 	
 	@Test
 	public void cuandoSeTieneUnDepositoDeSuministrosConstruyendoseElJugadorNoTieneMasUnidadesDePoblacion() {
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
 		avanzarTurnos(3, jugador);
 		int cantidadFinal = jugador.getPoblacionMaxima();
+		
 		assertTrue(cantidadInicial == cantidadFinal);
 	}
 	
@@ -162,9 +177,11 @@ public class JugadorTest {
 	public void cuandoSeCreaUnDepositoDeSuministroslElJugadorTiene1EdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
+		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
 	
@@ -173,9 +190,11 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		GasVespeno gas = new GasVespeno(1, 1);
+		
 		int cantidadInicial = jugador.getMineral();
 		jugador.crearRefineria(gas);
 		int cantidadFinal = jugador.getMineral();
+		
 		assertTrue(cantidadInicial == cantidadFinal + 100);
 	}
 	
@@ -184,11 +203,13 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		GasVespeno gas = new GasVespeno(1, 1);
+		
 		jugador.crearRefineria(gas);
 		avanzarTurnos(6, jugador);
 		int cantidadInicial = jugador.getGasVespeno();
 		jugador.avanzarTurno();
 		int cantidadFinal = jugador.getGasVespeno();
+		
 		assertTrue(cantidadInicial + 10 == cantidadFinal);
 	}
 	
@@ -197,11 +218,13 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		GasVespeno gas = new GasVespeno(1, 1);
+		
 		jugador.crearRefineria(gas);
 		avanzarTurnos(6, jugador);
 		int cantidadInicial = jugador.getGasVespeno();
 		avanzarTurnos(2, jugador);
 		int cantidadFinal = jugador.getGasVespeno();
+		
 		assertTrue(cantidadInicial + 20 == cantidadFinal);
 	}
 	
@@ -210,9 +233,11 @@ public class JugadorTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
 		GasVespeno gas = new GasVespeno(1, 1);
+		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		jugador.crearRefineria(gas);
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
+		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
 	
@@ -221,6 +246,7 @@ public class JugadorTest {
 	public void cuandoSeCreaUnaFabricaElJugadorTiene200UnidadesMenosDeMineralY100DeGas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -230,6 +256,7 @@ public class JugadorTest {
 		jugador.crearFabrica(2, 2);
 		int cantidadFinalMineral = jugador.getMineral();
 		int cantidadFinalGas = jugador.getGasVespeno();
+		
 		assertTrue(cantidadInicialMineral == cantidadFinalMineral + 200);
 		assertTrue(cantidadInicialGas == cantidadFinalGas + 100);
 	}
@@ -238,6 +265,7 @@ public class JugadorTest {
 	public void cuandoSeTrataDeCrearUnaFabricaTeniendoUnaBarracaEnConstruccionSeLanzaUnaExcepcion () {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -250,6 +278,7 @@ public class JugadorTest {
 	public void cuandoSeTrataDeCrearUnaFabricaSinTenerUnaBarracaSeLanzaUnaExcepcion () {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearDepositoDeSuministros(0, 0);
@@ -261,6 +290,7 @@ public class JugadorTest {
 	public void cuandoSeCreaUnaFabricaElJugadorPasaATenerUnEdificioMas () {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
+		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -269,6 +299,7 @@ public class JugadorTest {
 		avanzarTurnos(12, jugador);
 		jugador.crearFabrica(2, 2);
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
+		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
 	
@@ -276,11 +307,31 @@ public class JugadorTest {
 	public void cuandoSeCreaUnaBarracaElJugadorTiene150UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador");
-		jugador.sumarUnidadesDeGasVespeno(1000);
-		jugador.sumarUnidadesDeMineral(1000);
+		
 		int cantidadInicialMineral = jugador.getMineral();
 		jugador.crearBarraca(1, 1);
 		int cantidadFinalMineral = jugador.getMineral();
+		
 		assertTrue(cantidadInicialMineral == cantidadFinalMineral + 150);
+	}
+	
+	@Test(expected = NoSeTienenLosRecursosSuficientes.class)
+	public void cuandoSeIntentaCrearUnaBarracaConMineralInsuficienteLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador");
+		
+		jugador.crearBarraca(1, 1);
+		jugador.crearBarraca(2, 2);
+	}
+	
+	@Test(expected = NoSeTienenLosRecursosSuficientes.class)
+	public void cuandoSeIntentaCrearUnaBarracaConGasVespenoInsuficienteLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador");
+		
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.crearFabrica(2, 2);
 	}
 }

@@ -1,6 +1,8 @@
 package algoCraft.construcciones.excepciones;
 
-public class ElEdificioNoPuedeCrearLaUnidad extends Exception {
+import algoCraft.AlgoCraftException;
+
+public class ElEdificioNoPuedeCrearLaUnidad extends AlgoCraftException {
 
 	/**
 	 * 
