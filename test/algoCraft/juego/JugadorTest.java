@@ -482,5 +482,25 @@ public class JugadorTest {
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		
 	}
-	
+	/*
+	@Test
+	public void seCreanDosBarracasYSeConstruyeUnMarineEnLaSegundaElJugadorTiene1UnidadMas() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarPoblacionMaxima(3);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+
+		jugador.crearBarraca(3, 3);
+		avanzarTurnos(12, jugador);
+		
+		jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(1, 1, true)));
+		avanzarTurnos(4, jugador);
+		
+		assertTrue(1 == jugador.getUnidades().size());
+	}*/
 }

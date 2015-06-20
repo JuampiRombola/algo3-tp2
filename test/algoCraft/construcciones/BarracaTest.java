@@ -7,6 +7,7 @@ import org.junit.Test;
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 
@@ -15,9 +16,8 @@ public class BarracaTest {
 	private Barraca crearBarracaConstruida(){
 		Jugador jugador = new Jugador("Jugador");
 		Barraca barraca = new Barraca(1, 1);
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 12; i++)
 			barraca.avanzarTurno(jugador);
-		}
 		return barraca;
 	}
 	
@@ -175,4 +175,52 @@ public class BarracaTest {
 		barraca.avanzarTurno(jugador);
 		assertTrue(0 < barraca.getVidaActual());
 	}
+	
+	@Test
+	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamente(){
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador");
+		
+		Barraca barraca1 = new Barraca(1, 1);
+		for (int i = 0; i < 12; i++)
+			barraca1.avanzarTurno(jugador);
+		
+		Barraca barraca2 = new Barraca(1, 1);
+		for (int i = 0; i < 12; i++)
+			barraca2.avanzarTurno(jugador);
+		
+		barraca1.crearMarine();
+		
+		for (int i = 0; i < 4; i++)
+			barraca1.avanzarTurno(jugador);
+		
+		assertTrue(barraca1.getSeCreoUnaUnidadNueva());
+	}
+	/*
+	@Test
+	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamenteConJugador(){
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador");
+		jugador.sumarPoblacionMaxima(3);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		
+		jugador.crearBarraca(1, 1);
+		for(int i = 0; i < 12; i++)
+			jugador.avanzarTurno();
+
+		jugador.crearBarraca(3, 3);
+		for(int i = 0; i < 12; i++)
+			jugador.avanzarTurno();
+		
+		Barraca barraca1 = ((Barraca) mapa.getUnidad(new Posicion(1, 1, true)));
+		barraca1.crearMarine();
+		
+		for (int i = 0; i < 4; i++)
+			barraca1.avanzarTurno(jugador);
+		
+		assertTrue(barraca1.getSeCreoUnaUnidadNueva());
+		//assertTrue(1 == jugador.getUnidades().size());
+	}*/
 }

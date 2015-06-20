@@ -12,7 +12,6 @@ public abstract class EdificioConstructor extends Edificio {
 	protected boolean seCreoUnaUnidadNueva;
 	protected Queue<Unidad> unidadesEnConstruccion;
 
-	
 	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse) {
 		super(vida, posicion, turnosEnConstruirse);
 		this.seCreoUnaUnidadNueva = false;
