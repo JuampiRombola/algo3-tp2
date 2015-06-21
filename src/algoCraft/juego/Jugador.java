@@ -122,7 +122,7 @@ public class Jugador {
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		this.agregarEdificio(centro);
 		this.restarRecursosGastados(CentroDeMineral.cantidadMineral, CentroDeMineral.cantidadGasVespeno);
-		Mapa.getMapa().agregarUnidad(centro);
+		Mapa.getMapa().ocuparRecurso(centro);
 	}
 	
 	public void crearDepositoDeSuministros(int x, int y) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
@@ -138,7 +138,7 @@ public class Jugador {
 		Refineria refineria = new Refineria(gas);
 		this.agregarEdificio(refineria);
 		this.restarRecursosGastados(Refineria.cantidadMineral, Refineria.cantidadGasVespeno);
-		Mapa.getMapa().agregarUnidad(refineria);
+		Mapa.getMapa().ocuparRecurso(refineria);
 	}
 	
 	public void crearBarraca(int x, int y) throws NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	

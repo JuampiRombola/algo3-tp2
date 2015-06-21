@@ -389,6 +389,26 @@ public class MapaTest {
 	}
 	
 	@Test
+	public void alOcuparUnMineralCuandoSeLePreguntaAlMapaPorEsaPosicionYaNoTieneMineralAhi() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		Mineral mineral = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		EdificioRecolector centro = new CentroDeMineral(mineral);
+		mapaGenerado.ocuparRecurso(centro);
+		
+		Assert.assertFalse(mapaGenerado.hayMineralEn(mineral.getPosicion()));
+	}
+	
+	@Test
 	public void alOcuparUnGasVespenoEnEsaPosicionDelMapaQuedaUnaRefineria() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
@@ -406,5 +426,25 @@ public class MapaTest {
 		mapaGenerado.ocuparRecurso(refineria);
 		
 		Assert.assertTrue(refineria == mapaGenerado.getUnidad(gasVespeno.getPosicion()));
+	}
+	
+	@Test
+	public void alOcuparUnGasVespenoCuandoSeLePreguntaAlMapaPorEsaPosicionYaNoTieneGasVespenoAhi() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		GasVespeno gasVespeno = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
+				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		EdificioRecolector refineria = new Refineria(gasVespeno);
+		mapaGenerado.ocuparRecurso(refineria);
+		
+		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
 	}
 }
