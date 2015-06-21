@@ -447,4 +447,40 @@ public class MapaTest {
 		
 		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
 	}
+	
+	@Test
+	public void siSeRemueveUnMineralYaNoHayMineralEnEsaPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		Mineral mineral = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		mapaGenerado.removerRecurso(mineral);
+		
+		assertFalse(mapaGenerado.hayMineralEn(mineral.getPosicion()));
+	}
+	
+	@Test
+	public void siSeRemueveUnGasVespenoYaNoHayGasVespenoEnEsaPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		GasVespeno gasVespeno = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
+				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		mapaGenerado.removerRecurso(gasVespeno);
+		
+		assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
+	}
 }
