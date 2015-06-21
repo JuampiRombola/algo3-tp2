@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.construcciones.Base;
 import algoCraft.construcciones.Edificio;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
@@ -28,28 +29,28 @@ public class JugadorTest {
 	
 	@Test
 	public void cuandoSeCreaElJugadorTiene200UnidadesDeMineral() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		assertEquals(200, jugador.getMineral());
 	}
 	
 	@Test
 	public void cuandoSeCreaElJugadorTiene0UnidadesDeGasVespeno() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		assertEquals(0, jugador.getGasVespeno());
 	}
 	
 	@Test
 	public void cuandoSeCreaUnJugadorEsteTieneUnNombre() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		assertEquals("Jugador", jugador.getNombre());
 	}
 	
 	@Test
 	public void cuandoSeCreaUnJugadorEsteNoTieneEdificios() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		ArrayList<Edificio> edificios = jugador.getEdificios();
 		
@@ -58,7 +59,7 @@ public class JugadorTest {
 	
 	@Test
 	public void cuandoSeCreaUnJugadorEsteNoTieneUnidades() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		ArrayList<Unidad> unidades = jugador.getUnidades();
 		
@@ -67,7 +68,7 @@ public class JugadorTest {
 	
 	@Test
 	public void cuandoSeCreaUnJugadorEsteNoTienePoblacion() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int poblacion = jugador.getPoblacion();
 		
@@ -76,7 +77,7 @@ public class JugadorTest {
 	
 	@Test
 	public void cuandoSeCreaUnJugadorEsteNoTienePoblacionMaxima() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int poblacion = jugador.getPoblacionMaxima();
 		
@@ -86,7 +87,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnCentroDeMineralElJugadorTiene50UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
 		int cantidadInicial = jugador.getMineral();
 		
@@ -99,7 +100,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeTieneUnCentroDeMineralConstruidoYPasaUnTurnoElJugadorTiene10UnidadesMasDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
 		
 		jugador.crearCentroDeMineral(mineral);
@@ -114,7 +115,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeTieneUnCentroDeMineralConstruidoYPasanDosTurnosElJugadorTiene20UnidadesMasDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
 		
 		jugador.crearCentroDeMineral(mineral);
@@ -129,7 +130,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnCentroDeMineralElJugadorTiene1EdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		Mineral mineral = new Mineral(1, 1);
@@ -142,7 +143,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnDepositoDeSuministrosElJugadorTiene100UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int cantidadInicial = jugador.getMineral();
 		jugador.crearDepositoDeSuministros(1, 1);
@@ -154,7 +155,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeTieneUnDepositoDeSuministrosConstruidoElJugadorTiene5UnidadesMasDePoblacion() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
@@ -166,7 +167,7 @@ public class JugadorTest {
 	
 	@Test
 	public void cuandoSeTieneUnDepositoDeSuministrosConstruyendoseElJugadorNoTieneMasUnidadesDePoblacion() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
@@ -179,7 +180,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnDepositoDeSuministroslElJugadorTiene1EdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		jugador.crearDepositoDeSuministros(1, 1);
@@ -191,7 +192,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnaRefinerialElJugadorTiene100UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		int cantidadInicial = jugador.getMineral();
@@ -204,7 +205,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeTieneUnaRefineriaConstruidaYPasaUnTurnoElJugadorTiene10UnidadesMasDeGasVespeno() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		jugador.crearRefineria(gas);
@@ -219,7 +220,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeTieneUnaRefineriaConstruidaYPasanDosTurnosElJugadorTiene20UnidadesMasDeGasVespeno() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		jugador.crearRefineria(gas);
@@ -234,7 +235,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnaRefinerialElJugadorTiene1EdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
@@ -248,7 +249,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnaFabricaElJugadorTiene200UnidadesMenosDeMineralY100DeGas() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -267,7 +268,7 @@ public class JugadorTest {
 	@Test(expected = NoSePuedeConstruirElEdificio.class)
 	public void cuandoSeTrataDeCrearUnaFabricaTeniendoUnaBarracaEnConstruccionSeLanzaUnaExcepcion () {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -280,7 +281,7 @@ public class JugadorTest {
 	@Test(expected = NoSePuedeConstruirElEdificio.class)
 	public void cuandoSeTrataDeCrearUnaFabricaSinTenerUnaBarracaSeLanzaUnaExcepcion () {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -292,7 +293,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnaFabricaElJugadorPasaATenerUnEdificioMas () {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -309,7 +310,7 @@ public class JugadorTest {
 	@Test
 	public void cuandoSeCreaUnaBarracaElJugadorTiene150UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		int cantidadInicialMineral = jugador.getMineral();
 		jugador.crearBarraca(1, 1);
@@ -321,7 +322,7 @@ public class JugadorTest {
 	@Test(expected = NoSeTienenLosRecursosSuficientes.class)
 	public void cuandoSeIntentaCrearUnaBarracaConMineralInsuficienteLanzaError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.crearBarraca(1, 1);
 		jugador.crearBarraca(2, 2);
@@ -330,7 +331,7 @@ public class JugadorTest {
 	@Test(expected = NoSeTienenLosRecursosSuficientes.class)
 	public void cuandoSeIntentaCrearUnaBarracaConGasVespenoInsuficienteLanzaError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -342,7 +343,7 @@ public class JugadorTest {
 	public void cuandoSeCreaUnMarineAumentaEn1LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -359,7 +360,7 @@ public class JugadorTest {
 	public void cuandoSeCrean2MarinesAumentaEn2LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -377,7 +378,7 @@ public class JugadorTest {
 	public void cuandoSeCrean2MarinesAumentaEn2BarracasDistintasAumentaEn2LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarPoblacionMaxima(2);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -397,7 +398,7 @@ public class JugadorTest {
 	public void cuandoSeCreaUnGoliathAumentaEn1LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -416,7 +417,7 @@ public class JugadorTest {
 	public void cuandoSeCrean2GoliathsAumentaEn1LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -436,7 +437,7 @@ public class JugadorTest {
 	public void cuandoSeCreaUnMarineYUnGoliathAumentaEn2LaCantidadDeUnidades() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarPoblacionMaxima(3);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
@@ -456,7 +457,7 @@ public class JugadorTest {
 	public void cuandoSeIntentaCrearUnaUnidadSinTenerLaCapacidadNecesariaLanzaError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -469,7 +470,7 @@ public class JugadorTest {
 	public void cuandoSeIntentaCrearUnaUnidadSinTenerLaCapacidadNecesariaYTeniendoUnidadesLanzaError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
@@ -486,7 +487,7 @@ public class JugadorTest {
 	public void seCreanDosBarracasYSeConstruyeUnMarineEnLaSegundaElJugadorTiene1UnidadMas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarPoblacionMaxima(3);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);

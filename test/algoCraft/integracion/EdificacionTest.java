@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.construcciones.Base;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
@@ -42,7 +43,7 @@ public class EdificacionTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		Jugador jugador = new Jugador("JugadorDePrueba");
+		Jugador jugador = new Jugador("JugadorDePrueba", new Base(3, 3));
 		jugador.sumarPoblacionMaxima(50);
 		
 		// Se busca un mineral y se le construye un centro encima

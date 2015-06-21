@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.construcciones.Base;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
@@ -16,8 +17,8 @@ public class SimuladorPartidaTest {
 	@Test
 	public void simuladorPartidaTest() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador1 = new Jugador("Ariel");
-		Jugador jugador2 = new Jugador("Juampi");
+		Jugador jugador1 = new Jugador("Ariel", new Base(133, 133));
+		Jugador jugador2 = new Jugador("Juampi", new Base(120, 120));
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
 		Mapa mapa = Mapa.getMapa();

@@ -3,6 +3,7 @@ package algoCraft.juego;
 import java.util.ArrayList;
 
 import algoCraft.construcciones.Barraca;
+import algoCraft.construcciones.Base;
 import algoCraft.construcciones.CentroDeMineral;
 import algoCraft.construcciones.DepositoDeSuministros;
 import algoCraft.construcciones.Edificio;
@@ -34,9 +35,10 @@ public class Jugador {
 	private ArrayList<Unidad> unidades;
 	private int poblacion;
 	private int poblacionMaxima;
+	private Base base;
 	
 
-	public Jugador(String nombre) {
+	public Jugador(String nombre, Base base) {
 		this.nombre = nombre;
 		this.mineral = cantidadInicialDeMineral;
 		this.gasVespeno = cantidadInicialDeGasVespeno;
@@ -44,6 +46,7 @@ public class Jugador {
 		this.unidades = new ArrayList<Unidad>();
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
+		this.base = base;
 	}
 	
 	public int getGasVespeno() {
@@ -182,5 +185,9 @@ public class Jugador {
 			edificio.avanzarTurno(this);
 		for (Unidad unidad : this.unidades)
 			unidad.avanzarTurno();
+	}
+	
+	public boolean perdioLaPartida() {
+		return this.base.estaDestruido();
 	}
 }

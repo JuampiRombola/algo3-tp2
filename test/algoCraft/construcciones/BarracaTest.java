@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.construcciones.Base;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -14,7 +15,7 @@ import algoCraft.unidades.Goliath;
 public class BarracaTest {
 
 	private Barraca crearBarracaConstruida(){
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++)
 			barraca.avanzarTurno(jugador);
@@ -29,7 +30,7 @@ public class BarracaTest {
 	
 	@Test
 	public void laBarracaDejaDeEstarEnConstruccionCuandoPasan12Turnos(){
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		int turno = 0;
 		while(barraca.estaEnConstruccion()){
@@ -53,7 +54,7 @@ public class BarracaTest {
 	
 	@Test
 	public void laBarracaTarda3TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = crearBarracaConstruida();
 		barraca.crearMarine();
 		int turno = 0;
@@ -66,7 +67,7 @@ public class BarracaTest {
 	
 	@Test
 	public void laBarracaTarda6TurnosLuegoDeSuConstrucionEnCrear2Marines() throws ElEdificioEstaEnConstruccion{
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = crearBarracaConstruida();
 		barraca.crearMarine();
 		int turno = 0;
@@ -111,7 +112,7 @@ public class BarracaTest {
 
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno(jugador);
@@ -126,7 +127,7 @@ public class BarracaTest {
 	
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		Goliath goliath = new Goliath(2,2);
 		for (int i = 0; i < 12; i++) {
@@ -159,7 +160,7 @@ public class BarracaTest {
 	
 	@Test
 	public void alCrearseLaBarracaYPasar12TurnosYaNoEstaEnConstruccion() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		
 		for (int i = 0; i < 12; i++) {
@@ -177,7 +178,7 @@ public class BarracaTest {
 	
 	@Test
 	public void alCrearseLaBarracaYPasar12TurnosEstaTieneTodaLaVida() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		
 		for (int i = 0; i < 12; i++) {
@@ -189,7 +190,7 @@ public class BarracaTest {
 	
 	@Test
 	public void alCrearseLaBarracaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		barraca.avanzarTurno(jugador);
 		assertTrue(0 < barraca.getVidaActual());
@@ -199,7 +200,7 @@ public class BarracaTest {
 	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamente(){
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		
 		Barraca barraca1 = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++)
@@ -225,7 +226,7 @@ public class BarracaTest {
 	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamenteConJugador(){
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador");
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarPoblacionMaxima(3);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
