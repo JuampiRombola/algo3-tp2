@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import algoCraft.construcciones.Base;
+import algoCraft.construcciones.EdificioRecolector;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
@@ -76,7 +77,6 @@ public class Mapa {
 			if (this.posicionEstaOcupada(posicion)) continue;
 			GasVespeno gasVespeno = new GasVespeno(posicion.getX(), posicion.getY());
 			this.gasVespeno.put(posicion, gasVespeno);
-			this.elementos.put(posicion, gasVespeno);
 			cantidadGasVespeno++;
 		}
 	}
@@ -88,7 +88,6 @@ public class Mapa {
 			if (this.posicionEstaOcupada(posicion)) continue;
 			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());
 			this.minerales.put(posicion, mineral);
-			this.elementos.put(posicion, mineral);
 			cantidadMinerales++;
 		}
 	}
@@ -110,8 +109,8 @@ public class Mapa {
 			throw new PosicionInvalidaException();
 	}
 	
-	public boolean posicionEstaOcupada(Posicion posicion) {
-		return this.elementos.containsKey(posicion);
+	public boolean posicionEstaOcupada(Posicion p) {
+		return this.elementos.containsKey(p) | this.minerales.containsKey(p) | this.gasVespeno.containsKey(p) ;
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
@@ -125,8 +124,11 @@ public class Mapa {
 	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
 		if (!this.posicionEstaOcupada(posicion))
 			throw new PosicionVaciaException();
-		return elementos.get(posicion);
-
+		if (!(this.hayGasVespenoEn(posicion) || this.hayMineralEn(posicion)))
+			return elementos.get(posicion);
+		if (this.hayGasVespenoEn(posicion))
+			return gasVespeno.get(posicion);
+		return minerales.get(posicion);
 	}
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
@@ -142,12 +144,19 @@ public class Mapa {
 		this.elementos.remove(unidad.getPosicion());
 	}
 	
+	public void removerRecurso(Posicionable recurso) {
+		if (this.hayGasVespenoEn(recurso.getPosicion()))
+			gasVespeno.remove(recurso.getPosicion());
+		if (this.hayMineralEn(recurso.getPosicion()))
+			minerales.remove(recurso.getPosicion());
+	}
+	
 	public boolean hayGasVespenoEn(Posicion posicion) {
-		return this.gasVespeno.containsKey(posicion);
+		return ((!this.elementos.containsKey(posicion)) && this.gasVespeno.containsKey(posicion));
 	}
 	
 	public boolean hayMineralEn(Posicion posicion) {
-		return this.minerales.containsKey(posicion);
+		return ((!this.elementos.containsKey(posicion)) && this.minerales.containsKey(posicion));
 	}
 	
 	public int getCantidadMinerales() {
@@ -166,5 +175,11 @@ public class Mapa {
 			posicionBuscada = posiciones.remove(0);
 		}
 		return posicionBuscada;
+	}
+	
+	public void ocuparRecurso(EdificioRecolector recolector) {
+		Posicion posicion = recolector.getPosicion();
+		if (this.hayGasVespenoEn(posicion) || this.hayMineralEn(posicion))
+			this.elementos.put(recolector.getPosicion(), recolector);
 	}
 }

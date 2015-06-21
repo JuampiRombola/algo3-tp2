@@ -8,12 +8,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import algoCraft.construcciones.Base;
+import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.construcciones.EdificioRecolector;
+import algoCraft.construcciones.Refineria;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
+import algoCraft.recursos.GasVespeno;
+import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
@@ -363,4 +368,43 @@ public class MapaTest {
 		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
 	}
 	
+	@Test
+	public void alOcuparUnMineralEnEsaPosicionDelMapaQuedaUnCentroDeMineral() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		Mineral mineral = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		EdificioRecolector centro = new CentroDeMineral(mineral);
+		mapaGenerado.ocuparRecurso(centro);
+		
+		Assert.assertTrue(centro == mapaGenerado.getUnidad(mineral.getPosicion()));
+	}
+	
+	@Test
+	public void alOcuparUnGasVespenoEnEsaPosicionDelMapaQuedaUnaRefineria() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapaGenerado = Mapa.getMapa();
+		mapaGenerado.cargarBases(1);
+		GasVespeno gasVespeno = null;
+		
+		for (int i=0; i < 30; i++) {
+			for (int j=0; j < 30; j++){
+				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
+				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		EdificioRecolector refineria = new Refineria(gasVespeno);
+		mapaGenerado.ocuparRecurso(refineria);
+		
+		Assert.assertTrue(refineria == mapaGenerado.getUnidad(gasVespeno.getPosicion()));
+	}
 }

@@ -497,6 +497,7 @@ public class JugadorTest {
 
 		jugador.crearBarraca(3, 3);
 		avanzarTurnos(12, jugador);
+		
 		Barraca miBarraca = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
 		jugador.crearMarine(miBarraca);
 		avanzarTurnos(4, jugador);
