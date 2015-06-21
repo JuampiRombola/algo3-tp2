@@ -442,11 +442,10 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12, jugador);
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		avanzarTurnos(3, jugador);
 		jugador.crearFabrica(2, 2);
 		avanzarTurnos(12, jugador);
 		
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
 		avanzarTurnos(6, jugador);
 		

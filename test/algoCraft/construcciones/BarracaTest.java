@@ -220,7 +220,7 @@ public class BarracaTest {
 		assertTrue(barraca1.seTerminoDeCrearLaUnidad());
 		assertTrue(1 == jugador.getUnidades().size());
 	}
-	/*
+
 	@Test
 	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamenteConJugador(){
 		Mapa.reiniciarInstanciaParaTest();
@@ -244,7 +244,7 @@ public class BarracaTest {
 		for (int i = 0; i < 4; i++)
 			barraca1.avanzarTurno(jugador);
 		
-		assertTrue(barraca1.getSeCreoUnaUnidadNueva());
-		//assertTrue(1 == jugador.getUnidades().size());
-	}*/
+		
+		assertTrue(1 == jugador.getUnidades().size());
+	}
 }
