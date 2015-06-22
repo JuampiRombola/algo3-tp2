@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
 
@@ -235,5 +236,14 @@ public class UnidadTest{
 		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
 		assertEquals(Mapa.getMapa().getUnidad(posicion), unidad);
+	}
+	
+	@Test(expected = PosicionVaciaException.class)
+	public void siLaUnidadEsDestruidaNoLaEncuentroEnElMapa(){
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		unidad.recibePuntosDeDanio(vidaMaxima + 1);
+		assertTrue(unidad.estaDestruido());
+		Mapa.getMapa().getUnidad(posicion);
 	}
 }

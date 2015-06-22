@@ -54,6 +54,9 @@ public class Unidad implements Atacable {
 	
 	public void recibePuntosDeDanio(int danio) {
 		this.vida.recibirDanio(danio);
+		if(this.estaDestruido()){
+			Mapa.getMapa().removerUnidad(this);
+		}
 	}
 
 	public boolean esTerrestre() {
