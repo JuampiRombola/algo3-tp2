@@ -13,6 +13,7 @@ public class RefineriaTest {
 
 	@Test
 	public void cuandoSeCreaUnRefineriaNoTieneGasVespenoesRecolectados() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		assertEquals(0, refineria.getRecursosRecolectados());
@@ -20,6 +21,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void cuandoSeCreaUnRefineriaEsteEstaEnTierra() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		assertEquals(true, refineria.esTerrestre());
@@ -27,6 +29,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadaTiene10Unidades() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		refineria.recolectar();
@@ -35,6 +38,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void siSeRecolecta2VecessDespuesDeHaberSidoCreadaTiene20Unidades() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		refineria.recolectar();
@@ -55,6 +59,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void siLaRefineriaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno aasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(aasVespeno);
 		Goliath goliath = new Goliath(2,2);
@@ -68,6 +73,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void unaRefineriaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		Posicion posicion = new Posicion(1,1, true);
@@ -76,6 +82,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void unaRefineriaEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(2, 2);
 		Refineria refineria = new Refineria(gasVespeno);
 		Posicion posicion = new Posicion(2,2, true);

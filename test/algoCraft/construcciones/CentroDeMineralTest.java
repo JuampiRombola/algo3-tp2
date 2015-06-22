@@ -14,6 +14,7 @@ public class CentroDeMineralTest {
 
 	@Test
 	public void cuandoSeCreaUnCentroNoTieneMineralesRecolectados() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		assertEquals(0, centro.getRecursosRecolectados());
@@ -21,6 +22,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void cuandoSeCreaUnCentroDeMineralEsteEstaEnTierra() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		assertEquals(true, centro.esTerrestre());
@@ -28,6 +30,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadoTiene10Unidades() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		centro.recolectar();
@@ -36,6 +39,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siSeRecolecta2VecessDespuesDeHaberSidoCreadoTiene20Unidades() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		centro.recolectar();
@@ -45,6 +49,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathSuVidaDisminuye() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		int vidaInicial = centro.getVidaActual();
@@ -69,6 +74,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void unCentroEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		Posicion posicion = new Posicion(1,1, true);
@@ -77,6 +83,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void unCentroEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(2, 2);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		Posicion posicion = new Posicion(2,2, true);
