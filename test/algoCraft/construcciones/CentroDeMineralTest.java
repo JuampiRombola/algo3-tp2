@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
@@ -54,6 +55,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
+		Mapa.reiniciarInstanciaParaTest();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(mineral);
 		Goliath goliath = new Goliath(2,2);

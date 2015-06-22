@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.Atacable;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
@@ -14,6 +15,7 @@ public class ArmaTest {
 	
 	public Atacable crearAtacable(){
 		//El arma y la posicion en una atacable no tiene relevancia, es solo para crear la unidad.
+		Mapa.reiniciarInstanciaParaTest();
 		Arma arma = new Arma(10,10);
 		Posicion posicion = new Posicion(1,1, true);
 		Atacable atacable = new Unidad(vidaMaxima, arma, posicion, 1);

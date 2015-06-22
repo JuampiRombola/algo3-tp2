@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.unidades.Goliath;
@@ -43,6 +44,7 @@ public class RefineriaTest {
 	
 	@Test
 	public void siLaRefineriaEsAtacadaPorUnGoliathSuVidaDisminuye() {
+		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = new Refineria(gasVespeno);
 		int vidaInicial = refineria.getVidaActual();

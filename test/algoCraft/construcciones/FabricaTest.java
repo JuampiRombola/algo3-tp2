@@ -9,6 +9,7 @@ import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.construcciones.Base;
 import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Goliath;
 
@@ -80,6 +81,7 @@ public class FabricaTest {
 
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);
@@ -95,6 +97,7 @@ public class FabricaTest {
 	
 	@Test
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);

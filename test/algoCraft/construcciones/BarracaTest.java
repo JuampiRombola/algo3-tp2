@@ -112,6 +112,7 @@ public class BarracaTest {
 
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++) {

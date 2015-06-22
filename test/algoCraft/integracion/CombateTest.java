@@ -25,9 +25,6 @@ public class CombateTest {
 		assertTrue(marine.getVidaMaxima() == 40);
 		assertTrue(goliath.getVidaMaxima() == 125);
 		
-		mapa.agregarUnidad(marine);
-		mapa.agregarUnidad(goliath);
-		
 		Assert.assertEquals(marine, mapa.getUnidad(new Posicion(100, 100, true)));
 		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(122, 122, true)));
 		

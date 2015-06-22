@@ -1,6 +1,7 @@
 package algoCraft.unidades;
 
 import algoCraft.Atacable;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
 
@@ -18,6 +19,7 @@ public class Unidad implements Atacable {
 		this.posicion = posicion;
 		this.activa = true;
 		this.poblacionQueOcupa = poblacionQueOcupa;
+		Mapa.getMapa().agregarUnidad(this);
 	}
 	
 	public void atacar(Atacable atacable) {

@@ -27,14 +27,11 @@ public class MapaTest {
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
-		
-		mapa.agregarUnidad(unidad);
-			
+		Posicionable unidad = new Marine(1, 1);			
 		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
 	}
 	
-	@Test
+	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -46,64 +43,41 @@ public class MapaTest {
 			fail();
 		} catch (PosicionInvalidaException e) {}
 	}
-	
-	@Test
+
+	@SuppressWarnings("unused")
+	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 10000);
-		
-		try{
-			mapa.agregarUnidad(unidad);
-			
-			fail();
-		} catch (PosicionInvalidaException e) {}
 	}
 	
-	@Test
+	@SuppressWarnings("unused")
+	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(-1, 1);
-		
-		try{
-			mapa.agregarUnidad(unidad);
-			
-			fail();
-		} catch (PosicionInvalidaException e) {}
 	}
 	
-	@Test
+	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, -1);
-		
-		try{
-			mapa.agregarUnidad(unidad);
-			
-			fail();
-		} catch (PosicionInvalidaException e) {}
+		mapa.agregarUnidad(unidad);
 	}
 	
-	@Test
+	@SuppressWarnings("unused")
+	@Test(expected = PosicionOcupadaException.class)
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 1);
-		Posicionable unidadIntrusa = new Marine(1, 1);
-		try {
-			mapa.agregarUnidad(unidad);
-			mapa.agregarUnidad(unidadIntrusa);
-			
-			fail();
-		} catch (PosicionOcupadaException e) {}
-		
-		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
-		Assert.assertFalse(unidadIntrusa == mapa.getUnidad(unidad.getPosicion()));
+		Posicionable unidadIntrusa = new Marine(1, 1);	
 	}
 	
-	@Test
+	/*@Test Las unidades se agregan solas, el test no tiene sentido ya.
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -115,7 +89,7 @@ public class MapaTest {
 			
 			fail();
 		} catch (PosicionOcupadaException e) {}
-	}
+	}*/
 	
 	@Test
 	public void cuandoSeIntentaObtenerLaUnidadDeUnaPosicionLibreSeLanzaUnError() {
@@ -128,18 +102,13 @@ public class MapaTest {
 		} catch (PosicionVaciaException e) {}
 	}
 	
-	@Test
+	@Test(expected = PosicionVaciaException.class)
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 1);
-		try{
-			mapa.agregarUnidad(unidad);
-			mapa.removerUnidad(unidad);
-			mapa.getUnidad(unidad.getPosicion());
-			
-			fail();
-		} catch (PosicionVaciaException e) {}
+		mapa.removerUnidad(unidad);
+		mapa.getUnidad(unidad.getPosicion());
 	}
 	
 	@Test
@@ -148,7 +117,6 @@ public class MapaTest {
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 1);
 		try{
-			mapa.agregarUnidad(unidad);
 			mapa.moverUnidad(unidad, 2, 2);
 			
 			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
@@ -161,7 +129,6 @@ public class MapaTest {
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(1, 1);
 		try{
-			mapa.agregarUnidad(unidad);
 			mapa.moverUnidad(unidad, 2, 2);
 			mapa.getUnidad(new Posicion(1, 1, true));
 			
@@ -176,8 +143,6 @@ public class MapaTest {
 		Posicionable unidadConMovimiento = new Marine(1, 1);
 		Posicionable unidad = new Marine(2, 2);
 
-		mapa.agregarUnidad(unidadConMovimiento);
-		mapa.agregarUnidad(unidad);
 		mapa.moverUnidad(unidadConMovimiento, 2, 2);
 		
 		Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
@@ -354,17 +319,17 @@ public class MapaTest {
 		Assert.assertEquals((new Posicion(0, 1, false)), posicionLibre);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1));
-
-		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion (0, 0, false));
+		Mapa mapa = Mapa.getMapa();	
+		Posicion posicionOcupada = new Posicion(0, 0, false);
+		Unidad unidad1 = new Unidad(1, null, new Posicion(0, 0, false), 1);
+		Unidad unidad2 = (new Unidad(1, null, new Posicion(0, 1, false), 1));
+		Unidad unidad3 = (new Unidad(1, null, new Posicion(1, 0, false), 1));
+		Unidad unidad4 = (new Unidad(1, null, new Posicion(1, 1, false), 1));
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
 		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
 	}
 	

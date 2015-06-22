@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algoCraft.mapa.Mapa;
 import algoCraft.unidades.Goliath;
 
 public class GoliathTest {
@@ -17,24 +18,28 @@ public class GoliathTest {
 	
 	@Test
 	public void unGoliathTiene125PuntosDeVidaMaximaInicialmente(){
+		Mapa.reiniciarInstanciaParaTest();
 		Goliath goliath = nuevoGoliath();
 		assertTrue(goliath.getVidaMaxima() == 125);
 	}
 	
 	@Test
 	public void unGoliathTiene125PuntosDeVidaActualInicialmente(){
+		Mapa.reiniciarInstanciaParaTest();
 		Goliath goliath = nuevoGoliath();
 		assertTrue(goliath.getVidaActual() == 125);
 	}
 	
 	@Test
 	public void unGoliathTiene12DeDanioInicialmente(){
+		Mapa.reiniciarInstanciaParaTest();
 		Goliath goliath = nuevoGoliath();
 		assertTrue(goliath.getDanio() == 12);
 	}
 	
 	@Test
 	public void unGoliathTiene5DeRangoInicialmente(){
+		Mapa.reiniciarInstanciaParaTest();
 		Goliath goliath = nuevoGoliath();
 		assertTrue(goliath.getRango() == 5);
 	}

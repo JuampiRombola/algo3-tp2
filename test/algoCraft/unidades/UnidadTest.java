@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
@@ -18,8 +19,11 @@ public class UnidadTest{
 	private Posicion posicionEnRango = new Posicion (2,1, true);
 	//La posicion de la unidad que vaya a atacar es 1 1. 100, 100 esta fuera de rango.
 	private Posicion posicionFueraDeRango = new Posicion(100,100, true);
-	private Unidad unidadAtacante = new Unidad(vidaMaxima, armaDePrueba, posicion, 1);
+
 	
+	private Unidad nuevaUnidadAtacante(){
+		return new Unidad(vidaMaxima, armaDePrueba, posicion, 1);
+	}
 	public Unidad nuevaUnidad() {
 		return new Unidad(vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
 	}
@@ -34,12 +38,14 @@ public class UnidadTest{
 	
 	@Test
 	public void alCrearseLaUnidadNoEstaDestruida() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		assertTrue(!unidad.estaDestruido());
 	}
 	
 	@Test 
 	public void alRecibirUnDanioIgualALaVidaMaximaEstaDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(vidaMaxima);
 		assertTrue(unidad.estaDestruido());
@@ -47,6 +53,7 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioMayorALaVidaMaximaEstaDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
@@ -54,6 +61,7 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirEnDosAtaquesUnDanioIgualASuVidaMAximaEstaDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(vidaMaxima/2);
 		unidad.recibePuntosDeDanio(vidaMaxima/2);
@@ -62,6 +70,7 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioIgualALaVidaMaximaLaVidaActualEs0() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(vidaMaxima);
 		assertTrue(unidad.getVidaActual() == 0);
@@ -69,6 +78,7 @@ public class UnidadTest{
 	
 	@Test 
 	public void alRecibirUnDanioMayorALaVidaMaximaLaVidaActualEs0() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(vidaMaxima + 20);
 		assertTrue(unidad.getVidaActual() == 0);
@@ -76,43 +86,49 @@ public class UnidadTest{
 	
 	@Test 
 	public void laVidaMaximaCoincideConLaDelConstructor() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		assertTrue(unidad.getVidaMaxima() == vidaMaxima);
 	}
 	
 	@Test 
 	public void laVidaMaximaCoincideConLaDelConstructorLuegoDeRecibirDanio() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		unidad.recibePuntosDeDanio(100);
 		assertTrue(unidad.getVidaMaxima() == vidaMaxima);
 	}
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDelAtacableEsteEsDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable);
+		nuevaUnidadAtacante().atacar(atacable);
 		assertTrue(atacable.estaDestruido());
 	}
 	
 	@Test
 	public void siDisparoUnArmaEnRangoConMenorDanioQueLaVidaDelAtacableEsteNoEsDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba + 1;
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable);
+		nuevaUnidadAtacante().atacar(atacable);
 		assertTrue(!atacable.estaDestruido());
 	}
 	
 	@Test
 	public void siDisparoUnArmaConMayorDanioQueLaVidaDelAtacablePeroFueraDeRangoElAtacableNoEsDestruido() {
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba - 1;
 		Unidad atacable = nuevaUnidadFueraDeRangoDeAtaque(vidaAtacable);
-		unidadAtacante.atacar(atacable);
+		nuevaUnidadAtacante().atacar(atacable);
 		assertTrue(!atacable.estaDestruido());
 	}
 	
 	
 	@Test
 	public void siTengoUnArmaConDanio1DevuelveConGetDanio1() {
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 1;
 		int rango = 10;
 		int vida = 10;
@@ -122,6 +138,7 @@ public class UnidadTest{
 	}
 	
 	public Unidad crearUnidadDestruida() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = nuevaUnidad();
 		armaDePrueba.atacar(unidad, rangoArmaDePrueba);
 		return unidad;
@@ -129,6 +146,7 @@ public class UnidadTest{
 	
 	@Test
 	public void siDisparoUnArmaYEstoyDestruidoNoPuedoDestruirAUnAtacable() {
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad unidadDestruida = crearUnidadDestruida();
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
@@ -138,6 +156,7 @@ public class UnidadTest{
 	
 	@Test
 	public void siTengoUnArmaConDanio2DevuelveConGetDanio2() {
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 2;
 		int rango = 10;
 		int vida = 10;
@@ -148,6 +167,7 @@ public class UnidadTest{
 	
 	@Test
 	public void  siTengoUnArmaConRango2DevuelveConGetRango2() {
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 10;
 		int rango = 2;
 		int vida = 10;
@@ -158,6 +178,7 @@ public class UnidadTest{
 	
 	@Test
 	public void  siTengoUnArmaConRango1DevuelveConGetRango1() {
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 10;
 		int rango = 1;
 		int vida = 10;
@@ -167,16 +188,19 @@ public class UnidadTest{
 	}
 	@Test
 	public void unaUnidadNoHaceDanioEnElSegundoDisparoSiDispara2VecesSeguidas() {
-		Unidad unidadAtacante = nuevaUnidad();
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba*2;
+		Unidad unidadAtacante = nuevaUnidadAtacante();
 		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(unidadAtacable);
 		unidadAtacante.atacar(unidadAtacable);
 		assertTrue(unidadAtacable.getVidaActual() == (vidaAtacable/2));
 	}
+	
 	@Test
 	public void unaUnidadHaceDanioEnElSegundoDisparoSiAvanzoUnTurno() {
-		Unidad unidadAtacante = nuevaUnidad();
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidadAtacante = nuevaUnidadAtacante();
 		int vidaAtacable = danioArmaDePrueba*2;
 		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(unidadAtacable);
@@ -187,13 +211,29 @@ public class UnidadTest{
 	
 	@Test
 	public void getPoblacionDevuelve1SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 1);
 		assertEquals(unidad.getPoblacionQueOcupa(), 1);
 	}
 	
 	@Test
 	public void getPoblacionDevuelve2SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
+		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
 		assertEquals(unidad.getPoblacionQueOcupa(), 2);
+	}
+	
+	@Test
+	public void getPosicionDevuelveUnaQueEsIgualALaDada() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		assertEquals(unidad.getPosicion(), posicion);
+	}
+	
+	@Test
+	public void siLePidoAlMapaLoQueHayEnLaPosicionDeLaUnidadLaEncuentro(){
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		assertEquals(Mapa.getMapa().getUnidad(posicion), unidad);
 	}
 }
