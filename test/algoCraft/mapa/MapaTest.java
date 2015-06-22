@@ -359,10 +359,10 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1, 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1, 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1, 1));
-		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1, 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 0, false), 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(0, 1, false), 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 0, false), 1));
+		mapa.agregarUnidad(new Unidad(1, null, new Posicion(1, 1, false), 1));
 
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion (0, 0, false));
 		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);

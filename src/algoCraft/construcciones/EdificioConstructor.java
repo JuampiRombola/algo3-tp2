@@ -1,49 +1,52 @@
 package algoCraft.construcciones;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import algoCraft.juego.Jugador;
-import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
-import algoCraft.unidades.Unidad;
 
 public abstract class EdificioConstructor extends Edificio {
 	protected boolean seTerminoDeCrearLaUnidad;
-	protected Queue<Unidad> unidadesEnConstruccion;
-
-	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse) {
+	protected int cantidadDeUnidadesAProducir;
+	protected int tiempoDeConstruccion = 0;
+	protected int turnosParaProducirUnidad;
+	
+	
+	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse, int turnosParaProducirUnidad) {
 		super(vida, posicion, turnosEnConstruirse);
 		this.seTerminoDeCrearLaUnidad = false;
-		this.unidadesEnConstruccion = new LinkedList<Unidad>();
+		this.cantidadDeUnidadesAProducir = 0;
+		this.turnosParaProducirUnidad = turnosParaProducirUnidad;
 	}
 
 	private boolean estaCreandoUnaUnidad() {
-		return (!(unidadesEnConstruccion.isEmpty()));
+		return cantidadDeUnidadesAProducir > 0;
 	}
 
+	private boolean pasoElTiempoParaQueLaUnidadSeProduzca(){
+		return (contadorDeTurnos >= turnosParaProducirUnidad);
+	}
+	
 	@Override
 	public void avanzarTurno(Jugador jugador) {
+		//El metodo que usa esa variable es inutil, lo dejo porque me interesan las pruebas.
 		super.avanzarTurno(jugador);
-		if(estaCreandoUnaUnidad())
-			continuarCreandoLaUnidad(jugador);
+		if(estaCreandoUnaUnidad() && pasoElTiempoParaQueLaUnidadSeProduzca()){
+			crearLaUnidad(jugador);
+			this.contadorDeTurnos = 0;
+			this.cantidadDeUnidadesAProducir--;
+			this.seTerminoDeCrearLaUnidad = true;
+		}
 	}
 
-	private void continuarCreandoLaUnidad(Jugador jugador) {
-		Unidad unidad = this.unidadesEnConstruccion.peek();
-		if (this.contadorDeTurnos == unidad.getTurnosEnConstruirse()) {
-			unidad = this.unidadesEnConstruccion.poll();
-			this.seTerminoDeCrearLaUnidad = true;
-			this.contadorDeTurnos = 0;
-			Posicion posicionSalida = new Posicion(this.posicion.getX(), this.posicion.getY(), unidad.esTerrestre());
+	protected abstract void crearLaUnidad(Jugador jugador);
+			/*Posicion posicionSalida = new Posicion(this.posicion.getX(), this.posicion.getY(), unidad.esTerrestre());
 			Posicion posicionLibre = Mapa.getMapa().getPosicionVaciaCercana(posicionSalida);
 			unidad.setPosicion(posicionLibre.getX(), posicionLibre.getY());
 			Mapa.getMapa().agregarUnidad(unidad);
 			jugador.agregarUnidad(unidad);
-			jugador.sumarPoblacion(unidad.getPoblacionQueOcupa());
-		}
-	}
+			jugador.sumarPoblacion(unidad.getPoblacionQueOcupa());*/
 	
+	
+	//Metodo inutil, por ahora lo quiero por las pruebas
 	public boolean seTerminoDeCrearLaUnidad() {
 		return this.seTerminoDeCrearLaUnidad;
 	}

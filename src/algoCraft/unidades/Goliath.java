@@ -14,6 +14,6 @@ public class Goliath extends Unidad {
 	public static int cantidadDePoblacion = 2;
 	
 	public Goliath(int posicionEnX, int posicionEnY) {
-		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), turnosEnConstruirse, cantidadDePoblacion);
+		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), cantidadDePoblacion);
 	}
 }

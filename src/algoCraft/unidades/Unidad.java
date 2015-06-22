@@ -9,16 +9,14 @@ public class Unidad implements Atacable {
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
-	private int turnosEnConstruirse;
 	private boolean activa;
 	private int poblacionQueOcupa;
 
-	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int turnosEnConstruirse, int poblacionQueOcupa) {
+	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int poblacionQueOcupa) {
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
 		this.activa = true;
-		this.turnosEnConstruirse = turnosEnConstruirse;
 		this.poblacionQueOcupa = poblacionQueOcupa;
 	}
 	
@@ -66,10 +64,6 @@ public class Unidad implements Atacable {
 
 	public Posicion getPosicion() {
 		return this.posicion;
-	}
-	
-	public int getTurnosEnConstruirse() {
-		return this.turnosEnConstruirse;
 	}
 	
 	public void avanzarTurno(){

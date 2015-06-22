@@ -9,7 +9,7 @@ public class Posicion {
 	private int x;
 	private int y;
 	private boolean esTerrestre;
-
+	
 	public Posicion(int x, int y, boolean esTerrestre) {
 		this.x = x;
 		this.y = y;
