@@ -246,4 +246,21 @@ public class UnidadTest{
 		assertTrue(unidad.estaDestruido());
 		Mapa.getMapa().getUnidad(posicion);
 	}
+	
+	@Test
+	public void siUnaUnidadSeMueveAUnaPosicionNuevaLaEncuentroAlli(){
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Posicion nuevaPosicion =  new Posicion(10,10, unidad.esTerrestre());
+		unidad.moverseA(10, 10);
+		assertEquals(unidad, Mapa.getMapa().getUnidad(nuevaPosicion));
+	}
+	
+	@Test(expected = PosicionVaciaException.class)
+	public void siUnaUnidadSeMueveAUnaPosicionNuevaNoLaEncuentroDondeEstaba(){
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		unidad.moverseA(10, 10);
+		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
+	}
 }

@@ -78,4 +78,8 @@ public class Unidad implements Atacable {
 	public int getPoblacionQueOcupa() {
 		return this.poblacionQueOcupa;
 	}
+	
+	public void moverseA(int xDestino, int yDestino){
+		Mapa.getMapa().moverUnidad(this, xDestino, yDestino);
+	}
 }
