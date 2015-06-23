@@ -18,6 +18,7 @@ import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
+import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Unidad;
 
 public class JugadorTest {
@@ -519,5 +520,19 @@ public class JugadorTest {
 		avanzarTurnos(4, jugador);
 		
 		assertTrue(1 == jugador.getUnidades().size());
+	}
+	
+	@Test
+	public void cuandoLaBaseDeUnJugadorEsDestruidaEstePierdeLaPartida() {
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Base base = jugador.getBase();
+		Goliath goliath = new Goliath(2,2);
+		
+		while (!base.estaDestruido()) {
+			goliath.atacar(base);
+			goliath.avanzarTurno();
+		}
+		
+		assertTrue(jugador.perdioLaPartida());
 	}
 }
