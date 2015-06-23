@@ -1,17 +1,21 @@
 package algoCraft.juego;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import algoCraft.juego.Jugador;
 
 public class Juego {
-	public ArrayList<Jugador> jugadores;
+	public LinkedList<Jugador> jugadores;
 	
 	public Juego() {
-		this.jugadores = new ArrayList<Jugador>();
+		this.jugadores = new LinkedList<Jugador>();
 	}
 	
 	public int getCantidadDeJugadores() {
 		return this.jugadores.size();
+	}
+	
+	public void anadirJugador(Jugador jugador) {
+		this.jugadores.add(jugador);
 	}
 }
