@@ -228,6 +228,7 @@ public class BarracaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
 		jugador.sumarPoblacionMaxima(3);
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);

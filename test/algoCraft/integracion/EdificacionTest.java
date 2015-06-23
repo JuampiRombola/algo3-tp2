@@ -45,6 +45,7 @@ public class EdificacionTest {
 		mapa.cargarBases(1);
 		
 		Jugador jugador = new Jugador("JugadorDePrueba", new Base(3, 3));
+		jugador.activar();
 		
 		// Se busca un mineral y se le construye un centro encima
 		Mineral mineral = this.obtenerUnMineralDelMapa();

@@ -49,7 +49,7 @@ public class Jugador {
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
 		this.base = base;
-		this.estaActivo = true;
+		this.estaActivo = false;
 	}
 	
 	public int getGasVespeno() {
@@ -208,5 +208,13 @@ public class Jugador {
 	public void validarSiEstaActivo() {
 		if (!this.estaActivo)
 			throw new ElJugadorNoEstaActivoException();
+	}
+
+	public void activar() {
+		this.estaActivo = true;
+	}
+	
+	public void desactivar() {
+		this.estaActivo = false;
 	}
 }

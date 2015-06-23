@@ -19,7 +19,9 @@ public class SimuladorPartidaTest {
 	public void simuladorPartidaTest() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador1 = new Jugador("Ariel", new Base(10, 10));
+		jugador1.activar();
 		Jugador jugador2 = new Jugador("Juampi", new Base(1, 1));
+		jugador2.activar();
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
 		Mapa mapa = Mapa.getMapa();
