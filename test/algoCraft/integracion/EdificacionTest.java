@@ -8,6 +8,7 @@ import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Base;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
@@ -44,7 +45,6 @@ public class EdificacionTest {
 		mapa.cargarBases(1);
 		
 		Jugador jugador = new Jugador("JugadorDePrueba", new Base(3, 3));
-		jugador.sumarPoblacionMaxima(50);
 		
 		// Se busca un mineral y se le construye un centro encima
 		Mineral mineral = this.obtenerUnMineralDelMapa();
@@ -71,43 +71,62 @@ public class EdificacionTest {
 		assertTrue(80 == jugador.getGasVespeno());
 		
 		//Pasan 12 turnos
-		for (int i=0; i < 12; i++)
+		for (int i=0; i < 15; i++)
 			jugador.avanzarTurno();
 		
-		assertTrue(120 == jugador.getMineral());
-		assertTrue(200 == jugador.getGasVespeno());
+		assertTrue(150 == jugador.getMineral());
+		assertTrue(230 == jugador.getGasVespeno());
 		
-		//El jugador deberia poder crear un Marine
+		//El jugador no deberia poder crear un Marine por sobrepoblacion
+		try {
+			jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(5, 5, true)));
+			
+			fail();
+		} catch (NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {}
+		
+		jugador.crearDepositoDeSuministros(6, 6);
+		
+		//Pasan 6 turnos
+		for (int i=0; i < 6; i++)
+			jugador.avanzarTurno();
+		
+		//Se aumenta la poblacion a 5
+		assertTrue(5 == jugador.getPoblacionMaxima());
+		
+		assertTrue(110 == jugador.getMineral());
+		assertTrue(290 == jugador.getGasVespeno());
+		
+		//El jugador debería poder crear un Marine
 		jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(5, 5, true)));
 		
-		assertTrue(70 == jugador.getMineral());
-		assertTrue(200 == jugador.getGasVespeno());
+		assertTrue(60 == jugador.getMineral());
+		assertTrue(290 == jugador.getGasVespeno());
 		
-		//Pasan 13 turnos
-		for (int i=0; i < 13; i++)
+		//Pasan 14 turnos
+		for (int i=0; i < 14; i++)
 			jugador.avanzarTurno();
 		
 		assertTrue(200 == jugador.getMineral());
-		assertTrue(330 == jugador.getGasVespeno());
+		assertTrue(430 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear una fabrica
 		jugador.crearFabrica(7, 7);
 		
 		assertTrue(0 == jugador.getMineral());
-		assertTrue(230 == jugador.getGasVespeno());
+		assertTrue(330 == jugador.getGasVespeno());
 		
 		//Pasan 12 turnos
 		for (int i=0; i < 12; i++)
 			jugador.avanzarTurno();
 		
 		assertTrue(120 == jugador.getMineral());
-		assertTrue(350 == jugador.getGasVespeno());
+		assertTrue(450 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear un Goliath
 		jugador.crearGoliath((Fabrica) mapa.getUnidad(new Posicion(7, 7, true)));
 		
 		assertTrue(20 == jugador.getMineral());
-		assertTrue(300 == jugador.getGasVespeno());
+		assertTrue(400 == jugador.getGasVespeno());
 	}
 
 }
