@@ -621,4 +621,28 @@ public class JugadorTest {
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
 	}
 	
+	@Test
+	public void cuandoAUnJugadorTieneDosBarracasYSeLeDestruyenUnaEstaEsEliminadoDeSuListaDeEdificios() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.crearBarraca(1, 1);
+		jugador.crearBarraca(3, 3);
+		avanzarTurnos(12, jugador);
+		Goliath goliath = new Goliath(2,2);
+		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(3, 3, true));
+		int cantidadEdificiosInicial = jugador.getEdificios().size();
+		
+		while (!barraca.estaDestruido()) {
+			goliath.atacar(barraca);
+			goliath.avanzarTurno();
+		}
+		jugador.actualizarEstado();
+		int cantidadEdificiosFinal = jugador.getEdificios().size();
+		
+		assertTrue(jugador.getEdificios().get(0) == (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
+		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
+	}
+	
 }
