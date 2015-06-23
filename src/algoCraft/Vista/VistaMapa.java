@@ -21,14 +21,9 @@ public class VistaMapa extends JPanel{
 		GridBagConstraints gbc = new GridBagConstraints();
 		for (int i = 0; i < mapa.getAncho(); i++){
 			for (int j = 0; j < mapa.getAlto(); j++){
-				VistaCuadrado cuadrado;
-				if(booleano){
-					cuadrado= new VistaCuadrado(Color.blue);
-					booleano = false;
-				}else{
-					cuadrado = new VistaCuadrado(Color.green);
-					booleano = true;
-				}
+				Color color = (booleano) ? Color.blue : Color.green;
+				VistaCuadrado cuadrado = new VistaCuadrado(color);
+				booleano = !booleano;
 				gbc.gridx = i;
                 gbc.gridy = j;
                 this.add(cuadrado, gbc);

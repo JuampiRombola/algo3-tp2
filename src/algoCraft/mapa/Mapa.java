@@ -27,12 +27,11 @@ public class Mapa{
 		this.minerales = new HashMap<Posicion, Mineral>();
 	}
 	
-	public int getAlto(){
+	public int getAlto() {
 		return alto;
-		
 	}
 	
-	public int getAncho(){
+	public int getAncho() {
 		return ancho;
 	}
 	
