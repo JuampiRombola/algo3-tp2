@@ -11,19 +11,20 @@ import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.recursos.Mineral;
 
 public class SimuladorPartidaTest {
-	/*
+
 	@Test
 	public void simuladorPartidaTest() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador1 = new Jugador("Ariel", new Base(133, 133));
-		Jugador jugador2 = new Jugador("Juampi", new Base(120, 120));
+		Jugador jugador1 = new Jugador("Ariel", new Base(10, 10));
+		Jugador jugador2 = new Jugador("Juampi", new Base(1, 1));
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(2);
-		/*
+		
 		//Se busca una posicion donde haya un mineral
 		Posicion posicionMineral = new Posicion(0, 0, true);
 		for (int i=0; i < 1000; i++) {
@@ -42,21 +43,21 @@ public class SimuladorPartidaTest {
 		jugador1.crearCentroDeMineral(mineral);
 		
 		//El jugador1 deberia poder crear una barraca
-		jugador1.crearBarraca(130, 130);
+		jugador1.crearBarraca(2, 2);
 		
 		//El jugador2 construye su 1er barraca
-		jugador2.crearBarraca(125, 125);
+		jugador2.crearBarraca(9, 9);
 			
 		//El jugador2 intenta crear una 2da barraca pero no puede
 		try {
-			jugador2.crearBarraca(126, 126);
+			jugador2.crearBarraca(7, 7);
 			
 			fail();
 		} catch (NoSeTienenLosRecursosSuficientes e) {}
 	
 		//El jugador2 no deberia poder empezar la creacion de un marine
 		try {
-			Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(130, 130, true)));
+			Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(9, 9, true)));
 			jugador2.crearMarine(barraca);
 			
 			fail();
@@ -69,8 +70,8 @@ public class SimuladorPartidaTest {
 		}
 		
 		//El jugador2 deberia poder empezar la creacion de un marine
-		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(130, 130, true)));
+		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(9, 9, true)));
 		jugador2.crearMarine(barraca);
-	}*/
+	}
 
 }

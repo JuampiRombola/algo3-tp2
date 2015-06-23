@@ -14,7 +14,7 @@ import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
 public class EdificacionTest {
-	/* Mapa muy grande
+
 	private Mineral obtenerUnMineralDelMapa() {
 		Mineral mineral = null;
 		for (int i=0; i < 30; i++) {
@@ -28,8 +28,8 @@ public class EdificacionTest {
 	
 	private GasVespeno obtenerUnGasVespenoDelMapa() {
 		GasVespeno gasVespeno = null;
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < Mapa.getMapa().getAlto(); i++) {
+			for (int j=0; j < Mapa.getMapa().getAncho(); j++){
 				if (!Mapa.getMapa().hayGasVespenoEn(new Posicion(i, j, true))) continue;
 				gasVespeno = (GasVespeno) Mapa.getMapa().getUnidad(new Posicion(i, j, true));
 			}
@@ -65,7 +65,7 @@ public class EdificacionTest {
 		assertTrue(80 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear una barraca
-		jugador.crearBarraca(50, 50);
+		jugador.crearBarraca(5, 5);
 		
 		assertTrue(0 == jugador.getMineral());
 		assertTrue(80 == jugador.getGasVespeno());
@@ -78,7 +78,7 @@ public class EdificacionTest {
 		assertTrue(200 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear un Marine
-		jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(50, 50, true)));
+		jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(5, 5, true)));
 		
 		assertTrue(70 == jugador.getMineral());
 		assertTrue(200 == jugador.getGasVespeno());
@@ -91,7 +91,7 @@ public class EdificacionTest {
 		assertTrue(330 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear una fabrica
-		jugador.crearFabrica(60, 60);
+		jugador.crearFabrica(7, 7);
 		
 		assertTrue(0 == jugador.getMineral());
 		assertTrue(230 == jugador.getGasVespeno());
@@ -104,10 +104,10 @@ public class EdificacionTest {
 		assertTrue(350 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear un Goliath
-		jugador.crearGoliath((Fabrica) mapa.getUnidad(new Posicion(60, 60, true)));
+		jugador.crearGoliath((Fabrica) mapa.getUnidad(new Posicion(7, 7, true)));
 		
 		assertTrue(20 == jugador.getMineral());
 		assertTrue(300 == jugador.getGasVespeno());
-	}*/
+	}
 
 }
