@@ -12,7 +12,7 @@ import algoCraft.mapa.Mapa;
 public class VistaMapa extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
-	//Practica con el tamaño de las cosas, todavia no muestra el mapa real.
+	//Practica con el tamanio de las cosas, todavia no muestra el mapa real.
 	public VistaMapa(){
 		Mapa mapa = Mapa.getMapa();
 	    this.setLayout(new GridBagLayout());
