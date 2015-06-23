@@ -94,6 +94,13 @@ public class JugadorTest {
 	}
 	
 	@Test
+	public void cuandoSeCreaUnJugadorEsteNoPerdioLaPartida() {
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		
+		assertFalse(jugador.perdioLaPartida());
+	}
+	
+	@Test
 	public void cuandoSeCreaUnCentroDeMineralElJugadorTiene50UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
