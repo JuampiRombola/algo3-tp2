@@ -85,6 +85,15 @@ public class JugadorTest {
 	}
 	
 	@Test
+	public void cuandoSeCreaUnJugadorEsteTieneUnaBase() {
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		
+		Base base = jugador.getBase();
+		
+		assertEquals(2500, base.getVidaActual());
+	}
+	
+	@Test
 	public void cuandoSeCreaUnCentroDeMineralElJugadorTiene50UnidadesMenosDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));

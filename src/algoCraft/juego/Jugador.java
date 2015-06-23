@@ -77,6 +77,10 @@ public class Jugador {
 		return this.poblacionMaxima;
 	}
 	
+	public Base getBase() {
+		return this.base;
+	}
+	
 	public void sumarUnidadesDeMineral(int cantidadASumar) {
 		this.mineral += cantidadASumar;
 	}
