@@ -53,4 +53,13 @@ public class JuegoTest {
 		
 		assertEquals(2, juego.getCantidadDeJugadores());
 	}
+	
+	@Test
+	public void cuandoSeIniciaElJuegoConMasDe4JugadoresSoloSeTiene4Jugadores() {
+		Juego juego = new Juego();
+
+		juego.iniciarPartida(5);
+		
+		assertEquals(4, juego.getCantidadDeJugadores());
+	}
 }

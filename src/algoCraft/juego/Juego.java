@@ -32,8 +32,7 @@ public class Juego {
 		nombres.add("Jugador2");
 		nombres.add("Jugador3");
 		nombres.add("Jugador4");
-		int indiceFinal = (cantidadDeJugadores > 4) ? 4 : cantidadDeJugadores;
-		return nombres.subList(0, indiceFinal);
+		return nombres.subList(0, cantidadDeJugadores);
 	}
 	
 	private void anadirJugadores(List<String> nombres, List<Base> bases, int cantidadDeJugadores) {
@@ -48,9 +47,10 @@ public class Juego {
 	public void iniciarPartida(int cantidadDeJugadores) {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		List<Base> bases = (List<Base>)mapa.cargarBases(cantidadDeJugadores);
-		List<String> nombres = this.pedirNombresDeJugadores(cantidadDeJugadores);
-		this.anadirJugadores(nombres, bases, cantidadDeJugadores);
+		int cantidad = (cantidadDeJugadores > 4) ? 4 : cantidadDeJugadores;
+		List<Base> bases = (List<Base>)mapa.cargarBases(cantidad);
+		List<String> nombres = this.pedirNombresDeJugadores(cantidad);
+		this.anadirJugadores(nombres, bases, cantidad);
 		this.iteradorJugadores = this.jugadores.iterator();
 	}
 	
