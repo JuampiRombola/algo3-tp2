@@ -35,4 +35,13 @@ public class JuegoTest {
 		
 		assertEquals(cantidadInicial + 2, juego.getCantidadDeJugadores());
 	}
+	
+	@Test
+	public void cuandoSeIniciaElJuegoCon3JugadoresTiene3Jugadores() {
+		Juego juego = new Juego();
+
+		juego.iniciarPartida(3);
+		
+		assertEquals(3, juego.getCantidadDeJugadores());
+	}
 }
