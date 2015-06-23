@@ -231,26 +231,37 @@ public class Jugador {
 	}
 
 	/*public void removerElementosDestruidos(ArrayList<Atacable> elementos) {
-		for (Atacable elemento : elementos) {
-			if (elemento.estaDestruido())
+		for (int i = 0; i < elementos.size(); i++) {
+			Atacable elemento = elementos.get(i);
+			if (elemento.estaDestruido()) {
 				elementos.remove(elemento);
+				i--;
+			}	
 		}
 	}*/
 	
 	public void actualizarEstado() {
-		for (Edificio edificio : this.edificios) {
-			if (edificio.estaDestruido())
+		for (int i = 0; i < this.edificios.size(); i++) {
+			Edificio edificio = this.edificios.get(i);
+			if (edificio.estaDestruido()) {
 				this.edificios.remove(edificio);
+				i--;
+			}
 		}
-		for (Unidad unidad : this.unidades) {
-			if (unidad.estaDestruido())
+		for (int i = 0; i < this.unidades.size(); i++) {
+			Unidad unidad = this.unidades.get(i);
+			if (unidad.estaDestruido()) {
 				this.unidades.remove(unidades);
+				i--;
+			}
 		}
-		for (DepositoDeSuministros casa : this.casas) {
-				if (casa.estaDestruido()) {
-					this.sumarPoblacion(-(DepositoDeSuministros.capacidadDePoblacionASumar));
-					this.casas.remove(casa);
-				}
+		for (int i = 0; i < this.casas.size(); i++) {
+			DepositoDeSuministros casa = this.casas.get(i);
+			if (casa.estaDestruido()) {
+				this.sumarPoblacion(-(DepositoDeSuministros.capacidadDePoblacionASumar));
+				this.casas.remove(casa);
+				i--;
+			}
 		}
 	}
 }
