@@ -258,7 +258,7 @@ public class Jugador {
 		for (int i = 0; i < this.casas.size(); i++) {
 			DepositoDeSuministros casa = this.casas.get(i);
 			if (casa.estaDestruido()) {
-				this.sumarPoblacion(-(DepositoDeSuministros.capacidadDePoblacionASumar));
+				this.sumarPoblacionMaxima(-(DepositoDeSuministros.capacidadDePoblacionASumar));
 				this.casas.remove(casa);
 				i--;
 			}

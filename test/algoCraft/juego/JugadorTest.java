@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Base;
+import algoCraft.construcciones.DepositoDeSuministros;
 import algoCraft.construcciones.Edificio;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.juego.Jugador;
@@ -593,6 +594,30 @@ public class JugadorTest {
 		jugador.actualizarEstado();
 		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
+		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
+	}
+	
+	@Test
+	public void cuandoAUnJugadorLeDestruyenUnDepositoDeSuministrosEsteEsEliminadoDeSuListaDeCasasYSereduceSuPoblaxonMaxima() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		jugador.crearDepositoDeSuministros(1, 1);
+		avanzarTurnos(3, jugador);
+		Goliath goliath = new Goliath(2,2);
+		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
+		int poblacionInicial = jugador.getPoblacionMaxima();
+		int cantidadEdificiosInicial = jugador.getCasas().size();
+		
+		while (!deposito.estaDestruido()) {
+			goliath.atacar(deposito);
+			goliath.avanzarTurno();
+		}
+		jugador.actualizarEstado();
+		int poblacionFinal = jugador.getPoblacionMaxima();
+		int cantidadEdificiosFinal = jugador.getCasas().size();
+		
+		assertTrue(poblacionInicial == poblacionFinal + 5);
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
 	}
 	
