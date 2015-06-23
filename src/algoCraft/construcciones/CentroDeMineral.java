@@ -15,16 +15,16 @@ public class CentroDeMineral extends EdificioRecolector{
 		super(mineral, vida, turnosEnConstruirse);
 	}
 	
-	public void recolectar() {
-		super.recolectar(cantidadARecolectar);
+	public int recolectar() {
+		return super.recolectar(cantidadARecolectar);
 	}
 		
 	@Override
 	public void avanzarTurno(Jugador jugador) {
 		super.avanzarTurno(jugador);
 		if (!this.estaEnConstruccion) {
-			this.recolectar();
-			jugador.sumarUnidadesDeMineral(cantidadARecolectar);
+			int cantidadRecolectada = this.recolectar();
+			jugador.sumarUnidadesDeMineral(cantidadRecolectada);
 		}
 	}
 }

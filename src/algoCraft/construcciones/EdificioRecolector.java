@@ -21,8 +21,9 @@ public abstract class EdificioRecolector extends Edificio {
 		return recursosRecolectados;
 	}
 	
-	public void recolectar(int cantidadRecolectada) {
+	public int recolectar(int cantidadARecolectar) {
+		int cantidadRecolectada = this.recurso.extraer(cantidadARecolectar);
 		this.recursosRecolectados += cantidadRecolectada;
-		this.recurso.extraer(cantidadRecolectada);
+		return cantidadRecolectada;
 	}
 }

@@ -21,10 +21,12 @@ public abstract class Recurso implements Posicionable {
 		return unidadesRestantes <= 0;
 	}
 	
-	public void extraer(int cantidadExtraida) {
+	public int extraer(int cantidadExtraida) {
 		if  (!this.estaDestruido()) {
 			this.unidadesRestantes -= cantidadExtraida;
+			return cantidadExtraida;
 		}
+		return 0;
 	}
 	
 	public boolean esTerrestre() {
