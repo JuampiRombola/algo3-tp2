@@ -19,7 +19,7 @@ public class UnidadTest{
 	private Posicion posicion = new Posicion(1,1, true);
 	private Posicion posicionEnRango = new Posicion (2,1, true);
 	//La posicion de la unidad que vaya a atacar es 1 1. 100, 100 esta fuera de rango.
-	private Posicion posicionFueraDeRango = new Posicion(100,100, true);
+	private Posicion posicionFueraDeRango = new Posicion(15,15, true);
 
 	
 	private Unidad nuevaUnidadAtacante(){

@@ -23,6 +23,7 @@ import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class MapaTest {
+	
 	@Test
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa.reiniciarInstanciaParaTest();

@@ -13,18 +13,27 @@ import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
-public class Mapa {
+public class Mapa{
 	private HashMap<Posicion, Posicionable> elementos;
 	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
 	private static Mapa instancia = null;
-	private int alto = 500;
-	private int ancho = 500;
-
+	private int alto = 25;
+	private int ancho = 25;
+	
 	private Mapa() {
 		this.elementos = new HashMap<Posicion, Posicionable>(alto * ancho);
 		this.gasVespeno = new HashMap<Posicion, GasVespeno>();
 		this.minerales = new HashMap<Posicion, Mineral>();
+	}
+	
+	public int getAlto(){
+		return alto;
+		
+	}
+	
+	public int getAncho(){
+		return ancho;
 	}
 	
 	public static void reiniciarInstanciaParaTest() {
