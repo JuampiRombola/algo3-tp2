@@ -2,6 +2,7 @@ package algoCraft.construcciones;
 
 import algoCraft.Atacable;
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Vida;
 
@@ -26,6 +27,8 @@ public abstract class Edificio implements Atacable {
 	
 	public void recibePuntosDeDanio(int danio) {
 		this.vida.recibirDanio(danio);
+		if(this.estaDestruido())
+			Mapa.getMapa().removerUnidad(this);
 	}
 	
 	public int getVidaActual() {

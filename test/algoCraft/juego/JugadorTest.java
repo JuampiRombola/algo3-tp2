@@ -209,9 +209,9 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		
-		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
+		int cantidadEdificiosInicial = (jugador.getCasas()).size();
 		jugador.crearDepositoDeSuministros(1, 1);
-		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
+		int cantidadEdificiosFinal = (jugador.getCasas()).size();
 		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}

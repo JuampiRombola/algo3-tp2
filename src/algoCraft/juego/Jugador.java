@@ -34,6 +34,7 @@ public class Jugador {
 	private int gasVespeno;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
+	private ArrayList<DepositoDeSuministros> casas;
 	private int poblacion;
 	private int poblacionMaxima;
 	private Base base;
@@ -46,6 +47,7 @@ public class Jugador {
 		this.gasVespeno = cantidadInicialDeGasVespeno;
 		this.edificios = new ArrayList<Edificio>();
 		this.unidades = new ArrayList<Unidad>();
+		this.casas = new ArrayList<DepositoDeSuministros>();
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
 		this.base = base;
@@ -70,6 +72,10 @@ public class Jugador {
 	
 	public ArrayList<Edificio> getEdificios() {
 		return this.edificios;
+	}
+	
+	public ArrayList<DepositoDeSuministros> getCasas() {
+		return this.casas;
 	}
 	
 	public int getPoblacion() {
@@ -113,6 +119,10 @@ public class Jugador {
 		this.edificios.add(edificio);
 	}
 	
+	private void agregarCasa(DepositoDeSuministros casa) {
+		this.casas.add(casa);
+	}
+	
 	private void verificarRecursos(int mineralesAGastar, int gasVespenoAGastar) throws NoSeTienenLosRecursosSuficientes {
 		if ((mineralesAGastar > this.mineral) || (gasVespenoAGastar > this.gasVespeno))
 			throw new NoSeTienenLosRecursosSuficientes();
@@ -140,7 +150,7 @@ public class Jugador {
 		this.validarSiEstaActivo();
 		this.verificarRecursos(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
 		DepositoDeSuministros deposito = new DepositoDeSuministros(x, y);
-		this.agregarEdificio(deposito);
+		this.agregarCasa(deposito);
 		this.restarRecursosGastados(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
 		Mapa.getMapa().agregarUnidad(deposito);
 	}
@@ -197,6 +207,8 @@ public class Jugador {
 	public void avanzarTurno() {
 		for (Edificio edificio : this.edificios)
 			edificio.avanzarTurno(this);
+		for (DepositoDeSuministros casa : this.casas)
+			casa.avanzarTurno(this);
 		for (Unidad unidad : this.unidades)
 			unidad.avanzarTurno();
 	}
@@ -216,5 +228,29 @@ public class Jugador {
 	
 	public void desactivar() {
 		this.estaActivo = false;
+	}
+
+	/*public void removerElementosDestruidos(ArrayList<Atacable> elementos) {
+		for (Atacable elemento : elementos) {
+			if (elemento.estaDestruido())
+				elementos.remove(elemento);
+		}
+	}*/
+	
+	public void actualizarEstado() {
+		for (Edificio edificio : this.edificios) {
+			if (edificio.estaDestruido())
+				this.edificios.remove(edificio);
+		}
+		for (Unidad unidad : this.unidades) {
+			if (unidad.estaDestruido())
+				this.unidades.remove(unidades);
+		}
+		for (DepositoDeSuministros casa : this.casas) {
+				if (casa.estaDestruido()) {
+					this.sumarPoblacion(-(DepositoDeSuministros.capacidadDePoblacionASumar));
+					this.casas.remove(casa);
+				}
+		}
 	}
 }

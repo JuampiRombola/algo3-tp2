@@ -62,4 +62,30 @@ public class JuegoTest {
 		
 		assertEquals(4, juego.getCantidadDeJugadores());
 	}
+	
+	@Test
+	public void cuandoSeAvanzaAlSiguienteJugadorElJugadorActualPasaASerElQueLeSigue() {
+		Juego juego = new Juego();
+		juego.iniciarPartida(3);
+
+		Jugador jugador1 = juego.getJugadorActual();
+		juego.siguienteJugador();
+		Jugador jugador2 = juego.getJugadorActual();
+		
+		assertTrue(jugador1 != jugador2);
+	}
+	
+	@Test
+	public void cuandoSePasaUnaRondaSeVuelveAlJugador1() {
+		Juego juego = new Juego();
+		juego.iniciarPartida(3);
+
+		Jugador jugadorInicial = juego.getJugadorActual();
+		juego.siguienteJugador();
+		juego.siguienteJugador();
+		juego.siguienteJugador();
+		Jugador jugadorFinal = juego.getJugadorActual();
+		
+		assertTrue(jugadorInicial == jugadorFinal);
+	}
 }

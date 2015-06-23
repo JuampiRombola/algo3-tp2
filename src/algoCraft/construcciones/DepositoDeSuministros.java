@@ -7,7 +7,7 @@ public class DepositoDeSuministros extends Edificio {
 	static boolean inicialmenteTerrestre = true;
 	static int vida = 500;
 	static int turnosQueTardaEnConstruirse = 6;
-	static int capacidadDePoblacionASumar = 5;
+	public static int capacidadDePoblacionASumar = 5;
 	public static int cantidadMineral = 100;
 	public static int cantidadGasVespeno = 0;
 

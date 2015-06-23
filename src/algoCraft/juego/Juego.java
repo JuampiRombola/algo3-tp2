@@ -11,8 +11,8 @@ import algoCraft.mapa.Mapa;
 
 public class Juego {
 	private ArrayList<Jugador> jugadores;
-	@SuppressWarnings("unused")
 	private Iterator<Jugador> iteradorJugadores;
+	private Jugador jugadorActual;
 	
 	public Juego() {
 		this.jugadores = new ArrayList<Jugador>();
@@ -46,12 +46,27 @@ public class Juego {
 	
 	public void iniciarPartida(int cantidadDeJugadores) {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
 		int cantidad = (cantidadDeJugadores > 4) ? 4 : cantidadDeJugadores;
-		List<Base> bases = (List<Base>)mapa.cargarBases(cantidad);
+		List<Base> bases = (List<Base>)Mapa.getMapa().cargarBases(cantidad);
 		List<String> nombres = this.pedirNombresDeJugadores(cantidad);
 		this.anadirJugadores(nombres, bases, cantidad);
 		this.iteradorJugadores = this.jugadores.iterator();
+		this.jugadorActual = this.iteradorJugadores.next();
+	}
+	
+	public void siguienteJugador() {
+		this.jugadorActual.avanzarTurno();
+		this.jugadorActual.desactivar();
+		this.jugadorActual = this.iteradorJugadores.next();
+		this.jugadorActual.activar();
+		this.jugadorActual.actualizarEstado();
+		if (!this.iteradorJugadores.hasNext()) {
+			this.iteradorJugadores = this.jugadores.iterator();
+		}
+	}
+	
+	public Jugador getJugadorActual() {
+		return this.jugadorActual;
 	}
 	
 	/*
