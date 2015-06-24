@@ -377,7 +377,7 @@ public class MapaTest {
 	public void alOcuparUnGasVespenoEnEsaPosicionDelMapaQuedaUnaRefineria() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
+		mapaGenerado.cargarBases(4);
 		GasVespeno gasVespeno = null;
 		
 		for (int i=0; i < 25; i++) {
