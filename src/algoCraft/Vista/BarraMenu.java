@@ -17,19 +17,20 @@ public class BarraMenu {
 	private JFrame marco;
 	private JMenuBar barraMenu;
     private JMenu menuJuego, menuAcercaDe;
-    private JMenuItem itmNuevaPartida, itmSalir, itmCreadores;
+    private JMenuItem itmSalir, itmCreadores;
+	private MenuNuevaPartida menuNuevaPartida;
     
     public BarraMenu(JFrame marco){
     	this.marco = marco;
     	this.barraMenu = new JMenuBar();
 		this.menuJuego = new JMenu("Juego");
 		this.menuAcercaDe = new JMenu("Acerca De");
-		this.itmNuevaPartida = new JMenuItem("Nueva Partida");
+		this.menuNuevaPartida = new MenuNuevaPartida();
 		this.itmSalir = new JMenuItem("Salir");
 		this.itmCreadores = new JMenuItem("Creadores");
 		
 		this.barraMenu.add(this.menuJuego);
-		this.menuJuego.add(this.itmNuevaPartida);
+		this.menuJuego.add(this.menuNuevaPartida);
 		this.menuJuego.add(this.itmSalir);
 		
 		this.barraMenu.add(this.menuAcercaDe);
@@ -45,25 +46,25 @@ public class BarraMenu {
     private void agregarEventosBarraMenu() {
 		this.itmSalir.addActionListener(new CerrarVentana());
 		this.itmCreadores.addActionListener(new MostrarDialogoCreadores(this.marco));
-		this.itmNuevaPartida.addActionListener(new NuevoJuegoListener());
 	}
     
     public class MostrarDialogoCreadores implements ActionListener{
     	private AcercaDeDialog dialog;
+    	
     	public MostrarDialogoCreadores(JFrame marco) {
     		this.dialog = new AcercaDeDialog(marco);
     	}
     	
 		public void actionPerformed(ActionEvent e){
             this.dialog.setVisible(true);
-			}
+		}
 	}
     
     public class NuevoJuegoListener implements ActionListener{
  
 		public void actionPerformed(ActionEvent e){
 			Mapa.getMapa().limpiarMapa();
-            Mapa.getMapa().cargarBases(2);
+            Mapa.getMapa().cargarBases(4);
             System.out.println("Creando nuevo juego ...");
 		}
 	}

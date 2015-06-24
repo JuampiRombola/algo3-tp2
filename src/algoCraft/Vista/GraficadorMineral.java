@@ -2,7 +2,7 @@ package algoCraft.Vista;
 
 public class GraficadorMineral extends Graficador{
 	@Override
-	PosicionVista getPosicionVista() {
+	public PosicionVista getPosicionVista() {
 		return new VistaMineral();
 	}
 }
