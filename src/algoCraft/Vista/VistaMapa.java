@@ -3,13 +3,16 @@ package algoCraft.Vista;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
 
-public class VistaMapa extends JPanel{
+public class VistaMapa extends JPanel implements Observer{
 	
 	private static final long serialVersionUID = 1L;
 	//Practica con el tamanio de las cosas, todavia no muestra el mapa real.
@@ -30,5 +33,14 @@ public class VistaMapa extends JPanel{
 			}
 		}
 	}
+	@Override
+	public void update(Observable o, Object arg) {
+		Mapa mapa = Mapa.getMapa();
+		for (int i = 0; i < mapa.getAncho(); i++){
+			for (int j = 0; j < mapa.getAlto(); j++){
+				Posicion posicionRevisada = new Posicion(i,j, true);
+				mapa.getUnidad(posicionRevisada);
+			}
+		}
+	}
 }
-
