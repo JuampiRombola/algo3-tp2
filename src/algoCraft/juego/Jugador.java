@@ -251,7 +251,7 @@ public class Jugador {
 		for (int i = 0; i < this.unidades.size(); i++) {
 			Unidad unidad = this.unidades.get(i);
 			if (unidad.estaDestruido()) {
-				this.unidades.remove(unidades);
+				this.unidades.remove(unidad);
 				i--;
 			}
 		}

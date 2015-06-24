@@ -21,6 +21,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
+import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class JugadorTest {
@@ -643,6 +644,31 @@ public class JugadorTest {
 		
 		assertTrue(jugador.getEdificios().get(0) == (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
+	}
+	
+	@Test
+	public void cuandoAUnJugadorSeLeDestruyenUnaUnidadEstaEsEliminadaDeSuListaDeUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.sumarPoblacionMaxima(5);
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
+		Goliath goliath = new Goliath(1,0);
+		avanzarTurnos(6, jugador);
+		int cantidadInicial = jugador.getUnidades().size();
+		Marine marine = (Marine)Mapa.getMapa().getUnidad(new Posicion(0, 0, true));
+
+		while (!marine.estaDestruido()) {
+			goliath.atacar(marine);
+			goliath.avanzarTurno();
+		}
+		jugador.actualizarEstado();
+		int cantidadFinal = jugador.getUnidades().size();
+		
+		assertTrue(cantidadInicial == cantidadFinal + 1);
 	}
 	
 }

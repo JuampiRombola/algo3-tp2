@@ -30,7 +30,7 @@ public class Unidad implements Atacable {
 	}
 
 	public boolean estaDestruido() {
-		return this.vida.getPuntosDeVida() == 0;
+		return this.getVidaActual() <= 0;
 	}
 	
 	public int getVidaActual() {
