@@ -26,6 +26,13 @@ public class Juego {
 		this.jugadoresDerrotados = 0;
 	}
 	
+	
+	public void limpiarJuego(){
+		jugadores.clear();
+		jugadoresDerrotados = 0;
+		nombresJugadores.clear();
+	}
+	
 	public int getCantidadDeJugadores() {
 		return this.jugadores.size();
 	}

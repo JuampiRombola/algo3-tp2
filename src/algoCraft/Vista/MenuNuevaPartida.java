@@ -6,15 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import algoCraft.mapa.Mapa;
+import algoCraft.juego.Juego;
 
 public class MenuNuevaPartida extends JMenu{
 
 	private static final long serialVersionUID = 1L;
 	private JMenuItem itmDosJugadores, itmTresJugadores, itmCuatroJugadores;
 	
-	MenuNuevaPartida(){
+	private Juego juego;
+	
+	MenuNuevaPartida(Juego juego){
 		super("Nueva partida");
+		this.juego = juego;
 		itmDosJugadores = new JMenuItem("Dos jugadores");
 		itmTresJugadores = new JMenuItem("Tres jugadores");
 		itmCuatroJugadores = new JMenuItem("Cuatro jugadores");
@@ -31,8 +34,10 @@ public class MenuNuevaPartida extends JMenu{
 	   public class dosJugadoresListener implements ActionListener{
 		   
 			public void actionPerformed(ActionEvent e){
-				Mapa.getMapa().limpiarMapa();
-	            Mapa.getMapa().cargarBases(2);
+				juego.limpiarJuego();
+				juego.agregarJugadorLlamado("1");
+				juego.agregarJugadorLlamado("2");
+				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
 		}
@@ -40,8 +45,11 @@ public class MenuNuevaPartida extends JMenu{
 	   public class tresJugadoresListener implements ActionListener{
 		   
 			public void actionPerformed(ActionEvent e){
-				Mapa.getMapa().limpiarMapa();
-	            Mapa.getMapa().cargarBases(3);
+				juego.limpiarJuego();
+				juego.agregarJugadorLlamado("1");
+				juego.agregarJugadorLlamado("2");
+				juego.agregarJugadorLlamado("3");
+				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
 		}
@@ -49,8 +57,12 @@ public class MenuNuevaPartida extends JMenu{
 	   public class cuatroJugadoresListener implements ActionListener{
 		   
 			public void actionPerformed(ActionEvent e){
-				Mapa.getMapa().limpiarMapa();
-	            Mapa.getMapa().cargarBases(4);
+				juego.limpiarJuego();
+				juego.agregarJugadorLlamado("1");
+				juego.agregarJugadorLlamado("2");
+				juego.agregarJugadorLlamado("3");
+				juego.agregarJugadorLlamado("4");
+				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
 		}

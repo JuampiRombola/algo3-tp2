@@ -11,6 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
+import algoCraft.juego.Juego;
 import algoCraft.mapa.Mapa;
 
 public class BarraMenu {
@@ -20,12 +21,12 @@ public class BarraMenu {
     private JMenuItem itmSalir, itmCreadores;
 	private MenuNuevaPartida menuNuevaPartida;
     
-    public BarraMenu(JFrame marco){
+    public BarraMenu(JFrame marco, Juego juego){
     	this.marco = marco;
     	this.barraMenu = new JMenuBar();
 		this.menuJuego = new JMenu("Juego");
 		this.menuAcercaDe = new JMenu("Acerca De");
-		this.menuNuevaPartida = new MenuNuevaPartida();
+		this.menuNuevaPartida = new MenuNuevaPartida(juego);
 		this.itmSalir = new JMenuItem("Salir");
 		this.itmCreadores = new JMenuItem("Creadores");
 		
