@@ -12,7 +12,6 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
 import algoCraft.juego.Juego;
-import algoCraft.mapa.Mapa;
 
 public class BarraMenu {
 	private JFrame marco;
@@ -58,15 +57,6 @@ public class BarraMenu {
     	
 		public void actionPerformed(ActionEvent e){
             this.dialog.setVisible(true);
-		}
-	}
-    
-    public class NuevoJuegoListener implements ActionListener{
- 
-		public void actionPerformed(ActionEvent e){
-			Mapa.getMapa().limpiarMapa();
-            Mapa.getMapa().cargarBases(4);
-            System.out.println("Creando nuevo juego ...");
 		}
 	}
     
