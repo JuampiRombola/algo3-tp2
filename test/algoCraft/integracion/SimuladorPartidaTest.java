@@ -36,21 +36,15 @@ public class SimuladorPartidaTest {
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
 		
-		//Se busca una posicion donde haya un mineral
-		Posicion posicionMineral = new Posicion(0, 0, true);
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++) {
-				posicionMineral = new Posicion(i, j, true);
-				if (mapa.hayMineralEn(posicionMineral))
-					break;
-			}
-			if (mapa.hayMineralEn(posicionMineral))
-				break;
-		}
+		//Se busca un mineral del mapa y se le crea un centro encima
+		Mineral mineral = null;
 		
-		// Se obtiene el mineral de la posicion encontrada
-		// y el jugador1 le crea un centro de mineral encima
-		Mineral mineral = (Mineral) mapa.getUnidad(posicionMineral);
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
+				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
+			}
+		}
 		jugador1.crearCentroDeMineral(mineral);
 		
 		//El jugador1 deberia poder crear una barraca

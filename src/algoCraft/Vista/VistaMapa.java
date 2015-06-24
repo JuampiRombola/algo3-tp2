@@ -58,8 +58,8 @@ public class VistaMapa extends JPanel implements Observer{
 		this.setLayout(new GridBagLayout());
 		Mapa mapa = Mapa.getMapa();
 		GridBagConstraints gbc = new GridBagConstraints();
-		for (int i = 0; i < mapa.getAncho(); i++){
-			for (int j = 0; j < mapa.getAlto(); j++){
+		for (int i = 0; i <= mapa.getAncho(); i++){
+			for (int j = 0; j <= mapa.getAlto(); j++){
 				Posicion posicionRevisada = new Posicion(i,j, true);
 				gbc.gridx = i;
                 gbc.gridy = j;
