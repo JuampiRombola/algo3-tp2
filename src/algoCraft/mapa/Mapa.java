@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Observable;
 
 import algoCraft.construcciones.Base;
 import algoCraft.construcciones.EdificioRecolector;
@@ -13,7 +14,7 @@ import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
-public class Mapa{
+public class Mapa extends Observable{
 	private HashMap<Posicion, Posicionable> elementos;
 	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
@@ -51,6 +52,7 @@ public class Mapa{
 		for (Base base : bases)
 			this.elementos.put(base.getPosicion(), base);
 		cargarRecursos();
+		this.notifyObservers();
 		return bases;
 	}
 	
