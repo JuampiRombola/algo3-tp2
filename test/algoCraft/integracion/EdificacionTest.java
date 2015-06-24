@@ -85,7 +85,7 @@ public class EdificacionTest {
 			fail();
 		} catch (NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {}
 		
-		jugador.crearDepositoDeSuministros(6, 6);
+		jugador.crearDepositoDeSuministros(11, 10);
 		
 		//Pasan 6 turnos
 		for (int i=0; i < 6; i++)
