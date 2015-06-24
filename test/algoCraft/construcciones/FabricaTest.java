@@ -16,6 +16,7 @@ import algoCraft.unidades.Goliath;
 public class FabricaTest {
 	
 	private Fabrica crearFabricaConstruida(){
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		for(int i = 0; i < 12; i++)
@@ -27,6 +28,7 @@ public class FabricaTest {
 	}
 	
 	private void construirEdificio(Edificio edificio, Jugador jugador) {
+		Mapa.reiniciarInstanciaParaTest();
 		for(int i = 0; i < 12; i++)
 			edificio.avanzarTurno(jugador);
 	}
@@ -148,6 +150,7 @@ public class FabricaTest {
 	
 	@Test
 	public void laFabricaTarda6TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Fabrica fabrica = crearFabricaConstruida();
 		fabrica.crearGoliath();
@@ -163,6 +166,7 @@ public class FabricaTest {
 
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);
@@ -174,6 +178,7 @@ public class FabricaTest {
 	
 	@Test(expected = ElEdificioEstaEnConstruccion.class)
 	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);
@@ -184,6 +189,7 @@ public class FabricaTest {
 	
 	@Test
 	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);
@@ -196,6 +202,7 @@ public class FabricaTest {
 	
 	@Test
 	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);
@@ -215,6 +222,7 @@ public class FabricaTest {
 	
 	@Test
 	public void cuandoSeCreaUnaFabricaSePuedeSeguirCreandoUnMarineYAhoraTambienUnGoliath() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(0, 0);
 		construirEdificio(barraca, jugador);

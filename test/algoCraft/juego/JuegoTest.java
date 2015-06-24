@@ -8,11 +8,13 @@ import org.junit.Test;
 
 import algoCraft.construcciones.Base;
 import algoCraft.juego.Juego;
+import algoCraft.mapa.Mapa;
 
 public class JuegoTest {
 
 	@Test
 	public void cuandoSeCreaElJuegoEsteNoTieneJugadores() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		
 		assertEquals(0, juego.getCantidadDeJugadores());
@@ -20,6 +22,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeAgregaUnJugadorElJuegoTieneUnJugadorMas() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		int cantidadInicial = juego.getCantidadDeJugadores();
 		
@@ -30,6 +33,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeAgreganDosJugadoresElJuegoTiene2JugadoresMas() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		int cantidadInicial = juego.getCantidadDeJugadores();
 		
@@ -41,6 +45,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeIniciaElJuegoCon3JugadoresTiene3Jugadores() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 
 		juego.iniciarPartida(3);
@@ -50,6 +55,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeIniciaElJuegoCon2JugadoresTiene2Jugadores() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 
 		juego.iniciarPartida(2);
@@ -59,6 +65,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeIniciaElJuegoConMasDe4JugadoresSoloSeTiene4Jugadores() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 
 		juego.iniciarPartida(5);
@@ -68,6 +75,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeAvanzaAlSiguienteJugadorElJugadorActualPasaASerElQueLeSigue() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		juego.iniciarPartida(3);
 
@@ -80,6 +88,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSePasaUnaRondaSeVuelveAlJugador1() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		juego.iniciarPartida(3);
 
@@ -94,6 +103,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeIniciaElJuegoCon3JugadoresNoTieneGanador() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 
 		juego.iniciarPartida(3);
@@ -103,6 +113,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeIniciaElJuegoCon2JugadoresNoTieneGanador() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 
 		juego.iniciarPartida(2);
@@ -112,6 +123,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeCreaUnaPartidaConDosJugadoresYLaVidaDeLaBaseDeUnoDeEllosLlegaA0YEsSuTurnoSeDeterminaQueHayGanador() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		juego.iniciarPartida(2);
 		ArrayList<Jugador> jugadores = juego.getJugadores();
@@ -126,6 +138,7 @@ public class JuegoTest {
 	
 	@Test
 	public void cuandoSeCreaUnaPartidaConTresJugadoresYSeDeterminaQue2DeEllosHanPerdidoHayGanador() {
+		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
 		juego.iniciarPartida(3);
 		ArrayList<Jugador> jugadores = juego.getJugadores();

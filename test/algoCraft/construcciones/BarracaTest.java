@@ -15,6 +15,7 @@ import algoCraft.unidades.Goliath;
 public class BarracaTest {
 
 	private Barraca crearBarracaConstruida(){
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		for (int i = 0; i < 12; i++)
@@ -54,6 +55,7 @@ public class BarracaTest {
 	
 	@Test
 	public void laBarracaTarda3TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = crearBarracaConstruida();
 		barraca.crearMarine();
@@ -67,6 +69,7 @@ public class BarracaTest {
 	
 	@Test
 	public void laBarracaTarda6TurnosLuegoDeSuConstrucionEnCrear2Marines() throws ElEdificioEstaEnConstruccion{
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = crearBarracaConstruida();
 		barraca.crearMarine();
@@ -128,6 +131,7 @@ public class BarracaTest {
 	
 	@Test
 	public void siLaBarracaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
+		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(1, 1);
 		Goliath goliath = new Goliath(2,2);

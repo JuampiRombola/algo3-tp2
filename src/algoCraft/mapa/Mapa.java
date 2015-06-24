@@ -122,7 +122,7 @@ public class Mapa extends Observable{
 	private void validadPosicion(Posicion posicion) throws PosicionInvalidaException {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		if (x < 0 || x > alto || y < 0 || y > ancho)
+		if (x < 0 || x > this.alto || y < 0 || y > this.ancho)
 			throw new PosicionInvalidaException();
 	}
 	

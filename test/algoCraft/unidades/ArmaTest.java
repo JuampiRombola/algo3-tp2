@@ -23,6 +23,7 @@ public class ArmaTest {
 	}
 	@Test
 	public void siDisparoUnArmaEnRangoConIgualDanioQueLaVidaDeLaUnidadEstaEsDestruida(){
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaMaxima = 10;
 		int danio =  vidaMaxima + 1;
 		int rango = 10;
@@ -33,6 +34,7 @@ public class ArmaTest {
 	}
 	@Test
 	public void siDisparoUnArmaConMenorDanioQueLaVidaDelAtacableEstaNoEsDestruida(){
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaMaxima = 10;
 		int danio =  vidaMaxima - 1;
 		int rango = 10;
@@ -43,6 +45,7 @@ public class ArmaTest {
 	}
 	@Test
 	public void siDisparoUnArmaConMayorDanioQueLavidaMmaximaDeLaUnidadPeroNoEstoyEnRangoNoEsDestruida(){
+		Mapa.reiniciarInstanciaParaTest();
 		int vidaMaxima = 10;
 
 		int danio =  vidaMaxima + 1;
@@ -55,6 +58,7 @@ public class ArmaTest {
 	
 	@Test
 	public void unArmaConDanio1DevuelveConGetDanio1(){
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 1;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
@@ -63,6 +67,7 @@ public class ArmaTest {
 	
 	@Test
 	public void unArmaConDanio2DevuelveConGetDanio2(){
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 2;
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
@@ -71,6 +76,7 @@ public class ArmaTest {
 	
 	@Test
 	public void unArmaConRango2DevuelveConGetRango2(){
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 10;
 		int rango = 2;
 		Arma arma = new Arma(danio, rango);
@@ -79,6 +85,7 @@ public class ArmaTest {
 	
 	@Test
 	public void unArmaConRango1DevuelveConGetRango1(){
+		Mapa.reiniciarInstanciaParaTest();
 		int danio = 10;
 		int rango = 1;
 		Arma arma = new Arma(danio, rango);
