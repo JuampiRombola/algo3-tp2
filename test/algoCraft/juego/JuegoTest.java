@@ -31,9 +31,9 @@ public class JuegoTest {
 	public void cuandoSeAgrgan3JugadoresYSeIniciaElJuegoTiene3Jugadores() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
 		
 		juego.iniciarPartida();
 		
@@ -44,8 +44,8 @@ public class JuegoTest {
 	public void cuandoSeAgrgan2JugadoresYSeIniciaElJuegoTiene2Jugadores() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
 		
 		juego.iniciarPartida();
 		
@@ -56,28 +56,28 @@ public class JuegoTest {
 	public void cuandoSeAgrgan2JugadoresConElMismoNombreSeLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador1);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador1);
 	}
 	
 	@Test(expected = NoSePuedenAgregarMasDe4Jugadores.class)
 	public void cuandoSeTrataDeAgregarUn5toJugadorSeLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
-		juego.agregarNombreJugador(jugador4);
-		juego.agregarNombreJugador(jugador5);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
+		juego.agregarJugadorLlamado(jugador4);
+		juego.agregarJugadorLlamado(jugador5);
 	}
 	
 	@Test
 	public void cuandoSeAvanzaAlSiguienteJugadorElJugadorActualPasaASerElQueLeSigue() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
 		juego.iniciarPartida();
 
 		Jugador jugador1 = juego.getJugadorActual();
@@ -91,9 +91,9 @@ public class JuegoTest {
 	public void cuandoSePasaUnaRondaSeVuelveAlJugador1() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
 		juego.iniciarPartida();
 
 		Jugador jugadorInicial = juego.getJugadorActual();
@@ -109,9 +109,9 @@ public class JuegoTest {
 	public void cuandoSeIniciaElJuegoCon3JugadoresNoTieneGanador() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
 
 		juego.iniciarPartida();
 		
@@ -122,8 +122,8 @@ public class JuegoTest {
 	public void cuandoSeIniciaElJuegoCon2JugadoresNoTieneGanador() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
 
 		juego.iniciarPartida();
 		
@@ -134,8 +134,8 @@ public class JuegoTest {
 	public void cuandoSeCreaUnaPartidaConDosJugadoresYLaVidaDeLaBaseDeUnoDeEllosLlegaA0YEsSuTurnoSeDeterminaQueHayGanador() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
 		juego.iniciarPartida();
 		ArrayList<Jugador> jugadores = juego.getJugadores();
 		Jugador jugador2 = jugadores.get(1);
@@ -151,9 +151,9 @@ public class JuegoTest {
 	public void cuandoSeCreaUnaPartidaConTresJugadoresYSeDeterminaQue2DeEllosHanPerdidoHayGanador() {
 		Mapa.reiniciarInstanciaParaTest();
 		Juego juego = new Juego();
-		juego.agregarNombreJugador(jugador1);
-		juego.agregarNombreJugador(jugador2);
-		juego.agregarNombreJugador(jugador3);
+		juego.agregarJugadorLlamado(jugador1);
+		juego.agregarJugadorLlamado(jugador2);
+		juego.agregarJugadorLlamado(jugador3);
 		juego.iniciarPartida();
 		ArrayList<Jugador> jugadores = juego.getJugadores();
 		Jugador jugador1 = jugadores.get(0);

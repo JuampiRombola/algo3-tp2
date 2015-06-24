@@ -42,7 +42,7 @@ public class Juego {
 		this.jugadores.add(jugador);
 	}
 	
-	public void agregarNombreJugador(String nombre) {
+	public void agregarJugadorLlamado(String nombre) {
 		if (this.nombresJugadores.size() >= 4)
 			throw new NoSePuedenAgregarMasDe4Jugadores();
 		if (this.nombresJugadores.contains(nombre))
