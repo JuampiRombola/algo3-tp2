@@ -162,9 +162,9 @@ public class Mapa extends Observable {
 	}
 	
 	public void removerRecurso(Posicionable recurso) {
-		if (this.hayGasVespenoEn(recurso.getPosicion()))
+		if (this.gasVespeno.containsKey(recurso.getPosicion()))
 			gasVespeno.remove(recurso.getPosicion());
-		if (this.hayMineralEn(recurso.getPosicion()))
+		if (this.minerales.containsKey(recurso.getPosicion()))
 			minerales.remove(recurso.getPosicion());
 	}
 	

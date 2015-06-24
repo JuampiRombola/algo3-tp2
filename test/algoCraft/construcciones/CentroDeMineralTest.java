@@ -89,4 +89,53 @@ public class CentroDeMineralTest {
 		Posicion posicion = new Posicion(2,2, true);
 		assertEquals(centro.getPosicion(), posicion);
 	}
+	
+	@Test
+	public void siSeTerminaUnMineralYSeDestruyeSuCentroLaPosicionQuedaVacia() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		Mineral mineral = null;
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
+				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		CentroDeMineral centro = new CentroDeMineral(mineral);
+		mapa.ocuparRecurso(centro);
+		
+		mineral.extraer(1490);
+		centro.recolectar();
+		assertTrue(mineral.estaDestruido());
+		centro.recibePuntosDeDanio(500);
+		
+		assertFalse(mapa.posicionEstaOcupada(centro.getPosicion()));
+	}
+	
+	@Test
+	public void siSeTerminaUnMineralYNoSeDestruyeSuCentroLaPosicionQuedaOcupada() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		Mineral mineral = null;
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
+				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
+				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		CentroDeMineral centro = new CentroDeMineral(mineral);
+		mapa.ocuparRecurso(centro);
+		
+		mineral.extraer(1490);
+		centro.recolectar();
+		
+		assertTrue(mineral.estaDestruido());
+		assertTrue(mapa.posicionEstaOcupada(centro.getPosicion()));
+	}
 }

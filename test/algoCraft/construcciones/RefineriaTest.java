@@ -88,5 +88,54 @@ public class RefineriaTest {
 		Posicion posicion = new Posicion(2,2, true);
 		assertEquals(refineria.getPosicion(), posicion);
 	}
+	
+	@Test
+	public void siSeTerminaUnGasVespenoYSeDestruyeSuRefineriaLaPosicionQuedaVacia() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		GasVespeno gasVespeno = null;
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
+				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
+				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		Refineria refineria = new Refineria(gasVespeno);
+		mapa.ocuparRecurso(refineria);
+		
+		gasVespeno.extraer(990);
+		refineria.recolectar();
+		assertTrue(gasVespeno.estaDestruido());
+		refineria.recibePuntosDeDanio(750);
+		
+		assertFalse(mapa.posicionEstaOcupada(refineria.getPosicion()));
+	}
+	
+	@Test
+	public void siSeTerminaUnGasVespenoYNoSeDestruyeSuRefineriaLaPosicionQuedaOcupada() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		GasVespeno gasVespeno = null;
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
+				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
+				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
+			}
+		}
+		
+		Refineria refineria = new Refineria(gasVespeno);
+		mapa.ocuparRecurso(refineria);
+		
+		gasVespeno.extraer(990);
+		refineria.recolectar();
+
+		assertTrue(gasVespeno.estaDestruido());
+		assertTrue(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
+	}
 }
 
