@@ -68,13 +68,13 @@ public class CombateTest {
 		Assert.assertTrue(marine.estaDestruido());
 		Assert.assertFalse(goliath.estaDestruido());
 		
-		//La posicion (100, 100) terrestre queda vacia
+		//La posicion (1, 1) terrestre queda vacia
 		try {
 			mapa.getUnidad(new Posicion(1, 1, true));
 			fail();
 		} catch (PosicionVaciaException e) {}
 				
-		//La posicion (100, 102) terrestre se mantiene ocupada por el goliath
+		//La posicion (3, 3) terrestre se mantiene ocupada por el goliath
 		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(3, 3, true)));
 	}
 }

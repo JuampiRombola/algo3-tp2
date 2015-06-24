@@ -2,6 +2,8 @@ package algoCraft.integracion;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
@@ -23,19 +25,21 @@ public class SimuladorPartidaTest {
 	@Test
 	public void simuladorPartidaTest() {
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador1 = new Jugador("Ariel", new Base(10, 10));
+		Mapa mapa = Mapa.getMapa();
+		Iterator<Base> it = (mapa.cargarBases(2)).iterator();
+		Base base1 = it.next();
+		Base base2 = it.next();
+		Jugador jugador1 = new Jugador("Ariel", base1);
 		jugador1.activar();
-		Jugador jugador2 = new Jugador("Juampi", new Base(1, 1));
+		Jugador jugador2 = new Jugador("Juampi", base2);
 		jugador2.activar();
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
-		Mapa mapa = Mapa.getMapa();
-		mapa.cargarBases(2);
 		
 		//Se busca una posicion donde haya un mineral
 		Posicion posicionMineral = new Posicion(0, 0, true);
-		for (int i=0; i < 1000; i++) {
-			for (int j=0; j < 1000; j++) {
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++) {
 				posicionMineral = new Posicion(i, j, true);
 				if (mapa.hayMineralEn(posicionMineral))
 					break;
@@ -50,22 +54,22 @@ public class SimuladorPartidaTest {
 		jugador1.crearCentroDeMineral(mineral);
 		
 		//El jugador1 deberia poder crear una barraca
-		jugador1.crearBarraca(2, 2);
+		jugador1.crearBarraca(10, 10);
 		
 		//El jugador2 comienza a construir su 1er barraca
-		jugador2.crearBarraca(3, 3);
+		jugador2.crearBarraca(12, 12);
 			
 		//El jugador2 intenta crear una 2da barraca pero no puede
 		int cantidadMinerales1 = jugador2.getMineral();
 		try {
-			jugador2.crearBarraca(7, 7);
+			jugador2.crearBarraca(13, 13);
 			fail();
 		} catch (NoSeTienenLosRecursosSuficientes e) {}
 		int cantidadMinerales2 = jugador2.getMineral();
 		assertEquals(cantidadMinerales1, cantidadMinerales2);
 
 		//El jugador2 no deberia poder empezar la creacion de un marine
-		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(3, 3, true)));
+		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(12, 12, true)));
 		int cantidadMineralesAntesDeMarine = jugador2.getMineral();
 		try {
 			jugador2.crearMarine(barraca);

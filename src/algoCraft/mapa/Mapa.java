@@ -64,8 +64,8 @@ public class Mapa extends Observable{
 	}
 	
 	private Collection<Base> generarBases(int cantidadJugadores) {
-		int x = 4;
-		int y = 4;
+		int x = 3;
+		int y = 3;
 		ArrayList<Base> bases = new ArrayList<Base> ();
 		// Se crean 4 bases, una en cada vertice del mapa.
 		bases.add(new Base(x, y));
@@ -100,7 +100,7 @@ public class Mapa extends Observable{
 	
 	private void generarMineralesEntornoALaBase(Posicionable base) {
 		int cantidadMinerales = 0;
-		while (!(cantidadMinerales == 8)) {
+		while (!(cantidadMinerales == 6)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
 			if (this.posicionEstaOcupada(posicion)) continue;
 			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());

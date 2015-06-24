@@ -78,7 +78,6 @@ public class MapaTest {
 		Posicionable unidadIntrusa = new Marine(1, 1);	
 	}
 	
-	/*@Test Las unidades se agregan solas, el test no tiene sentido ya.
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -90,7 +89,7 @@ public class MapaTest {
 			
 			fail();
 		} catch (PosicionOcupadaException e) {}
-	}*/
+	}
 	
 	@Test
 	public void cuandoSeIntentaObtenerLaUnidadDeUnaPosicionLibreSeLanzaUnError() {
@@ -198,7 +197,7 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(1);
 		
-		Assert.assertTrue(8 == mapaGenerado.getCantidadMinerales());
+		Assert.assertTrue(6 == mapaGenerado.getCantidadMinerales());
 	}
 	
 	@Test
@@ -207,7 +206,7 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(2);
 		
-		Assert.assertTrue(16 == mapaGenerado.getCantidadMinerales());
+		Assert.assertTrue(12 == mapaGenerado.getCantidadMinerales());
 	}
 	
 	@Test
@@ -216,7 +215,7 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(3);
 		
-		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
+		Assert.assertTrue(18 == mapaGenerado.getCantidadMinerales());
 	}
 	
 	@Test
@@ -225,16 +224,16 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(4);
 		
-		Assert.assertTrue(32 == mapaGenerado.getCantidadMinerales());
+		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
 	}
 	
 	@Test
-	public void siSeCargaUnaSolaBaseEstaSeEncuentraEnEl15x15() {
+	public void siSeCargaUnaSolaBaseEstaSeEncuentraEnEl3x3() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		Assert.assertTrue(mapa.posicionEstaOcupada(new Posicion(15, 15, true)));
+		Assert.assertTrue(mapa.posicionEstaOcupada(new Posicion(3, 3, true)));
 	}
 	
 	@Test
@@ -283,21 +282,21 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void noDeberiaHaberGasVespenoEnEl250y250() {
+	public void noDeberiaHaberGasVespenoEnEl10y10() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(4);
 		
-		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(250, 250, true)));
+		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(10, 10, true)));
 	}
 	
 	@Test
-	public void noDeberiaHaberMineralesEnEl250y250() {
+	public void noDeberiaHaberMineralesEnEl10y10() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(4);
 		
-		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(250, 250, true)));
+		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(10, 10, true)));
 	}
 	
 	@Test
@@ -341,8 +340,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		Mineral mineral = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
 				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
@@ -361,8 +360,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		Mineral mineral = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
 				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
@@ -381,8 +380,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		GasVespeno gasVespeno = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
 				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
@@ -401,8 +400,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		GasVespeno gasVespeno = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
 				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
@@ -421,8 +420,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		Mineral mineral = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
 				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
@@ -439,8 +438,8 @@ public class MapaTest {
 		mapaGenerado.cargarBases(1);
 		GasVespeno gasVespeno = null;
 		
-		for (int i=0; i < 30; i++) {
-			for (int j=0; j < 30; j++){
+		for (int i=0; i < 25; i++) {
+			for (int j=0; j < 25; j++){
 				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
 				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
 			}
