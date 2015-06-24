@@ -392,7 +392,7 @@ public class MapaTest {
 		
 		Assert.assertTrue(refineria == mapaGenerado.getUnidad(gasVespeno.getPosicion()));
 	}
-	
+
 	@Test
 	public void alOcuparUnGasVespenoCuandoSeLePreguntaAlMapaPorEsaPosicionYaNoTieneGasVespenoAhi() {
 		Mapa.reiniciarInstanciaParaTest();

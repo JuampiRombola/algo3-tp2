@@ -14,7 +14,7 @@ import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
-public class Mapa extends Observable{
+public class Mapa extends Observable {
 	private HashMap<Posicion, Posicionable> elementos;
 	private HashMap<Posicion, GasVespeno> gasVespeno;
 	private HashMap<Posicion, Mineral> minerales;
@@ -28,7 +28,7 @@ public class Mapa extends Observable{
 		this.minerales = new HashMap<Posicion, Mineral>();
 	}
 	
-	public void limpiarMapa(){
+	public void limpiarMapa() {
 		elementos.clear();
 		minerales.clear();
 		gasVespeno.clear();
@@ -91,7 +91,7 @@ public class Mapa extends Observable{
 		int cantidadGasVespeno = 0;
 		while (!(cantidadGasVespeno == 2)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (this.posicionEstaOcupada(posicion)) continue;
+			if (!posicion.esPositiva() || this.posicionEstaOcupada(posicion)) continue;
 			GasVespeno gasVespeno = new GasVespeno(posicion.getX(), posicion.getY());
 			this.gasVespeno.put(posicion, gasVespeno);
 			cantidadGasVespeno++;
@@ -102,7 +102,7 @@ public class Mapa extends Observable{
 		int cantidadMinerales = 0;
 		while (!(cantidadMinerales == 6)) {
 			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (this.posicionEstaOcupada(posicion)) continue;
+			if (!posicion.esPositiva() || this.posicionEstaOcupada(posicion)) continue;
 			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());
 			this.minerales.put(posicion, mineral);
 			cantidadMinerales++;
@@ -127,7 +127,7 @@ public class Mapa extends Observable{
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
-		return this.elementos.containsKey(p) | this.minerales.containsKey(p) | this.gasVespeno.containsKey(p) ;
+		return (this.elementos.containsKey(p) | this.minerales.containsKey(p) | this.gasVespeno.containsKey(p)) ;
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {

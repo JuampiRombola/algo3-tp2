@@ -121,4 +121,32 @@ public class PosicionTest {
 		Assert.assertEquals((new Posicion(1, 0, true)), it.next());
 		Assert.assertEquals((new Posicion(1, 1, true)), it.next());
 	}
+	
+	@Test
+	public void siUnaPosicionTieneXMenorA0EntoncesNoEsPositiva() {
+		Posicion posicion = new Posicion(-1, 0, true);
+		
+		Assert.assertFalse(posicion.esPositiva());
+	}
+	
+	@Test
+	public void siUnaPosicionTieneYMenorA0EntoncesNoEsPositiva() {
+		Posicion posicion = new Posicion(0, -1, true);
+		
+		Assert.assertFalse(posicion.esPositiva());
+	}
+	
+	@Test
+	public void siUnaPosicionTieneXEYIgualA0EntoncesEsPositiva() {
+		Posicion posicion = new Posicion(0, 0, true);
+		
+		Assert.assertTrue(posicion.esPositiva());
+	}
+	
+	@Test
+	public void siUnaPosicionTieneXEYMayorA0EntoncesEsPositiva() {
+		Posicion posicion = new Posicion(1, 1, true);
+		
+		Assert.assertTrue(posicion.esPositiva());
+	}
 }
