@@ -671,4 +671,28 @@ public class JugadorTest {
 		assertTrue(cantidadInicial == cantidadFinal + 1);
 	}
 	
+	@Test
+	public void cuandoAUnJugadorNoSeLeDestruyeNingunElementoYActualizaSuEstadoSigueTeniendoLaMismaCantidadDeEdificiosYUnidades() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.activar();
+		jugador.crearDepositoDeSuministros(1, 1);
+		jugador.crearBarraca(2, 2);
+		avanzarTurnos(12, jugador);
+		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(2, 2, true)));
+		avanzarTurnos(6, jugador);
+		int cantidadInicialEdificios = jugador.getEdificios().size();
+		int cantidadInicialCasas = jugador.getCasas().size();
+		int cantidadInicialUnidades = jugador.getUnidades().size();
+		
+		jugador.actualizarEstado();
+		int cantidadFinalEdificios = jugador.getEdificios().size();
+		int cantidadFinalCasas = jugador.getCasas().size();
+		int cantidadFinalUnidades = jugador.getUnidades().size();
+		
+		assertEquals(cantidadFinalEdificios, cantidadInicialEdificios);
+		assertEquals(cantidadFinalCasas, cantidadInicialCasas);
+		assertEquals(cantidadFinalUnidades, cantidadInicialUnidades);
+	}
 }
