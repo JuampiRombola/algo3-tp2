@@ -448,4 +448,19 @@ public class MapaTest {
 		
 		assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
 	}
+	
+	@Test
+	public void siSeLimpiaElMapaEsteQuedaVacio() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(2);
+		
+		mapa.limpiarMapa();
+		for (int i=0; i <= mapa.getAlto(); i++) {
+			for (int j=0; j <= mapa.getAncho(); j++){
+				assertFalse(mapa.posicionEstaOcupada(new Posicion (i, j, true)));
+				assertFalse(mapa.posicionEstaOcupada(new Posicion (i, j, false)));
+			}
+		}
+	}
 }
