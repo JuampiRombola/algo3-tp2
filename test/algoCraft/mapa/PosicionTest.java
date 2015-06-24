@@ -11,6 +11,8 @@ import algoCraft.unidades.Marine;
 
 public class PosicionTest {
 
+	//Comentarios:
+	
 	@Test
 	public void posicionDevuelveCoordenadaXCorrectamente() {
 		Posicion posicion = new Posicion(1, 2, true);
