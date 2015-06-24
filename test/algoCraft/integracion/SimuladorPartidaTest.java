@@ -15,6 +15,11 @@ import algoCraft.recursos.Mineral;
 
 public class SimuladorPartidaTest {
 
+	private void avanzarTurnos(int turnos, Jugador jugador) {
+		for(int i = 0; i < turnos; i++)
+			jugador.avanzarTurno();
+	}
+	
 	@Test
 	public void simuladorPartidaTest() {
 		Mapa.reiniciarInstanciaParaTest();
@@ -47,33 +52,46 @@ public class SimuladorPartidaTest {
 		//El jugador1 deberia poder crear una barraca
 		jugador1.crearBarraca(2, 2);
 		
-		//El jugador2 construye su 1er barraca
-		jugador2.crearBarraca(9, 9);
+		//El jugador2 comienza a construir su 1er barraca
+		jugador2.crearBarraca(3, 3);
 			
 		//El jugador2 intenta crear una 2da barraca pero no puede
+		int cantidadMinerales1 = jugador2.getMineral();
 		try {
 			jugador2.crearBarraca(7, 7);
-			
 			fail();
 		} catch (NoSeTienenLosRecursosSuficientes e) {}
-	
+		int cantidadMinerales2 = jugador2.getMineral();
+		assertEquals(cantidadMinerales1, cantidadMinerales2);
+
 		//El jugador2 no deberia poder empezar la creacion de un marine
+		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(3, 3, true)));
+		int cantidadMineralesAntesDeMarine = jugador2.getMineral();
 		try {
-			Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(9, 9, true)));
 			jugador2.crearMarine(barraca);
-			
 			fail();
 		} catch (ElEdificioEstaEnConstruccion e) {}
-				
+		int cantidadMineralesDespuesDeMarine = jugador2.getMineral();
+		assertEquals(cantidadMineralesAntesDeMarine, cantidadMineralesDespuesDeMarine);
+
+		int cantidadMineralesJugador1 = jugador1.getMineral();
 		//Pasan 12 turnos
-		for (int i=0; i < 12; i++) {
-			jugador1.avanzarTurno();
-			jugador2.avanzarTurno();
-		}
+		avanzarTurnos(12, jugador1);
+		avanzarTurnos(12, jugador2);
+		
+		//El jugador1 tendria que haber recogido minerales
+		int cantidadMineralesJugador1DespuesDe12Turnos = jugador1.getMineral();
+		assertTrue(cantidadMineralesJugador1DespuesDe12Turnos > cantidadMineralesJugador1);
+		
+		//El jugador1 deberia tener 2 edificios y el jugador 2 uno solo
+		assertEquals(2, jugador1.getEdificios().size());
+		assertEquals(1, jugador2.getEdificios().size());
 		
 		//El jugador2 deberia poder empezar la creacion de un marine
-		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(9, 9, true)));
+		int cantidadMinerales3 = jugador2.getMineral();
 		jugador2.crearMarine(barraca);
+		int cantidadMinerales4 = jugador2.getMineral();
+		assertTrue(cantidadMinerales3 == cantidadMinerales4 + 50);
 	}
 
 }
