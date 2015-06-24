@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import algoCraft.juego.Juego;
 
@@ -35,8 +36,8 @@ public class MenuNuevaPartida extends JMenu{
 		   
 			public void actionPerformed(ActionEvent e){
 				juego.limpiarJuego();
-				juego.agregarJugadorLlamado("1");
-				juego.agregarJugadorLlamado("2");
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del primer jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del segundo jugador"));
 				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
@@ -46,9 +47,9 @@ public class MenuNuevaPartida extends JMenu{
 		   
 			public void actionPerformed(ActionEvent e){
 				juego.limpiarJuego();
-				juego.agregarJugadorLlamado("1");
-				juego.agregarJugadorLlamado("2");
-				juego.agregarJugadorLlamado("3");
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del primer jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del segundo jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del tercer jugador"));
 				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
@@ -58,10 +59,10 @@ public class MenuNuevaPartida extends JMenu{
 		   
 			public void actionPerformed(ActionEvent e){
 				juego.limpiarJuego();
-				juego.agregarJugadorLlamado("1");
-				juego.agregarJugadorLlamado("2");
-				juego.agregarJugadorLlamado("3");
-				juego.agregarJugadorLlamado("4");
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del primer jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del segundo jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del tercer jugador"));
+				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del cuarto jugador"));
 				juego.iniciarPartida();
 	            System.out.println("Creando nuevo juego ...");
 			}
