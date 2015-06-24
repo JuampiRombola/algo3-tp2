@@ -85,6 +85,7 @@ public class Juego {
 		this.anadirJugadores(this.nombresJugadores, bases, cantidad);
 		this.iteradorJugadores = this.jugadores.iterator();
 		this.jugadorActual = this.iteradorJugadores.next();
+		this.jugadorActual.activar();
 	}
 	
 	public void siguienteJugador() {
