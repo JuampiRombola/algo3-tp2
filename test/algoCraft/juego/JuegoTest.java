@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import algoCraft.construcciones.Base;
+import algoCraft.juego.Juego;
 
 public class JuegoTest {
 
