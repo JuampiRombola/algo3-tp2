@@ -52,13 +52,14 @@ public class Mapa extends Observable{
 		for (Base base : bases)
 			this.elementos.put(base.getPosicion(), base);
 		cargarRecursos();
+		setChanged();
 		this.notifyObservers();
 		return bases;
 	}
 	
 	private Collection<Base> generarBases(int cantidadJugadores) {
-		int x = 15;
-		int y = 15;
+		int x = 4;
+		int y = 4;
 		ArrayList<Base> bases = new ArrayList<Base> ();
 		// Se crean 4 bases, una en cada vertice del mapa.
 		bases.add(new Base(x, y));
@@ -104,7 +105,7 @@ public class Mapa extends Observable{
 	
 	private Posicion obtenerPosicionAleatoriaEntornoALaBase(Posicionable base) {
 		Posicion posicionBase = base.getPosicion();
-		int corrimiento = 10;
+		int corrimiento = 4;
 		int xBase = posicionBase.getX();
 		int yBase = posicionBase.getY();
 		int xRandom = (int)Math.floor(Math.random()*((xBase+corrimiento)-(xBase-corrimiento))+(xBase-corrimiento));

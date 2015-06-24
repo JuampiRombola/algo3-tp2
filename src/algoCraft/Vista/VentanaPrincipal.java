@@ -1,6 +1,7 @@
 package algoCraft.Vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -18,7 +19,9 @@ public class VentanaPrincipal{
 		marco.addWindowListener(new CloseListener());
 		JMenuBar barraMenu = (new BarraMenu(marco)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
-		marco.add(new VistaMapa(), BorderLayout.EAST);
+		VistaMapa vistaMapa = new VistaMapa();
+		marco.add(vistaMapa, BorderLayout.EAST);
+		marco.getContentPane().setBackground(Color.black);
 		marco.setVisible(true);
 	}
 

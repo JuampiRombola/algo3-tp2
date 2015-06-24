@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
+import algoCraft.mapa.Mapa;
+
 public class BarraMenu {
 	private JFrame marco;
 	private JMenuBar barraMenu;
@@ -43,6 +45,7 @@ public class BarraMenu {
     private void agregarEventosBarraMenu() {
 		this.itmSalir.addActionListener(new CerrarVentana());
 		this.itmCreadores.addActionListener(new MostrarDialogoCreadores(this.marco));
+		this.itmNuevaPartida.addActionListener(new NuevoJuegoListener());
 	}
     
     public class MostrarDialogoCreadores implements ActionListener{
@@ -54,6 +57,14 @@ public class BarraMenu {
 		public void actionPerformed(ActionEvent e){
             this.dialog.setVisible(true);
 			}
+	}
+    
+    public class NuevoJuegoListener implements ActionListener{
+ 
+		public void actionPerformed(ActionEvent e){
+            Mapa.getMapa().cargarBases(2);
+            System.out.println("Creando nuevo juego ...");
+		}
 	}
     
     public class CerrarVentana implements ActionListener{
