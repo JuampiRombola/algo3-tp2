@@ -62,6 +62,7 @@ public class BarraMenu {
     public class NuevoJuegoListener implements ActionListener{
  
 		public void actionPerformed(ActionEvent e){
+			Mapa.getMapa().limpiarMapa();
             Mapa.getMapa().cargarBases(2);
             System.out.println("Creando nuevo juego ...");
 		}

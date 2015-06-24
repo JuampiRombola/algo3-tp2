@@ -28,6 +28,12 @@ public class Mapa extends Observable{
 		this.minerales = new HashMap<Posicion, Mineral>();
 	}
 	
+	public void limpiarMapa(){
+		elementos.clear();
+		minerales.clear();
+		gasVespeno.clear();
+	}
+	
 	public int getAlto() {
 		return alto;
 	}
