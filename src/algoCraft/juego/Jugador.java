@@ -205,6 +205,8 @@ public class Jugador {
 	}
 
 	public void avanzarTurno() {
+		if (this.perdioLaPartida())
+			return;
 		for (Edificio edificio : this.edificios)
 			edificio.avanzarTurno(this);
 		for (DepositoDeSuministros casa : this.casas)

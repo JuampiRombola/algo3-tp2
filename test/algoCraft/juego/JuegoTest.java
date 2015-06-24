@@ -2,6 +2,8 @@ package algoCraft.juego;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import algoCraft.construcciones.Base;
@@ -87,5 +89,67 @@ public class JuegoTest {
 		Jugador jugadorFinal = juego.getJugadorActual();
 		
 		assertTrue(jugadorInicial == jugadorFinal);
+	}
+	
+	@Test
+	public void cuandoSeIniciaElJuegoCon3JugadoresNoTieneGanador() {
+		Juego juego = new Juego();
+
+		juego.iniciarPartida(3);
+		
+		assertEquals(false, juego.hayGanador());
+	}
+	
+	@Test
+	public void cuandoSeIniciaElJuegoCon2JugadoresNoTieneGanador() {
+		Juego juego = new Juego();
+
+		juego.iniciarPartida(2);
+		
+		assertEquals(false, juego.hayGanador());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaPartidaConDosJugadoresYLaVidaDeLaBaseDeUnoDeEllosLlegaA0YEsSuTurnoSeDeterminaQueHayGanador() {
+		Juego juego = new Juego();
+		juego.iniciarPartida(2);
+		ArrayList<Jugador> jugadores = juego.getJugadores();
+		Jugador jugador2 = jugadores.get(1);
+		
+		//Se le saca toda la vida a la base del jugador 2 para que aparezca como destruida
+		jugador2.getBase().recibePuntosDeDanio(2500);
+		juego.siguienteJugador();
+		
+		assertEquals(true, juego.hayGanador());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaPartidaConTresJugadoresYSeDeterminaQue2DeEllosHanPerdidoHayGanador() {
+		Juego juego = new Juego();
+		juego.iniciarPartida(3);
+		ArrayList<Jugador> jugadores = juego.getJugadores();
+		Jugador jugador1 = jugadores.get(0);
+		Jugador jugador2 = jugadores.get(1);
+		Jugador jugador3 = jugadores.get(2);
+		
+		//Se le saca toda la vida a la base del jugador 2 para que aparezca como destruida
+		//La base del jugador 3 pierde un poco de vida
+		jugador2.getBase().recibePuntosDeDanio(2500);
+		jugador3.getBase().recibePuntosDeDanio(25);
+		juego.siguienteJugador();
+		assertEquals(false, jugador3.perdioLaPartida());
+		assertEquals(1, juego.getJugadoresDerrotados());
+		
+		//Se le saca vida a la base del jugador 1 en el turno del jugador 3
+		jugador1.getBase().recibePuntosDeDanio(250);
+		assertEquals(false, jugador1.perdioLaPartida());
+		juego.siguienteJugador();
+		assertEquals(1, juego.getJugadoresDerrotados());
+		
+		//Se deja destruida la base del jugador 1 en el turno del jugador 3, por lo que al avanzar el turno
+		//y se decreta que hay un ganador
+		juego.siguienteJugador();
+		jugador1.getBase().recibePuntosDeDanio(2500);
+		assertEquals(true, juego.hayGanador());
 	}
 }

@@ -13,13 +13,23 @@ public class Juego {
 	private ArrayList<Jugador> jugadores;
 	private Iterator<Jugador> iteradorJugadores;
 	private Jugador jugadorActual;
+	private int jugadoresDerrotados;
 	
 	public Juego() {
 		this.jugadores = new ArrayList<Jugador>();
+		this.jugadoresDerrotados = 0;
 	}
 	
 	public int getCantidadDeJugadores() {
 		return this.jugadores.size();
+	}
+	
+	public ArrayList<Jugador> getJugadores() {
+		return this.jugadores;
+	}
+	
+	public int getJugadoresDerrotados() {
+		return this.jugadoresDerrotados;
 	}
 	
 	public void anadirJugador(Jugador jugador) {
@@ -58,15 +68,23 @@ public class Juego {
 		this.jugadorActual.avanzarTurno();
 		this.jugadorActual.desactivar();
 		this.jugadorActual = this.iteradorJugadores.next();
-		this.jugadorActual.activar();
 		this.jugadorActual.actualizarEstado();
 		if (!this.iteradorJugadores.hasNext()) {
 			this.iteradorJugadores = this.jugadores.iterator();
 		}
+		if (this.jugadorActual.perdioLaPartida()) {
+			this.jugadoresDerrotados++;
+			this.siguienteJugador();
+		}
+		this.jugadorActual.activar();
 	}
 	
 	public Jugador getJugadorActual() {
 		return this.jugadorActual;
+	}
+	
+	public boolean hayGanador() {
+		return (this.jugadoresDerrotados + 1 == this.getCantidadDeJugadores());
 	}
 	
 	/*
