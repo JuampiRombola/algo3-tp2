@@ -27,7 +27,7 @@ public abstract class Edificio implements Atacable {
 	
 	public void recibePuntosDeDanio(int danio) {
 		this.vida.recibirDanio(danio);
-		if(this.estaDestruido())
+		if (this.estaDestruido() && (Mapa.getMapa().posicionEstaOcupada(this.posicion)))
 			Mapa.getMapa().removerUnidad(this);
 	}
 	
