@@ -1,5 +1,6 @@
 package algoCraft.construcciones;
 
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Recurso;
 import algoCraft.unidades.Vida;
@@ -11,8 +12,8 @@ public abstract class EdificioRecolector extends Edificio {
 	protected Posicion posicion;
 	protected Vida vida;
 	
-	public EdificioRecolector(Recurso recurso, int vida, int turnosEnConstruirse) {
-		super(vida, recurso.getPosicion(), turnosEnConstruirse);
+	public EdificioRecolector(Jugador jugador, Recurso recurso, int vida, int turnosEnConstruirse) {
+		super(jugador, vida, recurso.getPosicion(), turnosEnConstruirse);
 		this.recursosRecolectados = 0;
 		this.recurso = recurso;
 	}

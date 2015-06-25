@@ -1,5 +1,6 @@
 package algoCraft.unidades;
 
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 
 public class Marine extends Unidad{
@@ -13,7 +14,19 @@ public class Marine extends Unidad{
 	public static int cantidadGasVespeno = 0;
 	public static int cantidadDePoblacion = 1;
 	
-	public Marine(int posicionEnX, int posicionEnY) {
-		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), cantidadDePoblacion);
+	public Marine(Jugador jugador, int posicionEnX, int posicionEnY) {
+		super(jugador, vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), cantidadDePoblacion);
+	}
+	
+	public static int getCantidadDeMineralQueCUesta() {
+		return cantidadMineral;
+	}
+	
+	public static int getCantidadDeGasQueCUesta() {
+		return cantidadGasVespeno;
+	}
+	
+	public static int getCantidadDePoblacionQueOcupa() {
+		return cantidadDePoblacion;
 	}
 }

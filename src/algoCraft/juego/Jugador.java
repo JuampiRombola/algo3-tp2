@@ -4,17 +4,24 @@ import java.util.ArrayList;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Base;
-import algoCraft.construcciones.CentroDeMineral;
-import algoCraft.construcciones.DepositoDeSuministros;
+import algoCraft.construcciones.CreadorDeBarraca;
+import algoCraft.construcciones.CreadorDeCentroDeMineral;
+import algoCraft.construcciones.CreadorDeDepositoDeSuministros;
+import algoCraft.construcciones.CreadorDeEdificios;
+import algoCraft.construcciones.CreadorDeFabrica;
+import algoCraft.construcciones.CreadorDeGoliath;
+import algoCraft.construcciones.CreadorDeMarine;
+import algoCraft.construcciones.CreadorDeRefineria;
+import algoCraft.construcciones.CreadorDeUnidades;
 import algoCraft.construcciones.Edificio;
 import algoCraft.construcciones.Fabrica;
-import algoCraft.construcciones.Refineria;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.juego.excepciones.ElJugadorNoEstaActivoException;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.recursos.GasVespeno;
@@ -34,7 +41,6 @@ public class Jugador {
 	private int gasVespeno;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
-	private ArrayList<DepositoDeSuministros> casas;
 	private int poblacion;
 	private int poblacionMaxima;
 	private Base base;
@@ -47,7 +53,6 @@ public class Jugador {
 		this.gasVespeno = cantidadInicialDeGasVespeno;
 		this.edificios = new ArrayList<Edificio>();
 		this.unidades = new ArrayList<Unidad>();
-		this.casas = new ArrayList<DepositoDeSuministros>();
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
 		this.base = base;
@@ -72,10 +77,6 @@ public class Jugador {
 	
 	public ArrayList<Edificio> getEdificios() {
 		return this.edificios;
-	}
-	
-	public ArrayList<DepositoDeSuministros> getCasas() {
-		return this.casas;
 	}
 	
 	public int getPoblacion() {
@@ -118,17 +119,20 @@ public class Jugador {
 	private void agregarEdificio(Edificio edificio) {
 		this.edificios.add(edificio);
 	}
-	
-	private void agregarCasa(DepositoDeSuministros casa) {
-		this.casas.add(casa);
-	}
-	
-	private void verificarRecursos(int mineralesAGastar, int gasVespenoAGastar) throws NoSeTienenLosRecursosSuficientes {
-		if ((mineralesAGastar > this.mineral) || (gasVespenoAGastar > this.gasVespeno))
-			throw new NoSeTienenLosRecursosSuficientes();
-	}
 
 	
+	public void pagarMineralGasVespeno(int cantidadMineral, int cantidadGasVespeno) throws NoSeTienenLosRecursosSuficientes{
+		if (!seTienenLosRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
+			throw new NoSeTienenLosRecursosSuficientes();
+		this.restarRecursosGastados(cantidadMineral, cantidadGasVespeno);
+	}
+	
+	private boolean seTienenLosRecursosSuficientes(int mineralesAGastar, int gasVespenoAGastar) {
+		if ((mineralesAGastar > this.mineral) || (gasVespenoAGastar > this.gasVespeno))
+			return false;
+		return true;
+	}
+
 	private Edificio validarDependenciasEdificios(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
 		for (Edificio edificio : this.edificios) {
 			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion()))
@@ -136,85 +140,67 @@ public class Jugador {
 		}
 		throw new NoSePuedeConstruirElEdificio();
 	}
-	
-	public void crearCentroDeMineral(Mineral mineral) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
+
+	public void crearEdificio(int x, int y, CreadorDeEdificios creador) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
 		this.validarSiEstaActivo();
-		this.verificarRecursos(CentroDeMineral.cantidadMineral, CentroDeMineral.cantidadGasVespeno);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
-		this.agregarEdificio(centro);
-		this.restarRecursosGastados(CentroDeMineral.cantidadMineral, CentroDeMineral.cantidadGasVespeno);
-		Mapa.getMapa().ocuparRecurso(centro);
+		Edificio edificio = creador.crearEdificio(this, x, y);
+		this.agregarEdificio(edificio);
+		Mapa.getMapa().agregarUnidad(edificio);
 	}
 	
-	public void crearDepositoDeSuministros(int x, int y) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		this.validarSiEstaActivo();
-		this.verificarRecursos(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
-		DepositoDeSuministros deposito = new DepositoDeSuministros(x, y);
-		this.agregarCasa(deposito);
-		this.restarRecursosGastados(DepositoDeSuministros.cantidadMineral, DepositoDeSuministros.cantidadGasVespeno);
-		Mapa.getMapa().agregarUnidad(deposito);
+	public void crearCentroDeMineral(Mineral mineral) {
+		Posicion posicion = mineral.getPosicion();
+		this.crearEdificio(posicion.getX(), posicion.getY(), new CreadorDeCentroDeMineral(mineral));
 	}
 	
-	public void crearRefineria(GasVespeno gas) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		this.validarSiEstaActivo();
-		this.verificarRecursos(Refineria.cantidadMineral, Refineria.cantidadGasVespeno);
-		Refineria refineria = new Refineria(gas);
-		this.agregarEdificio(refineria);
-		this.restarRecursosGastados(Refineria.cantidadMineral, Refineria.cantidadGasVespeno);
-		Mapa.getMapa().ocuparRecurso(refineria);
+	public void crearDepositoDeSuministros(int x, int y) {
+		this.crearEdificio(x, y, new CreadorDeDepositoDeSuministros());
 	}
 	
-	public void crearBarraca(int x, int y) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
-		this.validarSiEstaActivo();
-		this.verificarRecursos(Barraca.cantidadMineral, Barraca.cantidadGasVespeno);
-		Barraca barraca = new Barraca(x, y);
-		this.agregarEdificio(barraca);
-		this.restarRecursosGastados(Barraca.cantidadMineral, Barraca.cantidadGasVespeno);
-		Mapa.getMapa().agregarUnidad(barraca);
+	public void crearRefineria(GasVespeno gas) {
+		Posicion posicion = gas.getPosicion();
+		this.crearEdificio(posicion.getX(), posicion.getY(), new CreadorDeRefineria(gas));
 	}
 	
-	public void crearFabrica(int x, int y) throws ElJugadorNoEstaActivoException, NoSePuedeConstruirElEdificio, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {
-		this.validarSiEstaActivo();
+	public void crearBarraca(int x, int y) {	
+		this.crearEdificio(x, y, new CreadorDeBarraca());
+	}
+	
+	public void crearFabrica(int x, int y) {
 		Edificio barraca = this.validarDependenciasEdificios(Barraca.class);
-		this.verificarRecursos(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
-		Fabrica fabrica = new Fabrica(x, y, (Barraca)barraca);
-		this.agregarEdificio(fabrica);
-		this.restarRecursosGastados(Fabrica.cantidadMineral, Fabrica.cantidadGasVespeno);
-		Mapa.getMapa().agregarUnidad(fabrica);
+		this.crearEdificio(x, y, new CreadorDeFabrica((Barraca)barraca));
 	}
 	
-	private void sePuedeConstruirUnidad(int cantidadDePoblacionQueOcupa) throws NoSePuedeConstruirLaUnidadPorSobrepoblacion {
+	private boolean sePuedeConstruirUnidad(int cantidadDePoblacionQueOcupa) {
 		if (!(this.poblacion + cantidadDePoblacionQueOcupa <= this.poblacionMaxima))
+			return false;
+		return true;
+	}
+	
+	private void crearUnidad(CreadorDeUnidades creador, int poblacionQueOcupa) throws ElJugadorNoEstaActivoException, NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion{
+		this.validarSiEstaActivo();
+		if (!this.sePuedeConstruirUnidad(poblacionQueOcupa))
 			throw new NoSePuedeConstruirLaUnidadPorSobrepoblacion();
+		creador.crearUnidad();
 	}
 	
-	public void crearMarine(Barraca barraca) throws ElJugadorNoEstaActivoException, NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion {
-		this.validarSiEstaActivo();
-		this.sePuedeConstruirUnidad(Marine.cantidadDePoblacion);
-		this.verificarRecursos(Marine.cantidadMineral, Marine.cantidadGasVespeno);
-		barraca.crearMarine();
-		this.restarRecursosGastados(Marine.cantidadMineral, Marine.cantidadGasVespeno);
+	public void crearMarine(Barraca barraca) {
+		this.crearUnidad(new CreadorDeMarine(barraca), Marine.getCantidadDePoblacionQueOcupa());
 	}
 	
-	public void crearGoliath(Fabrica fabrica) throws ElJugadorNoEstaActivoException, NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion {
-		this.validarSiEstaActivo();
-		this.sePuedeConstruirUnidad(Goliath.cantidadDePoblacion);
-		this.verificarRecursos(Goliath.cantidadMineral, Goliath.cantidadGasVespeno);
-		fabrica.crearGoliath();
-		this.restarRecursosGastados(Goliath.cantidadMineral, Goliath.cantidadGasVespeno);
+	public void crearGoliath(Fabrica fabrica) {
+		this.crearUnidad(new CreadorDeGoliath(fabrica), Goliath.getCantidadDePoblacionQueOcupa());
 	}
 
 	public void avanzarTurno() {
 		if (this.perdioLaPartida())
 			return;
 		for (Edificio edificio : this.edificios)
-			edificio.avanzarTurno(this);
-		for (DepositoDeSuministros casa : this.casas)
-			casa.avanzarTurno(this);
+			edificio.avanzarTurno();
 		for (Unidad unidad : this.unidades)
 			unidad.avanzarTurno();
 	}
-	
+
 	public boolean perdioLaPartida() {
 		return this.base.estaDestruido();
 	}
@@ -231,7 +217,7 @@ public class Jugador {
 	public void desactivar() {
 		this.estaActivo = false;
 	}
-
+	
 	/*public void removerElementosDestruidos(ArrayList<Atacable> elementos) {
 		for (int i = 0; i < elementos.size(); i++) {
 			Atacable elemento = elementos.get(i);
@@ -254,14 +240,6 @@ public class Jugador {
 			Unidad unidad = this.unidades.get(i);
 			if (unidad.estaDestruido()) {
 				this.unidades.remove(unidad);
-				i--;
-			}
-		}
-		for (int i = 0; i < this.casas.size(); i++) {
-			DepositoDeSuministros casa = this.casas.get(i);
-			if (casa.estaDestruido()) {
-				this.sumarPoblacionMaxima(-(DepositoDeSuministros.capacidadDePoblacionASumar));
-				this.casas.remove(casa);
 				i--;
 			}
 		}

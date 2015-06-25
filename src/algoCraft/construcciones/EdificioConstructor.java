@@ -10,8 +10,8 @@ public abstract class EdificioConstructor extends Edificio {
 	protected int turnosParaProducirUnidad;
 	
 	
-	public EdificioConstructor(int vida, Posicion posicion, int turnosEnConstruirse, int turnosParaProducirUnidad) {
-		super(vida, posicion, turnosEnConstruirse);
+	public EdificioConstructor(Jugador jugador, int vida, Posicion posicion, int turnosEnConstruirse, int turnosParaProducirUnidad) {
+		super(jugador, vida, posicion, turnosEnConstruirse);
 		this.seTerminoDeCrearLaUnidad = false;
 		this.cantidadDeUnidadesAProducir = 0;
 		this.turnosParaProducirUnidad = turnosParaProducirUnidad;
@@ -26,18 +26,18 @@ public abstract class EdificioConstructor extends Edificio {
 	}
 	
 	@Override
-	public void avanzarTurno(Jugador jugador) {
+	public void avanzarTurno() {
 		//El metodo que usa esa variable es inutil, lo dejo porque me interesan las pruebas.
-		super.avanzarTurno(jugador);
+		super.avanzarTurno();
 		if(estaCreandoUnaUnidad() && pasoElTiempoParaQueLaUnidadSeProduzca()){
-			crearLaUnidad(jugador);
+			crearLaUnidad();
 			this.contadorDeTurnos = 0;
 			this.cantidadDeUnidadesAProducir--;
 			this.seTerminoDeCrearLaUnidad = true;
 		}
 	}
 
-	protected abstract void crearLaUnidad(Jugador jugador);
+	protected abstract void crearLaUnidad();
 			/*Posicion posicionSalida = new Posicion(this.posicion.getX(), this.posicion.getY(), unidad.esTerrestre());
 			Posicion posicionLibre = Mapa.getMapa().getPosicionVaciaCercana(posicionSalida);
 			unidad.setPosicion(posicionLibre.getX(), posicionLibre.getY());

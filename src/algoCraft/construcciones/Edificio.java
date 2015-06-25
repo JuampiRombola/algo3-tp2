@@ -7,13 +7,15 @@ import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Vida;
 
 public abstract class Edificio implements Atacable {
+	protected Jugador jugador;
 	protected Vida vida;
 	protected Posicion posicion;
 	protected int turnosEnConstruirse;
 	protected int contadorDeTurnos;
 	protected boolean estaEnConstruccion;
 	
-	public Edificio(int vida, Posicion posicion, int turnosEnConstruirse) {
+	public Edificio(Jugador jugador, int vida, Posicion posicion, int turnosEnConstruirse) {
+		this.jugador = jugador;
 		this.vida = new Vida(vida);
 		this.posicion = posicion;
 		this.estaEnConstruccion = true;
@@ -47,13 +49,13 @@ public abstract class Edificio implements Atacable {
 		return this.posicion;
 	}
 	
-	public void avanzarTurno(Jugador jugador) {
+	public void avanzarTurno() {
 		this.contadorDeTurnos++;
 		if(this.estaEnConstruccion)
-			continuarConstruccion(jugador);
+			this.continuarConstruccion();
 	}
 
-	protected void continuarConstruccion(Jugador jugador) {
+	protected void continuarConstruccion() {
 		if(this.contadorDeTurnos == this.turnosEnConstruirse){
 			this.estaEnConstruccion = false;
 			this.contadorDeTurnos = 0;

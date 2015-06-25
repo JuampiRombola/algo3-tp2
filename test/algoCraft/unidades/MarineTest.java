@@ -13,7 +13,7 @@ public class MarineTest {
 		Mapa.reiniciarInstanciaParaTest();
 		int posicionEnX  = 1;
 		int posicionEnY = 1;
-		return new Marine(posicionEnX,posicionEnY);
+		return new Marine(null, posicionEnX,posicionEnY);
 	}
 	
 	@Test

@@ -18,7 +18,7 @@ public class ArmaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Arma arma = new Arma(10,10);
 		Posicion posicion = new Posicion(1,1, true);
-		Atacable atacable = new Unidad(vidaMaxima, arma, posicion, 1);
+		Atacable atacable = new Unidad(null, vidaMaxima, arma, posicion, 1);
 		return atacable;
 	}
 	@Test

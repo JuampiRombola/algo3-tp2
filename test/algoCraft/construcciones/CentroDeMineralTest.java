@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
@@ -15,24 +16,27 @@ public class CentroDeMineralTest {
 	@Test
 	public void cuandoSeCreaUnCentroNoTieneMineralesRecolectados() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		assertEquals(0, centro.getRecursosRecolectados());
 		}
 	
 	@Test
 	public void cuandoSeCreaUnCentroDeMineralEsteEstaEnTierra() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		assertEquals(true, centro.esTerrestre());
 	}
 	
 	@Test
 	public void siSeRecolecta10UnidadesDespuesDeHaberSidoCreadoTiene10Unidades() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		centro.recolectar();
 		assertEquals(10, centro.getRecursosRecolectados());
 	}
@@ -40,8 +44,9 @@ public class CentroDeMineralTest {
 	@Test
 	public void siSeRecolecta2VecessDespuesDeHaberSidoCreadoTiene20Unidades() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		centro.recolectar();
 		centro.recolectar();
 		assertEquals(20, centro.getRecursosRecolectados());
@@ -50,10 +55,11 @@ public class CentroDeMineralTest {
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		int vidaInicial = centro.getVidaActual();
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		goliath.atacar(centro);
 		assertTrue(centro.getVidaActual() < vidaInicial);
 	}
@@ -61,9 +67,10 @@ public class CentroDeMineralTest {
 	@Test
 	public void siElCentroEsAtacadoPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
-		Goliath goliath = new Goliath(2,2);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
+		Goliath goliath = new Goliath(null, 2,2);
 		while (!centro.estaDestruido()) {
 			goliath.atacar(centro);
 			goliath.avanzarTurno();
@@ -75,8 +82,9 @@ public class CentroDeMineralTest {
 	@Test
 	public void unCentroEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(1, 1);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		Posicion posicion = new Posicion(1,1, true);
 		assertEquals(centro.getPosicion(), posicion);
 	}
@@ -84,8 +92,9 @@ public class CentroDeMineralTest {
 	@Test
 	public void unCentroEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mineral mineral = new Mineral(2, 2);
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		Posicion posicion = new Posicion(2,2, true);
 		assertEquals(centro.getPosicion(), posicion);
 	}
@@ -93,6 +102,7 @@ public class CentroDeMineralTest {
 	@Test
 	public void siSeTerminaUnMineralYSeDestruyeSuCentroLaPosicionQuedaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
@@ -104,7 +114,7 @@ public class CentroDeMineralTest {
 			}
 		}
 		
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		mapa.ocuparRecurso(centro);
 		
 		mineral.extraer(1490);
@@ -119,6 +129,7 @@ public class CentroDeMineralTest {
 	public void siSeTerminaUnMineralYNoSeDestruyeSuCentroLaPosicionQuedaOcupada() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		mapa.cargarBases(1);
 		
 		Mineral mineral = null;
@@ -129,7 +140,7 @@ public class CentroDeMineralTest {
 			}
 		}
 		
-		CentroDeMineral centro = new CentroDeMineral(mineral);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		mapa.ocuparRecurso(centro);
 		
 		mineral.extraer(1490);

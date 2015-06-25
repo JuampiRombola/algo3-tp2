@@ -16,25 +16,27 @@ public class Fabrica extends EdificioConstructor {
 	public static int cantidadGasVespeno = 100;
 	public static int turnosEnProducirGoliath = 6;
 	
-	public Fabrica(int x, int y, Barraca barraca) {
-		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirGoliath);
-		if(barraca.estaEnConstruccion())
+	public Fabrica(Jugador jugador, int x, int y, Barraca barraca) {
+		super(jugador, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirGoliath);
+		if (barraca.estaEnConstruccion())
 			throw new NoSePuedeConstruirElEdificio();
+		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 
 	public void crearGoliath() throws ElEdificioEstaEnConstruccion {
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
+		this.jugador.pagarMineralGasVespeno(Goliath.getCantidadDeMineralQueCUesta(), Goliath.getCantidadDeGasQueCUesta());
 		cantidadDeUnidadesAProducir++;
 		seTerminoDeCrearLaUnidad = false;
 	}
 	
 	@Override
-	protected void crearLaUnidad(Jugador jugador) {
+	protected void crearLaUnidad() {
 		Posicion posicionDelGoliath = Mapa.getMapa().getPosicionVaciaCercana(this.posicion);
-		Goliath goliath = new Goliath(posicionDelGoliath.getX(), posicionDelGoliath.getY());
-		jugador.agregarUnidad(goliath);
-		jugador.sumarPoblacion(goliath.getPoblacionQueOcupa());
+		Goliath goliath = new Goliath(this.jugador, posicionDelGoliath.getX(), posicionDelGoliath.getY());
+		this.jugador.agregarUnidad(goliath);
+		this.jugador.sumarPoblacion(goliath.getPoblacionQueOcupa());
 	}
 }
 

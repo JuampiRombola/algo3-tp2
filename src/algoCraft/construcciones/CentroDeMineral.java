@@ -11,8 +11,9 @@ public class CentroDeMineral extends EdificioRecolector{
 	public static int cantidadMineral = 50;
 	public static int cantidadGasVespeno = 0;
 	
-	public CentroDeMineral(Mineral mineral) {
-		super(mineral, vida, turnosEnConstruirse);
+	public CentroDeMineral(Jugador jugador, Mineral mineral) {
+		super(jugador, mineral, vida, turnosEnConstruirse);
+		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 	
 	public int recolectar() {
@@ -20,11 +21,11 @@ public class CentroDeMineral extends EdificioRecolector{
 	}
 		
 	@Override
-	public void avanzarTurno(Jugador jugador) {
-		super.avanzarTurno(jugador);
+	public void avanzarTurno() {
+		super.avanzarTurno();
 		if (!this.estaEnConstruccion) {
 			int cantidadRecolectada = this.recolectar();
-			jugador.sumarUnidadesDeMineral(cantidadRecolectada);
+			this.jugador.sumarUnidadesDeMineral(cantidadRecolectada);
 		}
 	}
 }

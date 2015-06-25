@@ -11,6 +11,7 @@ import algoCraft.construcciones.Base;
 import algoCraft.construcciones.CentroDeMineral;
 import algoCraft.construcciones.EdificioRecolector;
 import algoCraft.construcciones.Refineria;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -28,7 +29,7 @@ public class MapaTest {
 	public void cuandoSeOcupaUnaPosicionSeObtieneLoQueSeLeIntrodujo() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);			
+		Posicionable unidad = new Marine(null, 1, 1);			
 		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
 	}
 	
@@ -36,7 +37,7 @@ public class MapaTest {
 	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(10000, 1);
+		Posicionable unidad = new Marine(null, 10000, 1);
 		
 		try{
 			mapa.agregarUnidad(unidad);
@@ -50,7 +51,7 @@ public class MapaTest {
 	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 10000);
+		Posicionable unidad = new Marine(null, 1, 10000);
 	}
 	
 	@SuppressWarnings("unused")
@@ -58,14 +59,14 @@ public class MapaTest {
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(-1, 1);
+		Posicionable unidad = new Marine(null, -1, 1);
 	}
 	
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, -1);
+		Posicionable unidad = new Marine(null, 1, -1);
 		mapa.agregarUnidad(unidad);
 	}
 	
@@ -74,15 +75,15 @@ public class MapaTest {
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
-		Posicionable unidadIntrusa = new Marine(1, 1);	
+		Posicionable unidad = new Marine(null, 1, 1);
+		Posicionable unidadIntrusa = new Marine(null, 1, 1);	
 	}
 	
 	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
-		Posicionable unidadIntrusa = new Marine(1, 1);
+		Posicionable unidad = new Marine(null, 1, 1);
+		Posicionable unidadIntrusa = new Marine(null, 1, 1);
 		try{
 			mapa.agregarUnidad(unidad);
 			mapa.agregarUnidad(unidadIntrusa);
@@ -106,7 +107,7 @@ public class MapaTest {
 	public void cuandoSeRemueveUnaUnidadSuPosicionQuedaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
+		Posicionable unidad = new Marine(null, 1, 1);
 		mapa.removerUnidad(unidad);
 		mapa.getUnidad(unidad.getPosicion());
 	}
@@ -115,7 +116,7 @@ public class MapaTest {
 	public void cuandoSeMueveUnaUnidadParaObtenerlaHayQueBuscarlaConSuNuevaPosicion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
+		Posicionable unidad = new Marine(null, 1, 1);
 		try{
 			mapa.moverUnidad(unidad, 2, 2);
 			
@@ -127,7 +128,7 @@ public class MapaTest {
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(1, 1);
+		Posicionable unidad = new Marine(null, 1, 1);
 		try{
 			mapa.moverUnidad(unidad, 2, 2);
 			mapa.getUnidad(new Posicion(1, 1, true));
@@ -140,8 +141,8 @@ public class MapaTest {
 	public void moverUnaUnidadEnUnaPosicionOcupadaNoDesplazaALaUnidad() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicionable unidadConMovimiento = new Marine(1, 1);
-		Posicionable unidad = new Marine(2, 2);
+		Posicionable unidadConMovimiento = new Marine(null, 1, 1);
+		Posicionable unidad = new Marine(null, 2, 2);
 
 		mapa.moverUnidad(unidadConMovimiento, 2, 2);
 		
@@ -325,10 +326,10 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();	
 		Posicion posicionOcupada = new Posicion(0, 0, false);
-		Unidad unidad1 = new Unidad(1, null, new Posicion(0, 0, false), 1);
-		Unidad unidad2 = (new Unidad(1, null, new Posicion(0, 1, false), 1));
-		Unidad unidad3 = (new Unidad(1, null, new Posicion(1, 0, false), 1));
-		Unidad unidad4 = (new Unidad(1, null, new Posicion(1, 1, false), 1));
+		Unidad unidad1 = new Unidad(null, 1, null, new Posicion(0, 0, false), 1);
+		Unidad unidad2 = (new Unidad(null, 1, null, new Posicion(0, 1, false), 1));
+		Unidad unidad3 = (new Unidad(null, 1, null, new Posicion(1, 0, false), 1));
+		Unidad unidad4 = (new Unidad(null, 1, null, new Posicion(1, 1, false), 1));
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
 		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
 	}
@@ -337,6 +338,7 @@ public class MapaTest {
 	public void alOcuparUnMineralEnEsaPosicionDelMapaQuedaUnCentroDeMineral() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3,3));
 		mapaGenerado.cargarBases(1);
 		Mineral mineral = null;
 		
@@ -347,7 +349,7 @@ public class MapaTest {
 			}
 		}
 		
-		EdificioRecolector centro = new CentroDeMineral(mineral);
+		EdificioRecolector centro = new CentroDeMineral(jugador, mineral);
 		mapaGenerado.ocuparRecurso(centro);
 		
 		Assert.assertTrue(centro == mapaGenerado.getUnidad(mineral.getPosicion()));
@@ -358,6 +360,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(1);
+		Jugador jugador = new Jugador("Jugador", new Base(3,3));
 		Mineral mineral = null;
 		
 		for (int i=0; i < 25; i++) {
@@ -367,7 +370,7 @@ public class MapaTest {
 			}
 		}
 		
-		EdificioRecolector centro = new CentroDeMineral(mineral);
+		EdificioRecolector centro = new CentroDeMineral(jugador, mineral);
 		mapaGenerado.ocuparRecurso(centro);
 		
 		Assert.assertFalse(mapaGenerado.hayMineralEn(mineral.getPosicion()));
@@ -379,6 +382,7 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(4);
 		GasVespeno gasVespeno = null;
+		Jugador jugador = new Jugador("Jugador", new Base(3,3));
 		
 		for (int i=0; i < 25; i++) {
 			for (int j=0; j < 25; j++){
@@ -387,7 +391,7 @@ public class MapaTest {
 			}
 		}
 		
-		EdificioRecolector refineria = new Refineria(gasVespeno);
+		EdificioRecolector refineria = new Refineria(jugador, gasVespeno);
 		mapaGenerado.ocuparRecurso(refineria);
 		
 		Assert.assertTrue(refineria == mapaGenerado.getUnidad(gasVespeno.getPosicion()));
@@ -399,6 +403,7 @@ public class MapaTest {
 		Mapa mapaGenerado = Mapa.getMapa();
 		mapaGenerado.cargarBases(1);
 		GasVespeno gasVespeno = null;
+		Jugador jugador = new Jugador("Jugador", new Base(3,3));
 		
 		for (int i=0; i < 25; i++) {
 			for (int j=0; j < 25; j++){
@@ -407,7 +412,7 @@ public class MapaTest {
 			}
 		}
 		
-		EdificioRecolector refineria = new Refineria(gasVespeno);
+		EdificioRecolector refineria = new Refineria(jugador, gasVespeno);
 		mapaGenerado.ocuparRecurso(refineria);
 		
 		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));

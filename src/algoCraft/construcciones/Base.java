@@ -8,6 +8,6 @@ public class Base extends Edificio {
 	static int turnosEnConstruirse = 0;
 	
 	public Base(int x, int y) {
-		super(vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
+		super(null, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
 	}
 }

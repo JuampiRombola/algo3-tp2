@@ -11,16 +11,24 @@ public class DepositoDeSuministros extends Edificio {
 	public static int cantidadMineral = 100;
 	public static int cantidadGasVespeno = 0;
 
-	public DepositoDeSuministros(int x, int y){
-		super(vida, new Posicion(x, y, inicialmenteTerrestre), turnosQueTardaEnConstruirse);
+	public DepositoDeSuministros(Jugador jugador, int x, int y){
+		super(jugador, vida, new Posicion(x, y, inicialmenteTerrestre), turnosQueTardaEnConstruirse);
+		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 	
 	@Override
-	protected void continuarConstruccion(Jugador jugador) {
+	protected void continuarConstruccion() {
 		if(this.contadorDeTurnos == this.turnosEnConstruirse){
 			this.estaEnConstruccion = false;
 			this.contadorDeTurnos = 0;
-			jugador.sumarPoblacionMaxima(capacidadDePoblacionASumar);
+			this.jugador.sumarPoblacionMaxima(capacidadDePoblacionASumar);
 		}
+	}
+	
+	@Override
+	public void recibePuntosDeDanio(int danio) {
+		super.recibePuntosDeDanio(danio);
+		if (this.estaDestruido())
+			this.jugador.sumarPoblacionMaxima(-capacidadDePoblacionASumar);
 	}
 }

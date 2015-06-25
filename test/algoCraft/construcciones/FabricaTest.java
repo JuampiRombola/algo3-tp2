@@ -18,27 +18,31 @@ public class FabricaTest {
 	private Fabrica crearFabricaConstruida(){
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		for(int i = 0; i < 12; i++)
-			barraca.avanzarTurno(jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+			barraca.avanzarTurno();
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		for(int i = 0; i < 12; i++)
-			fabrica.avanzarTurno(jugador);
+			fabrica.avanzarTurno();
 		return fabrica;
 	}
 	
 	private void construirEdificio(Edificio edificio, Jugador jugador) {
 		Mapa.reiniciarInstanciaParaTest();
 		for(int i = 0; i < 12; i++)
-			edificio.avanzarTurno(jugador);
+			edificio.avanzarTurno();
 	}
 	
 	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		
 		Posicion posicion = new Posicion(1,1, fabrica.esTerrestre());
 		
@@ -48,9 +52,11 @@ public class FabricaTest {
 	@Test
 	public void unaFabricaEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(2, 2, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 2, 2, barraca);
 		
 		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
 		
@@ -60,9 +66,11 @@ public class FabricaTest {
 	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL22ConSetPosicion22() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		fabrica.setPosicion(2, 2);
 		
 		Posicion posicion = new Posicion(2,2, fabrica.esTerrestre());
@@ -73,10 +81,12 @@ public class FabricaTest {
 	@Test
 	public void cuandoSeCreaUnaFabricaEstaEstaEnTierra() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
 		
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		
 		assertEquals(true, fabrica.esTerrestre());
 	}
@@ -85,12 +95,14 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		construirEdificio(fabrica, jugador);
 		int vidaInicial = fabrica.getVidaActual();
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		
 		goliath.atacar(fabrica);
 		
@@ -101,11 +113,13 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		construirEdificio(fabrica, jugador);
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);
@@ -119,22 +133,26 @@ public class FabricaTest {
 	@Test
 	public void laFabricaEstaEnConstruccionCuandoRecienEsCreada() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		assertTrue(fabrica.estaEnConstruccion());
 	}
 	
 	@Test
 	public void laFabricaDejaDeEstarEnConstruccionCuandoPasan12Turnos() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		int turno = 0;
 		
 		while(fabrica.estaEnConstruccion()){
-			fabrica.avanzarTurno(jugador);
+			fabrica.avanzarTurno();
 			turno++;
 		}
 		
@@ -151,14 +169,13 @@ public class FabricaTest {
 	@Test
 	public void laFabricaTarda6TurnosLuegoDeSuConstrucionEnCrearUnMarine() throws ElEdificioEstaEnConstruccion{
 		Mapa.reiniciarInstanciaParaTest();
-		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Fabrica fabrica = crearFabricaConstruida();
 		fabrica.crearGoliath();
 		int turno = 0;
 		
 		while(!fabrica.seTerminoDeCrearLaUnidad()){
 			turno++;
-			fabrica.avanzarTurno(jugador);
+			fabrica.avanzarTurno();
 		}
 		
 		assertTrue(turno == 6);
@@ -168,10 +185,12 @@ public class FabricaTest {
 	public void cuandoSeCreaUnaFabricaEstaNoCreoNingunaUnidad() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
 		
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		
 		assertEquals(false, fabrica.seTerminoDeCrearLaUnidad());
 	}
@@ -180,9 +199,11 @@ public class FabricaTest {
 	public void cuandoLaFabricaNoEstaHabilidadNoPuedeCrearUnaUnidadYLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		
 		fabrica.crearGoliath();
 	}
@@ -191,9 +212,11 @@ public class FabricaTest {
 	public void alCrearseLaFabricaYPasar12TurnosEstaTieneTodaLaVida() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		
 		construirEdificio(fabrica, jugador);
 		
@@ -204,38 +227,45 @@ public class FabricaTest {
 	public void alCrearseLaFabricaYPasarUnTurnoTieneMasDe0PuntosDeVida() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
 		
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
-		fabrica.avanzarTurno(jugador);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
+		fabrica.avanzarTurno();
 		
 		assertTrue(0 < fabrica.getVidaActual());
 	}
 	
 	@Test(expected = NoSePuedeConstruirElEdificio.class)
 	public void siLaBarracaNoEstaConstruidaLaFabricaLanzaUnErrorAlCrearse() {
-		Barraca barraca = new Barraca(0, 0);
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 
-		new Fabrica(1, 1, barraca);
+		new Fabrica(jugador, 1, 1, barraca);
 	}
 	
 	@Test
 	public void cuandoSeCreaUnaFabricaSePuedeSeguirCreandoUnMarineYAhoraTambienUnGoliath() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		Barraca barraca = new Barraca(0, 0);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
 		
-		Fabrica fabrica = new Fabrica(1, 1, barraca);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		construirEdificio(fabrica, jugador);
 		
 		barraca.crearMarine();
 		fabrica.crearGoliath();
 		
 		for (int i=0; i < 6; i++) {
-			barraca.avanzarTurno(jugador);
-			fabrica.avanzarTurno(jugador);
+			barraca.avanzarTurno();
+			fabrica.avanzarTurno();
 		}
 		
 		assertTrue(barraca.seTerminoDeCrearLaUnidad());

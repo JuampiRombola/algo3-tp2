@@ -23,18 +23,18 @@ public class UnidadTest{
 
 	
 	private Unidad nuevaUnidadAtacante(){
-		return new Unidad(vidaMaxima, armaDePrueba, posicion, 1);
+		return new Unidad(null, vidaMaxima, armaDePrueba, posicion, 1);
 	}
 	public Unidad nuevaUnidad() {
-		return new Unidad(vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
+		return new Unidad(null, vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadEnRangoDeAtaque(int vida) {
-		return  new Unidad(vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
+		return  new Unidad(null, vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadFueraDeRangoDeAtaque(int vida) {
-		return new Unidad(vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
+		return new Unidad(null, vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	@Test
@@ -134,7 +134,7 @@ public class UnidadTest{
 		int rango = 10;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma, posicion, 1);
+		Unidad unidad = new Unidad(null, vida, arma, posicion, 1);
 		assertTrue(unidad.getDanio() == 1);
 	}
 	
@@ -162,7 +162,7 @@ public class UnidadTest{
 		int rango = 10;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma, posicion, 1);
+		Unidad unidad = new Unidad(null, vida, arma, posicion, 1);
 		assertTrue(unidad.getDanio() == 2);
 	}
 	
@@ -173,7 +173,7 @@ public class UnidadTest{
 		int rango = 2;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma, posicion, 1);
+		Unidad unidad = new Unidad(null, vida, arma, posicion, 1);
 		assertTrue(unidad.getRango() == 2);
 	}
 	
@@ -184,7 +184,7 @@ public class UnidadTest{
 		int rango = 1;
 		int vida = 10;
 		Arma arma = new Arma(danio, rango);
-		Unidad unidad = new Unidad(vida, arma, posicion, 1);
+		Unidad unidad = new Unidad(null, vida, arma, posicion, 1);
 		assertTrue(unidad.getRango() == 1);
 	}
 	@Test
@@ -213,35 +213,35 @@ public class UnidadTest{
 	@Test
 	public void getPoblacionDevuelve1SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 1);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 1);
 		assertEquals(unidad.getPoblacionQueOcupa(), 1);
 	}
 	
 	@Test
 	public void getPoblacionDevuelve2SiEsaFueLaPoblacionQueSeLeDioEnElConstructorALaUnidad() {
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		assertEquals(unidad.getPoblacionQueOcupa(), 2);
 	}
 	
 	@Test
 	public void getPosicionDevuelveUnaQueEsIgualALaDada() {
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		assertEquals(unidad.getPosicion(), posicion);
 	}
 	
 	@Test
 	public void siLePidoAlMapaLoQueHayEnLaPosicionDeLaUnidadLaEncuentro(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		assertEquals(Mapa.getMapa().getUnidad(posicion), unidad);
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
 	public void siLaUnidadEsDestruidaNoLaEncuentroEnElMapa(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
 		Mapa.getMapa().getUnidad(posicion);
@@ -250,7 +250,7 @@ public class UnidadTest{
 	@Test
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaLaEncuentroAlli(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		Posicion nuevaPosicion =  new Posicion(10,10, unidad.esTerrestre());
 		unidad.moverseA(10, 10);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(nuevaPosicion));
@@ -259,7 +259,7 @@ public class UnidadTest{
 	@Test(expected = PosicionVaciaException.class)
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaNoLaEncuentroDondeEstaba(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.moverseA(10, 10);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
 	}

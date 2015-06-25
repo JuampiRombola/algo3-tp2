@@ -1,5 +1,6 @@
 package algoCraft.unidades;
 
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 
 public class Goliath extends Unidad {
@@ -13,7 +14,19 @@ public class Goliath extends Unidad {
 	public static int cantidadGasVespeno = 50;
 	public static int cantidadDePoblacion = 2;
 	
-	public Goliath(int posicionEnX, int posicionEnY) {
-		super(vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), cantidadDePoblacion);
+	public Goliath(Jugador jugador, int posicionEnX, int posicionEnY) {
+		super(jugador, vidaMaxima, arma, new Posicion(posicionEnX,posicionEnY, inicialmenteTerrestre), cantidadDePoblacion);
+	}
+	
+	public static int getCantidadDeMineralQueCUesta() {
+		return cantidadMineral;
+	}
+	
+	public static int getCantidadDeGasQueCUesta() {
+		return cantidadGasVespeno;
+	}
+	
+	public static int getCantidadDePoblacionQueOcupa() {
+		return cantidadDePoblacion;
 	}
 }

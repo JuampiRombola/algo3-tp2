@@ -1,19 +1,22 @@
 package algoCraft.unidades;
 
 import algoCraft.Atacable;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
 
 
 public class Unidad implements Atacable {
+	private Jugador jugador;
 	private Vida vida;
 	private Arma arma;
 	private Posicion posicion;
 	private boolean activa;
 	private int poblacionQueOcupa;
 
-	public Unidad(int vidaMaxima, Arma arma, Posicion posicion, int poblacionQueOcupa) {
+	public Unidad(Jugador jugador, int vidaMaxima, Arma arma, Posicion posicion, int poblacionQueOcupa) {
+		this.jugador = jugador;
 		this.arma = arma;
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
@@ -77,6 +80,10 @@ public class Unidad implements Atacable {
 
 	public int getPoblacionQueOcupa() {
 		return this.poblacionQueOcupa;
+	}
+	
+	public Jugador getJugador() {
+		return this.jugador;
 	}
 	
 	public void moverseA(int xDestino, int yDestino){

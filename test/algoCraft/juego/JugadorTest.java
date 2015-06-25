@@ -211,9 +211,9 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		
-		int cantidadEdificiosInicial = (jugador.getCasas()).size();
+		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
 		jugador.crearDepositoDeSuministros(1, 1);
-		int cantidadEdificiosFinal = (jugador.getCasas()).size();
+		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		
 		assertTrue(cantidadEdificiosInicial + 1 == cantidadEdificiosFinal);
 	}
@@ -560,7 +560,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		Base base = jugador.getBase();
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		
 		while (!base.estaDestruido()) {
 			goliath.atacar(base);
@@ -584,7 +584,7 @@ public class JugadorTest {
 		jugador.activar();
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12, jugador);
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
@@ -605,10 +605,10 @@ public class JugadorTest {
 		jugador.activar();
 		jugador.crearDepositoDeSuministros(1, 1);
 		avanzarTurnos(3, jugador);
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int poblacionInicial = jugador.getPoblacionMaxima();
-		int cantidadEdificiosInicial = jugador.getCasas().size();
+		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
 		while (!deposito.estaDestruido()) {
 			goliath.atacar(deposito);
@@ -616,7 +616,7 @@ public class JugadorTest {
 		}
 		jugador.actualizarEstado();
 		int poblacionFinal = jugador.getPoblacionMaxima();
-		int cantidadEdificiosFinal = jugador.getCasas().size();
+		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
 		assertTrue(poblacionInicial == poblacionFinal + 5);
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
@@ -631,7 +631,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		jugador.crearBarraca(3, 3);
 		avanzarTurnos(12, jugador);
-		Goliath goliath = new Goliath(2,2);
+		Goliath goliath = new Goliath(null, 2,2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(3, 3, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
@@ -656,7 +656,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12, jugador);
 		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
-		Goliath goliath = new Goliath(1,0);
+		Goliath goliath = new Goliath(null, 1,0);
 		avanzarTurnos(6, jugador);
 		int cantidadInicial = jugador.getUnidades().size();
 		Marine marine = (Marine)Mapa.getMapa().getUnidad(new Posicion(0, 0, true));
@@ -683,12 +683,12 @@ public class JugadorTest {
 		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(2, 2, true)));
 		avanzarTurnos(6, jugador);
 		int cantidadInicialEdificios = jugador.getEdificios().size();
-		int cantidadInicialCasas = jugador.getCasas().size();
+		int cantidadInicialCasas = jugador.getEdificios().size();
 		int cantidadInicialUnidades = jugador.getUnidades().size();
 		
 		jugador.actualizarEstado();
 		int cantidadFinalEdificios = jugador.getEdificios().size();
-		int cantidadFinalCasas = jugador.getCasas().size();
+		int cantidadFinalCasas = jugador.getEdificios().size();
 		int cantidadFinalUnidades = jugador.getUnidades().size();
 		
 		assertEquals(cantidadFinalEdificios, cantidadInicialEdificios);

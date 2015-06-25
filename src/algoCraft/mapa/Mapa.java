@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.Observable;
 
 import algoCraft.construcciones.Base;
+import algoCraft.construcciones.CentroDeMineral;
 import algoCraft.construcciones.EdificioRecolector;
+import algoCraft.construcciones.Refineria;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
@@ -133,6 +135,10 @@ public class Mapa extends Observable {
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
 		Posicion posicion = unidad.getPosicion();
 		this.validadPosicion(posicion);
+		if ((unidad.getClass() == Refineria.class) || (unidad.getClass() == CentroDeMineral.class)){
+			this.ocuparRecurso((EdificioRecolector)unidad);
+			return;
+		}
 		if (this.posicionEstaOcupada(posicion))
 			throw new PosicionOcupadaException();
 		this.elementos.put(posicion, unidad);

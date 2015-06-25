@@ -17,8 +17,8 @@ public class CombateTest {
 	public void combateAMuerteEntreUnMarineYUnGoliath() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Marine marine = new Marine(1, 1);
-		Goliath goliath = new Goliath(10, 10);
+		Marine marine = new Marine(null, 1, 1);
+		Goliath goliath = new Goliath(null, 10, 10);
 		
 		//La vida del marine y del goliath estan completas
 		assertTrue(marine.getVidaMaxima() == 40);
