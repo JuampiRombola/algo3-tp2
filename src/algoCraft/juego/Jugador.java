@@ -20,7 +20,6 @@ import algoCraft.juego.excepciones.ElJugadorNoEstaActivoException;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
-import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
@@ -145,7 +144,6 @@ public class Jugador {
 		this.validarSiEstaActivo();
 		Edificio edificio = creador.crearEdificio(this, x, y);
 		this.agregarEdificio(edificio);
-		Mapa.getMapa().agregarUnidad(edificio);
 	}
 	
 	public void crearCentroDeMineral(Mineral mineral) {

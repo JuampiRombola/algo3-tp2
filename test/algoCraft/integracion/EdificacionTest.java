@@ -15,28 +15,6 @@ import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
 public class EdificacionTest {
-
-	private Mineral obtenerUnMineralDelMapa() {
-		Mineral mineral = null;
-		for (int i=0; i < Mapa.getMapa().getAlto(); i++) {
-			for (int j=0; j < Mapa.getMapa().getAncho(); j++){
-				if (!Mapa.getMapa().hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) Mapa.getMapa().getUnidad(new Posicion(i, j, true));
-			}
-		}
-		return mineral;
-	}
-	
-	private GasVespeno obtenerUnGasVespenoDelMapa() {
-		GasVespeno gasVespeno = null;
-		for (int i=0; i < Mapa.getMapa().getAlto(); i++) {
-			for (int j=0; j < Mapa.getMapa().getAncho(); j++){
-				if (!Mapa.getMapa().hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) Mapa.getMapa().getUnidad(new Posicion(i, j, true));
-			}
-		}
-		return gasVespeno;
-	}
 	
 	@Test
 	public void construccionDeEdificiosYUnidadesDeUnMismoJugadorRespetandoDependencias() {
@@ -48,12 +26,12 @@ public class EdificacionTest {
 		jugador.activar();
 		
 		// Se busca un mineral y se le construye un centro encima
-		Mineral mineral = this.obtenerUnMineralDelMapa();
+		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
 		jugador.crearCentroDeMineral(mineral);
 		assertTrue(150 == jugador.getMineral());
 		
 		// Se busca un mineral y se le construye un centro encima
-		GasVespeno gasVespeno = this.obtenerUnGasVespenoDelMapa();
+		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(2, 2, true));
 		jugador.crearRefineria(gasVespeno);
 		assertTrue(50 == jugador.getMineral());
 			

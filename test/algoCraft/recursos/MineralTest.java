@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
 
@@ -78,42 +77,11 @@ public class MineralTest {
 		Posicion posicion = new Posicion(1,1, true);
 		assertEquals(mineral.getPosicion(), posicion);
 	}
-	
 	@Test
-	public void siSeTerminaUnMineralSuPosicionQuedaVacia() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		mapa.cargarBases(1);
-		
-		Mineral mineral = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		assertTrue(mapa.posicionEstaOcupada(mineral.getPosicion()));
+	public void siSeTerminaUnMineralQuedaDestruido() {
+		Mineral mineral = new Mineral(1, 1);
 		mineral.extraer(1500);
-		assertFalse(mapa.posicionEstaOcupada(mineral.getPosicion()));
-	}
-	
-	@Test
-	public void siNoSeTerminaUnMineralSuPosicionNoQuedaVacia() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		mapa.cargarBases(1);
 		
-		Mineral mineral = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		assertTrue(mapa.posicionEstaOcupada(mineral.getPosicion()));
-		mineral.extraer(1499);
-		assertTrue(mapa.posicionEstaOcupada(mineral.getPosicion()));
+		assertTrue(mineral.estaDestruido());
 	}
 }

@@ -1,6 +1,7 @@
 package algoCraft.construcciones;
 
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Recurso;
 import algoCraft.unidades.Vida;
@@ -15,6 +16,7 @@ public abstract class EdificioRecolector extends Edificio {
 	public EdificioRecolector(Jugador jugador, Recurso recurso, int vida, int turnosEnConstruirse) {
 		super(jugador, vida, recurso.getPosicion(), turnosEnConstruirse);
 		this.recursosRecolectados = 0;
+		Mapa.getMapa().reemplazarUnidad(this);
 		this.recurso = recurso;
 	}
 	
@@ -26,5 +28,13 @@ public abstract class EdificioRecolector extends Edificio {
 		int cantidadRecolectada = this.recurso.extraer(cantidadARecolectar);
 		this.recursosRecolectados += cantidadRecolectada;
 		return cantidadRecolectada;
+	}
+	
+	@Override
+	public void destruir() {
+		if (this.recurso.estaDestruido())
+			Mapa.getMapa().removerUnidad(this);
+		else
+			Mapa.getMapa().reemplazarUnidad(this.recurso);
 	}
 }

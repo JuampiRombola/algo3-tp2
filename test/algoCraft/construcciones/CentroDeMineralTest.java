@@ -106,16 +106,8 @@ public class CentroDeMineralTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		Mineral mineral = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
+		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
-		mapa.ocuparRecurso(centro);
 		
 		mineral.extraer(1490);
 		centro.recolectar();
@@ -132,16 +124,8 @@ public class CentroDeMineralTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		mapa.cargarBases(1);
 		
-		Mineral mineral = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
+		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
-		mapa.ocuparRecurso(centro);
 		
 		mineral.extraer(1490);
 		centro.recolectar();

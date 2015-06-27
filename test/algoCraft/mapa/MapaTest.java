@@ -8,10 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import algoCraft.construcciones.Base;
-import algoCraft.construcciones.CentroDeMineral;
-import algoCraft.construcciones.EdificioRecolector;
-import algoCraft.construcciones.Refineria;
-import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -19,7 +15,6 @@ import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.recursos.GasVespeno;
-import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
@@ -140,74 +135,6 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void cuandoSeInicializaElMapaCon1BaseTiene2GasVespenoEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		Assert.assertTrue(2 == mapaGenerado.getCantidadGasVespeno());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon2BasesTiene4GasVespenoEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(2);
-		Assert.assertTrue(4 == mapaGenerado.getCantidadGasVespeno());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon3BasesTiene6GasVespenoEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(3);
-		Assert.assertTrue(6 == mapaGenerado.getCantidadGasVespeno());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon4BasesTiene8GasVespenoEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(4);
-		Assert.assertTrue(8 == mapaGenerado.getCantidadGasVespeno());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon1BaseTiene8MineralesEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		
-		Assert.assertTrue(6 == mapaGenerado.getCantidadMinerales());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon2BasesTiene16MineralesEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(2);
-		
-		Assert.assertTrue(12 == mapaGenerado.getCantidadMinerales());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon3BasesTiene24MineralesEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(3);
-		
-		Assert.assertTrue(18 == mapaGenerado.getCantidadMinerales());
-	}
-	
-	@Test
-	public void cuandoSeInicializaElMapaCon4BasesTiene32MineralesEnTodoElMapa() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(4);
-		
-		Assert.assertTrue(24 == mapaGenerado.getCantidadMinerales());
-	}
-	
-	@Test
 	public void siSeCargaUnaSolaBaseEstaSeEncuentraEnEl3x3() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -262,24 +189,6 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void noDeberiaHaberGasVespenoEnEl10y10() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(4);
-		
-		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(new Posicion(10, 10, true)));
-	}
-	
-	@Test
-	public void noDeberiaHaberMineralesEnEl10y10() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(4);
-		
-		Assert.assertFalse(mapaGenerado.hayMineralEn(new Posicion(10, 10, true)));
-	}
-	
-	@Test
 	public void laPosicionVaciaMasCercanaAl11x11EsLa10x10() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -312,126 +221,6 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void alOcuparUnMineralEnEsaPosicionDelMapaQuedaUnCentroDeMineral() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador", new Base(3,3));
-		mapaGenerado.cargarBases(1);
-		Mineral mineral = null;
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		EdificioRecolector centro = new CentroDeMineral(jugador, mineral);
-		mapaGenerado.ocuparRecurso(centro);
-		
-		Assert.assertTrue(centro == mapaGenerado.getUnidad(mineral.getPosicion()));
-	}
-	
-	@Test
-	public void alOcuparUnMineralCuandoSeLePreguntaAlMapaPorEsaPosicionYaNoTieneMineralAhi() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		Jugador jugador = new Jugador("Jugador", new Base(3,3));
-		Mineral mineral = null;
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		EdificioRecolector centro = new CentroDeMineral(jugador, mineral);
-		mapaGenerado.ocuparRecurso(centro);
-		
-		Assert.assertFalse(mapaGenerado.hayMineralEn(mineral.getPosicion()));
-	}
-	
-	@Test
-	public void alOcuparUnGasVespenoEnEsaPosicionDelMapaQuedaUnaRefineria() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(4);
-		GasVespeno gasVespeno = null;
-		Jugador jugador = new Jugador("Jugador", new Base(3,3));
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		EdificioRecolector refineria = new Refineria(jugador, gasVespeno);
-		mapaGenerado.ocuparRecurso(refineria);
-		
-		Assert.assertTrue(refineria == mapaGenerado.getUnidad(gasVespeno.getPosicion()));
-	}
-
-	@Test
-	public void alOcuparUnGasVespenoCuandoSeLePreguntaAlMapaPorEsaPosicionYaNoTieneGasVespenoAhi() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		GasVespeno gasVespeno = null;
-		Jugador jugador = new Jugador("Jugador", new Base(3,3));
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		EdificioRecolector refineria = new Refineria(jugador, gasVespeno);
-		mapaGenerado.ocuparRecurso(refineria);
-		
-		Assert.assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
-	}
-	
-	@Test
-	public void siSeRemueveUnMineralYaNoHayMineralEnEsaPosicion() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		Mineral mineral = null;
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayMineralEn(new Posicion(i, j, true))) continue;
-				mineral = (Mineral) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		mapaGenerado.removerRecurso(mineral);
-		
-		assertFalse(mapaGenerado.hayMineralEn(mineral.getPosicion()));
-	}
-	
-	@Test
-	public void siSeRemueveUnGasVespenoYaNoHayGasVespenoEnEsaPosicion() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapaGenerado = Mapa.getMapa();
-		mapaGenerado.cargarBases(1);
-		GasVespeno gasVespeno = null;
-		
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapaGenerado.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapaGenerado.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		mapaGenerado.removerRecurso(gasVespeno);
-		
-		assertFalse(mapaGenerado.hayGasVespenoEn(gasVespeno.getPosicion()));
-	}
-	
-	@Test
 	public void siSeLimpiaElMapaEsteQuedaVacio() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
@@ -453,10 +242,19 @@ public class MapaTest {
 		
 		Unidad unaUnidad = (new Unidad(null, 1, null, new Posicion(0, 0, true), 1));
 		GasVespeno otraUnidad = new GasVespeno(0, 0);
-		
 		mapa.reemplazarUnidad(otraUnidad);
 		
 		assertTrue(otraUnidad == mapa.getUnidad(unaUnidad.getPosicion()));
+	}
+	
+	@Test
+	public void siSeUsaElMetodoReemplazarUnidadEnYLaPosicionEstabaVaciaSeOcupaSinNingunProblema() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
 		
+		GasVespeno unicaUnidad = new GasVespeno(0, 0);
+		mapa.reemplazarUnidad(unicaUnidad);
+		
+		assertTrue(unicaUnidad == mapa.getUnidad(unicaUnidad.getPosicion()));
 	}
 }

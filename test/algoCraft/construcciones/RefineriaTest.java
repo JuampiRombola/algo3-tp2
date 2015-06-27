@@ -101,17 +101,8 @@ public class RefineriaTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
+		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(2, 2, true));
 		Refineria refineria = crearRefineria(gasVespeno);
-		mapa.ocuparRecurso(refineria);
-		
 		gasVespeno.extraer(990);
 		refineria.recolectar();
 		assertTrue(gasVespeno.estaDestruido());
@@ -126,16 +117,8 @@ public class RefineriaTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
+		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(2, 2, true));
 		Refineria refineria = crearRefineria(gasVespeno);
-		mapa.ocuparRecurso(refineria);
 		
 		gasVespeno.extraer(990);
 		refineria.recolectar();

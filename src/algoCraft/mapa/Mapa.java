@@ -7,9 +7,6 @@ import java.util.Iterator;
 import java.util.Observable;
 
 import algoCraft.construcciones.Base;
-import algoCraft.construcciones.CentroDeMineral;
-import algoCraft.construcciones.EdificioRecolector;
-import algoCraft.construcciones.Refineria;
 import algoCraft.mapa.excepciones.PosicionInvalidaException;
 import algoCraft.mapa.excepciones.PosicionOcupadaException;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
@@ -18,22 +15,16 @@ import algoCraft.recursos.Mineral;
 
 public class Mapa extends Observable {
 	private HashMap<Posicion, Posicionable> elementos;
-	private HashMap<Posicion, GasVespeno> gasVespeno;
-	private HashMap<Posicion, Mineral> minerales;
 	private static Mapa instancia = null;
 	private int alto = 25;
 	private int ancho = 25;
 	
 	private Mapa() {
 		this.elementos = new HashMap<Posicion, Posicionable>(alto * ancho);
-		this.gasVespeno = new HashMap<Posicion, GasVespeno>();
-		this.minerales = new HashMap<Posicion, Mineral>();
 	}
 	
 	public void limpiarMapa() {
 		elementos.clear();
-		minerales.clear();
-		gasVespeno.clear();
 	}
 	
 	public int getAlto() {
@@ -59,7 +50,7 @@ public class Mapa extends Observable {
 		Collection<Base> bases = generarBases(cantidadJugadores);
 		for (Base base : bases)
 			this.elementos.put(base.getPosicion(), base);
-		cargarRecursos();
+		cargarRecursos(bases);
 		setChanged();
 		this.notifyObservers();
 		return bases;
@@ -78,47 +69,28 @@ public class Mapa extends Observable {
 		return bases.subList(0, indiceFinal);
 	}
 
-	private void cargarRecursos() {
-		@SuppressWarnings("unchecked")
-		Collection<Posicionable> bases = ((HashMap<Posicion, Posicionable>)this.elementos.clone()).values();
-		Iterator<Posicionable> it = bases.iterator();
+	private void cargarRecursos(Collection<Base> bases) {
+		Iterator<Base> it = bases.iterator();
 		while (it.hasNext()) {
-			Posicionable base = it.next();
-			this.generarGasVespenoEntornoALaBase(base);
-			this.generarMineralesEntornoALaBase(base);
+			Base base = it.next();
+			this.generarRecursosEntornoALaBase(base);
 		}
 	}
 	
-	private void generarGasVespenoEntornoALaBase(Posicionable base) {
-		int cantidadGasVespeno = 0;
-		while (!(cantidadGasVespeno == 2)) {
-			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!posicion.esPositiva() || this.posicionEstaOcupada(posicion)) continue;
-			GasVespeno gasVespeno = new GasVespeno(posicion.getX(), posicion.getY());
-			this.gasVespeno.put(posicion, gasVespeno);
-			cantidadGasVespeno++;
+	private void generarRecursosEntornoALaBase(Base base) {
+		ArrayList<Posicion> posAdyacentes = base.getPosicion().obtenerPosicionesAdyacentes();
+		Iterator<Posicion> it = posAdyacentes.iterator();
+		int cantidadAgregada = 0;
+		while (it.hasNext()) {
+			Posicion posicion = it.next();
+			if (posicionEstaOcupada(posicion))
+				continue;
+			if (cantidadAgregada < 2)
+				this.agregarUnidad(new GasVespeno(posicion.getX(), posicion.getY()));
+			else
+				this.agregarUnidad(new Mineral(posicion.getX(), posicion.getY()));
+			cantidadAgregada++;
 		}
-	}
-	
-	private void generarMineralesEntornoALaBase(Posicionable base) {
-		int cantidadMinerales = 0;
-		while (!(cantidadMinerales == 6)) {
-			Posicion posicion = obtenerPosicionAleatoriaEntornoALaBase(base);
-			if (!posicion.esPositiva() || this.posicionEstaOcupada(posicion)) continue;
-			Mineral mineral = new Mineral(posicion.getX(), posicion.getY());
-			this.minerales.put(posicion, mineral);
-			cantidadMinerales++;
-		}
-	}
-	
-	private Posicion obtenerPosicionAleatoriaEntornoALaBase(Posicionable base) {
-		Posicion posicionBase = base.getPosicion();
-		int corrimiento = 4;
-		int xBase = posicionBase.getX();
-		int yBase = posicionBase.getY();
-		int xRandom = (int)Math.floor(Math.random()*((xBase+corrimiento)-(xBase-corrimiento))+(xBase-corrimiento));
-		int yRandom = (int)Math.floor(Math.random()*((yBase+corrimiento)-(yBase-corrimiento))+(yBase-corrimiento));
-		return (new Posicion(xRandom, yRandom, base.esTerrestre()));
 	}
 	
 	private boolean esPosicionValida(Posicion posicion) {
@@ -128,17 +100,13 @@ public class Mapa extends Observable {
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
-		return (this.elementos.containsKey(p) | this.minerales.containsKey(p) | this.gasVespeno.containsKey(p)) ;
+		return this.elementos.containsKey(p);
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
 		Posicion posicion = unidad.getPosicion();
 		if (!this.esPosicionValida(posicion))
 			throw new PosicionInvalidaException();
-		if ((unidad.getClass() == Refineria.class) || (unidad.getClass() == CentroDeMineral.class)){
-			this.ocuparRecurso((EdificioRecolector)unidad);
-			return;
-		}
 		if (this.posicionEstaOcupada(posicion))
 			throw new PosicionOcupadaException();
 		this.elementos.put(posicion, unidad);
@@ -147,11 +115,7 @@ public class Mapa extends Observable {
 	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
 		if (!this.posicionEstaOcupada(posicion))
 			throw new PosicionVaciaException();
-		if (!(this.hayGasVespenoEn(posicion) || this.hayMineralEn(posicion)))
-			return elementos.get(posicion);
-		if (this.hayGasVespenoEn(posicion))
-			return gasVespeno.get(posicion);
-		return minerales.get(posicion);
+		return elementos.get(posicion);
 	}
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
@@ -168,29 +132,6 @@ public class Mapa extends Observable {
 		this.elementos.remove(unidad.getPosicion());
 	}
 	
-	public void removerRecurso(Posicionable recurso) {
-		if (this.gasVespeno.containsKey(recurso.getPosicion()))
-			gasVespeno.remove(recurso.getPosicion());
-		if (this.minerales.containsKey(recurso.getPosicion()))
-			minerales.remove(recurso.getPosicion());
-	}
-	
-	public boolean hayGasVespenoEn(Posicion posicion) {
-		return ((!this.elementos.containsKey(posicion)) && this.gasVespeno.containsKey(posicion));
-	}
-	
-	public boolean hayMineralEn(Posicion posicion) {
-		return ((!this.elementos.containsKey(posicion)) && this.minerales.containsKey(posicion));
-	}
-	
-	public int getCantidadMinerales() {
-		return this.minerales.size();
-	}
-	
-	public int getCantidadGasVespeno() {
-		return this.gasVespeno.size();
-	}
-	
 	public Posicion getPosicionVaciaCercana(Posicion posicion) {
 		ArrayList<Posicion> posiciones = posicion.obtenerPosicionesAdyacentes();
 		Posicion posicionBuscada = posiciones.remove(0);
@@ -200,15 +141,10 @@ public class Mapa extends Observable {
 		}
 		return posicionBuscada;
 	}
-	
-	public void ocuparRecurso(EdificioRecolector recolector) {
-		Posicion posicion = recolector.getPosicion();
-		if (this.hayGasVespenoEn(posicion) || this.hayMineralEn(posicion))
-			this.elementos.put(recolector.getPosicion(), recolector);
-	}
-	
+
 	public void reemplazarUnidad(Posicionable nuevoPosicionable) {
-		this.removerUnidad(this.getUnidad(nuevoPosicionable.getPosicion()));
+		if (this.posicionEstaOcupada(nuevoPosicionable.getPosicion()))
+			this.removerUnidad(this.getUnidad(nuevoPosicionable.getPosicion()));
 		this.agregarUnidad(nuevoPosicionable);
 	}
 }

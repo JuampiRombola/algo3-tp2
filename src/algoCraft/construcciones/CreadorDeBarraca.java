@@ -1,12 +1,15 @@
 package algoCraft.construcciones;
 
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 
 public class CreadorDeBarraca extends CreadorDeEdificios {
 
 	@Override
 	public Edificio crearEdificio(Jugador jugador, int x, int y) {
-		return new Barraca(jugador, x, y);
+		Barraca barraca = new Barraca(jugador, x, y);
+		Mapa.getMapa().agregarUnidad(barraca);
+		return barraca;
 	}
 
 }

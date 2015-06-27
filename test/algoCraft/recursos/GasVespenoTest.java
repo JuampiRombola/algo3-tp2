@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
 public class GasVespenoTest {
@@ -78,40 +77,10 @@ public class GasVespenoTest {
 	}
 	
 	@Test
-	public void siSeTerminaUnGasVespenoSuPosicionQuedaVacia() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		mapa.cargarBases(1);
-		
-		GasVespeno gasVespeno = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		assertTrue(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
+	public void siSeTerminaUnGasVespenoQuedaDestruido() {
+		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		gasVespeno.extraer(1000);
-		assertFalse(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
-	}
-	
-	@Test
-	public void siNoSeTerminaUnGasVespenoSuPosicionNoQuedaVacia() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = null;
-		for (int i=0; i < 25; i++) {
-			for (int j=0; j < 25; j++){
-				if (!mapa.hayGasVespenoEn(new Posicion(i, j, true))) continue;
-				gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(i, j, true));
-			}
-		}
-		
-		assertTrue(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
-		gasVespeno.extraer(999);
-		assertTrue(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
+		assertTrue(gasVespeno.estaDestruido());
 	}
 }
