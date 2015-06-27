@@ -325,13 +325,12 @@ public class MapaTest {
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();	
-		Posicion posicionOcupada = new Posicion(0, 0, false);
-		Unidad unidad1 = new Unidad(null, 1, null, new Posicion(0, 0, false), 1);
-		Unidad unidad2 = (new Unidad(null, 1, null, new Posicion(0, 1, false), 1));
-		Unidad unidad3 = (new Unidad(null, 1, null, new Posicion(1, 0, false), 1));
-		Unidad unidad4 = (new Unidad(null, 1, null, new Posicion(1, 1, false), 1));
-		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
-		Assert.assertEquals((new Posicion(0, 2, false)), posicionLibre);
+		Unidad unidad1 = (new Unidad(null, 1, null, new Posicion(0, 0, true), 1));
+		Unidad unidad2 = (new Unidad(null, 1, null, new Posicion(0, 1, true), 1));
+		Unidad unidad3 = (new Unidad(null, 1, null, new Posicion(1, 0, true), 1));
+		Unidad unidad4 = (new Unidad(null, 1, null, new Posicion(1, 1, true), 1));
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion(0, 0, true));
+		Assert.assertEquals((new Posicion(0, 2, true)), posicionLibre);
 	}
 	
 	@Test

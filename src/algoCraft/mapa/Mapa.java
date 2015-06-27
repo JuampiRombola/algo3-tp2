@@ -121,11 +121,10 @@ public class Mapa extends Observable {
 		return (new Posicion(xRandom, yRandom, base.esTerrestre()));
 	}
 	
-	private void validadPosicion(Posicion posicion) throws PosicionInvalidaException {
+	private boolean esPosicionValida(Posicion posicion) {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		if (x < 0 || x > this.alto || y < 0 || y > this.ancho)
-			throw new PosicionInvalidaException();
+		return ((x >= 0) && (x < this.alto) && (y >= 0) && (y < this.ancho));
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
@@ -134,7 +133,8 @@ public class Mapa extends Observable {
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
 		Posicion posicion = unidad.getPosicion();
-		this.validadPosicion(posicion);
+		if (!this.esPosicionValida(posicion))
+			throw new PosicionInvalidaException();
 		if ((unidad.getClass() == Refineria.class) || (unidad.getClass() == CentroDeMineral.class)){
 			this.ocuparRecurso((EdificioRecolector)unidad);
 			return;
@@ -155,7 +155,8 @@ public class Mapa extends Observable {
 	}
 	
 	public void moverUnidad(Posicionable unidad, int xDestino, int yDestino) throws PosicionInvalidaException {
-		this.validadPosicion(new Posicion(xDestino, yDestino, unidad.esTerrestre()));
+		if (!this.esPosicionValida(new Posicion(xDestino, yDestino, unidad.esTerrestre())))
+			throw new PosicionInvalidaException();
 		if (!this.posicionEstaOcupada(new Posicion(xDestino, yDestino, unidad.esTerrestre()))) {
 			this.removerUnidad(unidad);
 			unidad.setPosicion(xDestino, yDestino);
