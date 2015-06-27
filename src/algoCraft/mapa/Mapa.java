@@ -206,4 +206,9 @@ public class Mapa extends Observable {
 		if (this.hayGasVespenoEn(posicion) || this.hayMineralEn(posicion))
 			this.elementos.put(recolector.getPosicion(), recolector);
 	}
+	
+	public void reemplazarUnidad(Posicionable nuevoPosicionable) {
+		this.removerUnidad(this.getUnidad(nuevoPosicionable.getPosicion()));
+		this.agregarUnidad(nuevoPosicionable);
+	}
 }

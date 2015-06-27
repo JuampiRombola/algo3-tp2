@@ -46,50 +46,29 @@ public class MapaTest {
 		} catch (PosicionInvalidaException e) {}
 	}
 
-	@SuppressWarnings("unused")
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConYFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, 1, 10000);
+		new Marine(null, 1, 10000);
 	}
 	
-	@SuppressWarnings("unused")
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaXNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, -1, 1);
+		new Marine(null, -1, 1);
 	}
 	
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConCoordenadaYNegativaSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, 1, -1);
-		mapa.agregarUnidad(unidad);
+		new Marine(null, 1, -1);
 	}
 	
-	@SuppressWarnings("unused")
 	@Test(expected = PosicionOcupadaException.class)
 	public void agregarUnaUnidadEnUnaPosicionOcupadaNoAgregaNada() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, 1, 1);
-		Posicionable unidadIntrusa = new Marine(null, 1, 1);	
-	}
-	
-	public void agregarUnaUnidadEnUnaPosicionOcupadaLanzaExcepcion() {
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, 1, 1);
-		Posicionable unidadIntrusa = new Marine(null, 1, 1);
-		try{
-			mapa.agregarUnidad(unidad);
-			mapa.agregarUnidad(unidadIntrusa);
-			
-			fail();
-		} catch (PosicionOcupadaException e) {}
+		new Marine(null, 1, 1);
+		new Marine(null, 1, 1);	
 	}
 	
 	@Test
@@ -320,15 +299,14 @@ public class MapaTest {
 		Assert.assertEquals((new Posicion(0, 1, false)), posicionLibre);
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
 	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();	
-		Unidad unidad1 = (new Unidad(null, 1, null, new Posicion(0, 0, true), 1));
-		Unidad unidad2 = (new Unidad(null, 1, null, new Posicion(0, 1, true), 1));
-		Unidad unidad3 = (new Unidad(null, 1, null, new Posicion(1, 0, true), 1));
-		Unidad unidad4 = (new Unidad(null, 1, null, new Posicion(1, 1, true), 1));
+		new Unidad(null, 1, null, new Posicion(0, 0, true), 1);
+		new Unidad(null, 1, null, new Posicion(0, 1, true), 1);
+		new Unidad(null, 1, null, new Posicion(1, 0, true), 1);
+		new Unidad(null, 1, null, new Posicion(1, 1, true), 1);
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion(0, 0, true));
 		Assert.assertEquals((new Posicion(0, 2, true)), posicionLibre);
 	}
@@ -466,5 +444,19 @@ public class MapaTest {
 				assertFalse(mapa.posicionEstaOcupada(new Posicion (i, j, false)));
 			}
 		}
+	}
+	
+	@Test
+	public void usandoElMetodoReemplazarUnidadSeReemplazaCorrectamenteUnaUnidadPorOtra() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		
+		Unidad unaUnidad = (new Unidad(null, 1, null, new Posicion(0, 0, true), 1));
+		GasVespeno otraUnidad = new GasVespeno(0, 0);
+		
+		mapa.reemplazarUnidad(otraUnidad);
+		
+		assertTrue(otraUnidad == mapa.getUnidad(unaUnidad.getPosicion()));
+		
 	}
 }
