@@ -83,8 +83,6 @@ public class Mapa extends Observable {
 		int cantidadAgregada = 0;
 		while (it.hasNext()) {
 			Posicion posicion = it.next();
-			if (posicionEstaOcupada(posicion))
-				continue;
 			if (cantidadAgregada < 2)
 				this.agregarUnidad(new GasVespeno(posicion.getX(), posicion.getY()));
 			else

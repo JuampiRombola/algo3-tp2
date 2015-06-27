@@ -180,4 +180,14 @@ public class JuegoTest {
 		jugador1.getBase().recibePuntosDeDanio(2500);
 		assertEquals(true, juego.hayGanador());
 	}
+	
+	@Test
+	public void cuandoSeLimpiaElJuegoSeBorranTodosLosDatos() {
+		Mapa.reiniciarInstanciaParaTest();
+		Juego juego = new Juego();
+		juego.limpiarJuego();
+		
+		assertTrue(0 == juego.getCantidadDeJugadores());
+		assertTrue(0 == juego.getJugadoresDerrotados());
+	}
 }

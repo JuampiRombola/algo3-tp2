@@ -31,14 +31,8 @@ public class MapaTest {
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaOcuparUnaPosicionConXFueraDeRango() {
 		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Posicionable unidad = new Marine(null, 10000, 1);
 		
-		try{
-			mapa.agregarUnidad(unidad);
-			
-			fail();
-		} catch (PosicionInvalidaException e) {}
+		new Marine(null, 10000, 1);
 	}
 
 	@Test(expected = PosicionInvalidaException.class)
@@ -66,15 +60,12 @@ public class MapaTest {
 		new Marine(null, 1, 1);	
 	}
 	
-	@Test
+	@Test(expected = PosicionVaciaException.class)
 	public void cuandoSeIntentaObtenerLaUnidadDeUnaPosicionLibreSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		try{
-			mapa.getUnidad(new Posicion(1, 1, true));
-			
-			fail();
-		} catch (PosicionVaciaException e) {}
+		
+		mapa.getUnidad(new Posicion(1, 1, true));
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
@@ -91,24 +82,20 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(null, 1, 1);
-		try{
-			mapa.moverUnidad(unidad, 2, 2);
-			
-			Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
-		} catch (PosicionVaciaException e) {}
+		
+		mapa.moverUnidad(unidad, 2, 2);
+		
+		Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
 	}
 	
-	@Test
+	@Test(expected = PosicionVaciaException.class)
 	public void cuandoSeMueveUnaUnidadCorrectamenteDejaSuPosicionViejaVacia() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(null, 1, 1);
-		try{
-			mapa.moverUnidad(unidad, 2, 2);
-			mapa.getUnidad(new Posicion(1, 1, true));
-			
-			fail();
-		} catch (PosicionVaciaException e) {}
+		
+		mapa.moverUnidad(unidad, 2, 2);
+		mapa.getUnidad(new Posicion(1, 1, true));
 	}
 	
 	@Test
@@ -256,5 +243,13 @@ public class MapaTest {
 		mapa.reemplazarUnidad(unicaUnidad);
 		
 		assertTrue(unicaUnidad == mapa.getUnidad(unicaUnidad.getPosicion()));
+	}
+	
+	@Test(expected = PosicionInvalidaException.class)
+	public void cuandoSeIntentaMoverUnaUnidadAUnaPosicionInvalidaLanzaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Marine marine = new Marine(null, 1, 1);
+		
+		marine.moverseA(-1, 0);
 	}
 }
