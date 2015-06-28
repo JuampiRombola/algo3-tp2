@@ -1,10 +1,8 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
