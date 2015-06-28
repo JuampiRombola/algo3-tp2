@@ -16,7 +16,7 @@ public class VentanaPrincipal implements Observer{
 	
 	private JFrame marco;
 	private Juego juego;
-	private JugadorPanel jugadorFrame;
+	private PanelJugador jugadorFrame;
 	private boolean primerTurno = true;
 	
 	public VentanaPrincipal(){
@@ -45,7 +45,7 @@ public class VentanaPrincipal implements Observer{
 		if(!primerTurno){
 			marco.remove(jugadorFrame);
 		}
-		jugadorFrame = new JugadorPanel(juego);
+		jugadorFrame = new PanelJugador(juego);
 		marco.add(jugadorFrame);
 		primerTurno = false;
 	}
