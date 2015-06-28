@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -18,7 +19,6 @@ public class VentanaPrincipal implements Observer{
 	private Juego juego;
 	private PanelJugador jugadorFrame;
 	private boolean primerTurno = true;
-	
 	public VentanaPrincipal(){
 		marco = new JFrame("AlgoCraft");
 		marco.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -45,8 +45,15 @@ public class VentanaPrincipal implements Observer{
 		if(!primerTurno){
 			marco.remove(jugadorFrame);
 		}
+		if(primerTurno){
+			JButton botonTerminarTurno = new JButton();
+			botonTerminarTurno.setAction(new AccionTerminarTurno(juego));
+			marco.add(botonTerminarTurno, BorderLayout.WEST);
+		}
 		jugadorFrame = new PanelJugador(juego);
 		marco.add(jugadorFrame);
+		marco.revalidate();
+		marco.repaint();
 		primerTurno = false;
 	}
 }
