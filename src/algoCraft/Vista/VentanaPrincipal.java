@@ -47,7 +47,7 @@ public class VentanaPrincipal implements Observer{
 		}
 		if(primerTurno){
 			JButton botonTerminarTurno = new JButton();
-			//botonTerminarTurno.setAction(new AccionTerminarTurno(juego));
+			botonTerminarTurno.setAction(new AccionTerminarTurno(juego));
 			marco.add(botonTerminarTurno, BorderLayout.WEST);
 		}
 		jugadorFrame = new PanelJugador(juego);
