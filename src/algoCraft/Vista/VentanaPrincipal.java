@@ -14,7 +14,7 @@ public class VentanaPrincipal{
 	
 	private JFrame marco;
 	private Juego juego;
-	
+	private PanelBotonera botonera;
 	public VentanaPrincipal(){
 		marco = new JFrame("AlgoCraft");
 		marco.setLayout(new BorderLayout());
@@ -23,9 +23,10 @@ public class VentanaPrincipal{
 		juego = new Juego();
 		JMenuBar barraMenu = (new BarraMenu(marco, juego)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
-		marco.getContentPane().add(new VistaMapa(), BorderLayout.EAST);
 		marco.getContentPane().add(new PanelIzquierdo(juego, marco), BorderLayout.WEST);
-		marco.getContentPane().add(new PanelBotonera(juego), BorderLayout.CENTER);
+		botonera = new PanelBotonera(juego);
+		marco.getContentPane().add(botonera, BorderLayout.CENTER);
+		marco.getContentPane().add(new VistaMapa(botonera), BorderLayout.EAST);
 		marco.setVisible(true);
 		marco.getContentPane().setBackground(Color.black);
 		marco.setVisible(true);
