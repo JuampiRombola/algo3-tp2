@@ -16,8 +16,9 @@ public class VentanaPrincipal implements Observer{
 	
 	private JFrame marco;
 	private Juego juego;
-	private VistaRecursos vistaRecursos;
+	private JugadorPanel jugadorFrame;
 	private boolean primerTurno = true;
+	
 	public VentanaPrincipal(){
 		marco = new JFrame("AlgoCraft");
 		marco.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,8 +42,11 @@ public class VentanaPrincipal implements Observer{
 
 	@Override//Se llama cuando se crea una partida o pasa un turno.
 	public void update(Observable o, Object arg) {
-		if(!primerTurno)
-			marco.remove(vistaRecursos);
-		marco.add(new VistaRecursos(juego));
+		if(!primerTurno){
+			marco.remove(jugadorFrame);
+		}
+		jugadorFrame = new JugadorPanel(juego);
+		marco.add(jugadorFrame);
+		primerTurno = false;
 	}
 }
