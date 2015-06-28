@@ -4,31 +4,27 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import algoCraft.juego.Juego;
 
-public class VentanaPrincipal implements Observer{
+public class VentanaPrincipal{
 	
 	private JFrame marco;
 	private Juego juego;
-	private PanelJugador jugadorFrame;
-	private boolean primerTurno = true;
+	
 	public VentanaPrincipal(){
 		marco = new JFrame("AlgoCraft");
+		marco.setLayout(new BorderLayout());
 		marco.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		marco.addWindowListener(new CloseListener());
 		juego = new Juego();
-		juego.addObserver(this);
 		JMenuBar barraMenu = (new BarraMenu(marco, juego)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
-		VistaMapa vistaMapa = new VistaMapa();
-		marco.add(vistaMapa, BorderLayout.EAST);
+		marco.getContentPane().add(new VistaMapa(), BorderLayout.EAST);
+		marco.getContentPane().add(new PanelIzquierdo(juego, marco), BorderLayout.WEST);
 		marco.getContentPane().setBackground(Color.black);
 		marco.setVisible(true);
 	}
@@ -38,22 +34,5 @@ public class VentanaPrincipal implements Observer{
 			e.getWindow().setVisible(false);
 			System.exit(0);
 		}
-	}
-
-	@Override//Se llama cuando se crea una partida o pasa un turno.
-	public void update(Observable o, Object arg) {
-		if(!primerTurno){
-			marco.remove(jugadorFrame);
-		}
-		if(primerTurno){
-			JButton botonTerminarTurno = new JButton();
-			botonTerminarTurno.setAction(new AccionTerminarTurno(juego));
-			marco.add(botonTerminarTurno, BorderLayout.WEST);
-		}
-		jugadorFrame = new PanelJugador(juego);
-		marco.add(jugadorFrame);
-		marco.revalidate();
-		marco.repaint();
-		primerTurno = false;
 	}
 }
