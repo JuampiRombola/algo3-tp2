@@ -25,6 +25,8 @@ public class VentanaPrincipal{
 		marco.setJMenuBar(barraMenu);
 		marco.getContentPane().add(new VistaMapa(), BorderLayout.EAST);
 		marco.getContentPane().add(new PanelIzquierdo(juego, marco), BorderLayout.WEST);
+		marco.getContentPane().add(new PanelBotonera(juego), BorderLayout.CENTER);
+		marco.setVisible(true);
 		marco.getContentPane().setBackground(Color.black);
 		marco.setVisible(true);
 	}
