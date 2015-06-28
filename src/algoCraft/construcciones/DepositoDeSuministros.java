@@ -1,6 +1,7 @@
 package algoCraft.construcciones;
 
 import algoCraft.juego.Jugador;
+import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
 public class DepositoDeSuministros extends Edificio {
@@ -26,9 +27,9 @@ public class DepositoDeSuministros extends Edificio {
 	}
 	
 	@Override
-	public void recibePuntosDeDanio(int danio) {
-		super.recibePuntosDeDanio(danio);
-		if (this.estaDestruido())
-			this.jugador.sumarPoblacionMaxima(-capacidadDePoblacionASumar);
+	public void destruir() {
+		this.jugador.sumarPoblacionMaxima(-capacidadDePoblacionASumar);
+		if (Mapa.getMapa().posicionEstaOcupada(this.posicion))
+			Mapa.getMapa().removerUnidad(this);
 	}
 }
