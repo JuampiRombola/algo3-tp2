@@ -80,7 +80,7 @@ public class VistaMapa extends JPanel implements Observer{
 				this.add(graficadores.get(posicionable.getClass()).getPosicionVista(), gbc);
 			}
 		}else{
-			this.add(new PosicionVista(Color.LIGHT_GRAY), gbc);
+			this.add(new VistaPosicionVacia(), gbc);
 		}
 	}
 }
