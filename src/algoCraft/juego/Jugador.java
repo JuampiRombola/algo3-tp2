@@ -1,6 +1,7 @@
 package algoCraft.juego;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Base;
@@ -29,7 +30,7 @@ import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
-public class Jugador {
+public class Jugador extends Observable{
 	static int cantidadInicialDeMineral = 200;
 	static int cantidadInicialDeGasVespeno = 0;
 	static int cantidadMaximaDePoblacion = 0;
@@ -210,6 +211,7 @@ public class Jugador {
 
 	public void activar() {
 		this.estaActivo = true;
+		notifyObservers();
 	}
 	
 	public void desactivar() {

@@ -6,6 +6,8 @@ import java.util.List;
 
 
 
+import java.util.Observable;
+
 //import java.util.Scanner;
 import algoCraft.construcciones.Base;
 import algoCraft.juego.Jugador;
@@ -13,7 +15,7 @@ import algoCraft.juego.excepciones.NoSePuedenAgregarMasDe4Jugadores;
 import algoCraft.juego.excepciones.NombreYaExistenteException;
 import algoCraft.mapa.Mapa;
 
-public class Juego {
+public class Juego extends Observable{
 	private ArrayList<String> nombresJugadores;
 	private ArrayList<Jugador> jugadores;
 	private Iterator<Jugador> iteradorJugadores;
@@ -86,6 +88,8 @@ public class Juego {
 		this.iteradorJugadores = this.jugadores.iterator();
 		this.jugadorActual = this.iteradorJugadores.next();
 		this.jugadorActual.activar();
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void siguienteJugador() {
@@ -101,6 +105,8 @@ public class Juego {
 			this.siguienteJugador();
 		}
 		this.jugadorActual.activar();
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Jugador getJugadorActual() {
