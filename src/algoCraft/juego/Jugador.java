@@ -37,7 +37,6 @@ public class Jugador extends Observable{
 	private Base base;
 	private boolean estaActivo;
 	
-
 	public Jugador(String nombre, Base base) {
 		this.edificios = new ArrayList<Edificio>();
 		this.unidades = new ArrayList<Unidad>();
@@ -177,14 +176,10 @@ public class Jugador extends Observable{
 	}
 	
 	public void crearMarine(Barraca barraca) {
-		if (!this.estaActivo)
-			throw new ElJugadorNoEstaActivoException();
 		this.crearUnidad(new CreadorDeMarine(barraca), Marine.getCantidadDePoblacionQueOcupa());
 	}
 	
 	public void crearGoliath(Fabrica fabrica) {
-		if (!this.estaActivo)
-			throw new ElJugadorNoEstaActivoException();
 		this.crearUnidad(new CreadorDeGoliath(fabrica), Goliath.getCantidadDePoblacionQueOcupa());
 	}
 

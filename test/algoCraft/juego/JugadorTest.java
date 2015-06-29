@@ -299,7 +299,7 @@ public class JugadorTest {
 	}
 	
 	@Test(expected = NoSePuedeConstruirElEdificio.class)
-	public void cuandoSeTrataDeCrearUnaFabricaTeniendoUnaBarracaEnConstruccionSeLanzaUnaExcepcion () {
+	public void cuandoSeTrataDeCrearUnaFabricaTeniendoUnaBarracaEnConstruccionSeLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
@@ -312,7 +312,7 @@ public class JugadorTest {
 	}
 	
 	@Test(expected = NoSePuedeConstruirElEdificio.class)
-	public void cuandoSeTrataDeCrearUnaFabricaSinTenerUnaBarracaSeLanzaUnaExcepcion () {
+	public void cuandoSeTrataDeCrearUnaFabricaSinTenerUnaBarracaSeLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
@@ -325,7 +325,7 @@ public class JugadorTest {
 	}
 	
 	@Test
-	public void cuandoSeCreaUnaFabricaElJugadorPasaATenerUnEdificioMas () {
+	public void cuandoSeCreaUnaFabricaElJugadorPasaATenerUnEdificioMas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
@@ -691,5 +691,18 @@ public class JugadorTest {
 		assertEquals(cantidadFinalEdificios, cantidadInicialEdificios);
 		assertEquals(cantidadFinalCasas, cantidadInicialCasas);
 		assertEquals(cantidadFinalUnidades, cantidadInicialUnidades);
+	}
+	
+	@Test(expected = ElJugadorNoEstaActivoException.class)
+	public void siUnJugadorNoEstaActivoNoPuedeCrearUnaUnidad() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12, jugador);
+		jugador.desactivar();
+
+		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 	}
 }

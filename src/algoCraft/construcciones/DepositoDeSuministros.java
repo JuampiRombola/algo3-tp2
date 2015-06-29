@@ -29,7 +29,6 @@ public class DepositoDeSuministros extends Edificio {
 	@Override
 	public void destruir() {
 		this.jugador.sumarPoblacionMaxima(-capacidadDePoblacionASumar);
-		if (Mapa.getMapa().posicionEstaOcupada(this.posicion))
-			Mapa.getMapa().removerUnidad(this);
+		Mapa.getMapa().removerUnidad(this);
 	}
 }

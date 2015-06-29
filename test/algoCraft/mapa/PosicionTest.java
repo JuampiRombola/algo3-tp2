@@ -125,15 +125,29 @@ public class PosicionTest {
 	}
 	
 	@Test
+	public void siUnaPosicionTieneXEYIgualA0EntoncesNoEsPositiva() {
+		Posicion posicion = new Posicion(0, 0, true);
+		
+		Assert.assertFalse(posicion.esPositiva());
+	}
+	
+	@Test
+	public void siUnaPosicionTieneXEYMenorA0EntoncesNoEsPositiva() {
+		Posicion posicion = new Posicion(-1, -1, true);
+		
+		Assert.assertFalse(posicion.esPositiva());
+	}
+	
+	@Test
 	public void siUnaPosicionTieneXMenorA0EntoncesNoEsPositiva() {
-		Posicion posicion = new Posicion(-1, 0, true);
+		Posicion posicion = new Posicion(-1, 1, true);
 		
 		Assert.assertFalse(posicion.esPositiva());
 	}
 	
 	@Test
 	public void siUnaPosicionTieneYMenorA0EntoncesNoEsPositiva() {
-		Posicion posicion = new Posicion(0, -1, true);
+		Posicion posicion = new Posicion(1, -1, true);
 		
 		Assert.assertFalse(posicion.esPositiva());
 	}
