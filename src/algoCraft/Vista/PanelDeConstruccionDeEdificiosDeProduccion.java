@@ -14,6 +14,6 @@ public class PanelDeConstruccionDeEdificiosDeProduccion extends PanelDeConstrucc
 
 	@Override
 	void prepararEventoDeProduccion(int x, int y) {
-		this.button.setAction(new AccionConstruirEdificioDeProduccion(juego, edificios, x, y));
+		this.button.setAction(new AccionConstruirEdificioDeProduccion(juego, comboBox, x, y));
 	}
 }

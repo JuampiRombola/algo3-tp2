@@ -76,4 +76,17 @@ public class PanelCentral extends JPanel{
 		this.revalidate();
 		this.repaint();
 	}
+
+	public void seleccionadaBarracaEn(int posicionX, int posicionY) {
+		if(existeUnPanelDeSeleccion){
+			this.remove(panelDeSeleccion);
+		}
+		this.setVisible(true);
+		panelDeSeleccion.setVisible(false);
+		panelBotonera.setVisible(true);
+		existeUnPanelDeSeleccion = false;
+		panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
+		this.revalidate();
+		this.repaint();
+	}
 }

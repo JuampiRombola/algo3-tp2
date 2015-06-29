@@ -14,12 +14,14 @@ public class PanelBotonera extends JPanel{
 	
 	private PanelDeConstruccion panelDeConstruccionDeEdificiosDeProduccion;
 	private PanelDeConstruccion panelDeConstruccionDeRecolectorDeMinerales;
-
 	private PanelDeConstruccionDeRecolectorDeGas panelDeConstruccionDeRecolectorDeGas;
+	private PanelDeConstruccion panelDeConstruccionDeLaBarraca;
 
 	private String identificadorPanelEdificioProduccion = "PRODUCCION";
 	private String identificadorPanelRecolectorMineral= "MINERAL";
 	private String identificadorPanelRecolectorGas = "GAS";
+	private String identificadorPanelbarraca = "BARRACA";
+
 	private CardLayout layout;
 	int posicionSeleccionadaEnX;
 	int posicionSeleccionadaEnY;
@@ -38,6 +40,9 @@ public class PanelBotonera extends JPanel{
 		
 		panelDeConstruccionDeRecolectorDeGas = new PanelDeConstruccionDeRecolectorDeGas(juego);
 		this.add(panelDeConstruccionDeRecolectorDeGas, identificadorPanelRecolectorGas);
+		
+		panelDeConstruccionDeLaBarraca = new PanelDeConstruccionDeLaBarraca(juego);
+		this.add(panelDeConstruccionDeLaBarraca, identificadorPanelbarraca);
 		
 		this.setVisible(false);
 		this.setMaximumSize(new Dimension(500,50));
@@ -67,5 +72,13 @@ public class PanelBotonera extends JPanel{
 	    posicionSeleccionadaEnX = x;
 	    posicionSeleccionadaEnY = y;
 	    panelDeConstruccionDeRecolectorDeGas.prepararEventoDeProduccion(x, y);
+	}
+
+	public void adecuarseParaFabricarDesdeBarraca(int x, int y) {
+		this.setVisible(true);
+	    layout.show(this, identificadorPanelbarraca);
+	    posicionSeleccionadaEnX = x;
+	    posicionSeleccionadaEnY = y;
+	    panelDeConstruccionDeLaBarraca.prepararEventoDeProduccion(x, y);
 	}
 }
