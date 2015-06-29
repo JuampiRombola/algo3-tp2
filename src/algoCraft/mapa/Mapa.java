@@ -98,9 +98,7 @@ public class Mapa extends Observable {
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
-		if(esPosicionValida(p))
-			return this.elementos.containsKey(p);
-		throw new PosicionInvalidaException();
+		return this.elementos.containsKey(p);
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
