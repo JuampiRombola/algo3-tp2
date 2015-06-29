@@ -16,16 +16,16 @@ public class Refineria extends EdificioRecolector {
 		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 	
-	public void recolectar() {
-		super.recolectar(cantidadARecolectar);
+	public int recolectar() {
+		return super.recolectar(cantidadARecolectar);
 	}
 		
 	@Override
 	public void avanzarTurno() {
 		super.avanzarTurno();
 		if (!this.estaEnConstruccion) {
-			this.recolectar();
-			this.jugador.sumarUnidadesDeGasVespeno(cantidadARecolectar);
+			int cantidadRecolectada = this.recolectar();
+			this.jugador.sumarUnidadesDeGasVespeno(cantidadRecolectada);
 		}
 	}
 }

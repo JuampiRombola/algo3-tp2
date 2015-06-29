@@ -155,5 +155,7 @@ public class Mapa extends Observable {
 		if (this.posicionEstaOcupada(nuevoPosicionable.getPosicion()))
 			this.removerUnidad(this.getUnidad(nuevoPosicionable.getPosicion()));
 		this.agregarUnidad(nuevoPosicionable);
+		setChanged();
+		this.notifyObservers();
 	}
 }

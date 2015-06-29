@@ -137,4 +137,20 @@ public class CentroDeMineralTest {
 		assertTrue(mineral.estaDestruido());
 		assertTrue(mapa.posicionEstaOcupada(centro.getPosicion()));
 	}
+	
+	@Test
+	public void siSeTerminaUnMineralSuCentroNoSigueSumandoRecursos() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		mapa.cargarBases(1);
+		
+		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
+		
+		mineral.extraer(1490);
+		centro.recolectar();
+		
+		assertTrue(10 == centro.getRecursosRecolectados());
+	}
 }

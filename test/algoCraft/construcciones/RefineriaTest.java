@@ -130,5 +130,21 @@ public class RefineriaTest {
 		assertTrue(gasVespeno.estaDestruido());
 		assertTrue(mapa.posicionEstaOcupada(gasVespeno.getPosicion()));
 	}
+	
+	@Test
+	public void siSeTerminaUnGasVespenoSuRefineriaNoSigueSumandoRecursos() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		mapa.cargarBases(1);
+		
+		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(2, 2, true));
+		Refineria refineria = crearRefineria(gasVespeno);
+		
+		gasVespeno.extraer(990);
+		refineria.recolectar();
+		refineria.recolectar();
+
+		assertTrue(10 == refineria.getRecursosRecolectados());
+	}
 }
 
