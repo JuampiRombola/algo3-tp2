@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import algoCraft.construcciones.Base;
+import algoCraft.construcciones.CentroDeMineral;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -31,6 +32,7 @@ public class VistaMapa extends JPanel implements Observer{
 		this.setBackground(Color.black);
 		Mapa mapa = Mapa.getMapa();
 		mapa.addObserver(this);
+		
 	    this.setLayout(new GridBagLayout());
 	    this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		boolean booleano = true;
@@ -52,11 +54,11 @@ public class VistaMapa extends JPanel implements Observer{
 		graficadores.put(GasVespeno.class, new GraficadorGasVespeno());
 		graficadores.put(Mineral.class, new GraficadorMineral());
 		graficadores.put(Base.class, new GraficadorBase());
+		graficadores.put(CentroDeMineral.class, new GraficadorRecolectorMinerales());
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Nuevo juego creado");
 		this.removeAll();
 		this.setLayout(new GridBagLayout());
 		Mapa mapa = Mapa.getMapa();

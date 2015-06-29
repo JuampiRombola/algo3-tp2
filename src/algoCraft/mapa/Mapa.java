@@ -112,6 +112,8 @@ public class Mapa extends Observable {
 		if (this.posicionEstaOcupada(posicion))
 			throw new PosicionOcupadaException();
 		this.elementos.put(posicion, unidad);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
@@ -128,10 +130,14 @@ public class Mapa extends Observable {
 			unidad.setPosicion(xDestino, yDestino);
 			this.elementos.put(unidad.getPosicion(), unidad);
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void removerUnidad(Posicionable unidad) {
 		this.elementos.remove(unidad.getPosicion());
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public Posicion getPosicionVaciaCercana(Posicion posicion) {

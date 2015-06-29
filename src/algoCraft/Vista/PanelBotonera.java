@@ -21,6 +21,7 @@ public class PanelBotonera extends JPanel{
 	int posicionSeleccionadaEnX;
 	int posicionSeleccionadaEnY;
 	
+	
 	PanelBotonera(Juego juego){
 		layout = new CardLayout();
 		this.setLayout(layout);
@@ -47,6 +48,7 @@ public class PanelBotonera extends JPanel{
 	    posicionSeleccionadaEnX = x;
 	    posicionSeleccionadaEnY = y;
 	    panelDeConstruccionDeRecolectorDeMinerales.prepararEventoDeProduccion(x, y);
+
 	}
 
 	public void adecuarseParaFabricarRecolectorDeGas(int x, int y) {
