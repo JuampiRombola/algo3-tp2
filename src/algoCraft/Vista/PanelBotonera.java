@@ -2,10 +2,7 @@ package algoCraft.Vista;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import algoCraft.juego.Juego;
 
 public class PanelBotonera extends JPanel{
@@ -21,8 +18,6 @@ public class PanelBotonera extends JPanel{
 	private String identificadorPanelRecolectorMineral= "MINERAL";
 	private String identificadorPanelRecolectorGas = "GAS";
 	private CardLayout layout;
-	private JLabel xLabel = new JLabel();
-	private JLabel yLabel = new JLabel();
 	int posicionSeleccionadaEnX;
 	int posicionSeleccionadaEnY;
 	
