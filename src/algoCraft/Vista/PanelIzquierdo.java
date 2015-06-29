@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Controlador.AccionTerminarTurno;
 import algoCraft.juego.Juego;
 
 public class PanelIzquierdo extends JPanel implements Observer {
