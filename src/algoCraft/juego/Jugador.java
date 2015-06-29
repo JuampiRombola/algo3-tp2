@@ -31,40 +31,27 @@ import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class Jugador extends Observable{
-	static int cantidadInicialDeMineral = 200;
-	static int cantidadInicialDeGasVespeno = 0;
-	static int cantidadMaximaDePoblacion = 0;
-	static int cantidadInicialDePoblacion = 0;
-	
 	private String nombre;
-	private int mineral;
-	private int gasVespeno;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
-	private int poblacion;
-	private int poblacionMaxima;
 	private Base base;
 	private boolean estaActivo;
 	
 
 	public Jugador(String nombre, Base base) {
-		this.nombre = nombre;
-		this.mineral = cantidadInicialDeMineral;
-		this.gasVespeno = cantidadInicialDeGasVespeno;
 		this.edificios = new ArrayList<Edificio>();
 		this.unidades = new ArrayList<Unidad>();
-		this.poblacion = cantidadInicialDePoblacion;
-		this.poblacionMaxima = cantidadMaximaDePoblacion;
+		this.nombre = nombre;
 		this.base = base;
 		this.estaActivo = false;
 	}
 	
 	public int getGasVespeno() {
-		return this.gasVespeno;
+		return this.base.getGasVespeno();
 	}
 	
 	public int getMineral() {
-		return this.mineral;
+		return this.base.getMineral();
 	}
 
 	public String getNombre() {
@@ -80,11 +67,11 @@ public class Jugador extends Observable{
 	}
 	
 	public int getPoblacion() {
-		return this.poblacion;
+		return this.base.getPoblacion();
 	}
 	
 	public int getPoblacionMaxima() {
-		return this.poblacionMaxima;
+		return this.base.getPoblacionMaxima();
 	}
 	
 	public Base getBase() {
@@ -92,11 +79,11 @@ public class Jugador extends Observable{
 	}
 	
 	public void sumarUnidadesDeMineral(int cantidadASumar) {
-		this.mineral += cantidadASumar;
+		this.base.sumarUnidadesDeMineral(cantidadASumar);
 	}
 	
 	public void sumarUnidadesDeGasVespeno(int cantidadASumar) {
-		this.gasVespeno += cantidadASumar;
+		this.base.sumarUnidadesDeGasVespeno(cantidadASumar);
 	}
 	
 	private void restarRecursosGastados(int cantidaDeMineralGastada, int cantidadDeGasVespenoGastado) {
@@ -105,11 +92,11 @@ public class Jugador extends Observable{
 	}
 	
 	public void sumarPoblacionMaxima(int cantidadASumar) {
-		this.poblacionMaxima += cantidadASumar;
+		this.base.sumarPoblacionMaxima(cantidadASumar);
 	}
 	
 	public void sumarPoblacion(int cantidadASumar) {
-		this.poblacion += cantidadASumar;
+		this.base.sumarPoblacion(cantidadASumar);
 	}
 	
 	public void agregarUnidad(Unidad unidad) {
@@ -119,7 +106,6 @@ public class Jugador extends Observable{
 	private void agregarEdificio(Edificio edificio) {
 		this.edificios.add(edificio);
 	}
-
 	
 	public void pagarMineralGasVespeno(int cantidadMineral, int cantidadGasVespeno) throws NoSeTienenLosRecursosSuficientes{
 		if (!seTienenLosRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
@@ -128,12 +114,10 @@ public class Jugador extends Observable{
 	}
 	
 	private boolean seTienenLosRecursosSuficientes(int mineralesAGastar, int gasVespenoAGastar) {
-		if ((mineralesAGastar > this.mineral) || (gasVespenoAGastar > this.gasVespeno))
-			return false;
-		return true;
+		return this.base.hayRecursosSuficientes(mineralesAGastar, gasVespenoAGastar);
 	}
 
-	private Edificio validarDependenciasEdificios(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
+	private Edificio getDependenciaEdificio(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
 		for (Edificio edificio : this.edificios) {
 			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion()))
 				return edificio;
@@ -142,7 +126,8 @@ public class Jugador extends Observable{
 	}
 
 	public void crearEdificio(int x, int y, CreadorDeEdificios creador) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
-		this.validarSiEstaActivo();
+		if (!this.estaActivo)
+			throw new ElJugadorNoEstaActivoException();
 		Edificio edificio = creador.crearEdificio(this, x, y);
 		this.agregarEdificio(edificio);
 	}
@@ -166,28 +151,31 @@ public class Jugador extends Observable{
 	}
 	
 	public void crearFabrica(int x, int y) {
-		Edificio barraca = this.validarDependenciasEdificios(Barraca.class);
+		Edificio barraca = this.getDependenciaEdificio(Barraca.class);
 		this.crearEdificio(x, y, new CreadorDeFabrica((Barraca)barraca));
 	}
 	
 	private boolean sePuedeConstruirUnidad(int cantidadDePoblacionQueOcupa) {
-		if (!(this.poblacion + cantidadDePoblacionQueOcupa <= this.poblacionMaxima))
-			return false;
-		return true;
+		return this.base.hayCapacidadSuficiente(cantidadDePoblacionQueOcupa);
 	}
 	
 	private void crearUnidad(CreadorDeUnidades creador, int poblacionQueOcupa) throws ElJugadorNoEstaActivoException, NoSePuedeConstruirLaUnidadPorSobrepoblacion, NoSeTienenLosRecursosSuficientes, ElEdificioEstaEnConstruccion{
-		this.validarSiEstaActivo();
+		if (!this.estaActivo)
+			throw new ElJugadorNoEstaActivoException();
 		if (!this.sePuedeConstruirUnidad(poblacionQueOcupa))
 			throw new NoSePuedeConstruirLaUnidadPorSobrepoblacion();
 		creador.crearUnidad();
 	}
 	
 	public void crearMarine(Barraca barraca) {
+		if (!this.estaActivo)
+			throw new ElJugadorNoEstaActivoException();
 		this.crearUnidad(new CreadorDeMarine(barraca), Marine.getCantidadDePoblacionQueOcupa());
 	}
 	
 	public void crearGoliath(Fabrica fabrica) {
+		if (!this.estaActivo)
+			throw new ElJugadorNoEstaActivoException();
 		this.crearUnidad(new CreadorDeGoliath(fabrica), Goliath.getCantidadDePoblacionQueOcupa());
 	}
 
@@ -202,11 +190,6 @@ public class Jugador extends Observable{
 
 	public boolean perdioLaPartida() {
 		return this.base.estaDestruido();
-	}
-	
-	public void validarSiEstaActivo() {
-		if (!this.estaActivo)
-			throw new ElJugadorNoEstaActivoException();
 	}
 
 	public void activar() {
