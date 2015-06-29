@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import algoCraft.construcciones.Base;
 import algoCraft.construcciones.CentroDeMineral;
+import algoCraft.construcciones.Refineria;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -55,6 +56,7 @@ public class VistaMapa extends JPanel implements Observer{
 		graficadores.put(Mineral.class, new GraficadorMineral());
 		graficadores.put(Base.class, new GraficadorBase());
 		graficadores.put(CentroDeMineral.class, new GraficadorRecolectorMinerales());
+		graficadores.put(Refineria.class, new GraficadorRefineria());
 	}
 	
 	@Override
