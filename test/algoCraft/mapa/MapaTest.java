@@ -251,4 +251,20 @@ public class MapaTest {
 		
 		marine.moverseA(-1, 0);
 	}
+	
+	@Test
+	public void cuandoSeObtienenLosElementosDelMapaRecienCreadoLaColeccionEstaVacia() {
+		Mapa.reiniciarInstanciaParaTest();
+		
+		Assert.assertTrue(0 == Mapa.getMapa().getElementos().size());
+	}
+	
+	@Test
+	public void cuandoSeAgregaUnElementoAlMapaSuCantidadDeElementosAumentaA1() {
+		Mapa.reiniciarInstanciaParaTest();
+		
+		new Marine(null, 1, 1);
+		
+		Assert.assertTrue(1 == Mapa.getMapa().getElementos().size());
+	}
 }

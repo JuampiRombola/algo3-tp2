@@ -39,6 +39,10 @@ public class Mapa extends Observable {
 	    instancia = null;
 	}
 	
+	public Collection<Posicionable> getElementos() {
+		return this.elementos.values();
+	}
+	
 	public static Mapa getMapa() {
 		if (instancia == null)
 			instancia = new Mapa();

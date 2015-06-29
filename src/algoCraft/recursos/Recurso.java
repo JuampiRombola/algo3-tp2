@@ -39,4 +39,7 @@ public abstract class Recurso implements Posicionable {
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
+	
+	public void avanzarTurno() {	
+	}
 }
