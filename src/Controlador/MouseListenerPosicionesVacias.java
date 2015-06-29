@@ -8,13 +8,18 @@ import algoCraft.Vista.PanelBotonera;
 
 public class MouseListenerPosicionesVacias extends MouseAdapter{
 	private PanelBotonera botonera;
+	private int x;
+	private int y;
 	
-	public MouseListenerPosicionesVacias(PanelBotonera botonera){
+	
+	public MouseListenerPosicionesVacias(PanelBotonera botonera, int x, int y){
 		super();
+		this.x = x;
+		this.y = y;
 		this.botonera = botonera;
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
-		botonera.adecuarseParaFabricarEdificiosDeProduccion();;
+		botonera.adecuarseParaFabricarEdificiosDeProduccion(x,y);;
 	}
 }

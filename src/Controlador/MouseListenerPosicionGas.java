@@ -7,13 +7,17 @@ import algoCraft.Vista.PanelBotonera;
 
 public class MouseListenerPosicionGas extends MouseAdapter{
 		private PanelBotonera botonera;
+		private int y;
+		private int x;
 			
-			public MouseListenerPosicionGas(PanelBotonera botonera){
+			public MouseListenerPosicionGas(PanelBotonera botonera, int x, int y){
 				super();
 				this.botonera = botonera;
+				this.x = x;
+				this.y = y;
 			}
 			
 			public void mousePressed(MouseEvent mouseEvent) {
-				botonera.adecuarseParaFabricarRecolectorDeGas();;
+				botonera.adecuarseParaFabricarRecolectorDeGas(x ,y);;
 			}
 }

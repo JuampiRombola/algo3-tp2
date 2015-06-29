@@ -77,13 +77,15 @@ public class VistaMapa extends JPanel implements Observer{
 
 	private void agregarVistaDe(Posicion posicion, GridBagConstraints gbc) {
 		Mapa mapa = Mapa.getMapa();
+		Graficador graficador;
 		if(mapa.posicionEstaOcupada(posicion)){
 			Posicionable posicionable = mapa.getUnidad(posicion);
 			if(graficadores.containsKey(posicionable.getClass())){
-				this.add(graficadores.get(posicionable.getClass()).getPosicionVista(botonera), gbc);
+				graficador = graficadores.get(posicionable.getClass());
+				this.add(graficador.getPosicionVista(botonera, posicion.getX(), posicion.getY()), gbc);
 			}
 		}else{
-			this.add(new VistaPosicionVacia(botonera), gbc);
+			this.add(new VistaPosicionVacia(botonera, posicion.getX(),posicion.getY()), gbc);
 		}
 	}
 }
