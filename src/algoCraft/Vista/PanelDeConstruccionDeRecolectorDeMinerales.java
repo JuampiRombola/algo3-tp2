@@ -13,6 +13,6 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	void prepararEventoDeProduccion(int x, int y) {
-		button.setAction(new AccionConstruirRecolectorDeMinerales(juego, y, y));
+		button.setAction(new AccionConstruirRecolectorDeMinerales(juego, x, y));
 	}
 }

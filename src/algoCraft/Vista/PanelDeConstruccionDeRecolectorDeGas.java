@@ -16,6 +16,6 @@ public class PanelDeConstruccionDeRecolectorDeGas extends PanelDeConstruccion {
 
 	@Override
 	void prepararEventoDeProduccion(int x, int y) {
-		button.setAction(new AccionConstruirRecolectorDeGas(juego, y, y));
+		button.setAction(new AccionConstruirRecolectorDeGas(juego, x, y));
 	}
 }
