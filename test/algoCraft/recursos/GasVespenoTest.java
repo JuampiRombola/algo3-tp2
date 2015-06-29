@@ -80,7 +80,6 @@ public class GasVespenoTest {
 	public void siSeTerminaUnGasVespenoQuedaDestruido() {
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		gasVespeno.extraer(1000);
-		
 		assertTrue(gasVespeno.estaDestruido());
 	}
 }

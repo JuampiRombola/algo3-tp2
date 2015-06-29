@@ -28,6 +28,8 @@ public class PanelCentral extends JPanel{
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
+		this.setVisible(true);
+		panelBotonera.setVisible(true);
 		this.panelDeSeleccion = new PanelDeSeleccionDeGasVespeno(posicionX, posicionY);
 		panelBotonera.adecuarseParaFabricarRecolectorDeGas(posicionX, posicionY);
 		this.add(panelDeSeleccion);
@@ -40,6 +42,8 @@ public class PanelCentral extends JPanel{
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
+		this.setVisible(true);
+		panelBotonera.setVisible(true);
 		this.panelDeSeleccion = new PanelDeSeleccionDeMineral(posicionX, posicionY);
 		this.add(panelDeSeleccion);
 		panelBotonera.adecuarseParaFabricarRecolectorDeMineral(posicionX, posicionY);
@@ -52,8 +56,23 @@ public class PanelCentral extends JPanel{
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
+		this.setVisible(true);
+		panelBotonera.setVisible(true);
 		panelBotonera.adecuarseParaFabricarEdificiosDeProduccion(posicionX, posicionY);
 		existeUnPanelDeSeleccion = false;
+		this.revalidate();
+		this.repaint();
+	}
+	
+	public void seleccionadaRefineriaEn(int posicionX, int posicionY){
+		if(existeUnPanelDeSeleccion){
+			this.remove(panelDeSeleccion);
+		}
+		this.setVisible(true);
+		panelBotonera.setVisible(false);
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeRefineria(posicionX, posicionY);
+		this.add(panelDeSeleccion);
 		this.revalidate();
 		this.repaint();
 	}

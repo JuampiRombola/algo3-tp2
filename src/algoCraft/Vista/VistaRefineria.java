@@ -1,13 +1,14 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
-import Controlador.MouseListenerPosicionesSinBotones;
+
+import Controlador.MouseListenerPosicionRefineria;
 
 public class VistaRefineria extends PosicionVista {
 	
-	VistaRefineria(PanelCentral panelCentral) {
+	VistaRefineria(PanelCentral panelCentral, int x, int y) {
 		super(new Color (0, 80, 0));
-		addMouseListener(new MouseListenerPosicionesSinBotones(panelCentral));
+		addMouseListener(new MouseListenerPosicionRefineria(panelCentral, x, y));
 	}
 
 	

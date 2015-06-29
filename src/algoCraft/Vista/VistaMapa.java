@@ -33,7 +33,6 @@ public class VistaMapa extends JPanel implements Observer{
 		this.setBackground(Color.black);
 		Mapa mapa = Mapa.getMapa();
 		mapa.addObserver(this);
-		
 	    this.setLayout(new GridBagLayout());
 	    this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		boolean booleano = true;

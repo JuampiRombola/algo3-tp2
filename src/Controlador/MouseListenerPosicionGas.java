@@ -17,7 +17,6 @@ public class MouseListenerPosicionGas extends MouseAdapter{
 		}
 			
 		public void mousePressed(MouseEvent mouseEvent) {
-			panelCentral.setVisible(true);
 			panelCentral.seleccionadoGasVespenoEn(x, y);
 		}
 }
