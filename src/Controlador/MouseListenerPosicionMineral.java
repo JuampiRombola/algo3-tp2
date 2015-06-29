@@ -2,8 +2,6 @@ package Controlador;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import algoCraft.Vista.PanelBotonera;
 import algoCraft.Vista.PanelCentral;
 
 public class MouseListenerPosicionMineral extends MouseAdapter{
@@ -19,6 +17,7 @@ public class MouseListenerPosicionMineral extends MouseAdapter{
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
+		panelCentral.setVisible(true);
 		panelCentral.seleccionadoMineralEn(x, y);
 	}
 }

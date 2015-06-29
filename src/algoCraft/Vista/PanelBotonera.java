@@ -2,7 +2,10 @@ package algoCraft.Vista;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
+
 import algoCraft.juego.Juego;
 
 public class PanelBotonera extends JPanel{
@@ -34,6 +37,7 @@ public class PanelBotonera extends JPanel{
 		panelDeConstruccionDeRecolectorDeGas = new PanelDeConstruccionDeRecolectorDeGas(juego);
 		this.add(panelDeConstruccionDeRecolectorDeGas, identificadorPanelRecolectorGas);
 		this.setVisible(false);
+		this.setMaximumSize(new Dimension(500,50));
 	}
 	
 	public void adecuarseParaFabricarEdificiosDeProduccion(int x, int y){

@@ -39,7 +39,6 @@ public class MenuNuevaPartida extends JMenu{
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del primer jugador"));
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del segundo jugador"));
 				juego.iniciarPartida();
-	            System.out.println("Creando nuevo juego ...");
 			}
 		}
 	   
@@ -51,7 +50,6 @@ public class MenuNuevaPartida extends JMenu{
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del segundo jugador"));
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del tercer jugador"));
 				juego.iniciarPartida();
-	            System.out.println("Creando nuevo juego ...");
 			}
 		}
 	   
@@ -64,7 +62,6 @@ public class MenuNuevaPartida extends JMenu{
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del tercer jugador"));
 				juego.agregarJugadorLlamado(JOptionPane.showInputDialog("Nombre del cuarto jugador"));
 				juego.iniciarPartida();
-	            System.out.println("Creando nuevo juego ...");
 			}
 		}
 }

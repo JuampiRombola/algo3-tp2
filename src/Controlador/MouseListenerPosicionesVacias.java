@@ -18,6 +18,7 @@ public class MouseListenerPosicionesVacias extends MouseAdapter{
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
+		panelCentral.setVisible(true);
 		panelCentral.seleccionadaPosicionVaciaEn(x, y);
 	}
 }
