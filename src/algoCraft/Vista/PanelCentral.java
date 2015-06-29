@@ -1,8 +1,6 @@
 package algoCraft.Vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
@@ -32,7 +30,7 @@ public class PanelCentral extends JPanel{
 		}
 		this.panelDeSeleccion = new PanelDeSeleccionDeGasVespeno(posicionX, posicionY);
 		panelBotonera.adecuarseParaFabricarRecolectorDeGas(posicionX, posicionY);
-		this.add(panelDeSeleccion, BorderLayout.SOUTH);
+		this.add(panelDeSeleccion);
 		existeUnPanelDeSeleccion = true;
 		this.revalidate();
 		this.repaint();
@@ -42,8 +40,10 @@ public class PanelCentral extends JPanel{
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
+		this.panelDeSeleccion = new PanelDeSeleccionDeMineral(posicionX, posicionY);
+		this.add(panelDeSeleccion);
 		panelBotonera.adecuarseParaFabricarRecolectorDeMineral(posicionX, posicionY);
-		existeUnPanelDeSeleccion = false;
+		existeUnPanelDeSeleccion = true;
 		this.revalidate();
 		this.repaint();
 	}

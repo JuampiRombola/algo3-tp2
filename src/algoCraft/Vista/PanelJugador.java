@@ -22,6 +22,7 @@ public class PanelJugador extends JPanel{
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		vistaRecursos = new PanelRecursos(juego);
 		nombreJugador = new JLabel(juego.getJugadorActual().getNombre());
+		nombreJugador.setAlignmentX(CENTER_ALIGNMENT);
 		nombreJugador.setForeground(Color.white);
 		this.add(nombreJugador);
 		this.add(vistaRecursos);
