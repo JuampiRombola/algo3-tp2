@@ -95,7 +95,8 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		jugador.activar();
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
+		jugador2.activar();
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		Barraca barraca = new Barraca(jugador, 0, 0);
@@ -103,7 +104,7 @@ public class FabricaTest {
 		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		construirEdificio(fabrica, jugador);
 		int vidaInicial = fabrica.getVidaActual();
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		
 		goliath.atacar(fabrica);
 		
@@ -114,14 +115,15 @@ public class FabricaTest {
 	public void siLaFabricaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		jugador.activar();
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
+		jugador2.activar();
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		Barraca barraca = new Barraca(jugador, 0, 0);
 		construirEdificio(barraca, jugador);
 		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
 		construirEdificio(fabrica, jugador);
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		
 		while (!fabrica.estaDestruido()) {
 			goliath.atacar(fabrica);

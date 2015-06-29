@@ -23,6 +23,10 @@ public abstract class Edificio implements Atacable {
 		this.turnosEnConstruirse = turnosEnConstruirse;
 	}
 	
+	public Jugador getJugador() {
+		return this.jugador;
+	}
+	
 	public boolean estaDestruido() {
 		return this.getVidaActual() <= 0;
 	}

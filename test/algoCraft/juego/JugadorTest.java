@@ -583,10 +583,12 @@ public class JugadorTest {
 	public void cuandoAUnJugadorLeDestruyenUnEdificioEsteEsEliminadoDeSuListaDeEdificios() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
 		jugador.activar();
+		jugador2.activar();
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12);
-		Goliath goliath = new Goliath(jugador, 2,2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
@@ -604,10 +606,12 @@ public class JugadorTest {
 	public void cuandoAUnJugadorLeDestruyenUnDepositoDeSuministrosEsteEsEliminadoDeSuListaDeCasasYSereduceSuPoblaxonMaxima() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
 		jugador.activar();
+		jugador2.activar();
 		jugador.crearDepositoDeSuministros(1, 1);
 		avanzarTurnos(3);
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int poblacionInicial = jugador.getPoblacionMaxima();
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
@@ -627,12 +631,14 @@ public class JugadorTest {
 	public void cuandoAUnJugadorTieneDosBarracasYSeLeDestruyenUnaEstaEsEliminadoDeSuListaDeEdificios() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
 		jugador.activar();
+		jugador2.activar();
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
 		jugador.crearBarraca(3, 3);
 		avanzarTurnos(12);
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(3, 3, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		

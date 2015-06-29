@@ -122,13 +122,14 @@ public class BarracaTest {
 	public void siLaBarracaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		jugador.activar();
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
+		jugador2.activar();
 		Barraca barraca = new Barraca(jugador, 1, 1);
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno();
 		}
 		int vidaInicial = barraca.getVidaActual();
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		
 		goliath.atacar(barraca);
 		
@@ -139,9 +140,10 @@ public class BarracaTest {
 	public void siLaBarracaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		jugador.activar();
+		Jugador jugador2 = new Jugador("Jugador", new Base(4, 4));
+		jugador2.activar();
 		Barraca barraca = new Barraca(jugador, 1, 1);
-		Goliath goliath = new Goliath(jugador, 2, 2);
+		Goliath goliath = new Goliath(jugador2, 2, 2);
 		for (int i = 0; i < 12; i++) {
 			barraca.avanzarTurno();
 		}

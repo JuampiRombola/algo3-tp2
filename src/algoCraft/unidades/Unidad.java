@@ -25,7 +25,7 @@ public class Unidad implements Atacable {
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (this.estaDestruido() || !this.activa || !this.jugador.estaActivo())
+		if (this.estaDestruido() || !this.activa || !this.jugador.estaActivo() || this.jugador == atacable.getJugador())
 			throw new NoPuedeAtacar();
 		arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
 		this.activa = false;
