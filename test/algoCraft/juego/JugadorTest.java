@@ -3,6 +3,7 @@ package algoCraft.juego;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.mapa.Posicionable;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
@@ -25,9 +27,11 @@ import algoCraft.unidades.Unidad;
 
 public class JugadorTest {
 
-	private void avanzarTurnos(int turnos, Jugador jugador) {
+	private void avanzarTurnos(int turnos) {
+		Collection<Posicionable> posicionables = Mapa.getMapa().getElementos();
 		for(int i = 0; i < turnos; i++)
-			jugador.avanzarTurno();
+			for(Posicionable posicionable : posicionables)
+				posicionable.avanzarTurno();
 	}
 	
 	@Test
@@ -125,9 +129,9 @@ public class JugadorTest {
 		Mineral mineral = new Mineral(1, 1);
 		
 		jugador.crearCentroDeMineral(mineral);
-		avanzarTurnos(4, jugador);
+		avanzarTurnos(4);
 		int cantidadInicial = jugador.getMineral();
-		jugador.avanzarTurno();
+		avanzarTurnos(1);
 		int cantidadFinal = jugador.getMineral();
 		
 		assertTrue(cantidadInicial + 10 == cantidadFinal);
@@ -141,9 +145,9 @@ public class JugadorTest {
 		Mineral mineral = new Mineral(1, 1);
 		
 		jugador.crearCentroDeMineral(mineral);
-		avanzarTurnos(4, jugador);
+		avanzarTurnos(4);
 		int cantidadInicial = jugador.getMineral();
-		avanzarTurnos(2, jugador);
+		avanzarTurnos(2);
 		int cantidadFinal = jugador.getMineral();
 		
 		assertTrue(cantidadInicial + 20 == cantidadFinal);
@@ -184,7 +188,7 @@ public class JugadorTest {
 		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		int cantidadFinal = jugador.getPoblacionMaxima();
 		
 		assertTrue(cantidadInicial + 5 == cantidadFinal);
@@ -198,7 +202,7 @@ public class JugadorTest {
 		
 		jugador.crearDepositoDeSuministros(1, 1);
 		int cantidadInicial = jugador.getPoblacionMaxima();
-		avanzarTurnos(3, jugador);
+		avanzarTurnos(3);
 		int cantidadFinal = jugador.getPoblacionMaxima();
 		
 		assertTrue(cantidadInicial == cantidadFinal);
@@ -239,9 +243,9 @@ public class JugadorTest {
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		jugador.crearRefineria(gas);
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		int cantidadInicial = jugador.getGasVespeno();
-		jugador.avanzarTurno();
+		avanzarTurnos(1);
 		int cantidadFinal = jugador.getGasVespeno();
 		
 		assertTrue(cantidadInicial + 10 == cantidadFinal);
@@ -255,9 +259,9 @@ public class JugadorTest {
 		GasVespeno gas = new GasVespeno(1, 1);
 		
 		jugador.crearRefineria(gas);
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		int cantidadInicial = jugador.getGasVespeno();
-		avanzarTurnos(2, jugador);
+		avanzarTurnos(2);
 		int cantidadFinal = jugador.getGasVespeno();
 		
 		assertTrue(cantidadInicial + 20 == cantidadFinal);
@@ -289,7 +293,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		int cantidadInicialMineral = jugador.getMineral();
 		int cantidadInicialGas = jugador.getGasVespeno();
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
 		int cantidadFinalMineral = jugador.getMineral();
 		int cantidadFinalGas = jugador.getGasVespeno();
@@ -307,7 +311,7 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
 		jugador.crearDepositoDeSuministros(4, 4);
-		avanzarTurnos(10, jugador);
+		avanzarTurnos(10);
 		jugador.crearFabrica(2, 2);
 	}
 	
@@ -320,7 +324,7 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearDepositoDeSuministros(4, 4);
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		jugador.crearFabrica(2, 2);
 	}
 	
@@ -335,7 +339,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		jugador.crearDepositoDeSuministros(4, 4);
 		int cantidadEdificiosInicial = (jugador.getEdificios()).size();
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
 		int cantidadEdificiosFinal = (jugador.getEdificios()).size();
 		
@@ -373,7 +377,7 @@ public class JugadorTest {
 		
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
 	}
 	
@@ -386,11 +390,11 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(1);
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		avanzarTurnos(3, jugador);
+		avanzarTurnos(3);
 		
 		assertTrue(1 == jugador.getUnidades().size());
 	}
@@ -404,12 +408,12 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(2);
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
 	}
@@ -426,11 +430,11 @@ public class JugadorTest {
 		
 		jugador.crearBarraca(1, 1);
 		jugador.crearBarraca(2, 2);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(2, 2, true))));
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
 	}
@@ -444,13 +448,13 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(2);
 
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		
 		assertTrue(1 == jugador.getUnidades().size());
 	}
@@ -464,14 +468,14 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(4);
 
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		
 		assertTrue(2 == jugador.getUnidades().size());
 	}
@@ -486,13 +490,13 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearFabrica(2, 2);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
 	}
@@ -506,7 +510,7 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 	}
@@ -520,11 +524,11 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(1);
 		
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		avanzarTurnos(3, jugador);
+		avanzarTurnos(3);
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
 		
 	}
@@ -540,14 +544,14 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 
 		jugador.crearBarraca(3, 3);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		
 		Barraca miBarraca = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
 		jugador.crearMarine(miBarraca);
-		avanzarTurnos(4, jugador);
+		avanzarTurnos(4);
 		
 		assertTrue(1 == jugador.getUnidades().size());
 	}
@@ -581,7 +585,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		Goliath goliath = new Goliath(null, 2,2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
@@ -590,7 +594,7 @@ public class JugadorTest {
 			goliath.atacar(barraca);
 			goliath.avanzarTurno();
 		}
-		jugador.actualizarEstado();
+		avanzarTurnos(1);
 		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
@@ -602,7 +606,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		jugador.crearDepositoDeSuministros(1, 1);
-		avanzarTurnos(3, jugador);
+		avanzarTurnos(3);
 		Goliath goliath = new Goliath(null, 2,2);
 		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
 		int poblacionInicial = jugador.getPoblacionMaxima();
@@ -612,7 +616,6 @@ public class JugadorTest {
 			goliath.atacar(deposito);
 			goliath.avanzarTurno();
 		}
-		jugador.actualizarEstado();
 		int poblacionFinal = jugador.getPoblacionMaxima();
 		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
@@ -628,7 +631,7 @@ public class JugadorTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.crearBarraca(1, 1);
 		jugador.crearBarraca(3, 3);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		Goliath goliath = new Goliath(null, 2,2);
 		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(3, 3, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
@@ -637,7 +640,6 @@ public class JugadorTest {
 			goliath.atacar(barraca);
 			goliath.avanzarTurno();
 		}
-		jugador.actualizarEstado();
 		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
 		assertTrue(jugador.getEdificios().get(0) == (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
@@ -676,14 +678,13 @@ public class JugadorTest {
 		jugador.activar();
 		jugador.crearDepositoDeSuministros(1, 1);
 		jugador.crearBarraca(2, 2);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(2, 2, true)));
-		avanzarTurnos(6, jugador);
+		avanzarTurnos(6);
 		int cantidadInicialEdificios = jugador.getEdificios().size();
 		int cantidadInicialCasas = jugador.getEdificios().size();
 		int cantidadInicialUnidades = jugador.getUnidades().size();
-		
-		jugador.actualizarEstado();
+
 		int cantidadFinalEdificios = jugador.getEdificios().size();
 		int cantidadFinalCasas = jugador.getEdificios().size();
 		int cantidadFinalUnidades = jugador.getUnidades().size();
@@ -700,7 +701,7 @@ public class JugadorTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.activar();
 		jugador.crearBarraca(1, 1);
-		avanzarTurnos(12, jugador);
+		avanzarTurnos(12);
 		jugador.desactivar();
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));

@@ -109,7 +109,7 @@ public class Juego extends Observable{
 	}
 	
 	private void avanzarTurnoTodasLasUnidades() {
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>(Mapa.getMapa().getElementos());
+		Collection<Posicionable> posicionables = Mapa.getMapa().getElementos();
 		for (Posicionable posicionable : posicionables)
 			posicionable.avanzarTurno();
 	}

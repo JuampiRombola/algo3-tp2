@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algoCraft.construcciones.Base;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
@@ -23,18 +25,18 @@ public class UnidadTest{
 
 	
 	private Unidad nuevaUnidadAtacante(){
-		return new Unidad(null, vidaMaxima, armaDePrueba, posicion, 1);
+		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, 1);
 	}
 	public Unidad nuevaUnidad() {
-		return new Unidad(null, vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
+		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadEnRangoDeAtaque(int vida) {
-		return  new Unidad(null, vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
+		return  new Unidad(new Jugador("jugador1", new Base(3, 3)), vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadFueraDeRangoDeAtaque(int vida) {
-		return new Unidad(null, vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
+		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	@Test
@@ -241,7 +243,7 @@ public class UnidadTest{
 	@Test(expected = PosicionVaciaException.class)
 	public void siLaUnidadEsDestruidaNoLaEncuentroEnElMapa(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad = new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
 		Mapa.getMapa().getUnidad(posicion);

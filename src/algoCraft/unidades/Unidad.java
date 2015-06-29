@@ -57,7 +57,8 @@ public class Unidad implements Atacable {
 	
 	public void recibePuntosDeDanio(int danio) {
 		this.vida.recibirDanio(danio);
-		if(this.estaDestruido()){
+		if (this.estaDestruido()){
+			this.jugador.removerUnidad(this);
 			Mapa.getMapa().removerUnidad(this);
 		}
 	}

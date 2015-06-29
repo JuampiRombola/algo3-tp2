@@ -234,32 +234,4 @@ public class BarracaTest {
 		assertTrue(barraca1.seTerminoDeCrearLaUnidad());
 		assertTrue(1 == jugador.getUnidades().size());
 	}
-
-	@Test
-	public void SeCreanDosBarracasYSeConstruyeUnMarineEnLaPrimeraCorrectamenteConJugador(){
-		Mapa.reiniciarInstanciaParaTest();
-		Mapa mapa = Mapa.getMapa();
-		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
-		jugador.activar();
-		jugador.sumarPoblacionMaxima(3);
-		jugador.sumarUnidadesDeGasVespeno(1000);
-		jugador.sumarUnidadesDeMineral(1000);
-		
-		jugador.crearBarraca(1, 1);
-		for(int i = 0; i < 12; i++)
-			jugador.avanzarTurno();
-
-		jugador.crearBarraca(3, 3);
-		for(int i = 0; i < 12; i++)
-			jugador.avanzarTurno();
-		
-		Barraca barraca1 = ((Barraca) mapa.getUnidad(new Posicion(1, 1, true)));
-		barraca1.crearMarine();
-		
-		for (int i = 0; i < 4; i++)
-			barraca1.avanzarTurno();
-		
-		
-		assertTrue(1 == jugador.getUnidades().size());
-	}
 }

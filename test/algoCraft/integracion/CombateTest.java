@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import algoCraft.construcciones.Base;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
@@ -17,8 +19,8 @@ public class CombateTest {
 	public void combateAMuerteEntreUnMarineYUnGoliath() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Marine marine = new Marine(null, 1, 1);
-		Goliath goliath = new Goliath(null, 10, 10);
+		Marine marine = new Marine(new Jugador("jugador1", new Base(3, 3)), 1, 1);
+		Goliath goliath = new Goliath(new Jugador("jugador1", new Base(4, 4)), 10, 10);
 		
 		//La vida del marine y del goliath estan completas
 		assertTrue(marine.getVidaMaxima() == 40);

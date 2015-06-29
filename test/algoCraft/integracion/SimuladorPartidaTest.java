@@ -2,6 +2,7 @@ package algoCraft.integracion;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
@@ -13,13 +14,16 @@ import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.mapa.Posicionable;
 import algoCraft.recursos.Mineral;
 
 public class SimuladorPartidaTest {
 
-	private void avanzarTurnos(int turnos, Jugador jugador) {
+	private void avanzarTurnos(int turnos) {
+		Collection<Posicionable> posicionables = Mapa.getMapa().getElementos();
 		for(int i = 0; i < turnos; i++)
-			jugador.avanzarTurno();
+			for(Posicionable posicionable : posicionables)
+				posicionable.avanzarTurno();
 	}
 	
 	@Test
@@ -65,9 +69,8 @@ public class SimuladorPartidaTest {
 		assertEquals(cantidadMineralesAntesDeMarine, cantidadMineralesDespuesDeMarine);
 
 		int cantidadMineralesJugador1 = jugador1.getMineral();
-		//Pasan 12 turnos
-		avanzarTurnos(12, jugador1);
-		avanzarTurnos(12, jugador2);
+		//Pasan 12 turnos 
+		avanzarTurnos(12);
 		
 		//El jugador1 tendria que haber recogido minerales
 		int cantidadMineralesJugador1DespuesDe12Turnos = jugador1.getMineral();

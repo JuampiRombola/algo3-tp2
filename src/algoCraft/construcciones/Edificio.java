@@ -33,8 +33,10 @@ public abstract class Edificio implements Atacable {
 	
 	public void recibePuntosDeDanio(int danio) {
 		this.vida.recibirDanio(danio);
-		if (this.estaDestruido())
+		if (this.estaDestruido()) {
+			this.jugador.removerEdificio(this);
 			this.destruir();
+		}
 	}
 	
 	public int getVidaActual() {

@@ -24,6 +24,11 @@ public class Base extends Edificio {
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
 	}
+	
+	@Override
+	public void recibePuntosDeDanio(int danio) {
+		this.vida.recibirDanio(danio);
+	}
 
 	public int getGasVespeno() {
 		return this.gasVespeno;

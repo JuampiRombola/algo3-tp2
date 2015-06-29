@@ -30,7 +30,7 @@ import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
-public class Jugador extends Observable{
+public class Jugador extends Observable {
 	private String nombre;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
@@ -119,6 +119,14 @@ public class Jugador extends Observable{
 		this.edificios.add(edificio);
 	}
 	
+	public void removerEdificio(Edificio edificio) {
+		this.edificios.remove(edificio);
+	}
+	
+	public void removerUnidad(Unidad unidad) {
+		this.unidades.remove(unidad);
+	}
+
 	public void pagarMineralGasVespeno(int cantidadMineral, int cantidadGasVespeno) throws NoSeTienenLosRecursosSuficientes{
 		if (!this.base.hayRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
 			throw new NoSeTienenLosRecursosSuficientes();
@@ -181,31 +189,5 @@ public class Jugador extends Observable{
 	
 	public void crearGoliath(Fabrica fabrica) {
 		this.crearUnidad(new CreadorDeGoliath(fabrica), Goliath.getCantidadDePoblacionQueOcupa());
-	}
-
-	public void avanzarTurno() {
-		if (this.perdioLaPartida())
-			return;
-		for (Edificio edificio : this.edificios)
-			edificio.avanzarTurno();
-		for (Unidad unidad : this.unidades)
-			unidad.avanzarTurno();
-	}
-	
-	public void actualizarEstado() {
-		for (int i = 0; i < this.edificios.size(); i++) {
-			Edificio edificio = this.edificios.get(i);
-			if (edificio.estaDestruido()) {
-				this.edificios.remove(edificio);
-				i--;
-			}
-		}
-		for (int i = 0; i < this.unidades.size(); i++) {
-			Unidad unidad = this.unidades.get(i);
-			if (unidad.estaDestruido()) {
-				this.unidades.remove(unidad);
-				i--;
-			}
-		}
 	}
 }

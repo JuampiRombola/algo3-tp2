@@ -40,7 +40,7 @@ public class Mapa extends Observable {
 	}
 	
 	public Collection<Posicionable> getElementos() {
-		return this.elementos.values();
+		return (new ArrayList<Posicionable>(this.elementos.values()));
 	}
 	
 	public static Mapa getMapa() {

@@ -2,6 +2,8 @@ package algoCraft.integracion;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
+
 import org.junit.Test;
 
 import algoCraft.construcciones.Barraca;
@@ -11,10 +13,18 @@ import algoCraft.juego.Jugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.mapa.Posicionable;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 
 public class EdificacionTest {
+	
+	private void avanzarTurnos(int turnos) {
+		Collection<Posicionable> posicionables = Mapa.getMapa().getElementos();
+		for(int i = 0; i < turnos; i++)
+			for(Posicionable posicionable : posicionables)
+				posicionable.avanzarTurno();
+	}
 	
 	@Test
 	public void construccionDeEdificiosYUnidadesDeUnMismoJugadorRespetandoDependencias() {
@@ -36,8 +46,7 @@ public class EdificacionTest {
 		assertTrue(50 == jugador.getMineral());
 			
 		//Pasan 13 turnos
-		for (int i=0; i < 13; i++)
-			jugador.avanzarTurno();
+		this.avanzarTurnos(13);
 		
 		//El jugador deberia tener 150 de mineral y 80 de gasVespeno
 		assertTrue(150 == jugador.getMineral());
@@ -49,9 +58,8 @@ public class EdificacionTest {
 		assertTrue(0 == jugador.getMineral());
 		assertTrue(80 == jugador.getGasVespeno());
 		
-		//Pasan 12 turnos
-		for (int i=0; i < 15; i++)
-			jugador.avanzarTurno();
+		//Pasan 15 turnos
+		this.avanzarTurnos(15);
 		
 		assertTrue(150 == jugador.getMineral());
 		assertTrue(230 == jugador.getGasVespeno());
@@ -66,8 +74,7 @@ public class EdificacionTest {
 		jugador.crearDepositoDeSuministros(11, 10);
 		
 		//Pasan 6 turnos
-		for (int i=0; i < 6; i++)
-			jugador.avanzarTurno();
+		this.avanzarTurnos(6);
 		
 		//Se aumenta la poblacion a 5
 		assertTrue(5 == jugador.getPoblacionMaxima());
@@ -82,8 +89,7 @@ public class EdificacionTest {
 		assertTrue(290 == jugador.getGasVespeno());
 		
 		//Pasan 14 turnos
-		for (int i=0; i < 14; i++)
-			jugador.avanzarTurno();
+		this.avanzarTurnos(14);
 		
 		assertTrue(200 == jugador.getMineral());
 		assertTrue(430 == jugador.getGasVespeno());
@@ -95,8 +101,7 @@ public class EdificacionTest {
 		assertTrue(330 == jugador.getGasVespeno());
 		
 		//Pasan 12 turnos
-		for (int i=0; i < 12; i++)
-			jugador.avanzarTurno();
+		this.avanzarTurnos(12);
 		
 		assertTrue(120 == jugador.getMineral());
 		assertTrue(450 == jugador.getGasVespeno());
