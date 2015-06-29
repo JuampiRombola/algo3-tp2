@@ -46,6 +46,19 @@ public class Jugador extends Observable{
 		this.estaActivo = false;
 	}
 	
+	public boolean perdioLaPartida() {
+		return this.base.estaDestruido();
+	}
+
+	public void activar() {
+		this.estaActivo = true;
+		notifyObservers();
+	}
+	
+	public void desactivar() {
+		this.estaActivo = false;
+	}
+	
 	public int getGasVespeno() {
 		return this.base.getGasVespeno();
 	}
@@ -108,15 +121,11 @@ public class Jugador extends Observable{
 	}
 	
 	public void pagarMineralGasVespeno(int cantidadMineral, int cantidadGasVespeno) throws NoSeTienenLosRecursosSuficientes{
-		if (!seTienenLosRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
+		if (!this.base.hayRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
 			throw new NoSeTienenLosRecursosSuficientes();
 		this.restarRecursosGastados(cantidadMineral, cantidadGasVespeno);
 	}
 	
-	private boolean seTienenLosRecursosSuficientes(int mineralesAGastar, int gasVespenoAGastar) {
-		return this.base.hayRecursosSuficientes(mineralesAGastar, gasVespenoAGastar);
-	}
-
 	private Edificio getDependenciaEdificio(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {
 		for (Edificio edificio : this.edificios) {
 			if ((edificio.getClass() == claseDeEdificioQueDebePoseer) && (!edificio.estaEnConstruccion()))
@@ -187,29 +196,6 @@ public class Jugador extends Observable{
 		for (Unidad unidad : this.unidades)
 			unidad.avanzarTurno();
 	}
-
-	public boolean perdioLaPartida() {
-		return this.base.estaDestruido();
-	}
-
-	public void activar() {
-		this.estaActivo = true;
-		notifyObservers();
-	}
-	
-	public void desactivar() {
-		this.estaActivo = false;
-	}
-	
-	/*public void removerElementosDestruidos(ArrayList<Atacable> elementos) {
-		for (int i = 0; i < elementos.size(); i++) {
-			Atacable elemento = elementos.get(i);
-			if (elemento.estaDestruido()) {
-				elementos.remove(elemento);
-				i--;
-			}	
-		}
-	}*/
 	
 	public void actualizarEstado() {
 		for (int i = 0; i < this.edificios.size(); i++) {
