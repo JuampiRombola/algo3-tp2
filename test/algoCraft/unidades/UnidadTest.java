@@ -11,6 +11,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.NoPuedeAtacar;
 
 public class UnidadTest{
 	private int rangoArmaDePrueba = 10;
@@ -25,18 +26,26 @@ public class UnidadTest{
 
 	
 	private Unidad nuevaUnidadAtacante(){
-		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, 1);
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
+		return new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 1);
 	}
 	public Unidad nuevaUnidad() {
-		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
+		return new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadEnRangoDeAtaque(int vida) {
-		return  new Unidad(new Jugador("jugador1", new Base(3, 3)), vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
+		return  new Unidad(jugador, vida, armaDePrueba, posicionEnRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	public Unidad nuevaUnidadFueraDeRangoDeAtaque(int vida) {
-		return new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
+		return new Unidad(jugador, vidaMaxima, armaDePrueba, posicionFueraDeRango, cantidadDePoblacionQueOcupa);
 	}
 	
 	@Test
@@ -147,14 +156,14 @@ public class UnidadTest{
 		return unidad;
 	}
 	
-	@Test
+	@Test(expected = NoPuedeAtacar.class)
 	public void siDisparoUnArmaYEstoyDestruidoNoPuedoDestruirAUnAtacable() {
 		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba;
 		Unidad unidadDestruida = crearUnidadDestruida();
 		Unidad atacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
+		
 		unidadDestruida.atacar(atacable);
-		assertTrue(!atacable.estaDestruido());
 	}
 	
 	@Test
@@ -189,15 +198,15 @@ public class UnidadTest{
 		Unidad unidad = new Unidad(null, vida, arma, posicion, 1);
 		assertTrue(unidad.getRango() == 1);
 	}
-	@Test
-	public void unaUnidadNoHaceDanioEnElSegundoDisparoSiDispara2VecesSeguidas() {
+	@Test(expected = NoPuedeAtacar.class)
+	public void siUnaUnidadIntentaAtacarDosVecesSeguidasSeLanzaUnaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba*2;
 		Unidad unidadAtacante = nuevaUnidadAtacante();
 		Unidad unidadAtacable = nuevaUnidadEnRangoDeAtaque(vidaAtacable);
 		unidadAtacante.atacar(unidadAtacable);
+		
 		unidadAtacante.atacar(unidadAtacable);
-		assertTrue(unidadAtacable.getVidaActual() == (vidaAtacable/2));
 	}
 	
 	@Test

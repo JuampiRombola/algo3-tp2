@@ -4,8 +4,7 @@ import algoCraft.Atacable;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
-
-
+import algoCraft.unidades.excepciones.NoPuedeAtacar;
 
 public class Unidad implements Atacable {
 	private Jugador jugador;
@@ -26,10 +25,10 @@ public class Unidad implements Atacable {
 	}
 	
 	public void atacar(Atacable atacable) {
-		if (!this.estaDestruido() && this.activa) {
-			arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
-			this.activa = false;
-		}
+		if (this.estaDestruido() || !this.activa || !this.jugador.estaActivo())
+			throw new NoPuedeAtacar();
+		arma.atacar(atacable, posicion.calcularDistancia(atacable.getPosicion()));
+		this.activa = false;
 	}
 
 	public boolean estaDestruido() {

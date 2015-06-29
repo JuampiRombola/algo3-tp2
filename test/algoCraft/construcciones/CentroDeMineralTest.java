@@ -56,10 +56,11 @@ public class CentroDeMineralTest {
 	public void siElCentroEsAtacadoPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		int vidaInicial = centro.getVidaActual();
-		Goliath goliath = new Goliath(null, 2,2);
+		Goliath goliath = new Goliath(jugador, 2, 2);
 		goliath.atacar(centro);
 		assertTrue(centro.getVidaActual() < vidaInicial);
 	}
@@ -68,9 +69,10 @@ public class CentroDeMineralTest {
 	public void siElCentroEsAtacadoPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
 		Mineral mineral = new Mineral(1, 1);
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
-		Goliath goliath = new Goliath(null, 2,2);
+		Goliath goliath = new Goliath(jugador, 2, 2);
 		while (!centro.estaDestruido()) {
 			goliath.atacar(centro);
 			goliath.avanzarTurno();

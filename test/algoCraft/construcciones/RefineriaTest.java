@@ -55,10 +55,12 @@ public class RefineriaTest {
 	@Test
 	public void siLaRefineriaEsAtacadaPorUnGoliathSuVidaDisminuye() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = crearRefineria(gasVespeno);
 		int vidaInicial = refineria.getVidaActual();
-		Goliath goliath = new Goliath(null, 2,2);
+		Goliath goliath = new Goliath(jugador, 2,2);
 		goliath.atacar(refineria);
 		assertTrue(refineria.getVidaActual() < vidaInicial);
 	}
@@ -66,9 +68,11 @@ public class RefineriaTest {
 	@Test
 	public void siLaRefineriaEsAtacadaPorUnGoliathHastaSerDestruidoNoRecibeMasDanio() {
 		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("jugador1", new Base(3, 3));
+		jugador.activar();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);
 		Refineria refineria = crearRefineria(gasVespeno);
-		Goliath goliath = new Goliath(null, 2,2);
+		Goliath goliath = new Goliath(jugador, 2, 2);
 		while (!refineria.estaDestruido()) {
 			goliath.atacar(refineria);
 			goliath.avanzarTurno();

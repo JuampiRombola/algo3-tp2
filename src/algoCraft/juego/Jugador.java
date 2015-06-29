@@ -58,6 +58,10 @@ public class Jugador extends Observable {
 		this.estaActivo = false;
 	}
 	
+	public boolean estaActivo() {
+		return this.estaActivo;
+	}
+	
 	public int getGasVespeno() {
 		return this.base.getGasVespeno();
 	}
