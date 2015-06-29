@@ -2,11 +2,14 @@ package algoCraft.Vista;
 
 import java.awt.Color;
 
+import Controlador.MouseListenerPosicionMineral;
+
 public class VistaMineral extends PosicionVista{
 
 	
 	private static final long serialVersionUID = 1L;
-	public VistaMineral(){
+	public VistaMineral(PanelBotonera botonera){
 		super(Color.cyan);
+		  addMouseListener(new MouseListenerPosicionMineral(botonera));
 	}
 }

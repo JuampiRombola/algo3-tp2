@@ -1,7 +1,6 @@
 package algoCraft.Vista;
 
 public abstract class Graficador {
-
 	
-	public abstract PosicionVista getPosicionVista();
+	public abstract PosicionVista getPosicionVista(PanelBotonera botonera);
 }

@@ -80,7 +80,7 @@ public class VistaMapa extends JPanel implements Observer{
 		if(mapa.posicionEstaOcupada(posicion)){
 			Posicionable posicionable = mapa.getUnidad(posicion);
 			if(graficadores.containsKey(posicionable.getClass())){
-				this.add(graficadores.get(posicionable.getClass()).getPosicionVista(), gbc);
+				this.add(graficadores.get(posicionable.getClass()).getPosicionVista(botonera), gbc);
 			}
 		}else{
 			this.add(new VistaPosicionVacia(botonera), gbc);
