@@ -78,8 +78,19 @@ public class SimuladorPartidaConJuegoTest {
 		//Como es el turno de nico ahora su marine se puede mover
 		Marine marineNico = (Marine) Mapa.getMapa().getUnidad(new Posicion(11, 11, true));
 		Base baseEquipo3 = equipo3.getBase();
-		Posicion posicionCercanaBaseEquipo3 = Mapa.getMapa().getPosicionVaciaCercana(baseEquipo3.getPosicion());
-		marineNico.moverseA(posicionCercanaBaseEquipo3.getX(), posicionCercanaBaseEquipo3.getY());
+		marineNico.moverseA(11, 9);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(11, 8);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(9, 8);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(9, 7);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(7, 7);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(7, 5);
+		avanzarTurnos(juego, 2);
+		marineNico.moverseA(5, 5);
 		
 		marineNico.atacar(baseEquipo3);
 		

@@ -24,14 +24,14 @@ public class CombateTest {
 		Jugador jugador2 = new Jugador("jugador2", new Base(4, 4));
 		jugador2.activar();
 		Marine marine = new Marine(jugador1, 1, 1);
-		Goliath goliath = new Goliath(jugador2, 10, 10);
+		Goliath goliath = new Goliath(jugador2, 1, 7);
 		
 		//La vida del marine y del goliath estan completas
 		assertTrue(marine.getVidaMaxima() == 40);
 		assertTrue(goliath.getVidaMaxima() == 125);
 		
 		Assert.assertEquals(marine, mapa.getUnidad(new Posicion(1, 1, true)));
-		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(10, 10, true)));
+		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(1, 7, true)));
 		
 		//Los dos intentan atacarse pero como estan fuera de rango no se sacan vida
 		marine.atacar(goliath);
@@ -43,17 +43,17 @@ public class CombateTest {
 		goliath.avanzarTurno();
 		
 		//El goliath se mueve dentro del rango del marine
-		goliath.moverseA(3, 3);
+		goliath.moverseA(1, 5);
 		
-		//La posicion (10, 10) terrestre queda vacia
+		//La posicion (1, 7) terrestre queda vacia
 		try {
-			mapa.getUnidad(new Posicion(10, 10, true));
+			mapa.getUnidad(new Posicion(1, 7, true));
 			fail();
 		} catch (PosicionVaciaException e) {}
 		
-		//Las posiciones (1, 1) y (3, 3) terrestres estan ocupadas
+		//Las posiciones (1, 1) y (1, 5) terrestres estan ocupadas
 		Assert.assertEquals(marine, mapa.getUnidad(new Posicion(1, 1, true)));
-		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(3, 3, true)));
+		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(1, 5, true)));
 		
 		// El marine ataca al goliath
 		marine.atacar(goliath);
@@ -80,7 +80,7 @@ public class CombateTest {
 			fail();
 		} catch (PosicionVaciaException e) {}
 				
-		//La posicion (3, 3) terrestre se mantiene ocupada por el goliath
-		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(3, 3, true)));
+		//La posicion (1, 5) terrestre se mantiene ocupada por el goliath
+		Assert.assertEquals(goliath, mapa.getUnidad(new Posicion(1, 5, true)));
 	}
 }

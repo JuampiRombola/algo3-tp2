@@ -249,7 +249,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Marine marine = new Marine(null, 1, 1);
 		
-		marine.moverseA(-1, 0);
+		marine.moverseA(-1, 1);
 	}
 	
 	@Test

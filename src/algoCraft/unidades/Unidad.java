@@ -4,7 +4,9 @@ import algoCraft.Atacable;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.NoPuedeAtacar;
+import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
 
 public class Unidad implements Atacable {
 	private Jugador jugador;
@@ -12,7 +14,9 @@ public class Unidad implements Atacable {
 	private Arma arma;
 	private Posicion posicion;
 	private boolean activa;
+	private boolean movimientoActivo;
 	private int poblacionQueOcupa;
+	static int rangoMovimiento = 2;
 
 	public Unidad(Jugador jugador, int vidaMaxima, Arma arma, Posicion posicion, int poblacionQueOcupa) {
 		this.jugador = jugador;
@@ -20,6 +24,7 @@ public class Unidad implements Atacable {
 		this.vida = new Vida(vidaMaxima);
 		this.posicion = posicion;
 		this.activa = true;
+		this.movimientoActivo = true;
 		this.poblacionQueOcupa = poblacionQueOcupa;
 		Mapa.getMapa().agregarUnidad(this);
 	}
@@ -76,6 +81,7 @@ public class Unidad implements Atacable {
 	
 	public void avanzarTurno(){
 		this.activa = true;
+		this.movimientoActivo = true;
 	}
 
 	public int getPoblacionQueOcupa() {
@@ -86,7 +92,12 @@ public class Unidad implements Atacable {
 		return this.jugador;
 	}
 	
-	public void moverseA(int xDestino, int yDestino){
+	public void moverseA(int xDestino, int yDestino) {
+		if (this.posicion.calcularDistancia(new Posicion(xDestino, yDestino, true)) > rangoMovimiento)
+			throw new RangoDeMovimientoInvalido();
+		if (!this.movimientoActivo)
+			throw new LaUnidadYaSeMovioEnEsteTurno();
 		Mapa.getMapa().moverUnidad(this, xDestino, yDestino);
+		this.movimientoActivo = false;
 	}
 }

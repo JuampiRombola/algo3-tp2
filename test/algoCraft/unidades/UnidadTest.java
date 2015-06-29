@@ -11,7 +11,9 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.NoPuedeAtacar;
+import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
 
 public class UnidadTest{
 	private int rangoArmaDePrueba = 10;
@@ -19,10 +21,10 @@ public class UnidadTest{
 	private Arma armaDePrueba = new Arma(danioArmaDePrueba, rangoArmaDePrueba);
 	private int vidaMaxima = 10;
 	private int cantidadDePoblacionQueOcupa = 1;
-	private Posicion posicion = new Posicion(1,1, true);
-	private Posicion posicionEnRango = new Posicion (2,1, true);
+	private Posicion posicion = new Posicion(1, 1, true);
+	private Posicion posicionEnRango = new Posicion (2, 1, true);
 	//La posicion de la unidad que vaya a atacar es 1 1. 100, 100 esta fuera de rango.
-	private Posicion posicionFueraDeRango = new Posicion(15,15, true);
+	private Posicion posicionFueraDeRango = new Posicion(15, 15, true);
 
 	
 	private Unidad nuevaUnidadAtacante(){
@@ -262,8 +264,8 @@ public class UnidadTest{
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaLaEncuentroAlli(){
 		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
-		Posicion nuevaPosicion =  new Posicion(10,10, unidad.esTerrestre());
-		unidad.moverseA(10, 10);
+		Posicion nuevaPosicion =  new Posicion(1, 2, unidad.esTerrestre());
+		unidad.moverseA(1, 2);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(nuevaPosicion));
 	}
 	
@@ -271,7 +273,7 @@ public class UnidadTest{
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaNoLaEncuentroDondeEstaba(){
 		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
-		unidad.moverseA(10, 10);
+		unidad.moverseA(1, 2);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
 	}
 	
@@ -292,5 +294,22 @@ public class UnidadTest{
 		Unidad unidadAliada = new Unidad(jugador, vidaMaxima, armaDePrueba, new Posicion(5, 5, true), 2);
 		
 		unidad.atacar(unidadAliada);
+	}
+	
+	@Test(expected = RangoDeMovimientoInvalido.class)
+	public void siUnaUnidadTrataDeMoverseMasDelRangoPermitidoSeLanzaUnError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		unidad.moverseA(1, 4);
+	}
+	
+	@Test(expected = LaUnidadYaSeMovioEnEsteTurno.class)
+	public void siUnaUnidadTrataDeMoverseDosVecesEnElMismoTurnoSeLanzaUnError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		unidad.moverseA(1, 2);
+		unidad.moverseA(1, 3);
 	}
 }
