@@ -51,7 +51,6 @@ public class Jugador extends Observable {
 
 	public void activar() {
 		this.estaActivo = true;
-		notifyObservers();
 	}
 	
 	public void desactivar() {
@@ -94,7 +93,8 @@ public class Jugador extends Observable {
 		return this.base;
 	}
 	
-	public void sumarUnidadesDeMineral(int cantidadASumar) {
+	public void sumarUnidadesDeMineral(int cantidadASumar)
+	{
 		this.base.sumarUnidadesDeMineral(cantidadASumar);
 	}
 	
@@ -105,6 +105,7 @@ public class Jugador extends Observable {
 	private void restarRecursosGastados(int cantidaDeMineralGastada, int cantidadDeGasVespenoGastado) {
 		this.sumarUnidadesDeMineral(-cantidaDeMineralGastada);
 		this.sumarUnidadesDeGasVespeno(-cantidadDeGasVespenoGastado);
+
 	}
 	
 	public void sumarPoblacionMaxima(int cantidadASumar) {
@@ -135,6 +136,8 @@ public class Jugador extends Observable {
 		if (!this.base.hayRecursosSuficientes(cantidadMineral, cantidadGasVespeno))
 			throw new NoSeTienenLosRecursosSuficientes();
 		this.restarRecursosGastados(cantidadMineral, cantidadGasVespeno);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	private Edificio getDependenciaEdificio(Class<?> claseDeEdificioQueDebePoseer) throws NoSePuedeConstruirElEdificio {

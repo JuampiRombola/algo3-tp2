@@ -5,9 +5,9 @@ import Controlador.MouseListenerPosicionesSinBotones;
 
 public class VistaRefineria extends PosicionVista {
 	
-	VistaRefineria(PanelBotonera botonera) {
+	VistaRefineria(PanelCentral panelCentral) {
 		super(new Color (0, 80, 0));
-		addMouseListener(new MouseListenerPosicionesSinBotones(botonera));
+		addMouseListener(new MouseListenerPosicionesSinBotones(panelCentral));
 	}
 
 	

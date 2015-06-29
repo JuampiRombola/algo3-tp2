@@ -4,20 +4,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import algoCraft.Vista.PanelBotonera;
+import algoCraft.Vista.PanelCentral;
 
 public class MouseListenerPosicionMineral extends MouseAdapter{
-private PanelBotonera botonera;
-private int x;
-private int y;
+	private PanelCentral panelCentral;
+	private int x;
+	private int y;
 	
-	public MouseListenerPosicionMineral(PanelBotonera botonera, int x, int y){
+	public MouseListenerPosicionMineral(PanelCentral panelCentral, int x, int y){
 		super();
-		this.botonera = botonera;
+		this.panelCentral = panelCentral;
 		this.x = x;
 		this.y = y;
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
-		botonera.adecuarseParaFabricarRecolectorDeMineral(x,y);;
+		panelCentral.seleccionadoMineralEn(x, y);
 	}
 }

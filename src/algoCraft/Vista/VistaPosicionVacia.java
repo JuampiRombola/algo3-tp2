@@ -7,8 +7,8 @@ import Controlador.MouseListenerPosicionesVacias;
 public class VistaPosicionVacia extends PosicionVista{
 	
 	private static final long serialVersionUID = 1L;
-	public VistaPosicionVacia(PanelBotonera botonera,int x, int y){
+	public VistaPosicionVacia(PanelCentral panelCentral,int x, int y){
 		super(Color.LIGHT_GRAY);
-		addMouseListener(new MouseListenerPosicionesVacias(botonera, x ,y));
+		addMouseListener(new MouseListenerPosicionesVacias(panelCentral, x ,y));
 	}
 } 

@@ -2,18 +2,17 @@ package Controlador;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import algoCraft.Vista.PanelBotonera;
+import algoCraft.Vista.PanelCentral;
 
 public class MouseListenerPosicionesSinBotones extends MouseAdapter {
-	private PanelBotonera botonera;
+	private PanelCentral panelCentral;
 	
-	public MouseListenerPosicionesSinBotones(PanelBotonera botonera){
+	public MouseListenerPosicionesSinBotones(PanelCentral panelCentral){
 		super();
-		this.botonera = botonera;
+		this.panelCentral= panelCentral;
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
-		botonera.setVisible(false);
+		panelCentral.setVisible(false);
 	}
 }

@@ -2,22 +2,21 @@ package Controlador;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import algoCraft.Vista.PanelBotonera;
+import algoCraft.Vista.PanelCentral;
 
 public class MouseListenerPosicionGas extends MouseAdapter{
-		private PanelBotonera botonera;
-		private int y;
-		private int x;
+	private PanelCentral panelCentral;
+	private int y;
+	private int x;
 			
-			public MouseListenerPosicionGas(PanelBotonera botonera, int x, int y){
-				super();
-				this.botonera = botonera;
-				this.x = x;
-				this.y = y;
-			}
+		public MouseListenerPosicionGas(PanelCentral panelCentral, int x, int y){
+			super();
+			this.panelCentral = panelCentral;
+			this.x = x;
+			this.y = y;
+		}
 			
-			public void mousePressed(MouseEvent mouseEvent) {
-				botonera.adecuarseParaFabricarRecolectorDeGas(x ,y);;
-			}
+		public void mousePressed(MouseEvent mouseEvent) {
+			panelCentral.seleccionadoGasVespenoEn(x, y);
+		}
 }

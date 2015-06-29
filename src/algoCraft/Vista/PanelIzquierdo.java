@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Controlador.AccionTerminarTurno;
@@ -19,13 +18,11 @@ public class PanelIzquierdo extends JPanel implements Observer {
 	private boolean primerTurno = true;
 	private Juego juego;
 	private PanelJugador panelJugador;
-	private JFrame marcoEnElQueEstoy;
 	
-	public PanelIzquierdo(Juego juego, JFrame marcoEnElQueEstoy){
+	public PanelIzquierdo(Juego juego){
 		this.juego = juego;
 		juego.addObserver(this);
 		this.setBackground(Color.black);
-		this.marcoEnElQueEstoy = marcoEnElQueEstoy;
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 	}
@@ -41,7 +38,7 @@ public class PanelIzquierdo extends JPanel implements Observer {
 		panelJugador = new PanelJugador(juego);
 		this.add(panelJugador, BorderLayout.NORTH);
 		primerTurno = false;
-		marcoEnElQueEstoy.revalidate();
-		marcoEnElQueEstoy.repaint();
+		this.revalidate();
+		this.repaint();
 	}
 }

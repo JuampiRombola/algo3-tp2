@@ -2,24 +2,22 @@ package Controlador;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-
-import algoCraft.Vista.PanelBotonera;
+import algoCraft.Vista.PanelCentral;
 
 public class MouseListenerPosicionesVacias extends MouseAdapter{
-	private PanelBotonera botonera;
 	private int x;
 	private int y;
+	private PanelCentral panelCentral;
 	
 	
-	public MouseListenerPosicionesVacias(PanelBotonera botonera, int x, int y){
+	public MouseListenerPosicionesVacias(PanelCentral panelCentral, int x, int y){
 		super();
 		this.x = x;
 		this.y = y;
-		this.botonera = botonera;
+		this.panelCentral = panelCentral;
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
-		botonera.adecuarseParaFabricarEdificiosDeProduccion(x,y);;
+		panelCentral.seleccionadaPosicionVaciaEn(x, y);
 	}
 }

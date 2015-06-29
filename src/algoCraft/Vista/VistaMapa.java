@@ -24,12 +24,12 @@ public class VistaMapa extends JPanel implements Observer{
 	@SuppressWarnings({ "rawtypes" })
 	private HashMap<Class, Graficador> graficadores = new HashMap<Class, Graficador>();
 
-	private PanelBotonera botonera;
+	private PanelCentral panelCentral;
 	
 	private static final long serialVersionUID = 1L;
 	//Practica con el tamanio de las cosas, todavia no muestra el mapa real.
-	public VistaMapa(PanelBotonera botonera){
-		this.botonera = botonera;
+	public VistaMapa(PanelCentral panelCentral){
+		this.panelCentral = panelCentral;
 		this.setBackground(Color.black);
 		Mapa mapa = Mapa.getMapa();
 		mapa.addObserver(this);
@@ -85,10 +85,10 @@ public class VistaMapa extends JPanel implements Observer{
 			Posicionable posicionable = mapa.getUnidad(posicion);
 			if(graficadores.containsKey(posicionable.getClass())){
 				graficador = graficadores.get(posicionable.getClass());
-				this.add(graficador.getPosicionVista(botonera, posicion.getX(), posicion.getY()), gbc);
+				this.add(graficador.getPosicionVista(panelCentral, posicion.getX(), posicion.getY()), gbc);
 			}
 		}else{
-			this.add(new VistaPosicionVacia(botonera, posicion.getX(),posicion.getY()), gbc);
+			this.add(new VistaPosicionVacia(panelCentral, posicion.getX(),posicion.getY()), gbc);
 		}
 	}
 }
