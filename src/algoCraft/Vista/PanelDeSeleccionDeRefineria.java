@@ -37,6 +37,7 @@ public class PanelDeSeleccionDeRefineria extends JPanel {
 		Refineria refineria;
 		boolean esTerrestre = true;
 		refineria = (Refineria) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
-		return new String("Vida: " + String.valueOf(refineria.getVidaActual()));
+		return new String("Vida: " + String.valueOf(refineria.getVidaActual()) + "/" +
+							String.valueOf(refineria.getVidaMaxima()));
 	}
 }
