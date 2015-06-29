@@ -71,8 +71,8 @@ public class GasVespenoTest {
 	
 	@Test
 	public void unCentroEnEl22DevuelveUnaPosicionEnEL11ConGetPosicion() {
-		GasVespeno gasVespeno = new GasVespeno(1, 1);
-		Posicion posicion = new Posicion(1,1, true);
+		GasVespeno gasVespeno = new GasVespeno(2, 2);
+		Posicion posicion = new Posicion(2,2, true);
 		assertEquals(gasVespeno.getPosicion(), posicion);
 	}
 	

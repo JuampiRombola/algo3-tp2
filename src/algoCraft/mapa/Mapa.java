@@ -94,7 +94,7 @@ public class Mapa extends Observable {
 	private boolean esPosicionValida(Posicion posicion) {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		return ((x >= 0) && (x < this.alto) && (y >= 0) && (y < this.ancho));
+		return ((x > 0) && (x <= this.alto) && (y > 0) && (y < this.ancho));
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {

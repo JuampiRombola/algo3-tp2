@@ -30,7 +30,8 @@ public class AccionConstruirRecolectorDeMinerales  extends AbstractAction{
 		jugadorActual = juego.getJugadorActual();
 		Posicion posicion = new Posicion(x, y, true);
 		//Es feo castear. Pero estoy seguro que en esa posicion hay un mineral.
-		Mineral mineral = (Mineral) Mapa.getMapa().getUnidad(posicion);
+		Mapa mapa = Mapa.getMapa();
+		Mineral mineral = (Mineral) mapa.getUnidad(posicion);
 		jugadorActual.crearCentroDeMineral(mineral);;
 	}
 
