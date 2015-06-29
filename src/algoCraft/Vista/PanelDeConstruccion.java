@@ -9,10 +9,10 @@ import javax.swing.JPanel;
 
 public class PanelDeConstruccion extends JPanel {
 	private static final long serialVersionUID = 1L;
-	String[] nombresEdificios = {"Extractor de Minerales", "Extractor de Gas Vespeno"};
+	//String[] nombresEdificios = {"Extractor de Minerales", "Extractor de Gas Vespeno"};
 	private JComboBox<String> edificios;
 	
-	PanelDeConstruccion(){
+	PanelDeConstruccion(String[] nombresEdificios){
 		edificios = new JComboBox<String>(nombresEdificios);
 		this.add(new JButton("Construir"), BorderLayout.CENTER);
 		this.add(edificios, BorderLayout.SOUTH);

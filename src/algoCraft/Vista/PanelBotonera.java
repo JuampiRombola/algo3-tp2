@@ -18,13 +18,13 @@ public class PanelBotonera extends JPanel implements Observer{
 		this.setBackground(Color.black);
 		this.setLayout(new BorderLayout());
 		this.setForeground(Color.white);
-		panelDeConstruccion = new PanelDeConstruccion();
+		panelDeConstruccion = new PanelDeConstruccionDeEdificiosDeProduccion();
 		panelDeConstruccion.setVisible(false);
 		this.add(panelDeConstruccion, BorderLayout.NORTH);
 		this.setVisible(false);
 	}
 	
-	public void adecuarseParaProduccion(){
+	public void adecuarseParaFabricarEdificiosDeProduccion(){
 		this.panelDeConstruccion.setVisible(true);
 	}
 	

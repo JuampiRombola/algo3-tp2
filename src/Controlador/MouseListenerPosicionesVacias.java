@@ -15,6 +15,6 @@ public class MouseListenerPosicionesVacias extends MouseAdapter{
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
-		botonera.adecuarseParaProduccion();
+		botonera.adecuarseParaFabricarEdificiosDeProduccion();;
 	}
 }
