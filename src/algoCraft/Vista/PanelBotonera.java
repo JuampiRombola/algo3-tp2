@@ -56,5 +56,6 @@ public class PanelBotonera extends JPanel{
 	    layout.show(this, identificadorPanelRecolectorGas);
 	    posicionSeleccionadaEnX = x;
 	    posicionSeleccionadaEnY = y;
+	    panelDeConstruccionDeRecolectorDeGas.prepararEventoDeProduccion(x, y);
 	}
 }
