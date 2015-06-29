@@ -274,4 +274,23 @@ public class UnidadTest{
 		unidad.moverseA(10, 10);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
 	}
+	
+	@Test(expected = NoPuedeAtacar.class)
+	public void siTratoDeAtacarConUnaUnidadDeUnJugadorInactivoLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		unidad.atacar(null);
+	}
+	
+	@Test(expected = NoPuedeAtacar.class)
+	public void siUnaUnidadTrataDeAtacarAUnAliadoLanzaError() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidadAliada = new Unidad(jugador, vidaMaxima, armaDePrueba, new Posicion(5, 5, true), 2);
+		
+		unidad.atacar(unidadAliada);
+	}
 }
