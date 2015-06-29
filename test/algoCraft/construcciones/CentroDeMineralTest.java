@@ -14,6 +14,15 @@ import algoCraft.unidades.Goliath;
 public class CentroDeMineralTest {
 
 	@Test
+	public void laVidaMaximaDelCentroEs500() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Mineral mineral = new Mineral(1, 1);
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
+		assertTrue(500 == centro.getVidaMaxima());
+	}
+	
+	@Test
 	public void cuandoSeCreaUnCentroNoTieneMineralesRecolectados() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));

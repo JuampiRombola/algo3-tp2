@@ -25,6 +25,14 @@ public class BarracaTest {
 	}
 	
 	@Test
+	public void laVidaMaximaDeLaBarracaEs1000() {
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Barraca barraca = new Barraca(jugador, 1, 1);
+		
+		assertTrue(1000 == barraca.getVidaMaxima());
+	}
+	
+	@Test
 	public void laBarracaEstaEnConstruccionCuandoRecienEsCreada(){
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		Barraca barraca = new Barraca(jugador, 1, 1);

@@ -36,6 +36,18 @@ public class FabricaTest {
 	}
 	
 	@Test
+	public void laVidaMaximaDeLaFabricaEs1250() {
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		Barraca barraca = new Barraca(jugador, 0, 0);
+		construirEdificio(barraca, jugador);
+		Fabrica fabrica = new Fabrica(jugador, 1, 1, barraca);
+		
+		assertTrue(1250 == fabrica.getVidaMaxima());
+	}
+	
+	@Test
 	public void unaFabricaEnEl11DevuelveUnaPosicionEnEL11ConGetPosicion() {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);

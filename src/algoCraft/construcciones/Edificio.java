@@ -75,4 +75,8 @@ public abstract class Edificio implements Atacable {
 	public boolean estaEnConstruccion() {
 		return this.estaEnConstruccion;
 	}
+	
+	public int getVidaMaxima() {
+		return vida.getPuntosDeVidaMaximos();
+	}
 }

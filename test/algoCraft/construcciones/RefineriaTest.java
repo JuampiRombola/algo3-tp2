@@ -18,6 +18,15 @@ public class RefineriaTest {
 	}
 	
 	@Test
+	public void laVidaMaximaDeLaRefineriaEs750() {
+		Mapa.reiniciarInstanciaParaTest();
+		GasVespeno gasVespeno = new GasVespeno(1, 1);
+		Refineria refineria = crearRefineria(gasVespeno);
+		
+		assertTrue(750 == refineria.getVidaMaxima());
+	}
+	
+	@Test
 	public void cuandoSeCreaUnRefineriaNoTieneGasVespenoesRecolectados() {
 		Mapa.reiniciarInstanciaParaTest();
 		GasVespeno gasVespeno = new GasVespeno(1, 1);

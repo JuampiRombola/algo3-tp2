@@ -1,5 +1,7 @@
 package algoCraft.construcciones;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,6 +9,13 @@ import algoCraft.mapa.Mapa;
 
 public class BaseTest {
 
+	@Test
+	public void laVidaMaximaDeLaBaseEs2500() {
+		Base base = new Base(1, 1);
+		
+		assertTrue(2500 == base.getVidaMaxima());
+	}
+	
 	@Test
 	public void cuandoSeCreaUnaBaseEstaEnTierra() {
 		Base base = new Base(1, 1);
