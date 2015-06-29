@@ -186,25 +186,24 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void laPosicionVaciaMasCercanaAl0x0EsLa0x1() {
+	public void laPosicionVaciaMasCercanaAl1x1EsLa1x2() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
-		Posicion posicionOcupada = new Posicion(0, 0, false);
+		Posicion posicionOcupada = new Posicion(1, 1, false);
 		Posicion posicionLibre = mapa.getPosicionVaciaCercana(posicionOcupada);
-		
-		Assert.assertEquals((new Posicion(0, 1, false)), posicionLibre);
+		Assert.assertEquals((new Posicion(1, 2, false)), posicionLibre);
 	}
 	
 	@Test
-	public void laPosicionVaciaMasCercanaAl0x0EsLa0x2SiTodasSusAdyacentesEstanOcupadas() {
+	public void laPosicionVaciaMasCercanaAl1x1EsLa1x3SiTodasSusAdyacentesEstanOcupadas() {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();	
-		new Unidad(null, 1, null, new Posicion(0, 0, true), 1);
-		new Unidad(null, 1, null, new Posicion(0, 1, true), 1);
-		new Unidad(null, 1, null, new Posicion(1, 0, true), 1);
+		new Unidad(null, 1, null, new Posicion(1, 2, true), 1);
+		new Unidad(null, 1, null, new Posicion(2, 1, true), 1);
+		new Unidad(null, 1, null, new Posicion(2, 2, true), 1);
 		new Unidad(null, 1, null, new Posicion(1, 1, true), 1);
-		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion(0, 0, true));
-		Assert.assertEquals((new Posicion(0, 2, true)), posicionLibre);
+		Posicion posicionLibre = mapa.getPosicionVaciaCercana(new Posicion(1, 1, true));
+		Assert.assertEquals((new Posicion(1, 3, true)), posicionLibre);
 	}
 	
 	@Test
@@ -227,8 +226,8 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		
-		Unidad unaUnidad = (new Unidad(null, 1, null, new Posicion(0, 0, true), 1));
-		GasVespeno otraUnidad = new GasVespeno(0, 0);
+		Unidad unaUnidad = (new Unidad(null, 1, null, new Posicion(2, 2, true), 1));
+		GasVespeno otraUnidad = new GasVespeno(2, 2);
 		mapa.reemplazarUnidad(otraUnidad);
 		
 		assertTrue(otraUnidad == mapa.getUnidad(unaUnidad.getPosicion()));
@@ -239,7 +238,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		
-		GasVespeno unicaUnidad = new GasVespeno(0, 0);
+		GasVespeno unicaUnidad = new GasVespeno(1, 1);
 		mapa.reemplazarUnidad(unicaUnidad);
 		
 		assertTrue(unicaUnidad == mapa.getUnidad(unicaUnidad.getPosicion()));

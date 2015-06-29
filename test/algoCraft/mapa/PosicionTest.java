@@ -139,13 +139,6 @@ public class PosicionTest {
 	}
 	
 	@Test
-	public void siUnaPosicionTieneXEYIgualA0EntoncesEsPositiva() {
-		Posicion posicion = new Posicion(0, 0, true);
-		
-		Assert.assertTrue(posicion.esPositiva());
-	}
-	
-	@Test
 	public void siUnaPosicionTieneXEYMayorA0EntoncesEsPositiva() {
 		Posicion posicion = new Posicion(1, 1, true);
 		

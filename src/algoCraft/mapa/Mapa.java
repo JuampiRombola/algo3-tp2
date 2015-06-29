@@ -94,7 +94,7 @@ public class Mapa extends Observable {
 	private boolean esPosicionValida(Posicion posicion) {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		return ((x > 0) && (x <= this.alto) && (y > 0) && (y < this.ancho));
+		return ((x >= 1) && (x <= this.alto) && (y >= 1) && (y <= this.ancho));
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
@@ -133,10 +133,11 @@ public class Mapa extends Observable {
 	public Posicion getPosicionVaciaCercana(Posicion posicion) {
 		ArrayList<Posicion> posiciones = posicion.obtenerPosicionesAdyacentes();
 		Posicion posicionBuscada = posiciones.remove(0);
-		while(this.posicionEstaOcupada(posicionBuscada)) {
+		while(this.posicionEstaOcupada(posicionBuscada) || !this.esPosicionValida(posicionBuscada)) {
 			posiciones.addAll(posicionBuscada.obtenerPosicionesAdyacentes());
 			posicionBuscada = posiciones.remove(0);
 		}
+		
 		return posicionBuscada;
 	}
 

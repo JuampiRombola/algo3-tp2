@@ -69,6 +69,6 @@ public class Posicion {
 	}
 
 	public boolean esPositiva() {
-		return (this.x >= 0 && this.y >= 0);
+		return (this.x > 0 && this.y > 0);
 	}
 }
