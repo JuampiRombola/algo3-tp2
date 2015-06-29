@@ -32,10 +32,13 @@ public class PanelBotonera extends JPanel{
 		this.setForeground(Color.white);
 		panelDeConstruccionDeEdificiosDeProduccion = new PanelDeConstruccionDeEdificiosDeProduccion(juego);
 		this.add(panelDeConstruccionDeEdificiosDeProduccion, identificadorPanelEdificioProduccion);
+		
 		panelDeConstruccionDeRecolectorDeMinerales = new PanelDeConstruccionDeRecolectorDeMinerales(juego);
 		this.add(panelDeConstruccionDeRecolectorDeMinerales, identificadorPanelRecolectorMineral);
+		
 		panelDeConstruccionDeRecolectorDeGas = new PanelDeConstruccionDeRecolectorDeGas(juego);
 		this.add(panelDeConstruccionDeRecolectorDeGas, identificadorPanelRecolectorGas);
+		
 		this.setVisible(false);
 		this.setMaximumSize(new Dimension(500,50));
 	}
@@ -43,6 +46,9 @@ public class PanelBotonera extends JPanel{
 	public void adecuarseParaFabricarEdificiosDeProduccion(int x, int y){
 		this.setVisible(true);
 	    layout.show(this, identificadorPanelEdificioProduccion);
+	    posicionSeleccionadaEnX = x;
+	    posicionSeleccionadaEnY = y;
+	    panelDeConstruccionDeEdificiosDeProduccion.prepararEventoDeProduccion(x, y);
 	}
 
 

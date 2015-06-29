@@ -1,5 +1,7 @@
 package algoCraft.Vista;
 
+import Controlador.AccionConstruirBarraca;
+import Controlador.AccionConstruirFabrica;
 import algoCraft.juego.Juego;
 
 public class PanelDeConstruccionDeEdificiosDeProduccion extends PanelDeConstruccion {
@@ -13,7 +15,9 @@ public class PanelDeConstruccionDeEdificiosDeProduccion extends PanelDeConstrucc
 
 	@Override
 	void prepararEventoDeProduccion(int x, int y) {
-		// TODO Auto-generated method stub
-		
+		if (edificios.getSelectedItem() == "Barraca")
+			button.setAction(new AccionConstruirBarraca(juego, x, y));
+		if(edificios.getSelectedItem() == "Fabrica")
+			button.setAction(new AccionConstruirFabrica(juego, x, y));
 	}
 }
