@@ -62,9 +62,9 @@ public class Mapa extends Observable {
 		ArrayList<Base> bases = new ArrayList<Base> ();
 		// Se crean 4 bases, una en cada vertice del mapa.
 		bases.add(new Base(x, y));
-		bases.add(new Base(alto-x, ancho-y));
-		bases.add(new Base(alto-x, y));
-		bases.add(new Base(x, ancho-y));
+		bases.add(new Base(alto-x+1, ancho-y+1));
+		bases.add(new Base(alto-x+1, y));
+		bases.add(new Base(x, ancho-y+1));
 		int indiceFinal = (cantidadJugadores > 4) ? 4 : cantidadJugadores;
 		return bases.subList(0, indiceFinal);
 	}
@@ -98,7 +98,9 @@ public class Mapa extends Observable {
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {
-		return this.elementos.containsKey(p);
+		if(esPosicionValida(p))
+			return this.elementos.containsKey(p);
+		throw new PosicionInvalidaException();
 	}
 	
 	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {

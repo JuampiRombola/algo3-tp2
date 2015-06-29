@@ -60,24 +60,23 @@ public class VistaMapa extends JPanel implements Observer{
 		this.removeAll();
 		this.setLayout(new GridBagLayout());
 		Mapa mapa = Mapa.getMapa();
-		GridBagConstraints gbc = new GridBagConstraints();
 		for (int i = 1; i <= mapa.getAncho(); i++){
 			for (int j = 1; j <= mapa.getAlto(); j++){
 				Posicion posicionRevisada = new Posicion(i,j, true);
-				gbc.gridx = i;
-                gbc.gridy = j;
-                agregarVistaDe(posicionRevisada, gbc);
-                /*PosicionVista vista = graficadores.get(GasVespeno.class).getPosicionVista();
-				this.add(vista, gbc);*/
+                agregarVistaDe(posicionRevisada);
 			}
 		}
 		this.revalidate();
 		this.repaint(); 
 	}
 
-	private void agregarVistaDe(Posicion posicion, GridBagConstraints gbc) {
+	private void agregarVistaDe(Posicion posicion) {
 		Mapa mapa = Mapa.getMapa();
 		Graficador graficador;
+		GridBagConstraints gbc = new GridBagConstraints();
+		//La parte visual tiene la primera posicion en 0, el mapa cuenta desde 1.
+		gbc.gridx = posicion.getX() - 1;
+		gbc.gridy = posicion.getY() - 1;
 		if(mapa.posicionEstaOcupada(posicion)){
 			Posicionable posicionable = mapa.getUnidad(posicion);
 			if(graficadores.containsKey(posicionable.getClass())){
