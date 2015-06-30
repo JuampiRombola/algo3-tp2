@@ -11,7 +11,6 @@ import algoCraft.juego.Juego;
 
 public abstract class PanelDeConstruccion extends JPanel {
 	private static final long serialVersionUID = 1L;
-	//String[] nombresEdificios = {"Extractor de Minerales", "Extractor de Gas Vespeno"};
 	protected JComboBox<String> comboBox;
 	protected JButton button = new JButton("Construir");
 	protected Juego juego;

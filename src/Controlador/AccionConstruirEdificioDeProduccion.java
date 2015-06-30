@@ -31,5 +31,7 @@ public class AccionConstruirEdificioDeProduccion extends AbstractAction{
 			jugadorActual.crearBarraca(x, y);
 		if(comboBox.getSelectedItem() == "Fabrica")
 			jugadorActual.crearFabrica(x, y);
+		if(comboBox.getSelectedItem() == "Deposito de suministros")
+			jugadorActual.crearDepositoDeSuministros(x, y);
 	}
 }

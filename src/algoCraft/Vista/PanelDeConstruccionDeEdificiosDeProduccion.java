@@ -4,7 +4,7 @@ import Controlador.AccionConstruirEdificioDeProduccion;
 import algoCraft.juego.Juego;
 
 public class PanelDeConstruccionDeEdificiosDeProduccion extends PanelDeConstruccion {
-	private static String[] nombresEdificios = {"Barraca", "Fabrica"};
+	private static String[] nombresEdificios = {"Barraca", "Fabrica", "Deposito de suministros"};
 	
 	PanelDeConstruccionDeEdificiosDeProduccion(Juego juego) {
 		super(nombresEdificios, juego);
