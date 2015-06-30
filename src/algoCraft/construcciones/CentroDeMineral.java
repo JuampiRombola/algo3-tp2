@@ -28,4 +28,12 @@ public class CentroDeMineral extends EdificioRecolector{
 			this.jugador.sumarUnidadesDeMineral(cantidadRecolectada);
 		}
 	}
+
+	public static int getCostoMineral() {
+		return cantidadMineral;
+	}
+	
+	public static int getCostoGas(){
+		return cantidadGasVespeno;
+	}
 }

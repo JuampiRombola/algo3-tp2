@@ -14,10 +14,10 @@ public class PanelDeConstruccionDeLaBarraca extends PanelDeConstruccion {
 	
 	private static final long serialVersionUID = 1L;
 	private static String[] nombresUnidades = {"Marine"};
-	JPanel costoDelMarine;
-	JLabel labelCostoDeUnMarine = new JLabel("Costo de un marine");
-	JLabel labelCostoMinerales;
-	JLabel labelCostoGas;
+	private JPanel costoDelMarine;
+	private JLabel labelCostoDeUnMarine = new JLabel("Costo de un marine");
+	private JLabel labelCostoMinerales;
+	private JLabel labelCostoGas;
 	
 	PanelDeConstruccionDeLaBarraca(Juego juego) {
 		super(nombresUnidades, juego);

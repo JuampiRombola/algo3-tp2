@@ -14,6 +14,12 @@ public class Barraca extends EdificioConstructor{
 	static int cantidadGasVespeno = 0;
 	static int turnosEnProducirMarine = 3;
 	
+	public static int getCostoMineral(){
+		return cantidadMineral;
+	}
+	public static int getCostoGas(){
+		return cantidadGasVespeno;
+	}
 	public Barraca(Jugador jugador, int x, int y) {
 		super(jugador, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirMarine);
 		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);

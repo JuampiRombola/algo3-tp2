@@ -12,6 +12,14 @@ public class DepositoDeSuministros extends Edificio {
 	public static int cantidadMineral = 100;
 	public static int cantidadGasVespeno = 0;
 
+	
+	public static int getCostoMineral(){
+		return cantidadMineral;
+	}
+	public static int getCostoGas(){
+		return cantidadGasVespeno;
+	}
+	
 	public DepositoDeSuministros(Jugador jugador, int x, int y){
 		super(jugador, vida, new Posicion(x, y, inicialmenteTerrestre), turnosQueTardaEnConstruirse);
 		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);

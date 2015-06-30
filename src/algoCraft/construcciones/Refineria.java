@@ -11,6 +11,14 @@ public class Refineria extends EdificioRecolector {
 	public static int cantidadMineral = 100;
 	public static int cantidadGasVespeno = 0;
 	
+	public static int getCostoMineral(){
+		return cantidadMineral;
+	}
+	
+	public static int getCostoGas(){
+		return cantidadGasVespeno;
+	}
+	
 	public Refineria(Jugador jugador, GasVespeno gas) {
 		super(jugador, gas, vida, turnosEnConstruirse);
 		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);

@@ -16,6 +16,12 @@ public class Fabrica extends EdificioConstructor {
 	public static int cantidadGasVespeno = 100;
 	public static int turnosEnProducirGoliath = 6;
 	
+	public static int getCostoMineral(){
+		return cantidadMineral;
+	}
+	public static int getCostoGas(){
+		return cantidadGasVespeno;
+	}
 	public Fabrica(Jugador jugador, int x, int y, Barraca barraca) {
 		super(jugador, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirGoliath);
 		if (barraca.estaEnConstruccion())
