@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import algoCraft.Musica;
 import algoCraft.juego.Juego;
 
 public class VentanaPrincipal{
@@ -15,14 +16,17 @@ public class VentanaPrincipal{
 	private JFrame marco;
 	private Juego juego;
 	private PanelCentral panelCentral;
+	private Musica musica;
 	
-	public VentanaPrincipal(){
+	public VentanaPrincipal() throws Exception{
 		marco = new JFrame("AlgoCraft");
 		marco.setLayout(new BorderLayout());
 		marco.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		marco.addWindowListener(new CloseListener());
 		juego = new Juego();
-		JMenuBar barraMenu = (new BarraMenu(marco, juego)).getBarraMenu();
+		musica = new Musica("Recursos/Musica/main.wav");
+	    musica.loop();
+		JMenuBar barraMenu = (new BarraMenu(marco, juego, musica)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
 		marco.getContentPane().add(new PanelIzquierdo(juego), BorderLayout.WEST);
 		panelCentral = new PanelCentral(juego);

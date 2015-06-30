@@ -11,27 +11,35 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
+import algoCraft.Musica;
 import algoCraft.juego.Juego;
 
 public class BarraMenu {
 	private JFrame marco;
+	private Musica musica;
 	private JMenuBar barraMenu;
-    private JMenu menuJuego, menuAcercaDe;
-    private JMenuItem itmSalir, itmCreadores;
+    private JMenu menuJuego, menuMusica, menuAcercaDe;
+    private JMenuItem itmSalir, itmCreadores, itmActivarMusica;
 	private MenuNuevaPartida menuNuevaPartida;
     
-    public BarraMenu(JFrame marco, Juego juego){
+    public BarraMenu(JFrame marco, Juego juego, Musica musica){
     	this.marco = marco;
+    	this.musica = musica;
     	this.barraMenu = new JMenuBar();
 		this.menuJuego = new JMenu("Juego");
+		this.menuMusica = new JMenu("Musica");
 		this.menuAcercaDe = new JMenu("Acerca De");
 		this.menuNuevaPartida = new MenuNuevaPartida(juego);
 		this.itmSalir = new JMenuItem("Salir");
 		this.itmCreadores = new JMenuItem("Creadores");
+		this.itmActivarMusica = new JMenuItem("Activar/Desactivar");
 		
 		this.barraMenu.add(this.menuJuego);
 		this.menuJuego.add(this.menuNuevaPartida);
 		this.menuJuego.add(this.itmSalir);
+		
+		this.barraMenu.add(this.menuMusica);
+		this.menuMusica.add(this.itmActivarMusica);
 		
 		this.barraMenu.add(this.menuAcercaDe);
 		this.menuAcercaDe.add(this.itmCreadores);
@@ -46,6 +54,7 @@ public class BarraMenu {
     private void agregarEventosBarraMenu() {
 		this.itmSalir.addActionListener(new CerrarVentana());
 		this.itmCreadores.addActionListener(new MostrarDialogoCreadores(this.marco));
+		this.itmActivarMusica.addActionListener(new activarDesactivarMusica(this.musica));
 	}
     
     public class MostrarDialogoCreadores implements ActionListener{
@@ -75,5 +84,21 @@ public class BarraMenu {
 	      this.setLocationRelativeTo(null);
 	      this.setSize(150, 130);
 	   }
+	}
+	
+	public class activarDesactivarMusica implements ActionListener{
+		private Musica musica;
+		
+		public activarDesactivarMusica(Musica musica){
+			this.musica = musica;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (this.musica.estaActiva())
+				musica.stop();
+			else
+				musica.loop();
+		}
 	}
 }
