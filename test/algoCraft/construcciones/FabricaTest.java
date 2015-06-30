@@ -20,6 +20,7 @@ public class FabricaTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
+		jugador.activar();
 		Barraca barraca = new Barraca(jugador, 0, 0);
 		for(int i = 0; i < 12; i++)
 			barraca.avanzarTurno();
@@ -268,6 +269,7 @@ public class FabricaTest {
 	public void cuandoSeCreaUnaFabricaSePuedeSeguirCreandoUnMarineYAhoraTambienUnGoliath() {
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
 		jugador.sumarUnidadesDeGasVespeno(1000);
 		jugador.sumarUnidadesDeMineral(1000);
 		Barraca barraca = new Barraca(jugador, 0, 0);

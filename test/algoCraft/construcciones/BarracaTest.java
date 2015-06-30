@@ -17,6 +17,7 @@ public class BarracaTest {
 	private Barraca crearBarracaConstruida(){
 		Mapa.reiniciarInstanciaParaTest();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
 		jugador.sumarUnidadesDeMineral(1000);
 		Barraca barraca = new Barraca(jugador, 1, 1);
 		for (int i = 0; i < 12; i++)
@@ -226,6 +227,7 @@ public class BarracaTest {
 		Mapa mapa = Mapa.getMapa();
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		jugador.sumarUnidadesDeMineral(1000);
+		jugador.activar();
 		
 		Barraca barraca1 = new Barraca(jugador, 1, 1);
 		for (int i = 0; i < 12; i++)
