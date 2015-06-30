@@ -148,6 +148,10 @@ public class PanelCentral extends JPanel{
 			moverUnidadSeleccionadaA(x,y);
 	}
 
+	public void clickIzquierdoSobreAtacable(int x, int y){
+		
+	}
+	
 	private void moverUnidadSeleccionadaA(int x, int y) {
 		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
 		unidad.moverseA(x, y);
