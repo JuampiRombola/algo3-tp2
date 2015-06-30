@@ -139,6 +139,19 @@ public class PanelCentral extends JPanel{
 		this.revalidate();
 		this.repaint();
 	}
+	
+	public void seleccionadoDepositoDeSuministrosEn(int x, int y) {
+		hayUnaUnidadSeleccionada = false;
+		if(existeUnPanelDeSeleccion)
+			this.remove(panelDeSeleccion);
+		this.setVisible(true);
+		panelBotonera.setVisible(false);
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeEdificios("Deposito de Suministros ", x, y);
+		this.add(panelDeSeleccion);
+		this.revalidate();
+		this.repaint();
+	}
 
 	public void seleccionadaFabricaEn(int x, int y) {
 		hayUnaUnidadSeleccionada = false;
