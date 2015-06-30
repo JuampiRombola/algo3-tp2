@@ -100,4 +100,16 @@ public class Unidad implements Atacable {
 		Mapa.getMapa().moverUnidad(this, xDestino, yDestino);
 		this.movimientoActivo = false;
 	}
+
+	public int getRangoMovimiento() {
+		return rangoMovimiento;
+	}
+
+	public boolean puedeAtacar() {
+		return this.activa;
+	}
+	
+	public boolean puedeMoverse() {
+		return this.movimientoActivo;
+	}
 }
