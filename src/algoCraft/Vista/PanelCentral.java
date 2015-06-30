@@ -25,9 +25,8 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadoGasVespenoEn(int posicionX, int posicionY){
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		this.setVisible(true);
 		panelBotonera.setVisible(true);
 		this.panelDeSeleccion = new PanelDeSeleccionDeGasVespeno(posicionX, posicionY);
@@ -39,9 +38,8 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadoMineralEn(int posicionX, int posicionY){
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		this.setVisible(true);
 		panelBotonera.setVisible(true);
 		this.panelDeSeleccion = new PanelDeSeleccionDeMineral(posicionX, posicionY);
@@ -53,9 +51,8 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadaPosicionVaciaEn(int posicionX, int posicionY){
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		this.setVisible(true);
 		panelBotonera.setVisible(true);
 		panelBotonera.adecuarseParaFabricarEdificiosDeProduccion(posicionX, posicionY);
@@ -65,9 +62,8 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadaRefineriaEn(int posicionX, int posicionY){
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		this.setVisible(true);
 		panelBotonera.setVisible(false);
 		existeUnPanelDeSeleccion = true;
@@ -88,5 +84,18 @@ public class PanelCentral extends JPanel{
 		panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
 		this.revalidate();
 		this.repaint();
+	}
+
+	public void seleccionadoCentroDeMineralEn(int x, int y) {
+		if(existeUnPanelDeSeleccion)
+			this.remove(panelDeSeleccion);
+		this.setVisible(true);
+		panelBotonera.setVisible(false);
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeCentroDeMineral(x, y);
+		this.add(panelDeSeleccion);
+		this.revalidate();
+		this.repaint();
+		
 	}
 }

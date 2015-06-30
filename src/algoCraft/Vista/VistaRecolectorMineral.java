@@ -2,13 +2,14 @@ package algoCraft.Vista;
 
 import java.awt.Color;
 
-import Controlador.MouseListenerPosicionesSinBotones;
+import Controlador.MouseListenerPosicionCentroMineral;
 
 public class VistaRecolectorMineral extends PosicionVista{
-private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
 	
 	public VistaRecolectorMineral(PanelCentral panelCentral,int x, int y){
 		super(Color.blue);
-		  addMouseListener(new MouseListenerPosicionesSinBotones(panelCentral));
+		addMouseListener(new MouseListenerPosicionCentroMineral(panelCentral, x, y));
 	}
 }
