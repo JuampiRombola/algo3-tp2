@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import Controlador.MouseListenerSonidoClick;
 import algoCraft.juego.Juego;
 
 public class MenuNuevaPartida extends JMenu{
@@ -20,8 +21,11 @@ public class MenuNuevaPartida extends JMenu{
 		super("Nueva partida");
 		this.juego = juego;
 		itmDosJugadores = new JMenuItem("Dos jugadores");
+		itmDosJugadores.addMouseListener(new MouseListenerSonidoClick());
 		itmTresJugadores = new JMenuItem("Tres jugadores");
+		itmTresJugadores.addMouseListener(new MouseListenerSonidoClick());
 		itmCuatroJugadores = new JMenuItem("Cuatro jugadores");
+		itmCuatroJugadores.addMouseListener(new MouseListenerSonidoClick());
 		
 		itmDosJugadores.addActionListener(new dosJugadoresListener());
 		itmTresJugadores.addActionListener(new tresJugadoresListener());

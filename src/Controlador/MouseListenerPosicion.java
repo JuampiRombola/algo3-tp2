@@ -3,7 +3,7 @@ package Controlador;
 import java.awt.event.MouseAdapter;
 import algoCraft.Vista.PanelCentral;
 
-public class MouseListenerPosicion extends MouseAdapter{
+public class MouseListenerPosicion extends MouseAdapter {
 	
 	protected PanelCentral panelCentral;
 	protected int y;

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Controlador.AccionTerminarTurno;
+import Controlador.MouseListenerSonidoClick;
 import algoCraft.juego.Juego;
 
 public class PanelIzquierdo extends JPanel implements Observer {
@@ -34,6 +35,7 @@ public class PanelIzquierdo extends JPanel implements Observer {
 		}
 		if(primerTurno){
 			JButton botonTerminarTurno = new JButton(new AccionTerminarTurno(juego));
+			botonTerminarTurno.addMouseListener(new MouseListenerSonidoClick());
 			this.add(botonTerminarTurno, BorderLayout.SOUTH);
 		}
 		panelJugador = new PanelJugador(juego);

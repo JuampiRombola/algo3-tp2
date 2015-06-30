@@ -51,7 +51,7 @@ public class PanelBotonera extends JPanel{
 		this.setVisible(false);
 		this.setMaximumSize(new Dimension(500,300));
 	}
-	
+
 	public void adecuarseParaFabricarEdificiosDeProduccion(int x, int y){
 		this.setVisible(true);
 	    layout.show(this, identificadorPanelEdificioProduccion);

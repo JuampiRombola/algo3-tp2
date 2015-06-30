@@ -34,7 +34,7 @@ public class PanelCentral extends JPanel implements Observer{
 		hayUnaUnidadSeleccionada = false;
 		juego.addObserver(this);
 	}
-	
+
 	public PanelBotonera getBotonera(){
 		return panelBotonera;
 	}

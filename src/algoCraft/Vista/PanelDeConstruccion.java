@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import Controlador.MouseListenerSonidoClick;
 import algoCraft.juego.Juego;
 
 public abstract class PanelDeConstruccion extends JPanel {
@@ -19,6 +20,7 @@ public abstract class PanelDeConstruccion extends JPanel {
 	protected JPanel panelComboBoton;
 	
 	PanelDeConstruccion(String[] nombresEdificios, Juego juego){
+		this.button.addMouseListener(new MouseListenerSonidoClick());
 		this.juego = juego;
 		comboBox = new JComboBox<String>(nombresEdificios);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

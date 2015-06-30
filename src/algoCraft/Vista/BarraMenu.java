@@ -11,6 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
+import Controlador.MouseListenerSonidoClick;
 import algoCraft.Musica;
 import algoCraft.juego.Juego;
 
@@ -27,11 +28,15 @@ public class BarraMenu {
     	this.musica = musica;
     	this.barraMenu = new JMenuBar();
 		this.menuJuego = new JMenu("Juego");
+		this.menuJuego.addMouseListener(new MouseListenerSonidoClick());
 		this.menuMusica = new JMenu("Musica");
+		this.menuMusica.addMouseListener(new MouseListenerSonidoClick());
 		this.menuAcercaDe = new JMenu("Acerca De");
+		this.menuAcercaDe.addMouseListener(new MouseListenerSonidoClick());
 		this.menuNuevaPartida = new MenuNuevaPartida(juego);
 		this.itmSalir = new JMenuItem("Salir");
 		this.itmCreadores = new JMenuItem("Creadores");
+		this.itmCreadores.addMouseListener(new MouseListenerSonidoClick());
 		this.itmActivarMusica = new JMenuItem("Activar/Desactivar");
 		
 		this.barraMenu.add(this.menuJuego);
