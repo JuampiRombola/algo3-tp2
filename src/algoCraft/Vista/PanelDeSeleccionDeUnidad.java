@@ -6,6 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import algoCraft.Musica;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Marine;
@@ -98,8 +99,13 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 		Unidad unidad;
 		boolean esTerrestre = true;
 		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
-		if (unidad.getClass() == Marine.class)
+		if (unidad.getClass() == Marine.class){ 
+			if (unidad.getJugador().estaActivo())
+				Musica.reproducir("Recursos/Musica/selecMarine.wav");
 			return "Marine ";
+		}
+		if (unidad.getJugador().estaActivo())
+			Musica.reproducir("Recursos/Musica/selecGoliath.wav");
 		return "Goliath ";
 	}
 	

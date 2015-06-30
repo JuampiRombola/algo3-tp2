@@ -1,6 +1,7 @@
 package algoCraft;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import sun.audio.AudioData;
 import sun.audio.AudioDataStream;
@@ -44,5 +45,12 @@ public class Musica implements java.applet.AudioClip {
 
 	public boolean estaActiva() {
 		return estaActiva;
+	}
+
+	public static void reproducir(String string) {
+		try {
+			(new Musica(string)).play();
+		} catch (IOException e1) {}	
+		
 	}
 }

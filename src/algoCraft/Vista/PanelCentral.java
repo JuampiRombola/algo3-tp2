@@ -9,10 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import algoCraft.Atacable;
+import algoCraft.Musica;
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Juego;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
@@ -188,6 +190,7 @@ public class PanelCentral extends JPanel implements Observer{
 			Unidad atacante = obtenerUnidadSeleccionada();
 			Atacable atacable = obtenerAtacableEn(x, y);
 			atacante.atacar(atacable);
+			Musica.reproducir("recursos/Musica/ataque.wav");
 		}
 	}
 
@@ -195,6 +198,10 @@ public class PanelCentral extends JPanel implements Observer{
 		Unidad unidad = obtenerUnidadSeleccionada() ;
 		try{
 			unidad.moverseA(x, y);
+			if (unidad.getClass() == Marine.class)
+				Musica.reproducir("Recursos/Musica/movMarine.wav");
+			else
+				Musica.reproducir("Recursos/Musica/movGoliath.wav");
 		}catch(RangoDeMovimientoInvalido e){
 			 JOptionPane.showMessageDialog(null, "La unidad no se puede mover tan lejos", "Error",
                      JOptionPane.ERROR_MESSAGE);

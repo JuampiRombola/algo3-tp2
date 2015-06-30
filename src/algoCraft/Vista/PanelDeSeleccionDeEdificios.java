@@ -6,6 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import algoCraft.Musica;
 import algoCraft.construcciones.Edificio;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -42,6 +43,8 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 		Edificio edificio;
 		boolean esTerrestre = true;
 		edificio = (Edificio) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		if (edificio.getJugador().estaActivo())
+			Musica.reproducir("Recursos/Musica/edificios.wav");
 		return edificio.getJugador().getNombre();
 	}
 

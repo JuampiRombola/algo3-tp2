@@ -6,6 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import algoCraft.Musica;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.GasVespeno;
@@ -20,6 +21,7 @@ public class PanelDeSeleccionDeGasVespeno extends JPanel{
 	public PanelDeSeleccionDeGasVespeno(int x, int y){
 		this.x = x;
 		this.y = y;
+		Musica.reproducir("Recursos/Musica/recursos.wav");
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		nombreDeLoSeleccionado = new JLabel("Gas Vespeno");
 		nombreDeLoSeleccionado.setForeground(Color.white);
