@@ -3,14 +3,12 @@ package Controlador;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JComboBox;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.juego.Juego;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
-import algoCraft.recursos.GasVespeno;
 
 public class AccionConstruirMarine extends AbstractAction{
 	private static final long serialVersionUID = 1L;
