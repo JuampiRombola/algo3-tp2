@@ -2,6 +2,7 @@ package algoCraft.construcciones;
 
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.ElEdificioPerteneceAOtroJugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Marine;
@@ -29,6 +30,8 @@ public class Barraca extends EdificioConstructor{
 	public void crearMarine() throws ElEdificioEstaEnConstruccion {
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
+		if (!this.jugador.estaActivo())
+			throw new ElEdificioPerteneceAOtroJugador();
 		this.jugador.pagarMineralGasVespeno(Marine.getCantidadDeMineralQueCUesta(), Marine.getCantidadDeGasQueCUesta());
 		cantidadDeUnidadesAProducir++;
 		seTerminoDeCrearLaUnidad = false;

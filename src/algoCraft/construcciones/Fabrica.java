@@ -3,6 +3,7 @@ package algoCraft.construcciones;
 
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.ElEdificioPerteneceAOtroJugador;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -32,6 +33,8 @@ public class Fabrica extends EdificioConstructor {
 	public void crearGoliath() throws ElEdificioEstaEnConstruccion {
 		if (this.estaEnConstruccion)
 			throw new ElEdificioEstaEnConstruccion();
+		if (!this.jugador.estaActivo())
+			throw new ElEdificioPerteneceAOtroJugador();
 		this.jugador.pagarMineralGasVespeno(Goliath.getCantidadDeMineralQueCUesta(), Goliath.getCantidadDeGasQueCUesta());
 		cantidadDeUnidadesAProducir++;
 		seTerminoDeCrearLaUnidad = false;

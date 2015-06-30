@@ -17,6 +17,7 @@ import algoCraft.juego.excepciones.ElJugadorNoEstaActivoException;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
+import algoCraft.juego.excepciones.ElEdificioPerteneceAOtroJugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -711,5 +712,41 @@ public class JugadorTest {
 		jugador.desactivar();
 
 		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+	}
+	
+	@Test(expected = ElEdificioPerteneceAOtroJugador.class)
+	public void elJugadorNoPuedeCrearUnMarineEnUnaBarracaQueNoLePertenece() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador1 = new Jugador("Jugador1", new Base(3, 3));
+		jugador1.activar();
+		jugador1.crearBarraca(1, 1);
+		avanzarTurnos(12);
+		jugador1.desactivar();
+		Jugador jugador2 = new Jugador("Jugador2", new Base(4, 4)); 
+		jugador2.activar();
+		jugador2.sumarPoblacionMaxima(5);
+
+		jugador2.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+	}
+	
+	@Test(expected = ElEdificioPerteneceAOtroJugador.class)
+	public void elJugadorNoPuedeCrearUnGoliathEnUnaFabricaQueNoLePertenece() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador1 = new Jugador("Jugador1", new Base(3, 3));
+		Jugador jugador2 = new Jugador("Jugador2", new Base(4, 4)); 
+		jugador1.sumarUnidadesDeMineral(1000);
+		jugador1.sumarUnidadesDeGasVespeno(1000);
+		jugador1.activar();
+		jugador1.crearBarraca(5, 5);
+		avanzarTurnos(12);
+		jugador1.crearFabrica(1, 1);
+		avanzarTurnos(12);
+		jugador1.desactivar();
+		jugador2.sumarPoblacionMaxima(5);
+		jugador2.activar();
+
+		jugador2.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(1, 1, true))));
 	}
 }
