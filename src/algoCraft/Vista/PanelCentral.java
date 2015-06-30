@@ -217,8 +217,13 @@ public class PanelCentral extends JPanel implements Observer{
 			this.remove(panelDeSeleccion);
 		hayUnaUnidadSeleccionada = true;
 		panelBotonera.setVisible(false);
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeUnidad(x, y);
+		this.add(panelDeSeleccion);
+		this.revalidate();
+		this.repaint();
 		//Las unidades son terrestres por ahora, true marca eso
-		posicionUnidadSeleccionada = new Posicion(x,y,true);
+		posicionUnidadSeleccionada = new Posicion(x, y, true);
 	}
 
 	@Override
