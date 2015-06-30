@@ -289,4 +289,16 @@ public class FabricaTest {
 		assertTrue(barraca.seTerminoDeCrearLaUnidad());
 		assertTrue(fabrica.seTerminoDeCrearLaUnidad());
 	}
+	
+	@Test
+	public void laFabricaCuesta200UnidadesDeMineral() {
+		
+		assertEquals(200, Fabrica.getCostoMineral());
+	}
+	
+	@Test
+	public void laFabricaCuesta100UnidadesDeGasVespeno() {
+		
+		assertEquals(100, Fabrica.getCostoGas());
+	}
 }

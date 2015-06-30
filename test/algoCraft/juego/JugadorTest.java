@@ -24,6 +24,7 @@ import algoCraft.mapa.Posicionable;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
 import algoCraft.unidades.Goliath;
+import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
 
 public class JugadorTest {
@@ -748,5 +749,48 @@ public class JugadorTest {
 		jugador2.activar();
 
 		jugador2.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(1, 1, true))));
+	}
+	
+	@Test
+	public void siLeDestruyenUnaBarracaConUnidadesEnConstruccionPasaATenerMenosPoblacion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.sumarPoblacionMaxima(10);
+		jugador.activar();
+		jugador.crearBarraca(1, 1);
+		Barraca barraca = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
+		avanzarTurnos(12);
+		
+		for (int i = 0; i < 3; i++)
+			jugador.crearMarine(barraca);
+		int poblacion = jugador.getPoblacion();
+		barraca.recibePuntosDeDanio(1000);
+		
+		assertTrue(poblacion - (Marine.getCantidadDePoblacionQueOcupa())*3 == jugador.getPoblacion());
+	}
+	
+	@Test
+	public void siLeDestruyenUnaFabricaConUnidadesEnConstruccionPasaATenerMenosPoblacion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Mapa mapa = Mapa.getMapa();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarPoblacionMaxima(10);
+		jugador.activar();
+		jugador.crearBarraca(1, 1);
+		avanzarTurnos(12);
+		jugador.crearFabrica(2, 2);
+		avanzarTurnos(12);
+		
+		Fabrica fabrica = (Fabrica) mapa.getUnidad(new Posicion(2, 2, true));
+		for (int i = 0; i < 3; i++)
+			jugador.crearGoliath(fabrica);
+		int poblacion = jugador.getPoblacion();
+		fabrica.recibePuntosDeDanio(1259);
+		
+		assertTrue(poblacion - (Goliath.getCantidadDePoblacionQueOcupa())*3 == jugador.getPoblacion());
 	}
 }
