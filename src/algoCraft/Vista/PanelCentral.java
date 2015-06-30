@@ -91,7 +91,6 @@ public class PanelCentral extends JPanel{
 			existeUnPanelDeSeleccion = false;
 			panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
 		}
-		panelDeSeleccion.setVisible(false);
 		this.revalidate();
 		this.repaint();
 	}

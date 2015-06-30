@@ -21,6 +21,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
 import algoCraft.recursos.GasVespeno;
 import algoCraft.recursos.Mineral;
+import algoCraft.unidades.Marine;
 
 public class VistaMapa extends JPanel implements Observer{
 	
@@ -62,6 +63,7 @@ public class VistaMapa extends JPanel implements Observer{
 		graficadores.put(Barraca.class, new GraficadorBarraca());
 		graficadores.put(Fabrica.class, new GraficadorFabrica());
 		graficadores.put(DepositoDeSuministros.class, new GraficadorDepositoDeSuministros());
+		graficadores.put(Marine.class, new GraficadorMarine());
 	}
 	
 	@Override
