@@ -1,6 +1,8 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
@@ -15,7 +17,7 @@ import algoCraft.unidades.Unidad;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
 
-public class PanelCentral extends JPanel{
+public class PanelCentral extends JPanel implements Observer{
 	private static final long serialVersionUID = 1L;
 	private PanelBotonera panelBotonera;
 	private JPanel panelDeSeleccion;
@@ -30,6 +32,7 @@ public class PanelCentral extends JPanel{
 		this.add(panelBotonera);
 		existeUnPanelDeSeleccion = false;
 		hayUnaUnidadSeleccionada = false;
+		juego.addObserver(this);
 	}
 	
 	public PanelBotonera getBotonera(){
@@ -208,6 +211,7 @@ public class PanelCentral extends JPanel{
 	private Atacable obtenerAtacableEn(int x, int y){
 		return (Atacable) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
 	}
+	
 	public void seleccionadaUnidadEn(int x, int y) {
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
@@ -215,5 +219,19 @@ public class PanelCentral extends JPanel{
 		panelBotonera.setVisible(false);
 		//Las unidades son terrestres por ahora, true marca eso
 		posicionUnidadSeleccionada = new Posicion(x,y,true);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		this.limpiarElementos();
+	}
+	
+	private void limpiarElementos(){
+		if(existeUnPanelDeSeleccion)
+			this.remove(panelDeSeleccion);
+		hayUnaUnidadSeleccionada = false;
+		panelBotonera.setVisible(false);
+		this.revalidate();
+		this.repaint();
 	}
 }

@@ -24,7 +24,7 @@ public class VentanaPrincipal{
 		marco.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		marco.addWindowListener(new CloseListener());
 		juego = new Juego();
-		musica = new Musica("Recursos/Musica/main.wav");
+		musica = new Musica("recursos/Musica/main.wav");
 	    musica.loop();
 		JMenuBar barraMenu = (new BarraMenu(marco, juego, musica)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
