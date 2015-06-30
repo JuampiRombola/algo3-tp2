@@ -1,10 +1,14 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import algoCraft.construcciones.Barraca;
 import algoCraft.juego.Juego;
+import algoCraft.mapa.Mapa;
+import algoCraft.mapa.Posicion;
 
 public class PanelCentral extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -77,13 +81,25 @@ public class PanelCentral extends JPanel{
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
-		this.setVisible(true);
+		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
+		// Podria sacarse si el casteo en el metodo booleano no es agradable
+		if(laBarracaEstaEnConstruccion(posicionX, posicionY)){
+			panelBotonera.setVisible(false);
+		}else{
+			this.setVisible(true);
+			panelBotonera.setVisible(true);
+			existeUnPanelDeSeleccion = false;
+			panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
+		}
 		panelDeSeleccion.setVisible(false);
-		panelBotonera.setVisible(true);
-		existeUnPanelDeSeleccion = false;
-		panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
 		this.revalidate();
 		this.repaint();
+	}
+
+	private boolean laBarracaEstaEnConstruccion(int posicionX, int posicionY) {
+		Posicion posicion = new Posicion(posicionX, posicionY, true);//Es terrestre, entonces pongo true
+		Barraca barraca = (Barraca) Mapa.getMapa().getUnidad(posicion);
+		return barraca.estaEnConstruccion();
 	}
 
 	public void seleccionadoCentroDeMineralEn(int x, int y) {

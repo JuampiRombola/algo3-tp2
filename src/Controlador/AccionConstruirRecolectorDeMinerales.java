@@ -3,9 +3,11 @@ package Controlador;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
 import algoCraft.juego.Juego;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.recursos.Mineral;
@@ -32,7 +34,12 @@ public class AccionConstruirRecolectorDeMinerales  extends AbstractAction{
 		//Es feo castear. Pero estoy seguro que en esa posicion hay un mineral.
 		Mapa mapa = Mapa.getMapa();
 		Mineral mineral = (Mineral) mapa.getUnidad(posicion);
-		jugadorActual.crearCentroDeMineral(mineral);;
+		try{
+			jugadorActual.crearCentroDeMineral(mineral);;
+		}catch(NoSeTienenLosRecursosSuficientes e){
+			 JOptionPane.showMessageDialog(null, "No se tienen suficientes recursos", "Error",
+                     JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }
