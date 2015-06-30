@@ -162,4 +162,16 @@ public class CentroDeMineralTest {
 		
 		assertTrue(10 == centro.getRecursosRecolectados());
 	}
+	
+	@Test
+	public void elCentroDeMineralCuesta50UnidadesDeMineral() {
+		
+		assertEquals(50, CentroDeMineral.getCostoMineral());
+	}
+	
+	@Test
+	public void elCentroDeMineralCuesta0UnidadesDeGasVespeno() {
+		
+		assertEquals(0, CentroDeMineral.getCostoGas());
+	}
 }

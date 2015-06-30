@@ -260,4 +260,22 @@ public class BarracaTest {
 		
 		assertEquals(0, Barraca.getCostoGas());
 	}
+	
+	@Test
+	public void laBarracaTarda12TurnosEnConstruirse() {
+		Barraca barraca = crearBarracaConstruida();
+		assertEquals(12, barraca.getTurnosEnConstruirse());
+	}
+	
+	@Test
+	public void siSeAvanzaUnTurnoLuegoDeQueSeComenzoAConstruirLaBarracaSuContadorDeTurnosEsIgualA1() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Barraca barraca = new Barraca(jugador, 1, 1);
+		
+		barraca.avanzarTurno();
+		
+		assertEquals(1, barraca.getTurnosQuePasaroDeConstruccion());
+	}
 }
