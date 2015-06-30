@@ -41,7 +41,7 @@ public class EdificacionTest {
 		assertTrue(150 == jugador.getMineral());
 		
 		// Se busca un mineral y se le construye un centro encima
-		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(2, 2, true));
+		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(1, 2, true));
 		jugador.crearRefineria(gasVespeno);
 		assertTrue(50 == jugador.getMineral());
 			

@@ -87,9 +87,11 @@ public class Mapa extends Observable {
 		while (it.hasNext()) {
 			Posicion posicion = it.next();
 			if (cantidadAgregada < 2)
-				this.agregarUnidad(new GasVespeno(posicion.getX(), posicion.getY()));
+				this.agregarUnidad(new GasVespeno(posicion.getX()-1, posicion.getY()));
+			else if (cantidadAgregada < 4)
+				this.agregarUnidad(new Mineral(posicion.getX()-1, posicion.getY()));
 			else
-				this.agregarUnidad(new Mineral(posicion.getX(), posicion.getY()));
+				this.agregarUnidad(new Mineral(posicion.getX()+1, posicion.getY()));
 			cantidadAgregada++;
 		}
 	}
