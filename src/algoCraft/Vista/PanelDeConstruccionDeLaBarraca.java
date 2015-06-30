@@ -1,5 +1,6 @@
 package algoCraft.Vista;
 
+import Controlador.AccionConstruirMarine;
 import algoCraft.juego.Juego;
 
 public class PanelDeConstruccionDeLaBarraca extends PanelDeConstruccion {
@@ -13,8 +14,7 @@ public class PanelDeConstruccionDeLaBarraca extends PanelDeConstruccion {
 
 	@Override
 	void prepararEventoDeProduccion(int x, int y) {
-		// TODO Auto-generated method stub
-
+		this.button.setAction(new AccionConstruirMarine(juego, x, y));
 	}
 
 }
