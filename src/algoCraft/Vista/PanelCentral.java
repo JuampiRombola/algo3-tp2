@@ -6,6 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import algoCraft.Atacable;
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Juego;
 import algoCraft.mapa.Mapa;
@@ -152,11 +153,15 @@ public class PanelCentral extends JPanel{
 	}
 
 	public void clickIzquierdoSobreAtacable(int x, int y){
-		
+		if(hayUnaUnidadSeleccionada){
+			Unidad atacante = obtenerUnidadSeleccionada();
+			Atacable atacable = obtenerAtacableEn(x, y);
+			atacante.atacar(atacable);
+		}
 	}
-	
+
 	private void moverUnidadSeleccionadaA(int x, int y) {
-		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
+		Unidad unidad = obtenerUnidadSeleccionada() ;
 		try{
 			unidad.moverseA(x, y);
 		}catch(RangoDeMovimientoInvalido e){
@@ -167,7 +172,14 @@ public class PanelCentral extends JPanel{
                      JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
+	private Unidad obtenerUnidadSeleccionada(){
+		return (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
+	}
+	
+	private Atacable obtenerAtacableEn(int x, int y){
+		return (Atacable) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
+	}
 	public void seleccionadaUnidadEn(int x, int y) {
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);

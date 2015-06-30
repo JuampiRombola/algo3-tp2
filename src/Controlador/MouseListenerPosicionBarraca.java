@@ -3,7 +3,7 @@ import java.awt.event.MouseEvent;
 
 import algoCraft.Vista.PanelCentral;
 
-public class MouseListenerPosicionBarraca extends MouseListenerPosicion{
+public class MouseListenerPosicionBarraca extends MouseListenerAtacable{
 	private PanelCentral panelCentral;
 	private int y;
 	private int x;
@@ -16,6 +16,7 @@ public class MouseListenerPosicionBarraca extends MouseListenerPosicion{
 		}
 			
 		public void mousePressed(MouseEvent mouseEvent) {
+			super.mousePressed(mouseEvent);
 			if(mouseEvent.getButton() == MouseEvent.BUTTON1)
 				panelCentral.seleccionadaBarracaEn(x, y);
 		}
