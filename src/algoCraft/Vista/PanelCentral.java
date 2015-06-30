@@ -3,6 +3,7 @@ package algoCraft.Vista;
 import java.awt.Color;
 
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import algoCraft.construcciones.Edificio;
@@ -10,6 +11,8 @@ import algoCraft.juego.Juego;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
+import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
 
 public class PanelCentral extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -154,7 +157,15 @@ public class PanelCentral extends JPanel{
 	
 	private void moverUnidadSeleccionadaA(int x, int y) {
 		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
-		unidad.moverseA(x, y);
+		try{
+			unidad.moverseA(x, y);
+		}catch(RangoDeMovimientoInvalido e){
+			 JOptionPane.showMessageDialog(null, "La unidad no se puede mover tan lejos", "Error",
+                     JOptionPane.ERROR_MESSAGE);
+		}catch(LaUnidadYaSeMovioEnEsteTurno e){
+			 JOptionPane.showMessageDialog(null, "La unidad ya se movio en este turno", "Error",
+                     JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void seleccionadaUnidadEn(int x, int y) {
