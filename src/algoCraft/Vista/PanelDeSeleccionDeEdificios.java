@@ -10,7 +10,7 @@ import algoCraft.construcciones.Edificio;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
-public class PanelDeConstruccionDeEdificios extends JPanel {
+public class PanelDeSeleccionDeEdificios extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	protected int y;
@@ -19,7 +19,7 @@ public class PanelDeConstruccionDeEdificios extends JPanel {
 	private JLabel labelVida;
 	private JLabel labelEstado;
 
-	public PanelDeConstruccionDeEdificios(String edificio, int x, int y){	
+	public PanelDeSeleccionDeEdificios(String edificio, int x, int y){	
 		this.x = x;
 		this.y = y;
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

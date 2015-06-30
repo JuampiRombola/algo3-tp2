@@ -8,7 +8,7 @@ import algoCraft.construcciones.EdificioRecolector;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 
-public class PanelDeSeleccionDeEdificioRecolector extends PanelDeConstruccionDeEdificios {
+public class PanelDeSeleccionDeEdificioRecolector extends PanelDeSeleccionDeEdificios {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelRecolectado;
