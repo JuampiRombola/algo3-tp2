@@ -16,11 +16,13 @@ public class PanelBotonera extends JPanel{
 	private PanelDeConstruccion panelDeConstruccionDeRecolectorDeMinerales;
 	private PanelDeConstruccionDeRecolectorDeGas panelDeConstruccionDeRecolectorDeGas;
 	private PanelDeConstruccion panelDeConstruccionDeLaBarraca;
+	private PanelDeConstruccion panelDeConstruccionDeLaFabrica;
 
 	private String identificadorPanelEdificioProduccion = "PRODUCCION";
 	private String identificadorPanelRecolectorMineral= "MINERAL";
 	private String identificadorPanelRecolectorGas = "GAS";
 	private String identificadorPanelbarraca = "BARRACA";
+	private String identificadorPanelFabrica = "FABRICA";
 
 	private CardLayout layout;
 	int posicionSeleccionadaEnX;
@@ -44,6 +46,8 @@ public class PanelBotonera extends JPanel{
 		panelDeConstruccionDeLaBarraca = new PanelDeConstruccionDeLaBarraca(juego);
 		this.add(panelDeConstruccionDeLaBarraca, identificadorPanelbarraca);
 		
+		panelDeConstruccionDeLaFabrica= new PanelDeConstruccionDeLaFabrica(juego);
+		this.add(panelDeConstruccionDeLaFabrica, identificadorPanelFabrica);
 		this.setVisible(false);
 		this.setMaximumSize(new Dimension(500,300));
 	}
@@ -80,5 +84,13 @@ public class PanelBotonera extends JPanel{
 	    posicionSeleccionadaEnX = x;
 	    posicionSeleccionadaEnY = y;
 	    panelDeConstruccionDeLaBarraca.prepararEventoDeProduccion(x, y);
+	}
+
+	public void adecuarseParaFabricarDesdeFabrica(int x, int y) {
+		this.setVisible(true);
+	    layout.show(this, identificadorPanelFabrica);
+	    posicionSeleccionadaEnX = x;
+	    posicionSeleccionadaEnY = y;
+	    panelDeConstruccionDeLaFabrica.prepararEventoDeProduccion(x, y);
 	}
 }

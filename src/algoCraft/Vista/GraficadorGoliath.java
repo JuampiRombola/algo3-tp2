@@ -1,8 +1,9 @@
 package algoCraft.Vista;
 
-public class GraficadorFabrica extends Graficador {
+public class GraficadorGoliath extends Graficador{
+	
 	@Override
 	public PosicionVista getPosicionVista(PanelCentral panelCentral, int x, int y) {
-		return new VistaFabrica(panelCentral, x, y);
+		return new VistaGoliath(panelCentral, x, y);
 	}
 }
