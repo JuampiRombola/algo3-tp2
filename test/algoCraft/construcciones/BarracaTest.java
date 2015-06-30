@@ -248,4 +248,16 @@ public class BarracaTest {
 		assertTrue(barraca1.seTerminoDeCrearLaUnidad());
 		assertTrue(1 == jugador.getUnidades().size());
 	}
+	
+	@Test
+	public void laBarracaCuesta150UnidadesDeMineral() {
+		
+		assertEquals(150, Barraca.getCostoMineral());
+	}
+	
+	@Test
+	public void laBarracaCuesta0UnidadesDeGasVespeno() {
+		
+		assertEquals(0, Barraca.getCostoGas());
+	}
 }
