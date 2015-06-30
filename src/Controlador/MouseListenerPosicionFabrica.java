@@ -1,23 +1,20 @@
 package Controlador;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import algoCraft.Vista.PanelCentral;
 
-public class MouseListenerPosicionFabrica extends MouseAdapter{
-	private PanelCentral panelCentral;
-	private int y;
-	private int x;
-			
+public class MouseListenerPosicionFabrica extends MouseListenerPosicion{
+
 		public MouseListenerPosicionFabrica(PanelCentral panelCentral, int x, int y){
-			super();
+			super(panelCentral, x, y);
 			this.panelCentral = panelCentral;
 			this.x = x;
 			this.y = y;
 		}
 			
 		public void mousePressed(MouseEvent mouseEvent) {
-			panelCentral.seleccionadaFabricaEn(x, y);
+			if(mouseEvent.getButton() == MouseEvent.BUTTON1)
+				panelCentral.seleccionadaFabricaEn(x, y);
 		}
 }

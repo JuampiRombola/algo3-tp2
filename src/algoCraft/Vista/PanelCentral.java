@@ -4,16 +4,20 @@ import java.awt.Color;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
 import algoCraft.construcciones.Edificio;
 import algoCraft.juego.Juego;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.unidades.Unidad;
 
 public class PanelCentral extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private PanelBotonera panelBotonera;
 	private JPanel panelDeSeleccion;
-	boolean existeUnPanelDeSeleccion;
+	private boolean existeUnPanelDeSeleccion;
+	private boolean hayUnaUnidadSeleccionada;
+	private Posicion posicionUnidadSeleccionada;
 	
 	public PanelCentral(Juego juego){
 		this.setBackground(Color.black);
@@ -21,6 +25,7 @@ public class PanelCentral extends JPanel{
 		this.panelBotonera = new PanelBotonera(juego);
 		this.add(panelBotonera);
 		existeUnPanelDeSeleccion = false;
+		hayUnaUnidadSeleccionada = false;
 	}
 	
 	public PanelBotonera getBotonera(){
@@ -28,6 +33,7 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadoGasVespenoEn(int posicionX, int posicionY){
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
 		this.setVisible(true);
@@ -41,6 +47,7 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadoMineralEn(int posicionX, int posicionY){
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
 		this.setVisible(true);
@@ -54,6 +61,7 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadaPosicionVaciaEn(int posicionX, int posicionY){
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
 		this.setVisible(true);
@@ -65,6 +73,7 @@ public class PanelCentral extends JPanel{
 	}
 	
 	public void seleccionadaRefineriaEn(int posicionX, int posicionY){
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
 		this.setVisible(true);
@@ -77,6 +86,7 @@ public class PanelCentral extends JPanel{
 	}
 
 	public void seleccionadaBarracaEn(int posicionX, int posicionY) {
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
@@ -101,6 +111,7 @@ public class PanelCentral extends JPanel{
 	}
 
 	public void seleccionadoCentroDeMineralEn(int x, int y) {
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
 		this.setVisible(true);
@@ -114,6 +125,7 @@ public class PanelCentral extends JPanel{
 	}
 
 	public void seleccionadaFabricaEn(int x, int y) {
+		hayUnaUnidadSeleccionada = false;
 		if(existeUnPanelDeSeleccion){
 			this.remove(panelDeSeleccion);
 		}
@@ -129,5 +141,25 @@ public class PanelCentral extends JPanel{
 		}
 		this.revalidate();
 		this.repaint();
+	}
+	
+	public void clickIzquierdoEnPosicionVacia(int x, int y){
+		if(hayUnaUnidadSeleccionada)
+			moverUnidadSeleccionadaA(x,y);
+	}
+
+	private void moverUnidadSeleccionadaA(int x, int y) {
+		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
+		unidad.moverseA(x, y);
+	}
+
+	public void seleccionadaUnidadEn(int x, int y) {
+		if(existeUnPanelDeSeleccion){
+			this.remove(panelDeSeleccion);
+		}
+		hayUnaUnidadSeleccionada = true;
+		panelBotonera.setVisible(false);
+		//Las unidades son terrestres por ahora, true marca eso
+		posicionUnidadSeleccionada = new Posicion(x,y,true);
 	}
 }
