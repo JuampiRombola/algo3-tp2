@@ -33,6 +33,7 @@ public class Barraca extends EdificioConstructor{
 		if (!this.jugador.estaActivo())
 			throw new ElEdificioPerteneceAOtroJugador();
 		this.jugador.pagarMineralGasVespeno(Marine.getCantidadDeMineralQueCUesta(), Marine.getCantidadDeGasQueCUesta());
+		this.jugador.sumarPoblacion(Marine.getCantidadDePoblacionQueOcupa());
 		cantidadDeUnidadesAProducir++;
 		seTerminoDeCrearLaUnidad = false;
 	}
@@ -42,6 +43,14 @@ public class Barraca extends EdificioConstructor{
 		Posicion posicionDelMarine = Mapa.getMapa().getPosicionVaciaCercana(this.posicion);
 		Marine marine = new Marine(this.jugador, posicionDelMarine.getX(), posicionDelMarine.getY());
 		this.jugador.agregarUnidad(marine);
-		this.jugador.sumarPoblacion(marine.getPoblacionQueOcupa());
+	}
+	
+	@Override
+	protected void destruir() {
+		super.destruir();
+		if (this.cantidadDeUnidadesAProducir > 0) {
+			for (int i = 0; i < this.cantidadDeUnidadesAProducir; i++)
+				this.jugador.sumarPoblacion(-Marine.getCantidadDePoblacionQueOcupa());
+		}
 	}
 }

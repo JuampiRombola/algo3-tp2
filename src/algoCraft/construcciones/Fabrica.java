@@ -45,7 +45,15 @@ public class Fabrica extends EdificioConstructor {
 		Posicion posicionDelGoliath = Mapa.getMapa().getPosicionVaciaCercana(this.posicion);
 		Goliath goliath = new Goliath(this.jugador, posicionDelGoliath.getX(), posicionDelGoliath.getY());
 		this.jugador.agregarUnidad(goliath);
-		this.jugador.sumarPoblacion(goliath.getPoblacionQueOcupa());
+	}
+	
+	@Override
+	protected void destruir() {
+		super.destruir();
+		if (this.cantidadDeUnidadesAProducir > 0) {
+			for (int i = 0; i < this.cantidadDeUnidadesAProducir; i++)
+				this.jugador.sumarPoblacion(-Goliath.getCantidadDePoblacionQueOcupa());
+		}
 	}
 }
 
