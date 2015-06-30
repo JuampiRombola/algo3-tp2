@@ -1,5 +1,6 @@
 package algoCraft.construcciones;
 
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 
 public class Base extends Edificio {
@@ -19,6 +20,7 @@ public class Base extends Edificio {
 	
 	public Base(int x, int y) {
 		super(null, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
+		this.estaEnConstruccion = false;
 		this.mineral = cantidadInicialDeMineral;
 		this.gasVespeno = cantidadInicialDeGasVespeno;
 		this.poblacion = cantidadInicialDePoblacion;
@@ -30,6 +32,10 @@ public class Base extends Edificio {
 		this.vida.recibirDanio(danio);
 	}
 
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+	
 	public int getGasVespeno() {
 		return this.gasVespeno;
 	}

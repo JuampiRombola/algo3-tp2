@@ -78,6 +78,7 @@ public class Juego extends Observable{
 			Base base = bases.get(i);
 			String nombre = nombres.get(i);
 			Jugador jugador = new Jugador(nombre, base);
+			base.setJugador(jugador);
 			this.agregarJugador(jugador);
 		}
 	}

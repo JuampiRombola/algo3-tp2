@@ -91,9 +91,8 @@ public class PanelCentral extends JPanel{
 
 	public void seleccionadaBarracaEn(int posicionX, int posicionY) {
 		hayUnaUnidadSeleccionada = false;
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
 		if(estaEnConstruccion(posicionX, posicionY)){
@@ -127,12 +126,24 @@ public class PanelCentral extends JPanel{
 		this.repaint();
 		
 	}
+	
+	public void seleccionadaBaseEn(int x, int y) {
+		hayUnaUnidadSeleccionada = false;
+		if(existeUnPanelDeSeleccion)
+			this.remove(panelDeSeleccion);
+		this.setVisible(true);
+		panelBotonera.setVisible(false);
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeEdificios("Base ", x, y);
+		this.add(panelDeSeleccion);
+		this.revalidate();
+		this.repaint();
+	}
 
 	public void seleccionadaFabricaEn(int x, int y) {
 		hayUnaUnidadSeleccionada = false;
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
 		if(estaEnConstruccion(x, y)){
@@ -181,9 +192,8 @@ public class PanelCentral extends JPanel{
 		return (Atacable) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
 	}
 	public void seleccionadaUnidadEn(int x, int y) {
-		if(existeUnPanelDeSeleccion){
+		if(existeUnPanelDeSeleccion)
 			this.remove(panelDeSeleccion);
-		}
 		hayUnaUnidadSeleccionada = true;
 		panelBotonera.setVisible(false);
 		//Las unidades son terrestres por ahora, true marca eso
