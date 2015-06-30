@@ -9,7 +9,6 @@ public abstract class EdificioConstructor extends Edificio {
 	protected int tiempoDeConstruccion = 0;
 	protected int turnosParaProducirUnidad;
 	
-	
 	public EdificioConstructor(Jugador jugador, int vida, Posicion posicion, int turnosEnConstruirse, int turnosParaProducirUnidad) {
 		super(jugador, vida, posicion, turnosEnConstruirse);
 		this.seTerminoDeCrearLaUnidad = false;
@@ -17,6 +16,14 @@ public abstract class EdificioConstructor extends Edificio {
 		this.turnosParaProducirUnidad = turnosParaProducirUnidad;
 	}
 
+	public int getUnidadesEnCola() {
+		return this.cantidadDeUnidadesAProducir;
+	}
+	
+	public int getTurnosParaProducirUnidad() {
+		return this.turnosParaProducirUnidad;
+	}
+	
 	private boolean estaCreandoUnaUnidad() {
 		return cantidadDeUnidadesAProducir > 0;
 	}
@@ -29,6 +36,8 @@ public abstract class EdificioConstructor extends Edificio {
 	public void avanzarTurno() {
 		//El metodo que usa esa variable es inutil, lo dejo porque me interesan las pruebas.
 		super.avanzarTurno();
+		if (estaCreandoUnaUnidad())
+			this.contadorDeTurnos++;
 		if(estaCreandoUnaUnidad() && pasoElTiempoParaQueLaUnidadSeProduzca()){
 			crearLaUnidad();
 			this.contadorDeTurnos = 0;

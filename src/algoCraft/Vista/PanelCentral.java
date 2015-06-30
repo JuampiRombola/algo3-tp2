@@ -95,12 +95,14 @@ public class PanelCentral extends JPanel{
 			this.remove(panelDeSeleccion);
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeEdificioConstructor("Barraca ", posicionX, posicionY);
+		this.add(panelDeSeleccion);
 		if(estaEnConstruccion(posicionX, posicionY)){
 			panelBotonera.setVisible(false);
 		}else{
 			this.setVisible(true);
 			panelBotonera.setVisible(true);
-			existeUnPanelDeSeleccion = false;
 			panelBotonera.adecuarseParaFabricarDesdeBarraca(posicionX, posicionY);
 		}
 		this.revalidate();
@@ -159,12 +161,14 @@ public class PanelCentral extends JPanel{
 			this.remove(panelDeSeleccion);
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
+		existeUnPanelDeSeleccion = true;
+		this.panelDeSeleccion = new PanelDeSeleccionDeEdificioConstructor("Fabrica ", x, y);
+		this.add(panelDeSeleccion);
 		if(estaEnConstruccion(x, y)){
 			panelBotonera.setVisible(false);
 		}else{
 			this.setVisible(true);
 			panelBotonera.setVisible(true);
-			existeUnPanelDeSeleccion = false;
 			panelBotonera.adecuarseParaFabricarDesdeFabrica(x, y);
 		}
 		this.revalidate();

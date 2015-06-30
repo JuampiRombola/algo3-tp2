@@ -33,7 +33,8 @@ public class PanelIzquierdo extends JPanel implements Observer {
 			this.remove(panelJugador);
 		}
 		if(primerTurno){
-			this.add(new JButton(new AccionTerminarTurno(juego)), BorderLayout.SOUTH);
+			JButton botonTerminarTurno = new JButton(new AccionTerminarTurno(juego));
+			this.add(botonTerminarTurno, BorderLayout.SOUTH);
 		}
 		panelJugador = new PanelJugador(juego);
 		this.add(panelJugador, BorderLayout.NORTH);

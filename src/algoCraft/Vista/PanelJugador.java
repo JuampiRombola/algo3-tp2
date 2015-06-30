@@ -21,10 +21,14 @@ public class PanelJugador extends JPanel{
 		this.setBackground(Color.black);
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		vistaRecursos = new PanelRecursos(juego);
-		nombreJugador = new JLabel(juego.getJugadorActual().getNombre());
-		nombreJugador.setAlignmentX(CENTER_ALIGNMENT);
+		nombreJugador = new JLabel(tamanioLetra(16, "Jugador activo: "+juego.getJugadorActual().getNombre()));
+		nombreJugador.setAlignmentX(LEFT_ALIGNMENT);
 		nombreJugador.setForeground(Color.white);
 		this.add(nombreJugador);
 		this.add(vistaRecursos);
+	}
+	
+	private String tamanioLetra(int tamanio, String string) {
+		return ("<html><span style='font-size:"+tamanio+"px'>"+string+"</span></html>");
 	}
 }
