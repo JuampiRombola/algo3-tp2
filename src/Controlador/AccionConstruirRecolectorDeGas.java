@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import algoCraft.juego.Juego;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.ConstruccionFueraDeRangoException;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
@@ -34,6 +35,9 @@ public class AccionConstruirRecolectorDeGas extends AbstractAction{
 		GasVespeno gas = (GasVespeno) Mapa.getMapa().getPosicionable(posicion);
 		try{
 			jugadorActual.crearRefineria(gas);
+		}catch(ConstruccionFueraDeRangoException e) {
+			 JOptionPane.showMessageDialog(null, "No se puede construir fuera del rango de construccion que indica la Base", "Error",
+                    JOptionPane.ERROR_MESSAGE);
 		}catch(NoSeTienenLosRecursosSuficientes e){
 			 JOptionPane.showMessageDialog(null, "No se tienen suficientes recursos", "Error",
                      JOptionPane.ERROR_MESSAGE);
