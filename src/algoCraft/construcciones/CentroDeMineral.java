@@ -12,8 +12,7 @@ public class CentroDeMineral extends EdificioRecolector{
 	public static int cantidadGasVespeno = 0;
 	
 	public CentroDeMineral(Jugador jugador, Mineral mineral) {
-		super(jugador, mineral, vida, turnosEnConstruirse);
-		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
+		super(jugador, mineral, vida, turnosEnConstruirse, cantidadMineral, cantidadGasVespeno);
 	}
 	
 	public int recolectar() {

@@ -20,8 +20,7 @@ public class Refineria extends EdificioRecolector {
 	}
 	
 	public Refineria(Jugador jugador, GasVespeno gas) {
-		super(jugador, gas, vida, turnosEnConstruirse);
-		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
+		super(jugador, gas, vida, turnosEnConstruirse, cantidadMineral, cantidadGasVespeno);
 	}
 	
 	public int recolectar() {

@@ -13,9 +13,10 @@ public abstract class EdificioRecolector extends Edificio {
 	protected Posicion posicion;
 	protected Vida vida;
 	
-	public EdificioRecolector(Jugador jugador, Recurso recurso, int vida, int turnosEnConstruirse) {
+	public EdificioRecolector(Jugador jugador, Recurso recurso, int vida, int turnosEnConstruirse, int cantidadMineral, int cantidadGas) {
 		super(jugador, vida, recurso.getPosicion(), turnosEnConstruirse);
 		this.recursosRecolectados = 0;
+		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGas);
 		Mapa.getMapa().reemplazarPosicionable(this);
 		this.recurso = recurso;
 	}
