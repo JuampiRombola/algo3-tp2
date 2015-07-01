@@ -63,7 +63,7 @@ public class UnidadTest{
 		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
 		
-		assertEquals(2, unidad.getRangoMovimiento());
+		assertEquals(4, unidad.getRangoMovimiento());
 	}
 	
 	@Test
@@ -332,7 +332,7 @@ public class UnidadTest{
 		jugador.activar();
 		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		
-		unidad.moverseA(1, 4);
+		unidad.moverseA(1, 10);
 	}
 	
 	@Test(expected = LaUnidadYaSeMovioEnEsteTurno.class)

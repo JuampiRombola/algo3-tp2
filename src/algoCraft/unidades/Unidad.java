@@ -17,7 +17,7 @@ public class Unidad implements Atacable {
 	private boolean activa;
 	private boolean movimientoActivo;
 	private int poblacionQueOcupa;
-	static int rangoMovimiento = 2;
+	static int rangoMovimiento = 4;
 
 	public Unidad(Jugador jugador, int vidaMaxima, Arma arma, Posicion posicion, int poblacionQueOcupa) {
 		this.jugador = jugador;
