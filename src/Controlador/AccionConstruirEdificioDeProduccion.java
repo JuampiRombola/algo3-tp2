@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import algoCraft.juego.Juego;
 import algoCraft.juego.Jugador;
+import algoCraft.juego.excepciones.ConstruccionFueraDeRangoException;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSeTienenLosRecursosSuficientes;
 
@@ -37,6 +38,9 @@ public class AccionConstruirEdificioDeProduccion extends AbstractAction{
 				jugadorActual.crearFabrica(x, y);
 			if(comboBox.getSelectedItem() == "Deposito de suministros")
 				jugadorActual.crearDepositoDeSuministros(x, y);
+		}catch(ConstruccionFueraDeRangoException e) {
+			 JOptionPane.showMessageDialog(null, "No se puede construir fuera del rango de construccion que indica la Base", "Error",
+                     JOptionPane.ERROR_MESSAGE);
 		}catch(NoSeTienenLosRecursosSuficientes e){
 			 JOptionPane.showMessageDialog(null, "No se tienen suficientes recursos", "Error",
                      JOptionPane.ERROR_MESSAGE);
