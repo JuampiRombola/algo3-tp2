@@ -23,6 +23,7 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 	public PanelDeSeleccionDeEdificios(String edificio, int x, int y){	
 		this.x = x;
 		this.y = y;
+		Musica.reproducir("Recursos/Musica/edificios.wav");
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		nombreDeLoSeleccionado = new JLabel(edificio +"de "+ crearStringJugador());
 		nombreDeLoSeleccionado.setForeground(Color.white);
@@ -43,8 +44,6 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 		Edificio edificio;
 		boolean esTerrestre = true;
 		edificio = (Edificio) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
-		if (edificio.getJugador().estaActivo())
-			Musica.reproducir("Recursos/Musica/edificios.wav");
 		return edificio.getJugador().getNombre();
 	}
 
