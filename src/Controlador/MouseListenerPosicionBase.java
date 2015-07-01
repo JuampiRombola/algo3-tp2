@@ -13,6 +13,7 @@ public class MouseListenerPosicionBase extends MouseListenerPosicion{
 	}
 	
 	public void mousePressed(MouseEvent mouseEvent) {
+		super.mousePressed(mouseEvent);
 		if(mouseEvent.getButton() == MouseEvent.BUTTON1)
 			panelCentral.seleccionadaBaseEn(x, y);
 	}
