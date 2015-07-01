@@ -1,8 +1,13 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,7 +24,7 @@ public class PanelDeSeleccionDeMineral extends JPanel{
 	private int x;
 	private int y;
 	
-	public PanelDeSeleccionDeMineral(int x, int y){
+	public PanelDeSeleccionDeMineral(int x, int y) {
 		this.x = x;
 		this.y = y;
 		Musica.reproducir("Recursos/Musica/recursos.wav");
@@ -32,6 +37,12 @@ public class PanelDeSeleccionDeMineral extends JPanel{
 		recursosRestantes.setAlignmentX(CENTER_ALIGNMENT);
 		recursosRestantes.setForeground(Color.white);
 		this.add(recursosRestantes);
+		try {
+			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/mineral.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setAlignmentX(CENTER_ALIGNMENT);
+			this.add(picLabel);
+		} catch (IOException e) {}
 		this.setBackground(Color.black);
 	}
 	
