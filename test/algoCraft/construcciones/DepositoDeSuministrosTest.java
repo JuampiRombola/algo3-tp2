@@ -29,7 +29,7 @@ public class DepositoDeSuministrosTest {
 		jugador.sumarUnidadesDeMineral(1000);
 		jugador.activar();
 		DepositoDeSuministros deposito = new DepositoDeSuministros(jugador, 1, 1);
-		Mapa.getMapa().agregarUnidad(deposito);
+		Mapa.getMapa().agregarPosicionable(deposito);
 		int mineralesAntesDelDeposito = jugador.getMineral();
 		
 		new DepositoDeSuministros(jugador, 1, 1);
