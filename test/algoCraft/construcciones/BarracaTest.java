@@ -291,4 +291,22 @@ public class BarracaTest {
 		barraca.crearMarine();
 		assertEquals(3, barraca.getTurnosParaProducirUnidad());
 	}
+	
+	@Test
+	public void cuandoSeConstruyeUnaBarracaEnUnaPosicionOcupadaNoSeLeCobraAlJugador() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.activar();
+		Barraca barraca = new Barraca(jugador, 1, 1);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno();
+		Mapa.getMapa().agregarUnidad(barraca);
+		int mineralesAntesDeLaBarraca = jugador.getMineral();
+		
+		new Barraca(jugador, 1, 1);
+		
+		assertTrue(jugador.getMineral() == mineralesAntesDeLaBarraca);
+	}
 }

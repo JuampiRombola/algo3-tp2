@@ -301,4 +301,22 @@ public class FabricaTest {
 		
 		assertEquals(100, Fabrica.getCostoGas());
 	}
+	
+	@Test
+	public void cuandoSeConstruyeUnaFabricaEnUnaPosicionOcupadaNoSeLeCobraAlJugador() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.sumarUnidadesDeGasVespeno(1000);
+		jugador.sumarUnidadesDeMineral(1000);
+		jugador.activar();
+		Barraca barraca = new Barraca(jugador, 1, 1);
+		for(int i = 0; i < 12; i++)
+			barraca.avanzarTurno();
+		Mapa.getMapa().agregarUnidad(barraca);
+		int mineralesAntesDeLaFabrica = jugador.getMineral();
+		
+		new Fabrica(jugador, 1, 1, barraca);
+		
+		assertTrue(jugador.getMineral() == mineralesAntesDeLaFabrica);
+	}
 }
