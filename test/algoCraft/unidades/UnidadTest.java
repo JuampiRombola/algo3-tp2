@@ -287,7 +287,9 @@ public class UnidadTest{
 	@Test
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaLaEncuentroAlli(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		Posicion nuevaPosicion =  new Posicion(1, 2, unidad.esTerrestre());
 		unidad.moverseA(1, 2);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(nuevaPosicion));
@@ -296,7 +298,9 @@ public class UnidadTest{
 	@Test(expected = PosicionVaciaException.class)
 	public void siUnaUnidadSeMueveAUnaPosicionNuevaNoLaEncuentroDondeEstaba(){
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.moverseA(1, 2);
 		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
 	}
@@ -323,7 +327,9 @@ public class UnidadTest{
 	@Test(expected = RangoDeMovimientoInvalido.class)
 	public void siUnaUnidadTrataDeMoverseMasDelRangoPermitidoSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		
 		unidad.moverseA(1, 4);
 	}
@@ -331,7 +337,9 @@ public class UnidadTest{
 	@Test(expected = LaUnidadYaSeMovioEnEsteTurno.class)
 	public void siUnaUnidadTrataDeMoverseDosVecesEnElMismoTurnoSeLanzaUnError() {
 		Mapa.reiniciarInstanciaParaTest();
-		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		
 		unidad.moverseA(1, 2);
 		unidad.moverseA(1, 3);

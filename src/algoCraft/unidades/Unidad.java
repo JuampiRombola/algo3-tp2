@@ -4,6 +4,7 @@ import algoCraft.Atacable;
 import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
+import algoCraft.unidades.excepciones.LaUnidadPerteneceAUnJugadorInactivo;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.NoPuedeAtacar;
 import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
@@ -93,6 +94,8 @@ public class Unidad implements Atacable {
 	}
 	
 	public void moverseA(int xDestino, int yDestino) {
+		if (!this.jugador.estaActivo())
+			throw new LaUnidadPerteneceAUnJugadorInactivo();
 		if (this.posicion.calcularDistancia(new Posicion(xDestino, yDestino, true)) > rangoMovimiento)
 			throw new RangoDeMovimientoInvalido();
 		if (!this.movimientoActivo)

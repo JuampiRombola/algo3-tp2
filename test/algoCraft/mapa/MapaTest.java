@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import algoCraft.construcciones.Base;
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.mapa.Posicionable;
@@ -247,7 +248,9 @@ public class MapaTest {
 	@Test(expected = PosicionInvalidaException.class)
 	public void cuandoSeIntentaMoverUnaUnidadAUnaPosicionInvalidaLanzaExcepcion() {
 		Mapa.reiniciarInstanciaParaTest();
-		Marine marine = new Marine(null, 1, 1);
+		Jugador jugador = new Jugador("Jugador",new Base(1, 1));
+		jugador.activar();
+		Marine marine = new Marine(jugador, 1, 1);
 		
 		marine.moverseA(-1, 1);
 	}

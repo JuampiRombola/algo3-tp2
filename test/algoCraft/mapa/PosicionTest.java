@@ -64,6 +64,7 @@ public class PosicionTest {
 	
 	@Test
 	public void alCompararUnaPosicionConOtroObjetoSeDevuelveFalse() {
+		Mapa.reiniciarInstanciaParaTest();
 		Posicion posicion1 = new Posicion(1, 1, true);
 		Object otroObjeto = new Marine(null, 1, 1);
 		Assert.assertFalse(posicion1.equals(otroObjeto));
