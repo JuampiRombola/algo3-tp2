@@ -94,8 +94,7 @@ public class Jugador extends Observable {
 		return this.base;
 	}
 	
-	public void sumarUnidadesDeMineral(int cantidadASumar)
-	{
+	public void sumarUnidadesDeMineral(int cantidadASumar){
 		this.base.sumarUnidadesDeMineral(cantidadASumar);
 	}
 	

@@ -37,6 +37,7 @@ public class Fabrica extends EdificioConstructor {
 		if (!this.jugador.estaActivo())
 			throw new ElEdificioPerteneceAOtroJugador();
 		this.jugador.pagarMineralGasVespeno(Goliath.getCantidadDeMineralQueCUesta(), Goliath.getCantidadDeGasQueCUesta());
+		this.jugador.sumarPoblacion(Goliath.getCantidadDePoblacionQueOcupa());
 		cantidadDeUnidadesAProducir++;
 		seTerminoDeCrearLaUnidad = false;
 	}
