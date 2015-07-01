@@ -16,7 +16,7 @@ public class VistaGasVespeno extends PosicionVista {
 	private static final long serialVersionUID = 1L;
 
 	VistaGasVespeno(PanelCentral panelCentral,int x, int y){
-		super(Color.green);
+		super(Color.lightGray);
 		try {
 			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/icoGas.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));

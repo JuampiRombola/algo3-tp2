@@ -17,7 +17,7 @@ public class VistaMineral extends PosicionVista{
 	private static final long serialVersionUID = 1L;
 	
 	public VistaMineral(PanelCentral panelCentral,int x, int y){
-		super(Color.cyan);
+		super(Color.lightGray);
 		try {
 			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/icoMineral.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
