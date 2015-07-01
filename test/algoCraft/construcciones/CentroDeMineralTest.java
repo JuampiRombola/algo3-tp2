@@ -174,4 +174,14 @@ public class CentroDeMineralTest {
 		
 		assertEquals(0, CentroDeMineral.getCostoGas());
 	}
+	
+	@Test
+	public void cuandoSeCreaUnCentroDeMineralElRecursoQueTieneAsociadoTieneTodosSusRecursos() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Mineral mineral = new Mineral(1, 1);
+		int unidadesIniciales = mineral.getUnidadesRestantes();
+		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
+		assertEquals(unidadesIniciales, centro.getRecursosRestantes());
+	}
 }

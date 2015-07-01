@@ -155,5 +155,27 @@ public class RefineriaTest {
 
 		assertTrue(10 == refineria.getRecursosRecolectados());
 	}
+	
+	@Test
+	public void laRefineriaCuesta200UnidadesDeMineral() {
+		
+		assertEquals(100, Refineria.getCostoMineral());
+	}
+	
+	@Test
+	public void laRefineriaCuesta100UnidadesDeGasVespeno() {
+		
+		assertEquals(0, Refineria.getCostoGas());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnCentroDeMineralElRecursoQueTieneAsociadoTieneTodosSusRecursos() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		GasVespeno gas = new GasVespeno(1, 1);
+		int unidadesIniciales = gas.getUnidadesRestantes();
+		Refineria refineria = new Refineria(jugador, gas);
+		assertEquals(unidadesIniciales, refineria.getRecursosRestantes());
+	}
 }
 

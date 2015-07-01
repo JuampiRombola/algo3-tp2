@@ -57,6 +57,30 @@ public class UnidadTest{
 		assertTrue(!unidad.estaDestruido());
 	}
 	
+	@Test
+	public void cuandoSeCreaUnaUnidadEstaTieneUnRangoDeMovimiento() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		assertEquals(2, unidad.getRangoMovimiento());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaUnidadEstaPuedeAtacar() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		assertEquals(true, unidad.puedeAtacar());
+	}
+	
+	@Test
+	public void cuandoSeCreaUnaUnidadEstaPuedeMoverse() {
+		Mapa.reiniciarInstanciaParaTest();
+		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		assertEquals(true, unidad.puedeMoverse());
+	}
+	
 	@Test 
 	public void alRecibirUnDanioIgualALaVidaMaximaEstaDestruido() {
 		Mapa.reiniciarInstanciaParaTest();
@@ -311,5 +335,26 @@ public class UnidadTest{
 		
 		unidad.moverseA(1, 2);
 		unidad.moverseA(1, 3);
+	}
+	
+	@Test(expected = NoPuedeAtacar.class)
+	public void siUnaUnidadTrataDeAtacarAOtraDelMismoJugadorSeLanzaUnaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		jugador.activar();
+		Unidad unidad1 = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad2 = new Unidad(jugador, vidaMaxima, armaDePrueba, new Posicion(2, 2, true), 2);
+		
+		unidad1.atacar(unidad2);
+	}
+	
+	@Test(expected = NoPuedeAtacar.class)
+	public void siUnaUnidadDeUnJugadorNoActivoTrataAtacarSeLanzaUnaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Unidad unidad1 = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
+		Unidad unidad2 = new Unidad(null, vidaMaxima, armaDePrueba, new Posicion(2, 2, true), 2);
+		
+		unidad1.atacar(unidad2);
 	}
 }

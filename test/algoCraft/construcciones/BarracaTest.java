@@ -278,4 +278,17 @@ public class BarracaTest {
 		
 		assertEquals(1, barraca.getTurnosQuePasaroDeConstruccion());
 	}
+	
+	@Test
+	public void cuandoSeCreaUnaBarracaNoTieneUnidadesEnConstruccion() {
+		Barraca barraca = crearBarracaConstruida();
+		assertEquals(0, barraca.getUnidadesEnCola());
+	}
+	
+	@Test
+	public void cuandoSeComienzaACrearUnMarineFaltanTresTurnosParaQueSeTermineDeConstruir() {
+		Barraca barraca = crearBarracaConstruida();
+		barraca.crearMarine();
+		assertEquals(3, barraca.getTurnosParaProducirUnidad());
+	}
 }
