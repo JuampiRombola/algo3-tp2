@@ -62,17 +62,6 @@ public class Juego extends Observable{
 		this.nombresJugadores.add(nombre);
 	}
 	
-	/*
-	private List<String> pedirNombresDeJugadores(int cantidadDeJugadores) {
-		ArrayList<String> nombres = new ArrayList<String>();
-		nombres.add("Jugador1");
-		nombres.add("Jugador2");
-		nombres.add("Jugador3");
-		nombres.add("Jugador4");
-		return nombres.subList(0, cantidadDeJugadores);
-	}
-	*/
-	
 	private void agregarJugadores(ArrayList<String> nombres, List<Base> bases, int cantidadDeJugadores) {
 		for (int i = 0; i < cantidadDeJugadores; i++) {
 			Base base = bases.get(i);
@@ -125,17 +114,4 @@ public class Juego extends Observable{
 	public boolean hayGanador() {
 		return (this.getJugadoresDerrotados() + 1 == this.getCantidadDeJugadores());
 	}
-	
-	/*
-	public String validarNombre(ArrayList<String> nombres) {
-		@SuppressWarnings("resource")
-		Scanner input = new Scanner(System.in);
-		String nombre = "";
-		while ((!nombres.contains(nombre)) && (nombre != "")) {
-			System.out.print("Ingrese el nombre del Jugador: ");
-			nombre = input.next();
-		}
-		return nombre;
-	}
-	*/
 }
