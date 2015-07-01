@@ -12,11 +12,13 @@ public class Base extends Edificio {
 	static int cantidadInicialDeGasVespeno = 0;
 	static int cantidadMaximaDePoblacion = 0;
 	static int cantidadInicialDePoblacion = 0;
+	static int rangoDeConstruccionInicial = 5;
 	
 	private int mineral;
 	private int gasVespeno;
 	private int poblacion;
 	private int poblacionMaxima;
+	private int rangoConstruccion;
 	
 	public Base(int x, int y) {
 		super(null, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse);
@@ -25,6 +27,11 @@ public class Base extends Edificio {
 		this.gasVespeno = cantidadInicialDeGasVespeno;
 		this.poblacion = cantidadInicialDePoblacion;
 		this.poblacionMaxima = cantidadMaximaDePoblacion;
+		this.rangoConstruccion = rangoDeConstruccionInicial;
+	}
+	
+	public int getRangoConstruccion() {
+		return rangoConstruccion+jugador.getEdificios().size();
 	}
 	
 	@Override

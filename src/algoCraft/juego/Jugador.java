@@ -17,6 +17,7 @@ import algoCraft.construcciones.CreadorDeUnidades;
 import algoCraft.construcciones.Edificio;
 import algoCraft.construcciones.Fabrica;
 import algoCraft.construcciones.excepciones.ElEdificioEstaEnConstruccion;
+import algoCraft.juego.excepciones.ConstruccionFueraDeRangoException;
 import algoCraft.juego.excepciones.ElJugadorNoEstaActivoException;
 import algoCraft.juego.excepciones.NoSePuedeConstruirElEdificio;
 import algoCraft.juego.excepciones.NoSePuedeConstruirLaUnidadPorSobrepoblacion;
@@ -151,10 +152,17 @@ public class Jugador extends Observable {
 	private void crearEdificio(int x, int y, CreadorDeEdificios creador) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
 		if (!this.estaActivo)
 			throw new ElJugadorNoEstaActivoException();
+		if (!this.estaDentroDelRangoDeConstruccionValido(x, y))
+			throw new ConstruccionFueraDeRangoException();
 		Edificio edificio = creador.crearEdificio(this, x, y);
 		this.agregarEdificio(edificio);
 	}
 	
+	private boolean estaDentroDelRangoDeConstruccionValido(int x, int y) {
+		Posicion posicion = new Posicion(x, y, true);
+		return (posicion.calcularDistancia(this.base.getPosicion()) <= this.base.getRangoConstruccion());
+	}
+
 	public void crearCentroDeMineral(Mineral mineral) {
 		Posicion posicion = mineral.getPosicion();
 		this.crearEdificio(posicion.getX(), posicion.getY(), new CreadorDeCentroDeMineral(mineral));

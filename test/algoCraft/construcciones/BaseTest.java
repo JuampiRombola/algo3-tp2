@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Assert;
 import org.junit.Test;
 
+import algoCraft.juego.Jugador;
 import algoCraft.mapa.Mapa;
 
 public class BaseTest {
@@ -144,5 +145,27 @@ public class BaseTest {
 		Base base = new Base(1, 1);
 		
 		Assert.assertFalse(base.hayRecursosSuficientes(200, 1));
+	}
+	
+	@Test
+	public void elRangoDeConstruccionDeLaBaseEs5CuandoSeCrea() {
+		Mapa.reiniciarInstanciaParaTest();
+		Base base = new Base(1, 1);
+		base.setJugador(new Jugador("Jugador", base));
+		
+		Assert.assertTrue(5 == base.getRangoConstruccion());
+	}
+	
+	@Test
+	public void elRangoDeConstruccionDeLaBaseAumentaEn1SiElJugadorCreaUnEdificio() {
+		Mapa.reiniciarInstanciaParaTest();
+		Base base = new Base(1, 1);
+		Jugador jugador = new Jugador("Jugador", base);
+		base.setJugador(jugador);
+		jugador.activar();
+		
+		jugador.crearDepositoDeSuministros(1, 1);
+		
+		Assert.assertTrue(6 == base.getRangoConstruccion());
 	}
 }

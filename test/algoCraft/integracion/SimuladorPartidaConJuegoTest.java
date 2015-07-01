@@ -47,7 +47,7 @@ public class SimuladorPartidaConJuegoTest {
 		} catch (ElJugadorNoEstaActivoException e){}
 				
 		//El equipo3 deberia poder crear una barraca
-		equipo3.crearBarraca(10, 10);
+		equipo3.crearBarraca(5, 5);
 		
 		juego.siguienteJugador();
 		
@@ -59,38 +59,26 @@ public class SimuladorPartidaConJuegoTest {
 		} catch (ElJugadorNoEstaActivoException e){}
 		
 		//Nico deberia poder crear una barraca
-		nico.crearBarraca(12, 12);
+		nico.crearBarraca(34, 20);
 		
 		//Se avanzan 23 turnos hasta terminar de construir la barraca del equipo3
 		avanzarTurnos(juego, 23);
 		
 		//equipo3 esta activo, crea un marine
-		equipo3.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(10, 10, true)));
+		equipo3.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(5, 5, true)));
 		
 		juego.siguienteJugador();
 		
 		//nico esta activo, crea un marine
-		nico.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(12, 12, true)));
+		nico.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(34, 20, true)));
 		
 		//Se avanzan 6 turnos hasta terminar de construir el marino de nico
 		avanzarTurnos(juego, 6);
 		
 		//Como es el turno de nico ahora su marine se puede mover
-		Marine marineNico = (Marine) Mapa.getMapa().getPosicionable(new Posicion(11, 11, true));
+		Marine marineNico = (Marine) Mapa.getMapa().getPosicionable(new Posicion(33, 19, true));
 		Base baseEquipo3 = equipo3.getBase();
-		marineNico.moverseA(11, 9);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(11, 8);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(9, 8);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(9, 7);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(7, 7);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(7, 5);
-		avanzarTurnos(juego, 2);
-		marineNico.moverseA(5, 5);
+		moverMarineHastaPosicion(marineNico, juego, 5, 5);
 		
 		marineNico.atacar(baseEquipo3);
 		
@@ -102,6 +90,18 @@ public class SimuladorPartidaConJuegoTest {
 		
 		assertTrue(juego.hayGanador());
 		assertTrue(equipo3.perdioLaPartida());
+	}
+
+	private void moverMarineHastaPosicion(Marine marineNico, Juego juego, int x, int y) {
+		while (marineNico.getPosicion().getY() > 5) {
+			Posicion posicion = marineNico.getPosicion();
+			marineNico.moverseA(posicion.getX() - 4, posicion.getY());
+			avanzarTurnos(juego, 2);
+			posicion = marineNico.getPosicion();
+			marineNico.moverseA(posicion.getX(), posicion.getY() - 2);
+			avanzarTurnos(juego, 2);
+		}
+		
 	}
 
 }

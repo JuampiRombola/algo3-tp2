@@ -34,8 +34,10 @@ public class SimuladorPartidaTest {
 		Base base1 = it.next();
 		Base base2 = it.next();
 		Jugador jugador1 = new Jugador("Ariel", base1);
+		base1.setJugador(jugador1);
 		jugador1.activar();
 		Jugador jugador2 = new Jugador("Juampi", base2);
+		base2.setJugador(jugador2);
 		jugador2.activar();
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
@@ -44,22 +46,22 @@ public class SimuladorPartidaTest {
 		jugador1.crearCentroDeMineral(mineral);
 		
 		//El jugador1 deberia poder crear una barraca
-		jugador1.crearBarraca(10, 10);
+		jugador1.crearBarraca(6, 6);
 		
 		//El jugador2 comienza a construir su 1er barraca
-		jugador2.crearBarraca(12, 12);
+		jugador2.crearBarraca(34, 20);
 			
 		//El jugador2 intenta crear una 2da barraca pero no puede
 		int cantidadMinerales1 = jugador2.getMineral();
 		try {
-			jugador2.crearBarraca(13, 13);
+			jugador2.crearBarraca(34, 21);
 			fail();
 		} catch (NoSeTienenLosRecursosSuficientes e) {}
 		int cantidadMinerales2 = jugador2.getMineral();
 		assertEquals(cantidadMinerales1, cantidadMinerales2);
 
 		//El jugador2 no deberia poder empezar la creacion de un marine
-		Barraca barraca = (Barraca) mapa.getPosicionable((new Posicion(12, 12, true)));
+		Barraca barraca = (Barraca) mapa.getPosicionable((new Posicion(34, 20, true)));
 		int cantidadMineralesAntesDeMarine = jugador2.getMineral();
 		try {
 			jugador2.crearMarine(barraca);

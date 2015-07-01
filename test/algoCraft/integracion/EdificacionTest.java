@@ -33,6 +33,7 @@ public class EdificacionTest {
 		Base base = (mapa.cargarBases(1)).iterator().next();
 		
 		Jugador jugador = new Jugador("JugadorDePrueba", base);
+		base.setJugador(jugador);
 		jugador.activar();
 		
 		// Se busca un mineral y se le construye un centro encima
@@ -53,7 +54,7 @@ public class EdificacionTest {
 		assertTrue(80 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear una barraca
-		jugador.crearBarraca(10, 10);
+		jugador.crearBarraca(6, 6);
 		
 		assertTrue(0 == jugador.getMineral());
 		assertTrue(80 == jugador.getGasVespeno());
@@ -66,12 +67,12 @@ public class EdificacionTest {
 		
 		//El jugador no deberia poder crear un Marine por sobrepoblacion
 		try {
-			jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(10, 10, true)));
+			jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(6, 6, true)));
 			
 			fail();
 		} catch (NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {}
 		
-		jugador.crearDepositoDeSuministros(11, 10);
+		jugador.crearDepositoDeSuministros(5, 6);
 		
 		//Pasan 6 turnos
 		this.avanzarTurnos(6);
@@ -83,7 +84,7 @@ public class EdificacionTest {
 		assertTrue(290 == jugador.getGasVespeno());
 		
 		//El jugador debería poder crear un Marine
-		jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(10, 10, true)));
+		jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(6, 6, true)));
 		
 		assertTrue(60 == jugador.getMineral());
 		assertTrue(290 == jugador.getGasVespeno());
@@ -95,7 +96,7 @@ public class EdificacionTest {
 		assertTrue(430 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear una fabrica
-		jugador.crearFabrica(12, 12);
+		jugador.crearFabrica(6, 7);
 		
 		assertTrue(0 == jugador.getMineral());
 		assertTrue(330 == jugador.getGasVespeno());
@@ -107,7 +108,7 @@ public class EdificacionTest {
 		assertTrue(450 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear un Goliath
-		jugador.crearGoliath((Fabrica) mapa.getPosicionable(new Posicion(12, 12, true)));
+		jugador.crearGoliath((Fabrica) mapa.getPosicionable(new Posicion(6, 7, true)));
 		
 		assertTrue(20 == jugador.getMineral());
 		assertTrue(400 == jugador.getGasVespeno());
