@@ -5,7 +5,7 @@ import algoCraft.mapa.Posicion;
 
 public class Marine extends Unidad{
 	static int vidaMaxima = 40;
-	static int danioBasico = 6;
+	static int danioBasico = 18;
 	static int rangoBasico = 4;
 	static Arma arma = new Arma(danioBasico,rangoBasico);
 	static boolean inicialmenteTerrestre = true;
