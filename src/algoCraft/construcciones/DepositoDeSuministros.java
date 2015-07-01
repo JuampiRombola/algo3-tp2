@@ -22,7 +22,8 @@ public class DepositoDeSuministros extends Edificio {
 	
 	public DepositoDeSuministros(Jugador jugador, int x, int y){
 		super(jugador, vida, new Posicion(x, y, inicialmenteTerrestre), turnosQueTardaEnConstruirse);
-		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
+		if (!Mapa.getMapa().posicionEstaOcupada(new Posicion(x, y, inicialmenteTerrestre)))
+			jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 	
 	@Override

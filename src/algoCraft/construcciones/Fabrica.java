@@ -27,7 +27,8 @@ public class Fabrica extends EdificioConstructor {
 		super(jugador, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirGoliath);
 		if (barraca.estaEnConstruccion())
 			throw new NoSePuedeConstruirElEdificio();
-		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
+		if (!Mapa.getMapa().posicionEstaOcupada(new Posicion(x, y, inicialmenteTerrestre)))
+			jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 
 	public void crearGoliath() throws ElEdificioEstaEnConstruccion {

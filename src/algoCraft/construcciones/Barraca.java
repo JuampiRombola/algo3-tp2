@@ -23,8 +23,8 @@ public class Barraca extends EdificioConstructor{
 	}
 	public Barraca(Jugador jugador, int x, int y) {
 		super(jugador, vidaMaxima, new Posicion(x, y, inicialmenteTerrestre), turnosEnConstruirse, turnosEnProducirMarine);
-		jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
-	
+		if (!Mapa.getMapa().posicionEstaOcupada(new Posicion(x, y, inicialmenteTerrestre)))
+			jugador.pagarMineralGasVespeno(cantidadMineral, cantidadGasVespeno);
 	}
 
 	public void crearMarine() throws ElEdificioEstaEnConstruccion {
