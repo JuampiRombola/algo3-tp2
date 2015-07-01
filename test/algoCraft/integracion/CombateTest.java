@@ -13,6 +13,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Goliath;
 import algoCraft.unidades.Marine;
+import algoCraft.unidades.excepciones.AtaqueFueraDeRangoException;
 
 public class CombateTest {
 	@Test
@@ -34,8 +35,16 @@ public class CombateTest {
 		Assert.assertEquals(goliath, mapa.getPosicionable(new Posicion(1, 7, true)));
 		
 		//Los dos intentan atacarse pero como estan fuera de rango no se sacan vida
-		marine.atacar(goliath);
-		goliath.atacar(marine);
+		try {
+			marine.atacar(goliath);
+			
+			fail();
+		} catch (AtaqueFueraDeRangoException e) {}
+		try {
+			goliath.atacar(marine);
+			
+			fail();
+		} catch (AtaqueFueraDeRangoException e) {}
 		assertTrue(marine.getVidaMaxima() == 40);
 		assertTrue(goliath.getVidaMaxima() == 125);
 		

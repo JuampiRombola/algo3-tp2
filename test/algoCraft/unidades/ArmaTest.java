@@ -11,6 +11,7 @@ import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.AtaqueFueraDeRangoException;
 
 public class ArmaTest {
 	private int vidaMaxima = 10;
@@ -46,7 +47,7 @@ public class ArmaTest {
 		assertTrue(!atacable.estaDestruido());
 	}
 	@Test
-	public void siDisparoUnArmaConMayorDanioQueLavidaMmaximaDeLaUnidadPeroNoEstoyEnRangoNoEsDestruida(){
+	public void siDisparoUnArmaConMayorDanioQueLaVidaMmaximaDeLaUnidadPeroNoEstoyEnRangoNoEsDestruida(){
 		Mapa.reiniciarInstanciaParaTest();
 		int vidaMaxima = 10;
 
@@ -54,7 +55,11 @@ public class ArmaTest {
 		int rango = 10;
 		Arma arma = new Arma(danio, rango);
 		Atacable atacable = crearAtacable();
-		arma.atacar(atacable, rango + 1);
+		try {
+			arma.atacar(atacable, rango + 1);
+			
+			fail();
+		} catch (AtaqueFueraDeRangoException e) {}
 		assertTrue(!atacable.estaDestruido());
 	}
 	

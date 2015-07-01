@@ -11,6 +11,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.AtaqueFueraDeRangoException;
 import algoCraft.unidades.excepciones.LaUnidadPerteneceAUnJugadorInactivo;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.NoPuedeAtacar;
@@ -160,7 +161,11 @@ public class UnidadTest{
 		Mapa.reiniciarInstanciaParaTest();
 		int vidaAtacable = danioArmaDePrueba - 1;
 		Unidad atacable = nuevaUnidadFueraDeRangoDeAtaque(vidaAtacable);
-		nuevaUnidadAtacante().atacar(atacable);
+		try {
+			nuevaUnidadAtacante().atacar(atacable);
+			fail();
+		} catch (AtaqueFueraDeRangoException e) {}
+		
 		assertTrue(!atacable.estaDestruido());
 	}
 	

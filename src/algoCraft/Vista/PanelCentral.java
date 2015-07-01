@@ -17,6 +17,7 @@ import algoCraft.mapa.Mapa;
 import algoCraft.mapa.Posicion;
 import algoCraft.unidades.Marine;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.AtaqueFueraDeRangoException;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
 
@@ -187,8 +188,13 @@ public class PanelCentral extends JPanel implements Observer{
 		if(hayUnaUnidadSeleccionada){
 			Unidad atacante = obtenerUnidadSeleccionada();
 			Atacable atacable = obtenerAtacableEn(x, y);
-			atacante.atacar(atacable);
-			Musica.reproducir("recursos/Musica/ataque.wav");
+			try {
+				atacante.atacar(atacable);
+				Musica.reproducir("recursos/Musica/ataque.wav");
+			}catch(AtaqueFueraDeRangoException e){
+				 JOptionPane.showMessageDialog(null, "La unidad seleccionada se encuentra fuera del rango de ataque", "Error",
+	                     JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
