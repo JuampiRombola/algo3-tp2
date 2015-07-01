@@ -1,8 +1,13 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,6 +32,12 @@ public class PanelDeSeleccionDeGasVespeno extends JPanel{
 		nombreDeLoSeleccionado.setForeground(Color.white);
 		nombreDeLoSeleccionado.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(nombreDeLoSeleccionado);
+		try {
+			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/gas.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setAlignmentX(CENTER_ALIGNMENT);
+			this.add(picLabel);
+		} catch (IOException e) {}
 		recursosRestantes = new JLabel(crearStringRecursosRestantes());
 		recursosRestantes.setAlignmentX(CENTER_ALIGNMENT);
 		recursosRestantes.setForeground(Color.white);

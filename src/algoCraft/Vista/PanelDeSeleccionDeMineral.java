@@ -33,10 +33,6 @@ public class PanelDeSeleccionDeMineral extends JPanel{
 		nombreDeLoSeleccionado.setForeground(Color.white);
 		nombreDeLoSeleccionado.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(nombreDeLoSeleccionado);
-		recursosRestantes = new JLabel(crearStringRecursosRestantes());
-		recursosRestantes.setAlignmentX(CENTER_ALIGNMENT);
-		recursosRestantes.setForeground(Color.white);
-		this.add(recursosRestantes);
 		try {
 			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/mineral.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
@@ -44,6 +40,10 @@ public class PanelDeSeleccionDeMineral extends JPanel{
 			this.add(picLabel);
 		} catch (IOException e) {}
 		this.setBackground(Color.black);
+		recursosRestantes = new JLabel(crearStringRecursosRestantes());
+		recursosRestantes.setAlignmentX(CENTER_ALIGNMENT);
+		recursosRestantes.setForeground(Color.white);
+		this.add(recursosRestantes);
 	}
 	
 	private String crearStringRecursosRestantes(){

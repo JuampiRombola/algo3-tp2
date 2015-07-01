@@ -1,6 +1,13 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import Controlador.MouseListenerPosicionMineral;
 
@@ -11,6 +18,12 @@ public class VistaMineral extends PosicionVista{
 	
 	public VistaMineral(PanelCentral panelCentral,int x, int y){
 		super(Color.cyan);
-		  addMouseListener(new MouseListenerPosicionMineral(panelCentral, x, y));
+		try {
+			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/icoMineral.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setAlignmentX(CENTER_ALIGNMENT);
+			this.add(picLabel);
+		} catch (IOException e) {}
+		addMouseListener(new MouseListenerPosicionMineral(panelCentral, x, y));
 	}
 }
