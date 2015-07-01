@@ -148,7 +148,7 @@ public class Jugador extends Observable {
 		throw new NoSePuedeConstruirElEdificio();
 	}
 
-	public void crearEdificio(int x, int y, CreadorDeEdificios creador) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
+	private void crearEdificio(int x, int y, CreadorDeEdificios creador) throws ElJugadorNoEstaActivoException, NoSeTienenLosRecursosSuficientes, PosicionInvalidaException, PosicionOcupadaException {	
 		if (!this.estaActivo)
 			throw new ElJugadorNoEstaActivoException();
 		Edificio edificio = creador.crearEdificio(this, x, y);
