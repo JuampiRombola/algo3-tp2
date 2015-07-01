@@ -27,7 +27,7 @@ public class Unidad implements Atacable {
 		this.activa = true;
 		this.movimientoActivo = true;
 		this.poblacionQueOcupa = poblacionQueOcupa;
-		Mapa.getMapa().agregarUnidad(this);
+		Mapa.getMapa().agregarPosicionable(this);
 	}
 	
 	public void atacar(Atacable atacable) {

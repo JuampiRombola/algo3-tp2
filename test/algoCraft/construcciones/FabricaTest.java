@@ -312,7 +312,7 @@ public class FabricaTest {
 		Barraca barraca = new Barraca(jugador, 1, 1);
 		for(int i = 0; i < 12; i++)
 			barraca.avanzarTurno();
-		Mapa.getMapa().agregarUnidad(barraca);
+		Mapa.getMapa().agregarPosicionable(barraca);
 		int mineralesAntesDeLaFabrica = jugador.getMineral();
 		
 		new Fabrica(jugador, 1, 1, barraca);

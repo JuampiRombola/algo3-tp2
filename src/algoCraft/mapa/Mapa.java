@@ -87,11 +87,11 @@ public class Mapa extends Observable {
 		while (it.hasNext()) {
 			Posicion posicion = it.next();
 			if (cantidadAgregada < 2)
-				this.agregarUnidad(new GasVespeno(posicion.getX()-1, posicion.getY()));
+				this.agregarPosicionable(new GasVespeno(posicion.getX()-1, posicion.getY()));
 			else if (cantidadAgregada < 4)
-				this.agregarUnidad(new Mineral(posicion.getX()-1, posicion.getY()));
+				this.agregarPosicionable(new Mineral(posicion.getX()-1, posicion.getY()));
 			else
-				this.agregarUnidad(new Mineral(posicion.getX()+1, posicion.getY()));
+				this.agregarPosicionable(new Mineral(posicion.getX()+1, posicion.getY()));
 			cantidadAgregada++;
 		}
 	}
@@ -106,7 +106,7 @@ public class Mapa extends Observable {
 		return this.elementos.containsKey(p);
 	}
 	
-	public void agregarUnidad(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
+	public void agregarPosicionable(Posicionable unidad) throws PosicionInvalidaException, PosicionOcupadaException {
 		Posicion posicion = unidad.getPosicion();
 		if (!this.esPosicionValida(posicion))
 			throw new PosicionInvalidaException();
@@ -155,7 +155,7 @@ public class Mapa extends Observable {
 	public void reemplazarPosicionable(Posicionable nuevoPosicionable) {
 		if (this.posicionEstaOcupada(nuevoPosicionable.getPosicion()))
 			this.removerPosicionable(this.getPosicionable(nuevoPosicionable.getPosicion()));
-		this.agregarUnidad(nuevoPosicionable);
+		this.agregarPosicionable(nuevoPosicionable);
 		setChanged();
 		this.notifyObservers();
 	}

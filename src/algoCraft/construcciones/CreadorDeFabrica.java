@@ -13,7 +13,7 @@ public class CreadorDeFabrica extends CreadorDeEdificios {
 	@Override
 	public Edificio crearEdificio(Jugador jugador, int x, int y) {
 		Fabrica fabrica = new Fabrica(jugador, x, y, this.barraca);
-		Mapa.getMapa().agregarUnidad(fabrica);
+		Mapa.getMapa().agregarPosicionable(fabrica);
 		return fabrica;
 	}
 

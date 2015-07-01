@@ -232,12 +232,12 @@ public class BarracaTest {
 		Barraca barraca1 = new Barraca(jugador, 1, 1);
 		for (int i = 0; i < 12; i++)
 			barraca1.avanzarTurno();
-		mapa.agregarUnidad(barraca1);
+		mapa.agregarPosicionable(barraca1);
 		
 		Barraca barraca2 = new Barraca(jugador, 2, 2);
 		for (int i = 0; i < 12; i++)
 			barraca2.avanzarTurno();
-		mapa.agregarUnidad(barraca2);
+		mapa.agregarPosicionable(barraca2);
 		
 		barraca1 = (Barraca) mapa.getPosicionable(new Posicion(1, 1, true));
 		barraca1.crearMarine();
@@ -302,7 +302,7 @@ public class BarracaTest {
 		Barraca barraca = new Barraca(jugador, 1, 1);
 		for(int i = 0; i < 12; i++)
 			barraca.avanzarTurno();
-		Mapa.getMapa().agregarUnidad(barraca);
+		Mapa.getMapa().agregarPosicionable(barraca);
 		int mineralesAntesDeLaBarraca = jugador.getMineral();
 		
 		new Barraca(jugador, 1, 1);
