@@ -133,7 +133,24 @@
 	</target>
 
 	<target name="empaquetar" depends="compilar.paquete">
-		<jar destfile="${build}/dist/titiritero.jar" basedir="${build}/classes" />
+		<jar destfile="${build}/dist/AlgoCraft.jar" basedir="${build}/classes" />
+	</target>
+
+	<target name="empaquetar.con.imagenes.musica" depends="compilar.paquete">
+		<copydir src="src/recursos/imagenes"
+			dest="${build}recursos/imagenes"
+			includes="**/*.png"/>
+		<copydir src="src/recursos/musica"
+			dest="${build}/recursos/musica"
+			includes="**/*.wav"/>
+		<jar destfile="${build}/dist/AlgoCraft.jar" basedir="${build}/recursos"/>
+	</target>
+
+	<target name="ejecutar.aplicacion" depends="empaquetar.con.imagenes.musica">
+		<java classname="algoCraft.Principal" fork="true">
+		<classpath refid="classpath"/>
+		<classpath location="${build}/dist/AlgoCraft.jar" />
+		</java>
 	</target>
 
 	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
@@ -177,5 +194,4 @@
 			</fileset>
 		</pmd>
 	</target>
-
 </project>
