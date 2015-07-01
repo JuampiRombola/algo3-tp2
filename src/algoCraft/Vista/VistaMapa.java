@@ -3,11 +3,17 @@ package algoCraft.Vista;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -41,10 +47,16 @@ public class VistaMapa extends JPanel implements Observer{
 		mapa.addObserver(this);
 	    this.setLayout(new GridBagLayout());
 	    this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+	    try {
+			BufferedImage myPicture = ImageIO.read(new File("recursos/imagenes/algocraft.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			this.add(picLabel);
+		} catch (IOException e) {}
+	    /*Antiguo mapa previo al juego
 		boolean booleano = true;
 		GridBagConstraints gbc = new GridBagConstraints();
-		for (int i = 1; i <= mapa.getAncho(); i++){
-			for (int j = 1; j <= mapa.getAlto(); j++){
+		for (int i = 1; i <= mapa.getAncho()+1; i++){
+			for (int j = 1; j <= mapa.getAlto()+1; j++){
 				Color color = (booleano) ? Color.blue : Color.green;
 				PosicionVista cuadrado = new PosicionVista(color);
 				booleano = !booleano;
@@ -52,9 +64,8 @@ public class VistaMapa extends JPanel implements Observer{
                 gbc.gridy = j;
                 this.add(cuadrado, gbc);
 			}
-		}
+		}*/
 		agregarGraficadoresExistentes();
-		setBorder(new LineBorder(Color.GRAY));
 	}
 	
 	private void agregarGraficadoresExistentes(){
@@ -81,6 +92,7 @@ public class VistaMapa extends JPanel implements Observer{
                 agregarVistaDe(posicionRevisada);
 			}
 		}
+		setBorder(new LineBorder(Color.GRAY));
 		this.revalidate();
 		this.repaint(); 
 	}

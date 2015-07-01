@@ -28,12 +28,12 @@ public class PanelIzquierdo extends JPanel implements Observer {
 		juego.addObserver(this);
 		this.setBackground(Color.black);
 		this.setLayout(new BorderLayout());
-		setBorder(new LineBorder(Color.GRAY));
 		this.setVisible(true);
 	}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		setBorder(new LineBorder(Color.GRAY));
 		if(!primerTurno){
 			this.remove(panelJugador);
 		}
