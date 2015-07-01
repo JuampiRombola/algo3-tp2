@@ -91,7 +91,7 @@ public class VistaMapa extends JPanel implements Observer{
 		gbc.gridx = posicion.getX() - 1;
 		gbc.gridy = posicion.getY() - 1;
 		if(mapa.posicionEstaOcupada(posicion)){
-			Posicionable posicionable = mapa.getUnidad(posicion);
+			Posicionable posicionable = mapa.getPosicionable(posicion);
 			if(graficadores.containsKey(posicionable.getClass())){
 				graficador = graficadores.get(posicionable.getClass());
 				this.add(graficador.getPosicionVista(panelCentral, posicion.getX(), posicion.getY()), gbc);

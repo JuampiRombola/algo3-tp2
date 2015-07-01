@@ -50,7 +50,7 @@ public class PanelDeSeleccionDeGasVespeno extends JPanel{
 		GasVespeno gas;
 		boolean esTerrestre = true;
 		int gasRestante;
-		gas = (GasVespeno) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		gas = (GasVespeno) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		gasRestante = gas.getUnidadesRestantes();
 		return new String("Quedan " + String.valueOf(gasRestante) + " unidades de Gas");
 	}

@@ -57,28 +57,28 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	private String crearStringDanio(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return "Ataque: " + String.valueOf(unidad.getDanio());
 	}
 	
 	private String crearStringRangoAtaque(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return "Rango de ataque: " + String.valueOf(unidad.getRango());
 	}
 	
 	private String crearStringRangoMovimiento(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return "Rango de movimiento: " + String.valueOf(unidad.getRangoMovimiento());
 	}
 	
 	private String crearStringAtaco(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		String ataque = "Ya ataco: ";
 		if (unidad.puedeAtacar())
 			return ataque+"No";
@@ -88,7 +88,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	private String crearStringSeMovio(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		String movimiento = "Se movio: ";
 		if (unidad.puedeMoverse())
 			return movimiento+"No";
@@ -98,7 +98,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	private String crearStringUnidad(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		if (unidad.getClass() == Marine.class){
 			if (!unidad.getJugador().estaActivo())
 				Musica.reproducir("Recursos/Musica/edificios.wav");
@@ -116,14 +116,14 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	private String crearStringJugador(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return unidad.getJugador().getNombre();
 	}
 	
 	private String crearStringVida(){
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return new String("Vida: " + String.valueOf(unidad.getVidaActual()) + "/" +
 							String.valueOf(unidad.getVidaMaxima()));
 	}

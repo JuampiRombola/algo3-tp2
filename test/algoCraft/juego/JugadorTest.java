@@ -395,7 +395,7 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(1);
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 		avanzarTurnos(3);
 		
 		assertTrue(1 == jugador.getUnidades().size());
@@ -413,8 +413,8 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(2);
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
@@ -434,8 +434,8 @@ public class JugadorTest {
 		jugador.crearBarraca(2, 2);
 		avanzarTurnos(12);
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(2, 2, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(2, 2, true))));
 		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
@@ -455,7 +455,7 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(2);
 
-		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getPosicionable(new Posicion(2, 2, true))));
 		avanzarTurnos(6);
 		
 		assertTrue(1 == jugador.getUnidades().size());
@@ -475,8 +475,8 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(4);
 
-		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
-		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getPosicionable(new Posicion(2, 2, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getPosicionable(new Posicion(2, 2, true))));
 		avanzarTurnos(12);
 		
 		assertTrue(2 == jugador.getUnidades().size());
@@ -496,8 +496,8 @@ public class JugadorTest {
 		jugador.crearFabrica(2, 2);
 		avanzarTurnos(12);
 		
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
-		jugador.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(2, 2, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
+		jugador.crearGoliath(((Fabrica) mapa.getPosicionable(new Posicion(2, 2, true))));
 		avanzarTurnos(6);
 		
 		assertTrue(2 == jugador.getUnidades().size());
@@ -514,7 +514,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12);
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 	}
 	
 	@Test(expected = NoSePuedeConstruirLaUnidadPorSobrepoblacion.class)
@@ -529,9 +529,9 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.sumarPoblacionMaxima(1);
 		
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 		avanzarTurnos(3);
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 		
 	}
 
@@ -551,7 +551,7 @@ public class JugadorTest {
 		jugador.crearBarraca(3, 3);
 		avanzarTurnos(12);
 		
-		Barraca miBarraca = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
+		Barraca miBarraca = (Barraca) mapa.getPosicionable(new Posicion(1, 1, true));
 		jugador.crearMarine(miBarraca);
 		avanzarTurnos(4);
 		
@@ -591,7 +591,7 @@ public class JugadorTest {
 		jugador.crearBarraca(1, 1);
 		avanzarTurnos(12);
 		Goliath goliath = new Goliath(jugador2, 2, 2);
-		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
+		Barraca barraca = (Barraca)Mapa.getMapa().getPosicionable(new Posicion(1, 1, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
 		while (!barraca.estaDestruido()) {
@@ -614,7 +614,7 @@ public class JugadorTest {
 		jugador.crearDepositoDeSuministros(1, 1);
 		avanzarTurnos(3);
 		Goliath goliath = new Goliath(jugador2, 2, 2);
-		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getUnidad(new Posicion(1, 1, true));
+		DepositoDeSuministros deposito = (DepositoDeSuministros )Mapa.getMapa().getPosicionable(new Posicion(1, 1, true));
 		int poblacionInicial = jugador.getPoblacionMaxima();
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
@@ -641,7 +641,7 @@ public class JugadorTest {
 		jugador.crearBarraca(3, 3);
 		avanzarTurnos(12);
 		Goliath goliath = new Goliath(jugador2, 2, 2);
-		Barraca barraca = (Barraca)Mapa.getMapa().getUnidad(new Posicion(3, 3, true));
+		Barraca barraca = (Barraca)Mapa.getMapa().getPosicionable(new Posicion(3, 3, true));
 		int cantidadEdificiosInicial = jugador.getEdificios().size();
 		
 		while (!barraca.estaDestruido()) {
@@ -650,7 +650,7 @@ public class JugadorTest {
 		}
 		int cantidadEdificiosFinal = jugador.getEdificios().size();
 		
-		assertTrue(jugador.getEdificios().get(0) == (Barraca)Mapa.getMapa().getUnidad(new Posicion(1, 1, true)));
+		assertTrue(jugador.getEdificios().get(0) == (Barraca)Mapa.getMapa().getPosicionable(new Posicion(1, 1, true)));
 		assertTrue(cantidadEdificiosInicial == cantidadEdificiosFinal + 1);
 	}
 	
@@ -687,7 +687,7 @@ public class JugadorTest {
 		jugador.crearDepositoDeSuministros(1, 1);
 		jugador.crearBarraca(2, 2);
 		avanzarTurnos(12);
-		jugador.crearMarine((Barraca)Mapa.getMapa().getUnidad(new Posicion(2, 2, true)));
+		jugador.crearMarine((Barraca)Mapa.getMapa().getPosicionable(new Posicion(2, 2, true)));
 		avanzarTurnos(6);
 		int cantidadInicialEdificios = jugador.getEdificios().size();
 		int cantidadInicialCasas = jugador.getEdificios().size();
@@ -712,7 +712,7 @@ public class JugadorTest {
 		avanzarTurnos(12);
 		jugador.desactivar();
 
-		jugador.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 	}
 	
 	@Test(expected = ElEdificioPerteneceAOtroJugador.class)
@@ -728,7 +728,7 @@ public class JugadorTest {
 		jugador2.activar();
 		jugador2.sumarPoblacionMaxima(5);
 
-		jugador2.crearMarine(((Barraca) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador2.crearMarine(((Barraca) mapa.getPosicionable(new Posicion(1, 1, true))));
 	}
 	
 	@Test(expected = ElEdificioPerteneceAOtroJugador.class)
@@ -748,7 +748,7 @@ public class JugadorTest {
 		jugador2.sumarPoblacionMaxima(5);
 		jugador2.activar();
 
-		jugador2.crearGoliath(((Fabrica) mapa.getUnidad(new Posicion(1, 1, true))));
+		jugador2.crearGoliath(((Fabrica) mapa.getPosicionable(new Posicion(1, 1, true))));
 	}
 	
 	@Test
@@ -760,7 +760,7 @@ public class JugadorTest {
 		jugador.sumarPoblacionMaxima(10);
 		jugador.activar();
 		jugador.crearBarraca(1, 1);
-		Barraca barraca = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
+		Barraca barraca = (Barraca) mapa.getPosicionable(new Posicion(1, 1, true));
 		avanzarTurnos(12);
 		
 		for (int i = 0; i < 3; i++)
@@ -785,7 +785,7 @@ public class JugadorTest {
 		jugador.crearFabrica(2, 2);
 		avanzarTurnos(12);
 		
-		Fabrica fabrica = (Fabrica) mapa.getUnidad(new Posicion(2, 2, true));
+		Fabrica fabrica = (Fabrica) mapa.getPosicionable(new Posicion(2, 2, true));
 		for (int i = 0; i < 3; i++)
 			jugador.crearGoliath(fabrica);
 		int poblacion = jugador.getPoblacion();

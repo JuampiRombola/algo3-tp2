@@ -30,7 +30,7 @@ public class AccionConstruirGoliath extends AbstractAction{
 		Jugador jugadorActual;
 		jugadorActual = juego.getJugadorActual();
 		Posicion posicion = new Posicion(x, y, true);
-		Fabrica fabrica = (Fabrica) Mapa.getMapa().getUnidad(posicion);
+		Fabrica fabrica = (Fabrica) Mapa.getMapa().getPosicionable(posicion);
 		try{
 			jugadorActual.crearGoliath(fabrica);
 		}catch(NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {

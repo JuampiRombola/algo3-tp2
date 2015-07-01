@@ -112,7 +112,7 @@ public class PanelCentral extends JPanel implements Observer{
 
 	private boolean estaEnConstruccion(int posicionX, int posicionY) {
 		Posicion posicion = new Posicion(posicionX, posicionY, true);//Es terrestre, entonces pongo true
-		Edificio edificio = (Edificio) Mapa.getMapa().getUnidad(posicion);
+		Edificio edificio = (Edificio) Mapa.getMapa().getPosicionable(posicion);
 		return edificio.estaEnConstruccion();
 	}
 
@@ -208,11 +208,11 @@ public class PanelCentral extends JPanel implements Observer{
 	}
 	
 	private Unidad obtenerUnidadSeleccionada(){
-		return (Unidad) Mapa.getMapa().getUnidad(posicionUnidadSeleccionada);
+		return (Unidad) Mapa.getMapa().getPosicionable(posicionUnidadSeleccionada);
 	}
 	
 	private Atacable obtenerAtacableEn(int x, int y){
-		return (Atacable) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
+		return (Atacable) Mapa.getMapa().getPosicionable(new Posicion(x, y, true));
 	}
 	
 	public void seleccionadaUnidadEn(int x, int y) {

@@ -119,7 +119,7 @@ public class CentroDeMineralTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		Mineral mineral = (Mineral) mapa.getPosicionable(new Posicion(4, 4, true));
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		
 		mineral.extraer(1490);
@@ -137,7 +137,7 @@ public class CentroDeMineralTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		mapa.cargarBases(1);
 		
-		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		Mineral mineral = (Mineral) mapa.getPosicionable(new Posicion(4, 4, true));
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		
 		mineral.extraer(1490);
@@ -154,7 +154,7 @@ public class CentroDeMineralTest {
 		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
 		mapa.cargarBases(1);
 		
-		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		Mineral mineral = (Mineral) mapa.getPosicionable(new Posicion(4, 4, true));
 		CentroDeMineral centro = new CentroDeMineral(jugador, mineral);
 		
 		mineral.extraer(1490);

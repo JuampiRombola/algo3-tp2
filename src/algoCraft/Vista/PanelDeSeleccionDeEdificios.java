@@ -43,14 +43,14 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 	private String crearStringJugador(){
 		Edificio edificio;
 		boolean esTerrestre = true;
-		edificio = (Edificio) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		edificio = (Edificio) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return edificio.getJugador().getNombre();
 	}
 
 	private String crearStringEnConstruccion(){
 		Edificio edificio;
 		boolean esTerrestre = true;
-		edificio = (Edificio) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		edificio = (Edificio) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		String turnos = new String(edificio.getTurnosQuePasaroDeConstruccion() + "/" + edificio.getTurnosEnConstruirse());
 		String estado = (edificio.estaEnConstruccion()) ? "en construccion "+"("+turnos+")" : "construido";
 		return new String("Estado: " + estado);
@@ -59,7 +59,7 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 	private String crearStringVida(){
 		Edificio edificio;
 		boolean esTerrestre = true;
-		edificio = (Edificio) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		edificio = (Edificio) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return new String("Vida: " + String.valueOf(edificio.getVidaActual()) + "/" +
 							String.valueOf(edificio.getVidaMaxima()));
 	}

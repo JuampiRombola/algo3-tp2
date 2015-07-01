@@ -31,7 +31,7 @@ public class AccionConstruirMarine extends AbstractAction{
 		Jugador jugadorActual;
 		jugadorActual = juego.getJugadorActual();
 		Posicion posicion = new Posicion(x, y, true);
-		Barraca barraca = (Barraca) Mapa.getMapa().getUnidad(posicion);
+		Barraca barraca = (Barraca) Mapa.getMapa().getPosicionable(posicion);
 		try{
 			jugadorActual.crearMarine(barraca);
 		}catch(NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {

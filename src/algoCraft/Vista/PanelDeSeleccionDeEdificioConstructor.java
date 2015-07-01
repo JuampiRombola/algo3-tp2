@@ -25,7 +25,7 @@ public class PanelDeSeleccionDeEdificioConstructor extends PanelDeSeleccionDeEdi
 	private String crearStringProduccion(){
 		EdificioConstructor constructor;
 		boolean esTerrestre = true;
-		constructor = (EdificioConstructor) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		constructor = (EdificioConstructor) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		String turnosConstruccion = " ("+constructor.getTurnosQuePasaroDeConstruccion()+"/"+constructor.getTurnosParaProducirUnidad()+")";
 		if (constructor.getUnidadesEnCola() == 0)
 			turnosConstruccion = "";

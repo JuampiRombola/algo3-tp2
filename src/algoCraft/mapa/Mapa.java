@@ -117,7 +117,7 @@ public class Mapa extends Observable {
 		this.notifyObservers();
 	}
 	
-	public Posicionable getUnidad(Posicion posicion) throws PosicionVaciaException {
+	public Posicionable getPosicionable(Posicion posicion) throws PosicionVaciaException {
 		if (!this.posicionEstaOcupada(posicion))
 			throw new PosicionVaciaException();
 		return elementos.get(posicion);
@@ -154,7 +154,7 @@ public class Mapa extends Observable {
 
 	public void reemplazarUnidad(Posicionable nuevoPosicionable) {
 		if (this.posicionEstaOcupada(nuevoPosicionable.getPosicion()))
-			this.removerUnidad(this.getUnidad(nuevoPosicionable.getPosicion()));
+			this.removerUnidad(this.getPosicionable(nuevoPosicionable.getPosicion()));
 		this.agregarUnidad(nuevoPosicionable);
 		setChanged();
 		this.notifyObservers();

@@ -31,7 +31,7 @@ public class AccionConstruirRecolectorDeGas extends AbstractAction{
 		jugadorActual = juego.getJugadorActual();
 		Posicion posicion = new Posicion(x, y, true);
 		//Es feo castear. Pero estoy seguro que en esa posicion hay un gas.
-		GasVespeno gas = (GasVespeno) Mapa.getMapa().getUnidad(posicion);
+		GasVespeno gas = (GasVespeno) Mapa.getMapa().getPosicionable(posicion);
 		try{
 			jugadorActual.crearRefineria(gas);
 		}catch(NoSeTienenLosRecursosSuficientes e){

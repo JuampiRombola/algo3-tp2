@@ -239,7 +239,7 @@ public class BarracaTest {
 			barraca2.avanzarTurno();
 		mapa.agregarUnidad(barraca2);
 		
-		barraca1 = (Barraca) mapa.getUnidad(new Posicion(1, 1, true));
+		barraca1 = (Barraca) mapa.getPosicionable(new Posicion(1, 1, true));
 		barraca1.crearMarine();
 		
 		for (int i = 0; i < 4; i++)

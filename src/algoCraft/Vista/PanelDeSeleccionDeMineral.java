@@ -51,7 +51,7 @@ public class PanelDeSeleccionDeMineral extends JPanel{
 		Mineral mineral;
 		boolean esTerrestre = true;
 		int cantidadDeMineral;
-		mineral = (Mineral) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		mineral = (Mineral) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		cantidadDeMineral = mineral.getUnidadesRestantes();
 		return new String("Quedan " + String.valueOf(cantidadDeMineral) + " unidades de Mineral");
 	}

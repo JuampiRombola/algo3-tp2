@@ -65,18 +65,18 @@ public class SimuladorPartidaConJuegoTest {
 		avanzarTurnos(juego, 23);
 		
 		//equipo3 esta activo, crea un marine
-		equipo3.crearMarine((Barraca) Mapa.getMapa().getUnidad(new Posicion(10, 10, true)));
+		equipo3.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(10, 10, true)));
 		
 		juego.siguienteJugador();
 		
 		//nico esta activo, crea un marine
-		nico.crearMarine((Barraca) Mapa.getMapa().getUnidad(new Posicion(12, 12, true)));
+		nico.crearMarine((Barraca) Mapa.getMapa().getPosicionable(new Posicion(12, 12, true)));
 		
 		//Se avanzan 6 turnos hasta terminar de construir el marino de nico
 		avanzarTurnos(juego, 6);
 		
 		//Como es el turno de nico ahora su marine se puede mover
-		Marine marineNico = (Marine) Mapa.getMapa().getUnidad(new Posicion(11, 11, true));
+		Marine marineNico = (Marine) Mapa.getMapa().getPosicionable(new Posicion(11, 11, true));
 		Base baseEquipo3 = equipo3.getBase();
 		marineNico.moverseA(11, 9);
 		avanzarTurnos(juego, 2);

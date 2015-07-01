@@ -114,7 +114,7 @@ public class RefineriaTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(1, 2, true));
+		GasVespeno gasVespeno = (GasVespeno) mapa.getPosicionable(new Posicion(1, 2, true));
 		Refineria refineria = crearRefineria(gasVespeno);
 		gasVespeno.extraer(990);
 		refineria.recolectar();
@@ -130,7 +130,7 @@ public class RefineriaTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(1, 2, true));
+		GasVespeno gasVespeno = (GasVespeno) mapa.getPosicionable(new Posicion(1, 2, true));
 		Refineria refineria = crearRefineria(gasVespeno);
 		
 		gasVespeno.extraer(990);
@@ -146,7 +146,7 @@ public class RefineriaTest {
 		Mapa mapa = Mapa.getMapa();
 		mapa.cargarBases(1);
 		
-		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(1, 2, true));
+		GasVespeno gasVespeno = (GasVespeno) mapa.getPosicionable(new Posicion(1, 2, true));
 		Refineria refineria = crearRefineria(gasVespeno);
 		
 		gasVespeno.extraer(990);

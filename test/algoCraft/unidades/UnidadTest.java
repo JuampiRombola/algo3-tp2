@@ -273,7 +273,7 @@ public class UnidadTest{
 	public void siLePidoAlMapaLoQueHayEnLaPosicionDeLaUnidadLaEncuentro(){
 		Mapa.reiniciarInstanciaParaTest();
 		Unidad unidad = new Unidad(null, vidaMaxima, armaDePrueba, posicion, 2);
-		assertEquals(Mapa.getMapa().getUnidad(posicion), unidad);
+		assertEquals(Mapa.getMapa().getPosicionable(posicion), unidad);
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
@@ -282,7 +282,7 @@ public class UnidadTest{
 		Unidad unidad = new Unidad(new Jugador("jugador1", new Base(3, 3)), vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.recibePuntosDeDanio(vidaMaxima + 1);
 		assertTrue(unidad.estaDestruido());
-		Mapa.getMapa().getUnidad(posicion);
+		Mapa.getMapa().getPosicionable(posicion);
 	}
 	
 	@Test
@@ -293,7 +293,7 @@ public class UnidadTest{
 		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		Posicion nuevaPosicion =  new Posicion(1, 2, unidad.esTerrestre());
 		unidad.moverseA(1, 2);
-		assertEquals(unidad, Mapa.getMapa().getUnidad(nuevaPosicion));
+		assertEquals(unidad, Mapa.getMapa().getPosicionable(nuevaPosicion));
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
@@ -303,7 +303,7 @@ public class UnidadTest{
 		jugador.activar();
 		Unidad unidad = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
 		unidad.moverseA(1, 2);
-		assertEquals(unidad, Mapa.getMapa().getUnidad(posicion));
+		assertEquals(unidad, Mapa.getMapa().getPosicionable(posicion));
 	}
 	
 	@Test(expected = NoPuedeAtacar.class)

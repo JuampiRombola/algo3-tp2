@@ -26,7 +26,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(null, 1, 1);			
-		Assert.assertEquals(unidad, mapa.getUnidad(unidad.getPosicion()));
+		Assert.assertEquals(unidad, mapa.getPosicionable(unidad.getPosicion()));
 	}
 	
 	@Test(expected = PosicionInvalidaException.class)
@@ -66,7 +66,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		
-		mapa.getUnidad(new Posicion(1, 1, true));
+		mapa.getPosicionable(new Posicion(1, 1, true));
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
@@ -75,7 +75,7 @@ public class MapaTest {
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(null, 1, 1);
 		mapa.removerUnidad(unidad);
-		mapa.getUnidad(unidad.getPosicion());
+		mapa.getPosicionable(unidad.getPosicion());
 	}
 	
 	@Test
@@ -86,7 +86,7 @@ public class MapaTest {
 		
 		mapa.moverUnidad(unidad, 2, 2);
 		
-		Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
+		Assert.assertEquals(unidad, mapa.getPosicionable(new Posicion(2, 2, true)));
 	}
 	
 	@Test(expected = PosicionVaciaException.class)
@@ -96,7 +96,7 @@ public class MapaTest {
 		Posicionable unidad = new Marine(null, 1, 1);
 		
 		mapa.moverUnidad(unidad, 2, 2);
-		mapa.getUnidad(new Posicion(1, 1, true));
+		mapa.getPosicionable(new Posicion(1, 1, true));
 	}
 	
 	@Test
@@ -108,8 +108,8 @@ public class MapaTest {
 
 		mapa.moverUnidad(unidadConMovimiento, 2, 2);
 		
-		Assert.assertEquals(unidad, mapa.getUnidad(new Posicion(2, 2, true)));
-		Assert.assertEquals(unidadConMovimiento, mapa.getUnidad(new Posicion(1, 1, true)));
+		Assert.assertEquals(unidad, mapa.getPosicionable(new Posicion(2, 2, true)));
+		Assert.assertEquals(unidadConMovimiento, mapa.getPosicionable(new Posicion(1, 1, true)));
 
 	}
 	
@@ -231,7 +231,7 @@ public class MapaTest {
 		GasVespeno otraUnidad = new GasVespeno(2, 2);
 		mapa.reemplazarUnidad(otraUnidad);
 		
-		assertTrue(otraUnidad == mapa.getUnidad(unaUnidad.getPosicion()));
+		assertTrue(otraUnidad == mapa.getPosicionable(unaUnidad.getPosicion()));
 	}
 	
 	@Test
@@ -242,7 +242,7 @@ public class MapaTest {
 		GasVespeno unicaUnidad = new GasVespeno(1, 1);
 		mapa.reemplazarUnidad(unicaUnidad);
 		
-		assertTrue(unicaUnidad == mapa.getUnidad(unicaUnidad.getPosicion()));
+		assertTrue(unicaUnidad == mapa.getPosicionable(unicaUnidad.getPosicion()));
 	}
 	
 	@Test(expected = PosicionInvalidaException.class)

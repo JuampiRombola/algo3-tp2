@@ -30,14 +30,14 @@ public class PanelDeSeleccionDeEdificioRecolector extends PanelDeSeleccionDeEdif
 	private String crearStringRecursosRecolectados(){
 		EdificioRecolector recolector;
 		boolean esTerrestre = true;
-		recolector = (EdificioRecolector) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		recolector = (EdificioRecolector) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return new String("Recursos recolectados: " + String.valueOf(recolector.getRecursosRecolectados()));
 	}
 	
 	private String crearStringRecursosRestantes() {
 		EdificioRecolector recolector;
 		boolean esTerrestre = true;
-		recolector = (EdificioRecolector) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		recolector = (EdificioRecolector) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return new String("Recursos restantes : " + String.valueOf(recolector.getRecursosRestantes()));
 	}
 }

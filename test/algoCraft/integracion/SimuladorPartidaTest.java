@@ -40,7 +40,7 @@ public class SimuladorPartidaTest {
 		jugador1.sumarPoblacionMaxima(2);
 		jugador2.sumarPoblacionMaxima(2);
 		
-		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		Mineral mineral = (Mineral) mapa.getPosicionable(new Posicion(4, 4, true));
 		jugador1.crearCentroDeMineral(mineral);
 		
 		//El jugador1 deberia poder crear una barraca
@@ -59,7 +59,7 @@ public class SimuladorPartidaTest {
 		assertEquals(cantidadMinerales1, cantidadMinerales2);
 
 		//El jugador2 no deberia poder empezar la creacion de un marine
-		Barraca barraca = (Barraca) mapa.getUnidad((new Posicion(12, 12, true)));
+		Barraca barraca = (Barraca) mapa.getPosicionable((new Posicion(12, 12, true)));
 		int cantidadMineralesAntesDeMarine = jugador2.getMineral();
 		try {
 			jugador2.crearMarine(barraca);

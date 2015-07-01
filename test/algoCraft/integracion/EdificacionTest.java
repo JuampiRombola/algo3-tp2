@@ -36,12 +36,12 @@ public class EdificacionTest {
 		jugador.activar();
 		
 		// Se busca un mineral y se le construye un centro encima
-		Mineral mineral = (Mineral) mapa.getUnidad(new Posicion(4, 4, true));
+		Mineral mineral = (Mineral) mapa.getPosicionable(new Posicion(4, 4, true));
 		jugador.crearCentroDeMineral(mineral);
 		assertTrue(150 == jugador.getMineral());
 		
 		// Se busca un mineral y se le construye un centro encima
-		GasVespeno gasVespeno = (GasVespeno) mapa.getUnidad(new Posicion(1, 2, true));
+		GasVespeno gasVespeno = (GasVespeno) mapa.getPosicionable(new Posicion(1, 2, true));
 		jugador.crearRefineria(gasVespeno);
 		assertTrue(50 == jugador.getMineral());
 			
@@ -66,7 +66,7 @@ public class EdificacionTest {
 		
 		//El jugador no deberia poder crear un Marine por sobrepoblacion
 		try {
-			jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(10, 10, true)));
+			jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(10, 10, true)));
 			
 			fail();
 		} catch (NoSePuedeConstruirLaUnidadPorSobrepoblacion e) {}
@@ -83,7 +83,7 @@ public class EdificacionTest {
 		assertTrue(290 == jugador.getGasVespeno());
 		
 		//El jugador debería poder crear un Marine
-		jugador.crearMarine((Barraca) mapa.getUnidad(new Posicion(10, 10, true)));
+		jugador.crearMarine((Barraca) mapa.getPosicionable(new Posicion(10, 10, true)));
 		
 		assertTrue(60 == jugador.getMineral());
 		assertTrue(290 == jugador.getGasVespeno());
@@ -107,7 +107,7 @@ public class EdificacionTest {
 		assertTrue(450 == jugador.getGasVespeno());
 		
 		//El jugador deberia poder crear un Goliath
-		jugador.crearGoliath((Fabrica) mapa.getUnidad(new Posicion(12, 12, true)));
+		jugador.crearGoliath((Fabrica) mapa.getPosicionable(new Posicion(12, 12, true)));
 		
 		assertTrue(20 == jugador.getMineral());
 		assertTrue(400 == jugador.getGasVespeno());
