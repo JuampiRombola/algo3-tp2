@@ -97,15 +97,17 @@ public class Juego extends Observable{
 	}
 	
 	public void siguienteJugador() {
-		this.jugadorActual.desactivar();
-		if (!this.iteradorJugadores.hasNext()) {
-			this.avanzarTurnoTodasLasUnidades();
-			this.iteradorJugadores = this.jugadores.iterator();
+		if(!hayGanador()){
+			this.jugadorActual.desactivar();
+			if (!this.iteradorJugadores.hasNext()) {
+				this.avanzarTurnoTodasLasUnidades();
+				this.iteradorJugadores = this.jugadores.iterator();
+			}
+			this.jugadorActual = this.iteradorJugadores.next();
+			if (this.jugadorActual.perdioLaPartida())
+				this.siguienteJugador();
+			this.jugadorActual.activar();
 		}
-		this.jugadorActual = this.iteradorJugadores.next();
-		if (this.jugadorActual.perdioLaPartida())
-			this.siguienteJugador();
-		this.jugadorActual.activar();
 		setChanged();
 		notifyObservers();
 	}

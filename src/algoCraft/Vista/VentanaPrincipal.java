@@ -4,14 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 
 import algoCraft.Musica;
 import algoCraft.juego.Juego;
 
-public class VentanaPrincipal{
+public class VentanaPrincipal implements Observer{
 	
 	private JFrame marco;
 	private Juego juego;
@@ -35,6 +38,7 @@ public class VentanaPrincipal{
 		marco.setVisible(true);
 		marco.getContentPane().setBackground(Color.black);
 		marco.setVisible(true);
+		this.juego.addObserver(this);
 	}
 
 	public static class CloseListener extends WindowAdapter{
@@ -42,5 +46,19 @@ public class VentanaPrincipal{
 			e.getWindow().setVisible(false);
 			System.exit(0);
 		}
+	}
+
+	@Override
+	//Todas las pantallas se manejan solas, este update solo se usa porque cuando
+	//Termina el juego, no hay ninguna pantalla que sea realmente adecuada para
+	//mostrar la opcion final
+	public void update(Observable o, Object arg) {
+		if(juego.hayGanador()){
+			JOptionPane.showMessageDialog(
+							marco,
+							juego.getJugadorActual().getNombre() + " es el ganador", 
+							"El juego ha terminado",  JOptionPane.PLAIN_MESSAGE
+						);
+		}	
 	}
 }

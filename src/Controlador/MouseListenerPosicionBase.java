@@ -3,7 +3,7 @@ package Controlador;
 import java.awt.event.MouseEvent;
 import algoCraft.Vista.PanelCentral;
 
-public class MouseListenerPosicionBase extends MouseListenerPosicion{
+public class MouseListenerPosicionBase extends MouseListenerAtacable{
 	
 	public MouseListenerPosicionBase(PanelCentral panelCentral, int x, int y){
 		super(panelCentral, x, y);
