@@ -14,8 +14,8 @@ public class PanelDeSeleccionDeEdificioRecolector extends PanelDeSeleccionDeEdif
 	private JLabel labelRecolectado;
 	private JLabel labelRecursosRestantes;
 
-	public PanelDeSeleccionDeEdificioRecolector(String recolector, int x, int y){
-		super(recolector, x, y);
+	public PanelDeSeleccionDeEdificioRecolector(String recolector, int x, int y, JLabel picLabel){
+		super(recolector, x, y, picLabel);
 		labelRecolectado = new JLabel(crearStringRecursosRecolectados());
 		labelRecolectado.setAlignmentX(CENTER_ALIGNMENT);
 		labelRecolectado.setForeground(Color.white);

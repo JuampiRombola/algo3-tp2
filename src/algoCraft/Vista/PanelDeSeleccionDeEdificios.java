@@ -20,7 +20,7 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 	private JLabel labelVida;
 	private JLabel labelEstado;
 
-	public PanelDeSeleccionDeEdificios(String edificio, int x, int y){	
+	public PanelDeSeleccionDeEdificios(String edificio, int x, int y, JLabel picLabel){	
 		this.x = x;
 		this.y = y;
 		Musica.reproducir("Recursos/Musica/edificios.wav");
@@ -29,6 +29,7 @@ public class PanelDeSeleccionDeEdificios extends JPanel {
 		nombreDeLoSeleccionado.setForeground(Color.white);
 		nombreDeLoSeleccionado.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(nombreDeLoSeleccionado);
+		this.add(picLabel);
 		labelEstado = new JLabel(crearStringEnConstruccion());
 		labelEstado.setAlignmentX(CENTER_ALIGNMENT);
 		labelEstado.setForeground(Color.white);

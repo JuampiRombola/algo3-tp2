@@ -97,7 +97,7 @@ public class PanelCentral extends JPanel implements Observer{
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
 		existeUnPanelDeSeleccion = true;
-		this.panelDeSeleccion = new PanelDeSeleccionDeEdificioConstructor("Barraca ", posicionX, posicionY);
+		this.panelDeSeleccion = new PanelDeSeleccionDeBarraca(posicionX, posicionY);
 		this.add(panelDeSeleccion);
 		if(estaEnConstruccion(posicionX, posicionY)){
 			panelBotonera.setVisible(false);
@@ -137,7 +137,7 @@ public class PanelCentral extends JPanel implements Observer{
 		this.setVisible(true);
 		panelBotonera.setVisible(false);
 		existeUnPanelDeSeleccion = true;
-		this.panelDeSeleccion = new PanelDeSeleccionDeEdificios("Base ", x, y);
+		this.panelDeSeleccion = new PanelDeSeleccionDeBase(x, y);
 		this.add(panelDeSeleccion);
 		this.revalidate();
 		this.repaint();
@@ -150,7 +150,7 @@ public class PanelCentral extends JPanel implements Observer{
 		this.setVisible(true);
 		panelBotonera.setVisible(false);
 		existeUnPanelDeSeleccion = true;
-		this.panelDeSeleccion = new PanelDeSeleccionDeEdificios("Deposito de Suministros ", x, y);
+		this.panelDeSeleccion = new PanelDeSeleccionDeDepositoDeSuministros(x, y);
 		this.add(panelDeSeleccion);
 		this.revalidate();
 		this.repaint();
@@ -163,7 +163,7 @@ public class PanelCentral extends JPanel implements Observer{
 		//Esto es para evitar que te muestra la opcion de crear marines si el edificio esta en construccion
 		// Podria sacarse si el casteo en el metodo booleano no es agradable
 		existeUnPanelDeSeleccion = true;
-		this.panelDeSeleccion = new PanelDeSeleccionDeEdificioConstructor("Fabrica ", x, y);
+		this.panelDeSeleccion = new PanelDeSeleccionDeFabrica(x, y);
 		this.add(panelDeSeleccion);
 		if(estaEnConstruccion(x, y)){
 			panelBotonera.setVisible(false);

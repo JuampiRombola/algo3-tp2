@@ -1,8 +1,13 @@
 package algoCraft.Vista;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,6 +32,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 		nombreDeLoSeleccionado.setForeground(Color.white);
 		nombreDeLoSeleccionado.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(nombreDeLoSeleccionado);
+		agregarLabelImagen();
 		labelVida = new JLabel(crearStringVida());
 		labelVida.setAlignmentX(CENTER_ALIGNMENT);
 		labelVida.setForeground(Color.white);
@@ -51,6 +57,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 		labelSeMovio.setAlignmentX(CENTER_ALIGNMENT);
 		labelSeMovio.setForeground(Color.white);
 		this.add(labelSeMovio);
+		reproducirSonido();
 		this.setBackground(Color.black);
 	}
 	
@@ -99,17 +106,8 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 		Unidad unidad;
 		boolean esTerrestre = true;
 		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
-		if (unidad.getClass() == Marine.class){
-			if (!unidad.getJugador().estaActivo())
-				Musica.reproducir("Recursos/Musica/edificios.wav");
-			else
-				Musica.reproducir("Recursos/Musica/selecMarine.wav");
+		if (unidad.getClass() == Marine.class)
 			return "Marine ";
-		}
-		if (!unidad.getJugador().estaActivo())
-			Musica.reproducir("Recursos/Musica/edificios.wav");
-		else
-			Musica.reproducir("Recursos/Musica/selecGoliath.wav");
 		return "Goliath ";
 	}
 	
@@ -126,5 +124,33 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		return new String("Vida: " + String.valueOf(unidad.getVidaActual()) + "/" +
 							String.valueOf(unidad.getVidaMaxima()));
+	}
+	
+	private void reproducirSonido() {
+		Unidad unidad;
+		boolean esTerrestre = true;
+		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		if (!unidad.getJugador().estaActivo()) {
+			Musica.reproducir("Recursos/Musica/edificios.wav");
+			return;
+		}
+		if (unidad.getClass() == Marine.class)
+			Musica.reproducir("Recursos/Musica/selecMarine.wav");
+		else
+			Musica.reproducir("Recursos/Musica/selecGoliath.wav");
+	}
+	
+	private void agregarLabelImagen() {
+		String direccion = "recursos/imagenes/goliath.png";
+		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
+		if (unidad.getClass() == Marine.class)
+			direccion = "recursos/imagenes/marine.png";
+		JLabel picLabel = new JLabel();
+		try {
+			BufferedImage myPicture = ImageIO.read(new File(direccion));
+			picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setAlignmentX(CENTER_ALIGNMENT);	
+		} catch (IOException e) {}
+		this.add(picLabel);
 	}
 }

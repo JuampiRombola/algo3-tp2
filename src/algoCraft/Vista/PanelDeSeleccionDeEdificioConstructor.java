@@ -13,8 +13,8 @@ public class PanelDeSeleccionDeEdificioConstructor extends PanelDeSeleccionDeEdi
 	private static final long serialVersionUID = 1L;
 	private JLabel labelEstadoProduccion;
 
-	public PanelDeSeleccionDeEdificioConstructor(String productor, int x, int y){
-		super(productor, x, y);
+	public PanelDeSeleccionDeEdificioConstructor(String productor, int x, int y, JLabel picLabel){
+		super(productor, x, y, picLabel);
 		labelEstadoProduccion = new JLabel(crearStringProduccion());
 		labelEstadoProduccion.setAlignmentX(CENTER_ALIGNMENT);
 		labelEstadoProduccion.setForeground(Color.white);
