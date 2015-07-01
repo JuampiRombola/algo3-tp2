@@ -31,10 +31,10 @@ public class MarineTest {
 	}
 	
 	@Test
-	public void unMarineTiene6DeDanioInicialmente(){
+	public void unMarineTiene18DeDanioInicialmente(){
 		Mapa.reiniciarInstanciaParaTest();
 		Marine marine = nuevoMarine();
-		assertTrue(marine.getDanio() == 6);
+		assertTrue(marine.getDanio() == 18);
 	}
 	
 	@Test

@@ -34,7 +34,7 @@ public class GoliathTest {
 	public void unGoliathTiene12DeDanioInicialmente(){
 		Mapa.reiniciarInstanciaParaTest();
 		Goliath goliath = nuevoGoliath();
-		assertTrue(goliath.getDanio() == 12);
+		assertTrue(goliath.getDanio() == 36);
 	}
 	
 	@Test

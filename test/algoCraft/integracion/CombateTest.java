@@ -61,7 +61,7 @@ public class CombateTest {
 		
 		// El goliath perdio 6 de vida y el marino esta intacto
 		Assert.assertTrue(40 == marine.getVidaActual());
-		Assert.assertTrue(119 == goliath.getVidaActual());
+		Assert.assertTrue((goliath.getVidaMaxima() - marine.getDanio()) == goliath.getVidaActual());
 		
 		// Comienza el combate a muerte entre el goliath y el marine, gana el goliath
 		// a pesar de tener 6 menos de vida por el primer ataque del marine
