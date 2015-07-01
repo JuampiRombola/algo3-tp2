@@ -15,8 +15,8 @@ import algoCraft.recursos.Mineral;
 public class Mapa extends Observable {
 	private HashMap<Posicion, Posicionable> elementos;
 	private static Mapa instancia = null;
-	private int alto = 25;
-	private int ancho = 25;
+	private int alto = 26;
+	private int ancho = 37;
 	
 	private Mapa() {
 		this.elementos = new HashMap<Posicion, Posicionable>(alto * ancho);
@@ -65,9 +65,9 @@ public class Mapa extends Observable {
 		ArrayList<Base> bases = new ArrayList<Base> ();
 		// Se crean 4 bases, una en cada vertice del mapa.
 		bases.add(new Base(x, y));
-		bases.add(new Base(alto-x+1, ancho-y+1));
-		bases.add(new Base(alto-x+1, y));
-		bases.add(new Base(x, ancho-y+1));
+		bases.add(new Base(ancho-x+1, alto-y+1));
+		bases.add(new Base(ancho-x+1, y));
+		bases.add(new Base(x, alto-y+1));
 		int indiceFinal = (cantidadJugadores > 4) ? 4 : cantidadJugadores;
 		return bases.subList(0, indiceFinal);
 	}
@@ -99,7 +99,7 @@ public class Mapa extends Observable {
 	private boolean esPosicionValida(Posicion posicion) {
 		int x = posicion.getX();
 		int y = posicion.getY();
-		return ((x >= 1) && (x <= this.alto) && (y >= 1) && (y <= this.ancho));
+		return ((x >= 1) && (x <= this.ancho) && (y >= 1) && (y <= this.alto));
 	}
 	
 	public boolean posicionEstaOcupada(Posicion p) {

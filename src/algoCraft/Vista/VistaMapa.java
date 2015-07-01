@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import algoCraft.construcciones.Barraca;
 import algoCraft.construcciones.Base;
@@ -53,6 +54,7 @@ public class VistaMapa extends JPanel implements Observer{
 			}
 		}
 		agregarGraficadoresExistentes();
+		setBorder(new LineBorder(Color.GRAY));
 	}
 	
 	private void agregarGraficadoresExistentes(){

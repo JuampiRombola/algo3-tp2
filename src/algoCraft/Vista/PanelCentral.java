@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import algoCraft.Atacable;
 import algoCraft.Musica;
@@ -35,6 +36,7 @@ public class PanelCentral extends JPanel implements Observer{
 		existeUnPanelDeSeleccion = false;
 		hayUnaUnidadSeleccionada = false;
 		juego.addObserver(this);
+		setBorder(new LineBorder(Color.GRAY));
 	}
 	
 	public void seleccionadoGasVespenoEn(int posicionX, int posicionY){

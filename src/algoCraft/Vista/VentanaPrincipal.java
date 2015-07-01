@@ -31,9 +31,8 @@ public class VentanaPrincipal implements Observer{
 	    musica.loop();
 		JMenuBar barraMenu = (new BarraMenu(marco, juego, musica)).getBarraMenu();
 		marco.setJMenuBar(barraMenu);
-		marco.getContentPane().add(new PanelIzquierdo(juego), BorderLayout.WEST);
 		panelCentral = new PanelCentral(juego);
-		marco.getContentPane().add(panelCentral, BorderLayout.CENTER);
+		marco.getContentPane().add(new PanelIzquierdo(juego, panelCentral));
 		marco.getContentPane().add(new VistaMapa(panelCentral), BorderLayout.EAST);
 		marco.setVisible(true);
 		marco.getContentPane().setBackground(Color.black);

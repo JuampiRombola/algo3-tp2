@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import algoCraft.juego.Juego;
 
@@ -26,6 +27,7 @@ public class PanelJugador extends JPanel{
 		nombreJugador.setForeground(Color.white);
 		this.add(nombreJugador);
 		this.add(vistaRecursos);
+		setBorder(new LineBorder(Color.GRAY));
 	}
 	
 	private String tamanioLetra(int tamanio, String string) {
