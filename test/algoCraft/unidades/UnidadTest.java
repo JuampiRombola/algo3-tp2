@@ -11,6 +11,7 @@ import algoCraft.mapa.Posicion;
 import algoCraft.mapa.excepciones.PosicionVaciaException;
 import algoCraft.unidades.Arma;
 import algoCraft.unidades.Unidad;
+import algoCraft.unidades.excepciones.LaUnidadPerteneceAUnJugadorInactivo;
 import algoCraft.unidades.excepciones.LaUnidadYaSeMovioEnEsteTurno;
 import algoCraft.unidades.excepciones.NoPuedeAtacar;
 import algoCraft.unidades.excepciones.RangoDeMovimientoInvalido;
@@ -364,5 +365,14 @@ public class UnidadTest{
 		Unidad unidad2 = new Unidad(null, vidaMaxima, armaDePrueba, new Posicion(2, 2, true), 2);
 		
 		unidad1.atacar(unidad2);
+	}
+	
+	@Test(expected = LaUnidadPerteneceAUnJugadorInactivo.class)
+	public void siUnaUnidadDeUnJugadorNoActivoTrataMoverseSeLanzaUnaExcepcion() {
+		Mapa.reiniciarInstanciaParaTest();
+		Jugador jugador = new Jugador("Jugador", new Base(3, 3));
+		Unidad unidad1 = new Unidad(jugador, vidaMaxima, armaDePrueba, posicion, 2);
+		
+		unidad1.moverseA(1, 1);
 	}
 }
