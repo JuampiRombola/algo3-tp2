@@ -129,7 +129,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	private void reproducirSonido() {
 		Unidad unidad;
 		boolean esTerrestre = true;
-		unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, esTerrestre));
+		unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, esTerrestre));
 		if (!unidad.getJugador().estaActivo()) {
 			Musica.reproducir("Recursos/Musica/edificios.wav");
 			return;
@@ -142,7 +142,7 @@ public class PanelDeSeleccionDeUnidad extends JPanel {
 	
 	private void agregarLabelImagen() {
 		String direccion = "recursos/imagenes/goliath.png";
-		Unidad unidad = (Unidad) Mapa.getMapa().getUnidad(new Posicion(x, y, true));
+		Unidad unidad = (Unidad) Mapa.getMapa().getPosicionable(new Posicion(x, y, true));
 		if (unidad.getClass() == Marine.class)
 			direccion = "recursos/imagenes/marine.png";
 		JLabel picLabel = new JLabel();
