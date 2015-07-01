@@ -40,7 +40,7 @@ public abstract class Edificio implements Atacable {
 	}
 	
 	protected void destruir() {
-		Mapa.getMapa().removerUnidad(this);
+		Mapa.getMapa().removerPosicionable(this);
 	}
 	
 	public void recibePuntosDeDanio(int danio) {

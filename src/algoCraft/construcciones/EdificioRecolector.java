@@ -16,7 +16,7 @@ public abstract class EdificioRecolector extends Edificio {
 	public EdificioRecolector(Jugador jugador, Recurso recurso, int vida, int turnosEnConstruirse) {
 		super(jugador, vida, recurso.getPosicion(), turnosEnConstruirse);
 		this.recursosRecolectados = 0;
-		Mapa.getMapa().reemplazarUnidad(this);
+		Mapa.getMapa().reemplazarPosicionable(this);
 		this.recurso = recurso;
 	}
 	
@@ -37,8 +37,8 @@ public abstract class EdificioRecolector extends Edificio {
 	@Override
 	public void destruir() {
 		if (this.recurso.estaDestruido())
-			Mapa.getMapa().removerUnidad(this);
+			Mapa.getMapa().removerPosicionable(this);
 		else
-			Mapa.getMapa().reemplazarUnidad(this.recurso);
+			Mapa.getMapa().reemplazarPosicionable(this.recurso);
 	}
 }

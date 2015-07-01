@@ -74,7 +74,7 @@ public class MapaTest {
 		Mapa.reiniciarInstanciaParaTest();
 		Mapa mapa = Mapa.getMapa();
 		Posicionable unidad = new Marine(null, 1, 1);
-		mapa.removerUnidad(unidad);
+		mapa.removerPosicionable(unidad);
 		mapa.getPosicionable(unidad.getPosicion());
 	}
 	
@@ -229,7 +229,7 @@ public class MapaTest {
 		
 		Unidad unaUnidad = (new Unidad(null, 1, null, new Posicion(2, 2, true), 1));
 		GasVespeno otraUnidad = new GasVespeno(2, 2);
-		mapa.reemplazarUnidad(otraUnidad);
+		mapa.reemplazarPosicionable(otraUnidad);
 		
 		assertTrue(otraUnidad == mapa.getPosicionable(unaUnidad.getPosicion()));
 	}
@@ -240,7 +240,7 @@ public class MapaTest {
 		Mapa mapa = Mapa.getMapa();
 		
 		GasVespeno unicaUnidad = new GasVespeno(1, 1);
-		mapa.reemplazarUnidad(unicaUnidad);
+		mapa.reemplazarPosicionable(unicaUnidad);
 		
 		assertTrue(unicaUnidad == mapa.getPosicionable(unicaUnidad.getPosicion()));
 	}

@@ -127,7 +127,7 @@ public class Mapa extends Observable {
 		if (!this.esPosicionValida(new Posicion(xDestino, yDestino, unidad.esTerrestre())))
 			throw new PosicionInvalidaException();
 		if (!this.posicionEstaOcupada(new Posicion(xDestino, yDestino, unidad.esTerrestre()))) {
-			this.removerUnidad(unidad);
+			this.removerPosicionable(unidad);
 			unidad.setPosicion(xDestino, yDestino);
 			this.elementos.put(unidad.getPosicion(), unidad);
 		}
@@ -135,8 +135,8 @@ public class Mapa extends Observable {
 		this.notifyObservers();
 	}
 	
-	public void removerUnidad(Posicionable unidad) {
-		this.elementos.remove(unidad.getPosicion());
+	public void removerPosicionable(Posicionable posicionable) {
+		this.elementos.remove(posicionable.getPosicion());
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -152,9 +152,9 @@ public class Mapa extends Observable {
 		return posicionBuscada;
 	}
 
-	public void reemplazarUnidad(Posicionable nuevoPosicionable) {
+	public void reemplazarPosicionable(Posicionable nuevoPosicionable) {
 		if (this.posicionEstaOcupada(nuevoPosicionable.getPosicion()))
-			this.removerUnidad(this.getPosicionable(nuevoPosicionable.getPosicion()));
+			this.removerPosicionable(this.getPosicionable(nuevoPosicionable.getPosicion()));
 		this.agregarUnidad(nuevoPosicionable);
 		setChanged();
 		this.notifyObservers();
