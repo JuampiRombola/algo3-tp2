@@ -54,11 +54,9 @@ public class VentanaPrincipal implements Observer{
 	//mostrar la opcion final
 	public void update(Observable o, Object arg) {
 		if(juego.hayGanador()){
-			JOptionPane.showMessageDialog(
-							marco,
-							juego.getJugadorActual().getNombre() + " es el ganador", 
-							"El juego ha terminado",  JOptionPane.PLAIN_MESSAGE
-						);
+			Musica.reproducir("Recursos/Musica/hayGanador.wav");
+			JOptionPane.showMessageDialog(marco, juego.getJugadorActual().getNombre() + " es el ganador", 
+				"El juego ha terminado",  JOptionPane.PLAIN_MESSAGE);
 		}	
 	}
 }
