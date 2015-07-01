@@ -4,7 +4,7 @@ import algoCraft.juego.Jugador;
 import algoCraft.mapa.Posicion;
 
 public class Base extends Edificio {
-	static int vidaMaxima = 2500;
+	static int vidaMaxima = 1000;
 	static boolean inicialmenteTerrestre = true;
 	static int turnosEnConstruirse = 0;
 	

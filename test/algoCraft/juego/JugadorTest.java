@@ -99,7 +99,7 @@ public class JugadorTest {
 		
 		Base base = jugador.getBase();
 		
-		assertEquals(2500, base.getVidaActual());
+		assertEquals(1000, base.getVidaActual());
 	}
 	
 	@Test

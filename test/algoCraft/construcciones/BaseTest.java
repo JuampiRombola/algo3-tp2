@@ -13,7 +13,7 @@ public class BaseTest {
 	public void laVidaMaximaDeLaBaseEs2500() {
 		Base base = new Base(1, 1);
 		
-		assertTrue(2500 == base.getVidaMaxima());
+		assertTrue(1000 == base.getVidaMaxima());
 	}
 	
 	@Test
@@ -27,7 +27,7 @@ public class BaseTest {
 	public void cuandoSeCreaUnaBaseTiene2500DeVida() {
 		Base base = new Base(1, 1);
 		
-		Assert.assertTrue(2500 == base.getVidaActual());
+		Assert.assertTrue(1000 == base.getVidaActual());
 	}
 	
 	@Test
