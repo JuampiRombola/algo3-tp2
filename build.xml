@@ -132,20 +132,20 @@
 		</javac>
 	</target>
 
-	<target name="empaquetar.con.imagenes.musica" depends="compilar.paquete">
-		<copydir src="src/algoCraft/recursos/imagenes"
-			dest="${build}classes/algoCraft/recursos/imagenes"
+	<target name="empaquetar" depends="compilar.paquete">
+		<copydir src="recursos/imagenes"
+			dest="${build}/classes/recursos/imagenes"
 			includes="**/*.png"/>
-		<copydir src="src/algoCraft/recursos/musica"
-			dest="${build}classes/algoCraft/recursos/musica"
+		<copydir src="recursos/musica"
+			dest="${build}/classes/recursos/musica"
 			includes="**/*.wav"/>
 		<jar destfile="${build}/dist/AlgoCraft.jar" basedir="${build}/classes"/>
 	</target>
-
-	<target name="ejecutar.aplicacion" depends="empaquetar.con.imagenes.musica">
+	
+	<target name="ejecutar.aplicacion" depends="empaquetar">
 		<java classname="algoCraft.Principal" fork="true">
 		<classpath refid="classpath"/>
-		<classpath location="${build}/dist/AlgoCraft.jar" />
+		<classpath location="${build}/dist/AlgoCraft.jar"/>
 		</java>
 	</target>
 
